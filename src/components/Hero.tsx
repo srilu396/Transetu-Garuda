@@ -7,55 +7,17 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-100">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/260113065319.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/260111132432.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/251230094441.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/251227130442.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/251226071057.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/251226070824.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/251226070732.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img
-            src="https://trackmyindia.in/tgg_cms/uploads/banners/260111134947.webp"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/65 to-background/40"></div>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/homepage-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/50 via-background/75 to-background/50"></div>
       </div>
       <div className="relative z-10 max-w-7xl mx-auto container-padding text-center">
         <div className="max-w-4xl mx-auto">
@@ -65,17 +27,17 @@ export default function Hero() {
           </div>
           <div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-8">
             <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
-            Advanced GPS Tracking Solutions
+            Advanced GPS & IoT Solutions
           </div>
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-foreground">Garuda - </span>
-            <span className="text-primary">Smart Fleet Management</span>
+            <span className="text-foreground">Garuda Technologies - </span>
+            <span className="text-primary">Precision Fleet & Asset Management</span>
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Revolutionizing the future of logistics with AI-powered tracking, fuel monitoring, and integrated safety systems.
+          <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            Empowering global industries with AI-driven GPS tracking, real-time fuel analytics, and integrated security solutions for complete operational visibility and safety.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 py-2 btn-hero group">
+            <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 py-2 btn-hero group">
               Get Started
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +59,7 @@ export default function Hero() {
               href="https://drive.google.com/file/d/1Ll8JurCrSrr9OETh-j0FBb2bF0O1K9X5/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-primary bg-background text-primary hover:bg-primary/10 h-10 px-6 py-2 btn-outline-hero group"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-primary bg-background text-primary hover:bg-primary/10 h-10 px-6 py-2 btn-outline-hero group"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,19 +81,19 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span>GPS tracking for mining</span>
+              <span>Advanced Mining GPS</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span>Fuel monitoring systems</span>
+              <span>Real-time Fuel Analytics</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span>Video surveillance tracking</span>
+              <span>AI Video Surveillance</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span>Industrial IOT solutions</span>
+              <span>Industrial IoT Platforms</span>
             </div>
           </div>
         </div>
