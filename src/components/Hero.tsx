@@ -17,12 +17,12 @@ export default function Hero() {
           <source src="/homepage-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/50 via-background/75 to-background/50"></div>
+        <div className="absolute inset-0 bg-yellow-50/80"></div>
       </div>
       <div className="relative z-10 max-w-7xl mx-auto container-padding text-center">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center px-4 py-2 bg-secondary/80 border border-primary/30 rounded-lg text-primary text-sm font-medium mb-6 mx-4">
-            <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium mb-6 mx-4">
+            <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
             Empanelled with ISRO
           </div>
           <div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-8">
@@ -31,7 +31,7 @@ export default function Hero() {
           </div>
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="text-foreground">Garuda Technologies - </span>
-            <span className="text-primary">Precision Fleet & Asset Management</span>
+            <span className="text-gradient">Precision Fleet & Asset Management</span>
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             Empowering global industries with AI-driven GPS tracking, real-time fuel analytics, and integrated security solutions for complete operational visibility and safety.
