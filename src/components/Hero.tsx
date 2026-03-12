@@ -46,8 +46,8 @@ export default function Hero() {
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-2xl">
               <span>Garuda Technologies - </span>
-              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic">
-                Precision Fleet Management
+              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic inline-block pb-2">
+                Precision Fleet <span className="font-medium">Management</span>
               </span>
             </h1>
             <p className="text-lg text-white font-bold mb-10 leading-relaxed max-w-xl drop-shadow-lg">
