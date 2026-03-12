@@ -1,7 +1,146 @@
-import React from 'react';
+import React from "react";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden"><div className="absolute inset-0 z-0"><div className="absolute inset-0 transition-opacity duration-1000 opacity-100"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/260113065319.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/260111132432.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/251230094441.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/251227130442.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/251226071057.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/251226070824.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/251226070732.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 transition-opacity duration-1000 opacity-0"><img src="https://trackmyindia.in/tgg_cms/uploads/banners/260111134947.webp" className="w-full h-full object-cover" /></div><div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/65 to-background/40"></div></div><div className="relative z-10 max-w-7xl mx-auto container-padding text-center"><div className="max-w-4xl mx-auto"><div className="inline-flex items-center px-4 py-2 bg-secondary/80 border border-primary/30 rounded-lg text-primary text-sm font-medium mb-6 mx-4"><span className="w-2 h-2 bg-primary rounded-full mr-2"></span>Empanelled with ISRO</div><div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-8"><span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>Advanced GPS Tracking Solutions</div><div className="transition-opacity duration-500 opacity-100"><h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold mb-4 leading-snug "><div className="transition-opacity duration-800 opacity-100"><span className="char text-foreground" style={{'--x': '100.04320573888685px', '--y': '52.06803566715706px', '--r': '-142.22586258679672deg'} as React.CSSProperties}>A</span><span className="char text-foreground" style={{'--x': '242.10748924199538px', '--y': '-97.39846407543092px', '--r': '149.9111468421553deg'} as React.CSSProperties}>I</span><span className="char text-foreground" style={{'--x': '-55.515379226190646px', '--y': '71.63971593626974px', '--r': '331.78493866498263deg'} as React.CSSProperties}>&nbsp;&nbsp;&nbsp;</span><span className="char text-foreground" style={{'--x': '186.3144530801069px', '--y': '-194.12630308086426px', '--r': '-180.88484662839397deg'} as React.CSSProperties}>B</span><span className="char text-foreground" style={{'--x': '136.99330419074136px', '--y': '-268.67516901018115px', '--r': '292.90679542505507deg'} as React.CSSProperties}>a</span><span className="char text-foreground" style={{'--x': '167.07554718068468px', '--y': '96.0022051716578px', '--r': '-43.35200624090356deg'} as React.CSSProperties}>s</span><span className="char text-foreground" style={{'--x': '397.63295915553px', '--y': '-115.04479127281627px', '--r': '162.17968963858937deg'} as React.CSSProperties}>e</span><span className="char text-foreground" style={{'--x': '375.1325902658149px', '--y': '113.10735441790342px', '--r': '-301.95763943840046deg'} as React.CSSProperties}>d</span><span className="char text-foreground" style={{'--x': '349.32523270810645px', '--y': '-283.82959000479667px', '--r': '312.1022572931191deg'} as React.CSSProperties}>&nbsp;&nbsp;&nbsp;</span><span className="char text-foreground" style={{'--x': '-25.19499589397782px', '--y': '-272.4717024552612px', '--r': '274.4496914625106deg'} as React.CSSProperties}>A</span><span className="char text-foreground" style={{'--x': '-229.89808298664514px', '--y': '-106.07327574442729px', '--r': '-289.351385288066deg'} as React.CSSProperties}>g</span><span className="char text-foreground" style={{'--x': '365.01674300184743px', '--y': '-109.06509434208937px', '--r': '-192.6985970311615deg'} as React.CSSProperties}>r</span><span className="char text-foreground" style={{'--x': '342.42019775853487px', '--y': '299.24596553300796px', '--r': '-185.06874596611763deg'} as React.CSSProperties}>i</span><span className="char text-foreground" style={{'--x': '165.8065400195161px', '--y': '-222.75570909646484px', '--r': '-7.307394650568199deg'} as React.CSSProperties}>c</span><span className="char text-foreground" style={{'--x': '38.22687267166697px', '--y': '47.53465062344179px', '--r': '36.998564516681256deg'} as React.CSSProperties}>u</span><span className="char text-foreground" style={{'--x': '205.0047012830198px', '--y': '263.0528758883778px', '--r': '-306.0103416457438deg'} as React.CSSProperties}>l</span><span className="char text-foreground" style={{'--x': '-320.8748854056765px', '--y': '-166.38638408459195px', '--r': '-221.64867085994018deg'} as React.CSSProperties}>t</span><span className="char text-foreground" style={{'--x': '393.7440849161595px', '--y': '201.16238788984907px', '--r': '181.2779303118583deg'} as React.CSSProperties}>u</span><span className="char text-foreground" style={{'--x': '270.06359847130796px', '--y': '28.559933227151078px', '--r': '308.25222463669536deg'} as React.CSSProperties}>r</span><span className="char text-foreground" style={{'--x': '-176.73264517222398px', '--y': '-244.20041835063796px', '--r': '263.6382191025606deg'} as React.CSSProperties}>e</span></div><div className="transition-opacity duration-800 opacity-100"><span className="char text-primary" style={{'--x': '169.3105519748575px', '--y': '270.02136242926485px', '--r': '291.1803076503055deg'} as React.CSSProperties}>A</span><span className="char text-primary" style={{'--x': '-67.71903261851094px', '--y': '148.24646463198025px', '--r': '91.32335480655888deg'} as React.CSSProperties}>d</span><span className="char text-primary" style={{'--x': '123.51152550261827px', '--y': '91.04702176045419px', '--r': '-0.24680560143445973deg'} as React.CSSProperties}>v</span><span className="char text-primary" style={{'--x': '281.43386804404076px', '--y': '-28.48297607993311px', '--r': '178.88367594617512deg'} as React.CSSProperties}>a</span><span className="char text-primary" style={{'--x': '301.5531464441418px', '--y': '52.07959683748453px', '--r': '-281.1084337890849deg'} as React.CSSProperties}>n</span><span className="char text-primary" style={{'--x': '-332.4642476503734px', '--y': '-289.6782800057301px', '--r': '-237.20188014589655deg'} as React.CSSProperties}>c</span><span className="char text-primary" style={{'--x': '5.700906207485332px', '--y': '-281.37972677657px', '--r': '-262.36327262059996deg'} as React.CSSProperties}>e</span><span className="char text-primary" style={{'--x': '253.4226660545462px', '--y': '-115.19589930839501px', '--r': '308.400344284522deg'} as React.CSSProperties}>d</span><span className="char text-primary" style={{'--x': '67.98409567464574px', '--y': '-28.291814353697816px', '--r': '128.96464890775394deg'} as React.CSSProperties}>&nbsp;&nbsp;&nbsp;</span><span className="char text-primary" style={{'--x': '-83.94637833975634px', '--y': '-119.07207655488659px', '--r': '230.37987087136935deg'} as React.CSSProperties}>A</span><span className="char text-primary" style={{'--x': '-224.5013548250375px', '--y': '19.014849654289662px', '--r': '221.86739471857436deg'} as React.CSSProperties}>I</span><span className="char text-primary" style={{'--x': '-85.88243788212185px', '--y': '238.4362714882012px', '--r': '-89.25130797366887deg'} as React.CSSProperties}>&nbsp;&nbsp;&nbsp;</span><span className="char text-primary" style={{'--x': '147.15202239170821px', '--y': '-227.3982660295809px', '--r': '-292.15347209525356deg'} as React.CSSProperties}>a</span><span className="char text-primary" style={{'--x': '-247.60676934046515px', '--y': '-54.135824943851105px', '--r': '152.9995956901157deg'} as React.CSSProperties}>n</span><span className="char text-primary" style={{'--x': '-202.94028168976456px', '--y': '200.45737096847347px', '--r': '-258.1490623855749deg'} as React.CSSProperties}>a</span><span className="char text-primary" style={{'--x': '279.38227754783406px', '--y': '125.55941716228102px', '--r': '338.2925493858887deg'} as React.CSSProperties}>l</span><span className="char text-primary" style={{'--x': '-353.5648121823783px', '--y': '-288.95938786955173px', '--r': '51.47346939681836deg'} as React.CSSProperties}>y</span><span className="char text-primary" style={{'--x': '-368.2876066088119px', '--y': '218.11957151217814px', '--r': '-184.98188831621837deg'} as React.CSSProperties}>t</span><span className="char text-primary" style={{'--x': '148.4884432082962px', '--y': '-138.72128999613116px', '--r': '-303.32870353652334deg'} as React.CSSProperties}>i</span><span className="char text-primary" style={{'--x': '248.21681963441824px', '--y': '-136.80141861050424px', '--r': '-29.923835094266565deg'} as React.CSSProperties}>c</span><span className="char text-primary" style={{'--x': '-211.37455883596454px', '--y': '20.682602611616005px', '--r': '295.8454729535383deg'} as React.CSSProperties}>s</span></div></h1></div><p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 max-w-3xl mx-auto leading-relaxed">Professional GPS tracking solutions for mining, fleet management, and industrial operations. Advanced features including GPS tracking with fuel monitoring.</p><div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"><button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-hero group">Get Started<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button><button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-outline-hero group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play w-4 h-4 mr-2"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>Watch Demo</button></div><div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground"><div className="flex items-center gap-2"><div className="w-2 h-2 bg-accent rounded-full"></div><span>GPS tracking for mining</span></div><div className="flex items-center gap-2"><div className="w-2 h-2 bg-accent rounded-full"></div><span>Fuel monitoring systems</span></div><div className="flex items-center gap-2"><div className="w-2 h-2 bg-accent rounded-full"></div><span>Video surveillance tracking</span></div><div className="flex items-center gap-2"><div className="w-2 h-2 bg-accent rounded-full"></div><span>Industrial IOT solutions</span></div></div></div></div><div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"><div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center"><div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div></div></div></section>
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-100">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/260113065319.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/260111132432.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/251230094441.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/251227130442.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/251226071057.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/251226070824.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/251226070732.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 transition-opacity duration-1000 opacity-0">
+          <img
+            src="https://trackmyindia.in/tgg_cms/uploads/banners/260111134947.webp"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/65 to-background/40"></div>
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto container-padding text-center">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center px-4 py-2 bg-secondary/80 border border-primary/30 rounded-lg text-primary text-sm font-medium mb-6 mx-4">
+            <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
+            Empanelled with ISRO
+          </div>
+          <div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-8">
+            <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
+            Advanced GPS Tracking Solutions
+          </div>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-foreground">Garuda - </span>
+            <span className="text-primary">Smart Fleet Management</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            Revolutionizing the future of logistics with AI-powered tracking, fuel monitoring, and integrated safety systems.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 py-2 btn-hero group">
+              Get Started
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-arrow-right w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </button>
+            <a
+              href="https://drive.google.com/file/d/1Ll8JurCrSrr9OETh-j0FBb2bF0O1K9X5/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-primary bg-background text-primary hover:bg-primary/10 h-10 px-6 py-2 btn-outline-hero group"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-play w-4 h-4 mr-2"
+              >
+                <polygon points="6 3 20 12 6 21 6 3"></polygon>
+              </svg>
+              Watch Demo
+            </a>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
+              <span>GPS tracking for mining</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
+              <span>Fuel monitoring systems</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
+              <span>Video surveillance tracking</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
+              <span>Industrial IOT solutions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+        </div>
+      </div>
+    </section>
   );
 }

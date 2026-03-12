@@ -1,7 +1,268 @@
-import React from 'react';
+import React from "react";
 
 export default function About() {
   return (
-    <section id="about" aria-label="About Company"><section id="about" className="section-padding" aria-labelledby="about-heading"><div className="max-w-7xl mx-auto container-padding"><div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"><article><header><h2 id="about-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">About <span className="text-gradient">Trans Global Geomatics<span className="hidden md:inline"> Pvt Ltd</span></span></h2></header><p className="text-lg text-muted-foreground mb-8 leading-relaxed">Established in <strong>2001</strong>, <strong>Trans Global Geomatics Pvt Ltd</strong> has been a leader in <strong>GPS tracking technology</strong>, offering innovative solutions for fleet management, mining, logistics, and industrial operations. Our dedication to <em>cutting-edge technology</em> and reliable service has made us a trusted global partner.</p><p className="text-muted-foreground mb-8 leading-relaxed">We provide <strong>comprehensive tracking systems</strong> that go beyond simple location monitoring. Our advanced solutions include <strong>fuel management, temperature control, video surveillance</strong>, and <strong>asset security</strong>—ensuring complete operational visibility and protection.</p><section aria-labelledby="mission-heading" className="card-glass p-6 mb-8"><h3 id="mission-heading" className="text-xl font-semibold mb-3 text-gradient">Our Mission</h3><p className="text-muted-foreground">To empower businesses with intelligent tracking solutions that enhance security, improve operational efficiency, and provide complete peace of mind through innovative technology and exceptional service.</p></section></article><aside className="grid grid-cols-2 gap-6"><div className="card-glass p-6 text-center glow-box" aria-label="Active Clients"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users w-8 h-8 text-white" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div><p className="text-3xl font-bold text-gradient mb-2">10,000+</p><p className="text-sm text-muted-foreground">Active Clients</p></div><div className="card-glass p-6 text-center glow-box" aria-label="Years Experience"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-clock w-8 h-8 text-white" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><p className="text-3xl font-bold text-gradient mb-2">24+</p><p className="text-sm text-muted-foreground">Years Experience</p></div><div className="card-glass p-6 text-center glow-box" aria-label="Uptime Guarantee"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield w-8 h-8 text-white" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg></div><p className="text-3xl font-bold text-gradient mb-2">99.9%</p><p className="text-sm text-muted-foreground">Uptime Guarantee</p></div><div className="card-glass p-6 text-center glow-box" aria-label="Industry Awards"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trophy w-8 h-8 text-white" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg></div><p className="text-3xl font-bold text-gradient mb-2">50+</p><p className="text-sm text-muted-foreground">Industry Awards</p></div></aside></div><section className="mt-20" aria-labelledby="core-values-heading"><h3 id="core-values-heading" className="text-2xl font-bold text-center mb-12">Our <span className="text-gradient">Core Values</span></h3><div className="grid grid-cols-1 md:grid-cols-3 gap-8"><article className="card-glass p-8 text-center"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield w-8 h-8 text-white" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg></div><h4 className="text-xl font-semibold mb-4">Security First</h4><p className="text-muted-foreground">Your data and assets are protected with enterprise-grade security measures and encryption.</p></article><article className="card-glass p-8 text-center"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users w-8 h-8 text-white" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div><h4 className="text-xl font-semibold mb-4">Customer Focused</h4><p className="text-muted-foreground">We prioritize our customers' needs and provide 24/7 support to ensure your success.</p></article><article className="card-glass p-8 text-center"><div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trophy w-8 h-8 text-white" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg></div><h4 className="text-xl font-semibold mb-4">Innovation</h4><p className="text-muted-foreground">Continuous innovation drives us to develop cutting-edge solutions for evolving needs.</p></article></div></section></div></section></section>
+    <section id="about" aria-label="About Company">
+      <section
+        id="about"
+        className="section-padding"
+        aria-labelledby="about-heading"
+      >
+        <div className="max-w-7xl mx-auto container-padding">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <article>
+              <header>
+                <h2
+                  id="about-heading"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
+                >
+                  About{" "}
+                  <span className="text-gradient">
+                    Garuda<span className="hidden md:inline"> Technology</span>
+                  </span>
+                </h2>
+              </header>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Established in <strong>2001</strong>,{" "}
+                <strong>Garuda Technology</strong> has been a leader in{" "}
+                <strong>GPS tracking technology</strong>, offering innovative
+                solutions for fleet management, mining, logistics, and
+                industrial operations. Our dedication to{" "}
+                <em>cutting-edge technology</em> and reliable service has made
+                us a trusted global partner.
+              </p>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                We provide <strong>comprehensive tracking systems</strong> that
+                go beyond simple location monitoring. Our advanced solutions
+                include{" "}
+                <strong>
+                  fuel management, temperature control, video surveillance
+                </strong>
+                , and <strong>asset security</strong>—ensuring complete
+                operational visibility and protection.
+              </p>
+              <section
+                aria-labelledby="mission-heading"
+                className="card-glass p-6 mb-8"
+              >
+                <h3
+                  id="mission-heading"
+                  className="text-xl font-semibold mb-3 text-gradient"
+                >
+                  Our Mission
+                </h3>
+                <p className="text-muted-foreground">
+                  To empower businesses with intelligent tracking solutions that
+                  enhance security, improve operational efficiency, and provide
+                  complete peace of mind through innovative technology and
+                  exceptional service.
+                </p>
+              </section>
+            </article>
+            <aside className="grid grid-cols-2 gap-6">
+              <div
+                className="card-glass p-6 text-center glow-box"
+                aria-label="Active Clients"
+              >
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-users w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <p className="text-3xl font-bold text-gradient mb-2">2000+</p>
+                <p className="text-sm text-muted-foreground">Active Clients</p>
+              </div>
+              <div
+                className="card-glass p-6 text-center glow-box"
+                aria-label="Years Experience"
+              >
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-clock w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <p className="text-3xl font-bold text-gradient mb-2">24+</p>
+                <p className="text-sm text-muted-foreground">
+                  Years Experience
+                </p>
+              </div>
+              <div
+                className="card-glass p-6 text-center glow-box"
+                aria-label="Uptime Guarantee"
+              >
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-shield w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                  </svg>
+                </div>
+                <p className="text-3xl font-bold text-gradient mb-2">99.9%</p>
+                <p className="text-sm text-muted-foreground">
+                  Uptime Guarantee
+                </p>
+              </div>
+              <div
+                className="card-glass p-6 text-center glow-box"
+                aria-label="Industry Awards"
+              >
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-trophy w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                  </svg>
+                </div>
+                <p className="text-3xl font-bold text-gradient mb-2">50+</p>
+                <p className="text-sm text-muted-foreground">Industry Awards</p>
+              </div>
+            </aside>
+          </div>
+          <section className="mt-20" aria-labelledby="core-values-heading">
+            <h3
+              id="core-values-heading"
+              className="text-2xl font-bold text-center mb-12"
+            >
+              Our <span className="text-gradient">Core Values</span>
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <article className="card-glass p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-shield w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                  </svg>
+                </div>
+                <h4 className="text-xl font-semibold mb-4">Security First</h4>
+                <p className="text-muted-foreground">
+                  Your data and assets are protected with enterprise-grade
+                  security measures and encryption.
+                </p>
+              </article>
+              <article className="card-glass p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-users w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <h4 className="text-xl font-semibold mb-4">Customer Focused</h4>
+                <p className="text-muted-foreground">
+                  We prioritize our customers' needs and provide 24/7 support to
+                  ensure your success.
+                </p>
+              </article>
+              <article className="card-glass p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-trophy w-8 h-8 text-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                  </svg>
+                </div>
+                <h4 className="text-xl font-semibold mb-4">Innovation</h4>
+                <p className="text-muted-foreground">
+                  Continuous innovation drives us to develop cutting-edge
+                  solutions for evolving needs.
+                </p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </section>
   );
 }

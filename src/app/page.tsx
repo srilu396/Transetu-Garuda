@@ -5,9 +5,11 @@ import Services from "@/components/Services";
 import Features from "@/components/Features";
 import Industries from "@/components/Industries";
 import About from "@/components/About";
-import Videos from "@/components/Videos";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import Clients from "@/components/Clients";
+import GPSSoftware from "@/components/GPSSoftware";
+import Innovation from "@/components/Innovation";
 
 export default function Home() {
   return (
@@ -15,12 +17,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Clients />
         <Products />
+        <GPSSoftware />
         <Services />
         <Features />
         <Industries />
         <About />
-        <Videos />
+        <Innovation />
         <Testimonials />
       </main>
       <Footer />
