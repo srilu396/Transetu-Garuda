@@ -28,26 +28,28 @@ const VehicleIcon = ({ type }: { type: 'car' | 'truck' | 'bus' }) => {
 const TrackedVehicle = ({ radius, speed, delay, type }: { radius: number, speed: number, delay: number, type: 'car' | 'truck' | 'bus' }) => {
   return (
     <motion.div
-      className="absolute flex items-center justify-center"
+      className="absolute flex items-center justify-center pointer-events-none"
       style={{ width: radius * 2, height: radius * 2 }}
       animate={{ rotate: 360 }}
-      transition={{ duration: speed, repeat: Infinity, ease: "linear", delay }}
+      transition={{ duration: speed * 2, repeat: Infinity, ease: "linear", delay }}
     >
       <div 
         className="absolute flex flex-col items-center" 
-        style={{ top: -8 }}
+        style={{ top: -10 }}
       >
         <motion.div
           className="text-primary relative"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
-          <VehicleIcon type={type} />
-          {/* Signal Ping from Vehicle */}
+          <div className="bg-primary/20 p-1.5 rounded-full backdrop-blur-sm border border-primary/30 shadow-[0_0_15px_rgba(var(--primary-rgb),0.2)]">
+            <VehicleIcon type={type} />
+          </div>
+          {/* Signal Ping from Vehicle - Every few seconds */}
           <motion.div
-            className="absolute inset-0 border border-primary rounded-full"
-            animate={{ scale: [1, 3], opacity: [1, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            className="absolute inset-0 border-2 border-primary/40 rounded-full"
+            animate={{ scale: [1, 3], opacity: [0.6, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeOut", repeatDelay: 1 }}
           />
         </motion.div>
       </div>
@@ -59,42 +61,42 @@ export default function GPSVisual() {
   return (
     <div className="relative w-full aspect-square max-w-[500px] mx-auto flex items-center justify-center">
       {/* Outer Glow */}
-      <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 bg-primary/10 rounded-full blur-[80px] opacity-50"></div>
 
       {/* Radar Container */}
       <div className="relative w-full h-full flex items-center justify-center">
         
-        {/* Radar Rings */}
+        {/* Radar Rings - Increased Opacity */}
         {[0.2, 0.4, 0.6, 0.8, 1].map((scale, i) => (
           <div
             key={i}
-            className="absolute border border-primary/10 rounded-full"
+            className="absolute border border-primary/20 rounded-full shadow-[0_0_10px_rgba(var(--primary-rgb),0.05)]"
             style={{ width: `${scale * 100}%`, height: `${scale * 100}%` }}
           />
         ))}
 
-        {/* Radar Sweep Effect */}
+        {/* Radar Sweep Effect - Stronger Gradients */}
         <motion.div
           className="absolute inset-0 rounded-full"
           style={{
-            background: "conic-gradient(from 0deg, transparent 0% 90%, rgba(var(--primary-rgb), 0.1) 95%, rgba(var(--primary-rgb), 0.2) 100%)",
+            background: "conic-gradient(from 0deg, transparent 0% 90%, rgba(var(--primary-rgb), 0.05) 95%, rgba(var(--primary-rgb), 0.2) 100%)",
           }}
           animate={{ rotate: 360 }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Crosshair Lines */}
+        {/* Crosshair Lines - Slightly Sharper */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full opacity-10">
           <div className="w-full h-[1px] bg-primary"></div>
           <div className="h-full w-[1px] bg-primary absolute"></div>
         </div>
 
-        {/* Dynamic Vehicles Tracking */}
-        <TrackedVehicle radius={180} speed={25} delay={0} type="truck" />
-        <TrackedVehicle radius={130} speed={18} delay={2} type="car" />
-        <TrackedVehicle radius={80} speed={12} delay={5} type="bus" />
+        {/* Dynamic Vehicles Tracking - Slow, Professional Speeds */}
+        <TrackedVehicle radius={185} speed={60} delay={0} type="truck" />
+        <TrackedVehicle radius={135} speed={45} delay={2} type="car" />
+        <TrackedVehicle radius={85} speed={30} delay={5} type="bus" />
 
-        {/* Static Signal Pings (Fixed Locations) */}
+        {/* Static Signal Pings (Fixed Locations) - Sharper Pulses */}
         {[
           { top: "25%", left: "65%" },
           { top: "60%", left: "20%" },
@@ -102,33 +104,33 @@ export default function GPSVisual() {
         ].map((pos, i) => (
           <div key={i} className="absolute" style={{ top: pos.top, left: pos.left }}>
             <motion.div
-              className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--primary)]"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.7 }}
+              className="w-2 h-2 bg-primary rounded-full shadow-[0_0_12px_var(--primary)]"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 4, repeat: Infinity, delay: i * 1 }}
             />
             <motion.div
-              className="absolute inset-0 w-1.5 h-1.5 border border-primary rounded-full"
-              animate={{ scale: [1, 6], opacity: [0.5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: i * 0.7 }}
+              className="absolute inset-0 w-2 h-2 border border-primary/50 rounded-full"
+              animate={{ scale: [1, 5], opacity: [0.5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, delay: i * 1, repeatDelay: 2 }}
             />
           </div>
         ))}
 
-        {/* Central Hub Icon */}
+        {/* Central Hub Icon - ISRO / Shield Visual - Sharper glow */}
         <motion.div
-          className="relative z-10 p-5 bg-primary text-primary-foreground rounded-full shadow-2xl shadow-primary/30"
+          className="relative z-10 p-6 bg-primary text-primary-foreground rounded-full shadow-[0_0_40px_rgba(var(--primary-rgb),0.5)] border-2 border-white/20"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
+            width="36"
+            height="36"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
@@ -138,10 +140,10 @@ export default function GPSVisual() {
           </svg>
         </motion.div>
 
-        {/* Decorative Grid Layer */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-          <div className="grid grid-cols-10 grid-rows-10 w-full h-full">
-            {[...Array(100)].map((_, i) => (
+        {/* Decorative Radar Grid - Slightly visible */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
+          <div className="grid grid-cols-12 grid-rows-12 w-full h-full">
+            {[...Array(144)].map((_, i) => (
               <div key={i} className="border-[0.5px] border-primary"></div>
             ))}
           </div>
@@ -150,3 +152,4 @@ export default function GPSVisual() {
     </div>
   );
 }
+

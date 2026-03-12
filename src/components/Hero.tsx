@@ -22,9 +22,9 @@ export default function Hero() {
           <source src="/homepage-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Modern SaaS Gradient Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-        <div className="absolute inset-0 backdrop-blur-[1px]"></div>
+        {/* Modern SaaS Gradient Overlay for maximum readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div className="absolute inset-0 backdrop-blur-[2px]"></div>
       </div>
       
       <div className="relative z-10 w-full max-w-7xl mx-auto container-padding">
@@ -36,26 +36,28 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium mb-6 shadow-xl">
               <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
               Empanelled with ISRO
             </div>
-            <div className="inline-flex items-center px-4 py-2 bg-primary/20 border border-primary/30 rounded-full text-white text-sm font-medium mb-8 backdrop-blur-md">
-              <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
+            <div className="inline-flex items-center px-4 py-2 bg-primary/30 border border-primary/40 rounded-full text-white text-sm font-semibold mb-8 backdrop-blur-md shadow-lg">
+              <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse shadow-[0_0_8px_var(--primary)]"></span>
               Advanced GPS & IoT Solutions
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-2xl">
               <span>Garuda Technologies - </span>
-              <span className="text-primary italic">Precision Fleet Management</span>
+              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic">
+                Precision Fleet Management
+              </span>
             </h1>
-            <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-xl">
+            <p className="text-lg text-white font-bold mb-10 leading-relaxed max-w-xl drop-shadow-lg">
               Empowering global industries with AI-driven GPS tracking, real-time fuel analytics, and integrated security solutions for complete operational visibility and safety.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
               <motion.button 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/40 h-12 px-8 py-2 w-full sm:w-auto group"
+                whileHover={{ scale: 1.04, boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)" }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-10 w-full sm:w-auto group shadow-2xl"
               >
                 Get Started
                 <svg
@@ -65,7 +67,7 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   className="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"
@@ -78,8 +80,8 @@ export default function Hero() {
                 href="https://drive.google.com/file/d/1Ll8JurCrSrr9OETh-j0FBb2bF0O1K9X5/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "white" }}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium border border-white/30 text-white h-12 px-8 py-2 transition-all w-full sm:w-auto backdrop-blur-sm"
+                whileHover={{ scale: 1.04, backgroundColor: "rgba(255,255,255,0.2)", borderColor: "white", boxShadow: "0 15px 30px -5px rgba(255, 255, 255, 0.15)" }}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold border-2 border-white/50 text-white h-14 px-10 transition-all w-full sm:w-auto backdrop-blur-md shadow-xl"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +90,7 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
@@ -97,25 +99,23 @@ export default function Hero() {
                 Watch Demo
               </motion.a>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                <span>Advanced Mining GPS</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                <span>Real-time Fuel Analytics</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                <span>AI Video Surveillance</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                <span>Industrial IoT Platforms</span>
-              </div>
+            
+            {/* Feature Highlights - High Contrast Tag style */}
+            <div className="flex flex-wrap gap-3">
+              {[
+                "Advanced Mining GPS",
+                "Real-time Fuel Analytics",
+                "AI Video Surveillance",
+                "Industrial IoT Platforms"
+              ].map((feature, i) => (
+                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-black/40 border border-white/20 rounded-full backdrop-blur-md shadow-lg">
+                  <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_var(--primary)]"></div>
+                  <span className="text-xs font-bold text-white uppercase tracking-widest">{feature}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
+
 
           {/* Right Visual Area */}
           <motion.div 
