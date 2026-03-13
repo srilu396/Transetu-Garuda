@@ -42,7 +42,7 @@ export interface IndustryStat {
   icon: LucideIcon;
 }
 
-export interface Industry {
+export interface IndustryData {
   slug: string;
   title: string;
   description: string;
@@ -56,7 +56,7 @@ export interface Industry {
   stats: IndustryStat[];
 }
 
-export const industries: Industry[] = [
+export const industries: IndustryData[] = [
   {
     slug: "logistics-transportation",
     title: "Logistics & Transportation",

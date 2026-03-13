@@ -12,7 +12,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { SolutionData } from "@/content/solutions";
+import { IndustryData } from "@/content/industries";
 import ProductDetailWrapper from "../Solutions/ProductDetailWrapper";
+import IndustryDetailWrapper from "../Industries/IndustryDetailWrapper";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 
@@ -26,6 +28,7 @@ interface SlidePanelProps {
   category?: string;
   layoutType?: "split" | "grid";
   solutionData?: SolutionData;
+  industryData?: IndustryData;
 }
 
 export default function SlidePanel({
@@ -38,6 +41,7 @@ export default function SlidePanel({
   category = "Premium Feature",
   layoutType = "split",
   solutionData,
+  industryData,
 }: SlidePanelProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -172,6 +176,11 @@ export default function SlidePanel({
               {solutionData ? (
                 <div className="flex flex-col">
                   <ProductDetailWrapper data={solutionData} showNavbarFooter={false} />
+                  <Footer />
+                </div>
+              ) : industryData ? (
+                <div className="flex flex-col">
+                  <IndustryDetailWrapper industry={industryData} showNavbarFooter={false} />
                   <Footer />
                 </div>
               ) : (
