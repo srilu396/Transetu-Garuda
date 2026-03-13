@@ -1,303 +1,226 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { 
+  MapPin, 
+  Shield, 
+  Fuel, 
+  BarChart3, 
+  Satellite, 
+  Zap, 
+  LocateFixed, 
+  Route, 
+  UserCheck, 
+  Box,
+  ChevronLeft,
+  ChevronRight
+} from "lucide-react";
+
+/**
+ * 10 High-Quality GPS Feature Cards with vibrant colors and polished descriptions.
+ */
+const features = [
+  {
+    title: "Live Asset Visibility",
+    description: "Monitor your fleet and assets with high-precision location data updated in real-time.",
+    icon: <MapPin className="w-10 h-10 text-blue-500" />,
+    color: "bg-blue-500/10",
+  },
+  {
+    title: "Proactive Security Suite",
+    description: "Multi-layered security with engine immobilizers, SOS alerts, and advanced anti-theft protocols.",
+    icon: <Shield className="w-10 h-10 text-green-500" />,
+    color: "bg-green-500/10",
+  },
+  {
+    title: "Dynamic Fuel Intelligence",
+    description: "Precise fuel level monitoring to detect sudden drainage and optimize overall consumption.",
+    icon: <Fuel className="w-10 h-10 text-orange-500" />,
+    color: "bg-orange-500/10",
+  },
+  {
+    title: "Actionable Data Analytics",
+    description: "Convert raw GPS data into strategic insights with automated reporting and custom dashboards.",
+    icon: <BarChart3 className="w-10 h-10 text-purple-500" />,
+    color: "bg-purple-500/10",
+  },
+  {
+    title: "Hyper-Reliable Connectivity",
+    description: "Enhanced global connectivity ensuring your assets stay connected even in the most remote areas.",
+    icon: <Satellite className="w-10 h-10 text-cyan-500" />,
+    color: "bg-cyan-500/10",
+  },
+  {
+    title: "Precision Alert System",
+    description: "Instant notifications for over-speeding, excessive idling, and unauthorized route deviations.",
+    icon: <Zap className="w-10 h-10 text-yellow-500" />,
+    color: "bg-yellow-500/10",
+  },
+  {
+    title: "Smart Virtual Boundaries",
+    description: "Define custom geofences and receive immediate alerts for entry/exit events.",
+    icon: <LocateFixed className="w-10 h-10 text-red-500" />,
+    color: "bg-red-500/10",
+  },
+  {
+    title: "Efficiency-First Routing",
+    description: "Intelligent path planning designed to reduce mileage, save time, and lower operating costs.",
+    icon: <Route className="w-10 h-10 text-violet-600" />,
+    color: "bg-violet-600/10",
+  },
+  {
+    title: "Behavioral Safety Analysis",
+    description: "Evaluate driving patterns to ensure safety and improve vehicle longevity across the fleet.",
+    icon: <UserCheck className="w-10 h-10 text-amber-600" />,
+    color: "bg-amber-600/10",
+  },
+  {
+    title: "Total Lifecycle Control",
+    description: "Holistic tracking for all equipment with maintenance reminders and automated usage logs.",
+    icon: <Box className="w-10 h-10 text-rose-600" />,
+    color: "bg-rose-600/10",
+  },
+];
 
 export default function Features() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(4);
+
+  // Memoized max index to avoid repetitive calculations
+  const maxIndex = Math.max(0, features.length - itemsToShow);
+
+  const updateItemsToShow = useCallback(() => {
+    if (window.innerWidth < 640) {
+      setItemsToShow(1);
+    } else if (window.innerWidth < 768) {
+      setItemsToShow(2);
+    } else if (window.innerWidth < 1024) {
+      setItemsToShow(3);
+    } else {
+      setItemsToShow(4);
+    }
+  }, []);
+
+  useEffect(() => {
+    updateItemsToShow();
+    window.addEventListener("resize", updateItemsToShow);
+    return () => window.removeEventListener("resize", updateItemsToShow);
+  }, [updateItemsToShow]);
+
+  // Ensure currentIndex stays within bounds when itemsToShow changes
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(maxIndex);
+    }
+  }, [itemsToShow, currentIndex, maxIndex]);
+
+  const nextSlide = () => {
+    if (currentIndex < maxIndex) {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
+    }
+  };
+
   return (
     <section id="features" aria-label="Key Features">
-      <section className="py-16 bg-gradient-to-b from-background to-secondary/10">
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Powerful <span className="text-gradient">Features</span> That
-              Drive Results
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 tracking-tight">
+              Core <span className="text-gradient">Strengths of Our Platform</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover the comprehensive suite of tools designed to optimize
-              your operations
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Experience the next generation of logistics management with our comprehensive GPS ecosystem, engineered for precision and performance.
             </p>
           </div>
+
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
-              className="relative w-full"
+              className="relative w-full overflow-visible"
               role="region"
               aria-roledescription="carousel"
             >
+              {/* Carousel Viewport */}
               <div className="overflow-hidden">
                 <div
-                  className="flex -ml-4"
-                  style={{ transform: "translate3d(0px, 0px, 0px)" }}
+                  className="flex transition-transform duration-700 ease-[cubic-bezier(0.45,0,0.55,1)]"
+                  style={{ 
+                    // translateX percentage is relative to the container itself (the one with the width calculation)
+                    // If each item is (100 / features.length)% of the container width, 
+                    // moving by one item means moving by (100 / features.length)%
+                    transform: `translateX(-${currentIndex * (100 / features.length)}%)`,
+                    width: `${(features.length / itemsToShow) * 100}%` 
+                  }}
                 >
-                  <div
-                    role="group"
-                    aria-roledescription="slide"
-                    className="pl-4 min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pr-4"
-                  >
-                    <div className="rounded-lg bg-card text-card-foreground shadow-sm h-full border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 w-full">
-                      <div className="p-6 text-center h-full flex flex-col justify-between">
-                        <div className="mb-4 flex justify-center">
-                          <div className="p-4 rounded-full bg-primary/10">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-map-pin w-10 h-10 text-blue-500"
-                            >
-                              <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                              <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                  {features.map((feature, index) => (
+                    <div
+                      key={index}
+                      role="group"
+                      aria-roledescription="slide"
+                      className="px-3"
+                      style={{ width: `${100 / features.length}%` }}
+                    >
+                      <div className="rounded-3xl bg-card text-card-foreground shadow-lg h-full border border-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02] w-full flex flex-col p-8 group">
+                        <div className="mb-6 flex justify-center">
+                          <div className={`p-6 rounded-2xl ${feature.color} group-hover:scale-110 group-hover:shadow-inner transition-all duration-500`}>
+                            {feature.icon}
                           </div>
                         </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">
-                            Real-Time GPS Tracking
+                        <div className="text-center flex-1">
+                          <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
+                            {feature.title}
                           </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            Monitor your fleet and assets with precise,
-                            real-time location data and comprehensive reporting.
+                          <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+                            {feature.description}
                           </p>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    role="group"
-                    aria-roledescription="slide"
-                    className="pl-4 min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pr-4"
-                  >
-                    <div className="rounded-lg bg-card text-card-foreground shadow-sm h-full border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 w-full">
-                      <div className="p-6 text-center h-full flex flex-col justify-between">
-                        <div className="mb-4 flex justify-center">
-                          <div className="p-4 rounded-full bg-primary/10">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-shield w-10 h-10 text-green-500"
-                            >
-                              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">
-                            Advanced Security
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            Protect your valuable assets with geo-fencing,
-                            alerts, and anti-theft features.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    role="group"
-                    aria-roledescription="slide"
-                    className="pl-4 min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pr-4"
-                  >
-                    <div className="rounded-lg bg-card text-card-foreground shadow-sm h-full border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 w-full">
-                      <div className="p-6 text-center h-full flex flex-col justify-between">
-                        <div className="mb-4 flex justify-center">
-                          <div className="p-4 rounded-full bg-primary/10">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-fuel w-10 h-10 text-orange-500"
-                            >
-                              <line x1="3" x2="15" y1="22" y2="22"></line>
-                              <line x1="4" x2="14" y1="9" y2="9"></line>
-                              <path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"></path>
-                              <path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">
-                            Fuel Monitoring
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            Track fuel consumption, detect theft, and optimize
-                            fuel efficiency across your fleet.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    role="group"
-                    aria-roledescription="slide"
-                    className="pl-4 min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pr-4"
-                  >
-                    <div className="rounded-lg bg-card text-card-foreground shadow-sm h-full border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 w-full">
-                      <div className="p-6 text-center h-full flex flex-col justify-between">
-                        <div className="mb-4 flex justify-center">
-                          <div className="p-4 rounded-full bg-primary/10">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-chart-column w-10 h-10 text-purple-500"
-                            >
-                              <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
-                              <path d="M18 17V9"></path>
-                              <path d="M13 17V5"></path>
-                              <path d="M8 17v-3"></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">
-                            Analytics &amp; Reports
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            Get detailed insights with customizable dashboards
-                            and comprehensive analytics.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    role="group"
-                    aria-roledescription="slide"
-                    className="pl-4 min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pr-4"
-                  >
-                    <div className="rounded-lg bg-card text-card-foreground shadow-sm h-full border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 w-full">
-                      <div className="p-6 text-center h-full flex flex-col justify-between">
-                        <div className="mb-4 flex justify-center">
-                          <div className="p-4 rounded-full bg-primary/10">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-satellite w-10 h-10 text-cyan-500"
-                            >
-                              <path d="M13 7 9 3 5 7l4 4"></path>
-                              <path d="m17 11 4 4-4 4-4-4"></path>
-                              <path d="m8 12 4 4 6-6-4-4Z"></path>
-                              <path d="m16 8 3-3"></path>
-                              <path d="M9 21a6 6 0 0 0-6-6"></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">
-                            Satellite Coverage
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            Global coverage with reliable satellite
-                            communication for remote locations.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    role="group"
-                    aria-roledescription="slide"
-                    className="pl-4 min-w-0 shrink-0 grow-0 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pr-4"
-                  >
-                    <div className="rounded-lg bg-card text-card-foreground shadow-sm h-full border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105 w-full">
-                      <div className="p-6 text-center h-full flex flex-col justify-between">
-                        <div className="mb-4 flex justify-center">
-                          <div className="p-4 rounded-full bg-primary/10">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-zap w-10 h-10 text-yellow-500"
-                            >
-                              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-3">
-                            Instant Alerts
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed text-sm">
-                            Receive immediate notifications for critical events
-                            and system updates.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
+
+              {/* Navigation Arrows - Using scale-0 and pointer-events-none for a clean "pause" effect */}
               <button
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 absolute z-10 rounded-full transition-all duration-200 top-1/2 -translate-y-1/2 -left-4 h-10 w-10 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground shadow-lg"
-                disabled
+                onClick={prevSlide}
+                className={`absolute z-30 rounded-full transition-all duration-500 top-1/2 -translate-y-1/2 -left-4 sm:-left-12 h-14 w-14 border-2 border-primary bg-background text-primary flex items-center justify-center hover:bg-primary hover:text-primary-foreground shadow-2xl group ${
+                  currentIndex === 0 ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
+                }`}
+                aria-label="Previous slide"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-arrow-left h-6 w-6"
-                >
-                  <path d="m12 19-7-7 7-7"></path>
-                  <path d="M19 12H5"></path>
-                </svg>
+                <ChevronLeft className="h-8 w-8 transition-transform group-active:scale-75" />
               </button>
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 absolute z-10 rounded-full transition-all duration-200 top-1/2 -translate-y-1/2 -right-4 h-10 w-10 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground shadow-lg">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-arrow-right h-6 w-6"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
+              
+              <button
+                onClick={nextSlide}
+                className={`absolute z-30 rounded-full transition-all duration-500 top-1/2 -translate-y-1/2 -right-4 sm:-right-12 h-14 w-14 border-2 border-primary bg-background text-primary flex items-center justify-center hover:bg-primary hover:text-primary-foreground shadow-2xl group ${
+                  currentIndex >= maxIndex ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
+                }`}
+                aria-label="Next slide"
+              >
+                <ChevronRight className="h-8 w-8 transition-transform group-active:scale-75" />
               </button>
+            </div>
+
+            {/* Intuitive Pagination Indicators */}
+            <div className="flex justify-center flex-wrap gap-2.5 mt-16">
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-2.5 transition-all duration-500 rounded-full ${
+                    currentIndex === idx 
+                      ? "w-10 bg-primary shadow-md" 
+                      : "w-2.5 bg-primary/20 hover:bg-primary/40"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>

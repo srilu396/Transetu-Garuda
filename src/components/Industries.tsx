@@ -1,225 +1,126 @@
 "use client";
 import React, { useState } from "react";
-import SlidePanel from "./SlidePanel";
+import Link from "next/link";
+import { industries } from "@/data/industries";
 import {
-  Truck,
-  GraduationCap,
-  Pickaxe,
-  Factory,
-  Pill,
-  Radio,
-  Car,
-  Building,
-  Shield,
+  ArrowRight,
+  TrendingUp,
 } from "lucide-react";
 
-const industriesData = [
-  {
-    title: "Logistics",
-    description:
-      "Optimize your supply chain with real-time GPS tracking for delivery vehicles, cargo monitoring, and route optimization.",
-    icon: Truck,
-    features: [
-      "Fleet management",
-      "Route optimization",
-      "Delivery tracking",
-      "Cargo security",
-    ],
-    category: "Logistics",
-  },
-  {
-    title: "School Transportation",
-    description:
-      "Ensure student safety with comprehensive school bus tracking, parent notifications, and driver monitoring systems.",
-    icon: GraduationCap,
-    features: [
-      "Student safety",
-      "Parent notifications",
-      "Driver monitoring",
-      "Route compliance",
-    ],
-    category: "Education",
-  },
-  {
-    title: "Mining",
-    description:
-      "Track heavy mining equipment, monitor operations in remote locations, and ensure safety compliance in harsh environments.",
-    icon: Pickaxe,
-    features: [
-      "Equipment tracking",
-      "Safety monitoring",
-      "Operational efficiency",
-      "Harsh environment durability",
-    ],
-    category: "Industrial",
-  },
-  {
-    title: "RMC (Ready Mix Concrete)",
-    description:
-      "Monitor concrete mixer trucks, optimize delivery schedules, and ensure timely concrete delivery with temperature tracking.",
-    icon: Factory,
-    features: [
-      "Mixer tracking",
-      "Delivery optimization",
-      "Temperature monitoring",
-      "Quality control",
-    ],
-    category: "Construction",
-  },
-  {
-    title: "Pharma",
-    description:
-      "Maintain cold chain integrity with temperature-controlled GPS tracking for pharmaceutical transportation and storage.",
-    icon: Pill,
-    features: [
-      "Cold chain monitoring",
-      "Temperature alerts",
-      "Compliance tracking",
-      "Audit trails",
-    ],
-    category: "Healthcare",
-  },
-  {
-    title: "Asset Telematics",
-    description:
-      "Comprehensive asset management with IoT integration, equipment monitoring, and predictive maintenance capabilities.",
-    icon: Radio,
-    features: [
-      "Asset monitoring",
-      "IoT integration",
-      "Predictive maintenance",
-      "Usage analytics",
-    ],
-    category: "IoT",
-  },
-  {
-    title: "Personal Vehicle Tracking",
-    description:
-      "Personal GPS tracking solutions for individual vehicles, family cars, and personal asset protection.",
-    icon: Car,
-    features: [
-      "Vehicle security",
-      "Family tracking",
-      "Theft protection",
-      "Usage monitoring",
-    ],
-    category: "Personal",
-  },
-  {
-    title: "Municipalities",
-    description:
-      "Comprehensive tracking solutions for municipal vehicles, waste management, public transportation, and city services optimization.",
-    icon: Building,
-    features: [
-      "Municipal fleet tracking",
-      "Waste management",
-      "Public services",
-      "City operations",
-    ],
-    category: "Government",
-  },
-  {
-    title: "High Value Cargo",
-    description:
-      "Secure high-value cargo transportation with smart padlock GPS tracking, real-time monitoring, and tamper alerts.",
-    icon: Shield,
-    features: [
-      "Smart padlock tracking",
-      "Cargo security",
-      "Tamper detection",
-      "High-value protection",
-    ],
-    category: "Security",
-  },
-];
-
 export default function Industries() {
-  const [selectedIndustry, setSelectedIndustry] = useState<typeof industriesData[0] | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = ["All", ...new Set(industries.map((ind) => ind.category))];
+
+  const filteredIndustries = selectedCategory === "All"
+    ? industries
+    : industries.filter((ind) => ind.category === selectedCategory);
 
   return (
-    <section id="industries" aria-label="Industries We Serve">
-      <section id="industries" className="section-padding bg-background">
-        <div className="max-w-7xl mx-auto container-padding">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-              Industries We <span className="text-gradient">Serve</span>
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Garuda OM provides specialized GPS tracking solutions across
-              diverse industries, delivering tailored technology to meet unique
-              operational requirements and challenges.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {industriesData.map((industry, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedIndustry(industry)}
-                className="text-left group"
+    <section id="industries" className="py-24 bg-background relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto container-padding">
+        <div className="text-center mb-16">
+          <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-4 block">
+            Custom Solutions
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+            Industries <span className="text-gradient-primary">We Serve</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            From logistics to healthcare, our specialized GPS and FASTag solutions are designed to meet the unique challenges of every sector.
+          </p>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                selectedCategory === category
+                  ? "bg-primary text-white shadow-lg shadow-primary/25"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* Industry Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredIndustries.map((industry, index) => {
+            const Icon = industry.icon;
+            return (
+              <Link 
+                href={`/industries/${industry.slug}`}
+                key={index} 
+                className="group relative"
               >
-                <div className="card-glass p-8 group-hover:scale-105 transition-transform duration-300 h-full flex flex-col">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                      {(() => {
-                        const Icon = industry.icon;
-                        return <Icon size={32} className="text-white" />;
-                      })()}
+                <div className="h-full card-glass p-8 hover:border-primary/40 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                  {/* Icon & Category */}
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-gradient-primary group-hover:text-white transition-all duration-500">
+                      <Icon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
-                      {industry.title}
-                    </h3>
+                    <span className="text-xs font-semibold text-primary/60 uppercase tracking-widest bg-primary/5 px-3 py-1 rounded-full">
+                      {industry.category}
+                    </span>
                   </div>
-                  <p className="text-muted-foreground mb-6 leading-relaxed flex-grow">
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
+                    {industry.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-grow">
                     {industry.description}
                   </p>
-                  <ul className="space-y-3">
-                    {industry.features.map((feature, fIndex) => (
-                      <li
-                        key={fIndex}
-                        className="flex items-center gap-3 text-sm"
-                      >
-                        <div className="w-2 h-2 bg-accent rounded-full flex-shrink-0"></div>
-                        <span className="text-muted-foreground">{feature}</span>
-                      </li>
+
+                  {/* Highlights/Features */}
+                  <div className="space-y-3 mb-8">
+                    {industry.features.slice(0, 2).map((feature, fIndex) => (
+                      <div key={fIndex} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <div className="w-1.5 h-1.5 bg-primary/40 rounded-full" />
+                        {feature}
+                      </div>
                     ))}
-                  </ul>
-                  <div className="mt-8 pt-6 border-t border-border/50">
-                    <div className="justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-primary font-medium text-sm flex items-center transition-colors">
-                      Learn More{" "}
-                      <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                        →
-                      </span>
+                  </div>
+
+                  {/* Stats Preview */}
+                  {industry.stats && industry.stats[1] && (
+                    <div className="flex items-center gap-2 text-primary font-bold mb-6 bg-primary/5 p-3 rounded-lg border border-primary/10">
+                      <TrendingUp className="w-4 h-4" />
+                      <span className="text-sm">{industry.stats[1].label}: {industry.stats[1].value}</span>
                     </div>
+                  )}
+
+                  {/* Call to Action */}
+                  <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform duration-300 mt-auto">
+                    View Industry Details
+                    <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
-              </button>
-            ))}
-          </div>
-          <div className="text-center mt-16">
-            <div className="card-glass p-8 lg:p-12 inline-block">
-              <h3 className="text-2xl font-bold mb-4">
-                Don't See Your Industry?
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-2xl">
-                We specialize in creating custom GPS tracking solutions for any
-                industry. Contact us to discuss your specific requirements and
-                challenges.
-              </p>
-              <button className="btn-primary">Discuss Custom Solutions</button>
-            </div>
-          </div>
+              </Link>
+            );
+          })}
         </div>
-      </section>
 
-      <SlidePanel
-        isOpen={!!selectedIndustry}
-        onClose={() => setSelectedIndustry(null)}
-        title={selectedIndustry?.title || ""}
-        description={selectedIndustry?.description || ""}
-        features={selectedIndustry?.features || []}
-        icon={selectedIndustry?.icon || Truck}
-        category={selectedIndustry?.category || "Industry Solution"}
-      />
+        {/* Bottom CTA */}
+        <div className="mt-20 text-center p-12 rounded-3xl bg-muted/30 border border-dashed border-border">
+          <h3 className="text-2xl font-bold mb-4">Don't see your industry listed?</h3>
+          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+            Our technology is highly adaptable. Contact us to discuss how we can build a custom tracking solution for your specific business needs.
+          </p>
+          <button className="btn-primary px-10 py-4">
+            Consult Our Experts
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
