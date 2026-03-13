@@ -71,4 +71,5 @@ export const dashCamSystem: SolutionData = {
     description:
       "Improve driver safety with live video streaming and cloud-recorded incident footage.",
   },
+  imageUrl: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
 };

@@ -44,6 +44,7 @@ export interface SolutionData {
     title: string;
     description: string;
   };
+  imageUrl?: string;
 }
 
 export const solutions: Record<string, SolutionData> = {

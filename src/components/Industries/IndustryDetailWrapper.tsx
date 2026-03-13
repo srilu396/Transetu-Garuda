@@ -40,7 +40,7 @@ export default function IndustryDetailWrapper({
             className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
           >
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Industries</span>
+            <span>Back to {industry.category}</span>
           </button>
 
           {/* Header with Industry Icon and Title */}

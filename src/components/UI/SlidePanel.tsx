@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { SolutionData } from "@/content/solutions";
 import { IndustryData } from "@/content/industries";
-import ProductDetailWrapper from "../Solutions/ProductDetailWrapper";
+import GPSDetailWrapper from "../GPS/GPSDetailWrapper";
 import IndustryDetailWrapper from "../Industries/IndustryDetailWrapper";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
@@ -146,36 +146,15 @@ export default function SlidePanel({
             exit="exit"
             className="relative h-full w-full bg-[#fef2cc] shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
           >
-            {/* Unified Top Header - Navigation & Close */}
+            {/* Unified Top Header - Navigation only */}
             <div className="relative z-[200]">
               <Navbar />
-              
-              {/* Secondary Nav Bar with Back button and Breadcrumbs */}
-              <div className="w-full bg-[#fef2cc]/90 backdrop-blur-lg border-b border-slate-800/10 px-6 md:px-12 py-3 flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <button 
-                    onClick={onClose}
-                    className="flex items-center gap-2 text-[#6467f2] font-black text-sm hover:gap-3 transition-all group"
-                  >
-                    <ArrowRight size={18} className="rotate-180" />
-                    Back to {category || "Solutions"}
-                  </button>
-                  
-                  <div className="hidden md:flex items-center gap-2 text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] border-l border-slate-300 pl-6">
-                    <span>Home</span>
-                    <ChevronRight size={12} className="text-slate-400" />
-                    <span>{category || "Solutions"}</span>
-                    <ChevronRight size={12} className="text-slate-400" />
-                    <span className="text-slate-900">{title}</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="flex-grow overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
               {solutionData ? (
                 <div className="flex flex-col">
-                  <ProductDetailWrapper data={solutionData} showNavbarFooter={false} />
+                  <GPSDetailWrapper data={solutionData} showNavbarFooter={false} />
                   <Footer />
                 </div>
               ) : industryData ? (

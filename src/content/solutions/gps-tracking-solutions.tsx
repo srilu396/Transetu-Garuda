@@ -73,4 +73,5 @@ export const gpsTrackingSolutions: SolutionData = {
     description:
       "Professional GPS tracking for fleets of all sizes. Real-time location, driver behavior monitoring, and route optimization.",
   },
+  imageUrl: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
 };
