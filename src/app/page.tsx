@@ -1,3 +1,4 @@
+import SolutionsOverview from "@/components/SolutionsOverview";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
@@ -17,6 +18,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <SolutionsOverview />
         <Products />
         <GPSSoftware />
         <Services />

@@ -16,8 +16,7 @@ import {
   Camera,
   Smartphone,
   Bell,
-  Zap,
-  Layers
+  Zap
 } from "lucide-react";
 
 // Categorized Feature Data
@@ -122,7 +121,7 @@ export default function GPSSoftware() {
   };
 
   return (
-    <section id="software" className="relative py-28 bg-gradient-to-b from-[#f5f9ff] to-[#eef6ff] text-slate-800 overflow-hidden font-sans border-t border-slate-200">
+    <section id="gps-tracking-solutions" className="relative py-28 bg-gradient-to-b from-[#f5f9ff] to-[#eef6ff] text-slate-800 overflow-hidden font-sans border-t border-slate-200">
       
       {/* Subtle Background Elements */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none"></div>
@@ -213,7 +212,8 @@ export default function GPSSoftware() {
                 {category.features.map((feature, idx) => (
                   <motion.div 
                     key={idx}
-                    variants={itemVariants}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    variants={itemVariants as any}
                     className="group bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all flex gap-5 items-center"
                   >
                     <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors shrink-0">

@@ -5,16 +5,6 @@ import { motion } from "framer-motion";
 
 const products = [
   {
-    title: "FASTag Management",
-    description: "Manage FASTag payments for your entire fleet from one platform. Easily recharge accounts, track toll expenses, and keep transaction records organized.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tag"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>
-    ),
-    badge: "Toll Payments",
-    features: ["Automatic FASTag recharge", "Toll transaction history", "Fleet-wide management"],
-    link: "/solutions/fastag",
-  },
-  {
     title: "Dash Cam System",
     description: "Improve driver safety with a smart dash camera that records both road and cabin activity while providing real-time alerts and video monitoring.",
     icon: (
@@ -32,7 +22,7 @@ const products = [
     ),
     badge: "Fleet Management",
     features: ["Real-time vehicle tracking", "Route optimization", "Driver behavior insights"],    
-    link: "/solutions/advanced-fleet-tracker",
+    link: "/solutions/gps-tracking-solutions",
   },
   {
     title: "Mining Equipment Tracking",

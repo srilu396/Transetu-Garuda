@@ -18,6 +18,7 @@ export default function Services() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="fastag" className="sr-only" aria-hidden="true" />
             <a
               className="block text-center border rounded-lg py-2 px-4 hover:bg-primary hover:text-white transition group"
               href="/services/fastag"
