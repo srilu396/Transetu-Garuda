@@ -17,13 +17,13 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Clients />
         <Products />
         <GPSSoftware />
         <Services />
         <Features />
         <Industries />
         <About />
+        <Clients />
         <Innovation />
         <Testimonials />
       </main>

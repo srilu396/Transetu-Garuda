@@ -1,268 +1,154 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function About() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  };
+
   return (
-    <section id="about" aria-label="About Company">
-      <section
-        id="about"
-        className="section-padding"
-        aria-labelledby="about-heading"
-      >
-        <div className="max-w-7xl mx-auto container-padding">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <article>
-              <header>
-                <h2
-                  id="about-heading"
-                  className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
-                >
-                  About{" "}
-                  <span className="text-gradient">
-                    Garuda<span className="hidden md:inline"> Technology</span>
-                  </span>
-                </h2>
-              </header>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Established in <strong>2001</strong>,{" "}
-                <strong>Garuda Technology</strong> has been a leader in{" "}
-                <strong>GPS tracking technology</strong>, offering innovative
-                solutions for fleet management, mining, logistics, and
-                industrial operations. Our dedication to{" "}
-                <em>cutting-edge technology</em> and reliable service has made
-                us a trusted global partner.
+    <section id="about" className="py-24 bg-white relative overflow-hidden" aria-label="About Company">
+      {/* Decorative background blur */}
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
+      
+      <div className="max-w-7xl mx-auto container-padding relative z-10">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+        >
+          <motion.article variants={itemVariants}>
+            <header>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-primary uppercase bg-primary/10 rounded-full"
+              >
+                Our Legacy
+              </motion.div>
+              <h2
+                id="about-heading"
+                className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 tracking-tight"
+              >
+                About{" "}
+                <span className="text-gradient">
+                  Garuda Technology
+                </span>
+              </h2>
+            </header>
+            <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+              <p>
+                Established in <strong className="text-slate-900">2001</strong>,{" "}
+                <strong className="text-slate-900">Garuda Technology</strong> has been a pioneer in{" "}
+                <strong className="text-slate-900 text-primary underline underline-offset-4 decoration-primary/20">GPS tracking innovation</strong>, 
+                crafting intelligent solutions for fleet management, mining, logistics, and high-impact industrial operations.
               </p>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                We provide <strong>comprehensive tracking systems</strong> that
-                go beyond simple location monitoring. Our advanced solutions
-                include{" "}
-                <strong>
-                  fuel management, temperature control, video surveillance
-                </strong>
-                , and <strong>asset security</strong>—ensuring complete
-                operational visibility and protection.
+              <p>
+                We deliver more than simple monitoring. Our ecosystem integrates{" "}
+                <strong className="text-slate-900 italic">fuel management, temperature precision, AI-driven video surveillance</strong>, 
+                and comprehensive asset protection—powering total operational transparency across the globe.
               </p>
-              <section
-                aria-labelledby="mission-heading"
-                className="card-glass p-6 mb-8"
-              >
-                <h3
-                  id="mission-heading"
-                  className="text-xl font-semibold mb-3 text-gradient"
-                >
-                  Our Mission
-                </h3>
-                <p className="text-muted-foreground">
-                  To empower businesses with intelligent tracking solutions that
-                  enhance security, improve operational efficiency, and provide
-                  complete peace of mind through innovative technology and
-                  exceptional service.
-                </p>
-              </section>
-            </article>
-            <aside className="grid grid-cols-2 gap-6">
-              <div
-                className="card-glass p-6 text-center glow-box"
-                aria-label="Active Clients"
-              >
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-users w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
-                </div>
-                <p className="text-3xl font-bold text-gradient mb-2">2000+</p>
-                <p className="text-sm text-muted-foreground">Active Clients</p>
-              </div>
-              <div
-                className="card-glass p-6 text-center glow-box"
-                aria-label="Years Experience"
-              >
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-clock w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                </div>
-                <p className="text-3xl font-bold text-gradient mb-2">24+</p>
-                <p className="text-sm text-muted-foreground">
-                  Years Experience
-                </p>
-              </div>
-              <div
-                className="card-glass p-6 text-center glow-box"
-                aria-label="Uptime Guarantee"
-              >
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-shield w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                  </svg>
-                </div>
-                <p className="text-3xl font-bold text-gradient mb-2">99.9%</p>
-                <p className="text-sm text-muted-foreground">
-                  Uptime Guarantee
-                </p>
-              </div>
-              <div
-                className="card-glass p-6 text-center glow-box"
-                aria-label="Industry Awards"
-              >
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-trophy w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                    <path d="M4 22h16"></path>
-                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                  </svg>
-                </div>
-                <p className="text-3xl font-bold text-gradient mb-2">50+</p>
-                <p className="text-sm text-muted-foreground">Industry Awards</p>
-              </div>
-            </aside>
-          </div>
-          <section className="mt-20" aria-labelledby="core-values-heading">
-            <h3
-              id="core-values-heading"
-              className="text-2xl font-bold text-center mb-12"
-            >
-              Our <span className="text-gradient">Core Values</span>
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <article className="card-glass p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-shield w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                  </svg>
-                </div>
-                <h4 className="text-xl font-semibold mb-4">Security First</h4>
-                <p className="text-muted-foreground">
-                  Your data and assets are protected with enterprise-grade
-                  security measures and encryption.
-                </p>
-              </article>
-              <article className="card-glass p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-users w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
-                </div>
-                <h4 className="text-xl font-semibold mb-4">Customer Focused</h4>
-                <p className="text-muted-foreground">
-                  We prioritize our customers' needs and provide 24/7 support to
-                  ensure your success.
-                </p>
-              </article>
-              <article className="card-glass p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-trophy w-8 h-8 text-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                    <path d="M4 22h16"></path>
-                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                  </svg>
-                </div>
-                <h4 className="text-xl font-semibold mb-4">Innovation</h4>
-                <p className="text-muted-foreground">
-                  Continuous innovation drives us to develop cutting-edge
-                  solutions for evolving needs.
-                </p>
-              </article>
             </div>
-          </section>
-        </div>
-      </section>
+
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              className="mt-12 p-8 bg-gradient-to-br from-slate-50 to-white border border-slate-100 rounded-3xl shadow-sm relative overflow-hidden group"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-primary/10 transition-colors" />
+              <h3 className="text-xl font-bold mb-4 text-primary">Our Mission</h3>
+              <p className="text-slate-600 leading-relaxed">
+                To empower global enterprises with intelligent tracking ecosystems that redefine security, 
+                optimize efficiency, and provide absolute operational certainty through relentless innovation 
+                and unparalleled service excellence.
+              </p>
+            </motion.div>
+          </motion.article>
+
+          <motion.aside variants={itemVariants} className="grid grid-cols-2 gap-6">
+            {[
+              { label: "Active Clients", value: "2000+", icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M22 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75" },
+              { label: "Years Experience", value: "24+", icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20 M12 6v6l4 2" },
+              { label: "Uptime Guarantee", value: "99.9%", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" },
+              { label: "Industry Awards", value: "50+", icon: "M6 9H4.5a2.5 2.5 0 0 1 0-5H6 M18 9h1.5a2.5 2.5 0 0 0 0-5H18 M4 22h16 M10 14.66V17 M14 14.66V17 M18 2H6v7a6 6 0 0 0 12 0V2Z" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -5 }}
+                className="bg-white p-8 text-center rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-300 group"
+              >
+                <div className="w-14 h-14 bg-slate-50 group-hover:bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors">
+                  <svg className="w-7 h-7 text-slate-400 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={stat.icon}></path>
+                  </svg>
+                </div>
+                <p className="text-3xl font-black text-slate-900 mb-2">{stat.value}</p>
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.aside>
+        </motion.div>
+
+        <section className="mt-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h3 className="text-3xl font-black mb-4">Our <span className="text-gradient">Core Values</span></h3>
+            <p className="text-slate-500 text-lg">The principles that drive every solution we build.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "Security First", desc: "Enterprise-grade protection and end-to-end encryption for every byte of your data.", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" },
+              { title: "Customer Focused", desc: "Your success is our priority. We provide expert-level 24/7 dedicated support.", icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8" },
+              { title: "Relentless Innovation", desc: "Pushing boundaries in GPS technology to solve tomorrow's logistics challenges today.", icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z" },
+            ].map((value, i) => (
+              <motion.article 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-slate-50/50 p-10 rounded-[2.5rem] border border-transparent hover:border-primary/10 hover:bg-white hover:shadow-xl transition-all duration-300 text-center"
+              >
+                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm">
+                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={value.icon}></path>
+                  </svg>
+                </div>
+                <h4 className="text-xl font-bold mb-4">{value.title}</h4>
+                <p className="text-slate-600 leading-relaxed">
+                  {value.desc}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+      </div>
     </section>
   );
 }

@@ -1,0 +1,43 @@
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { solutions } from "@/data/solutions";
+import ProductDetailWrapper from "@/components/solutions/ProductDetailWrapper";
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> } // Fix for Next.js 15 route params
+): Promise<Metadata> {
+  const { slug } = await params;
+  const solution = solutions[slug];
+
+  if (!solution) {
+    return {
+      title: "Solution Not Found | Garuda",
+    };
+  }
+
+  return {
+    title: solution.seoMeta.title,
+    description: solution.seoMeta.description,
+  };
+}
+
+export default async function SolutionPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>; // Fix for Next.js 15 route params
+}) {
+  const { slug } = await params;
+  const solution = solutions[slug];
+
+  if (!solution) {
+    notFound();
+  }
+
+  return <ProductDetailWrapper data={solution} />;
+}
+
+export function generateStaticParams() {
+  return Object.keys(solutions).map((slug) => ({
+    slug,
+  }));
+}

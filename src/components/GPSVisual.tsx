@@ -39,7 +39,7 @@ const VehicleIcon = ({ type, className }: { type: 'car' | 'truck' | 'bus' | 'mob
   );
 };
 
-const TrackedObject = ({ radius, speed, delay, type }: { radius: number, speed: number, delay: number, type: 'car' | 'truck' | 'bus' | 'mobile' | 'marker' }) => {
+const TrackedObject = ({ radius, speed, delay, type, color = "#cc44bf" }: { radius: number, speed: number, delay: number, type: 'car' | 'truck' | 'bus' | 'mobile' | 'marker', color?: string }) => {
   return (
     <motion.div
       className="absolute flex items-center justify-center pointer-events-none"
@@ -61,7 +61,8 @@ const TrackedObject = ({ radius, speed, delay, type }: { radius: number, speed: 
           </div>
           {/* Enhanced Signal Ping */}
           <motion.div
-            className="absolute inset-0 border-2 border-primary/60 rounded-full"
+            className="absolute inset-0 border-2 rounded-full"
+            style={{ borderColor: `${color}99` }} // color/60 equivalent
             animate={{ scale: [1, 3.5], opacity: [0.7, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", repeatDelay: 1.5 }}
           />
@@ -80,12 +81,24 @@ export default function GPSVisual() {
       {/* Radar Container */}
       <div className="relative w-full h-full flex items-center justify-center">
         
-        {/* Radar Rings - Higher Opacity for Visibility */}
-        {[0.2, 0.4, 0.6, 0.8, 1].map((scale, i) => (
+        {/* Radar Rings - Maximum Visibility */}
+        {[
+          { scale: 0.2, color: "#8b5cf6" }, // Inner
+          { scale: 0.4, color: "#f59e0b" }, 
+          { scale: 0.6, color: "#3b82f6" }, 
+          { scale: 0.8, color: "#cc44bf" }, 
+          { scale: 1.0, color: "#10b981" }, // Outer
+        ].map((ring, i) => (
           <div
             key={i}
-            className="absolute border border-primary/25 rounded-full shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)]"
-            style={{ width: `${scale * 100}%`, height: `${scale * 100}%` }}
+            className="absolute border rounded-full"
+            style={{ 
+              width: `${ring.scale * 100}%`, 
+              height: `${ring.scale * 100}%`,
+              borderColor: `${ring.color}cc`, // 80% opacity (Very Dark/Visible)
+              borderWidth: "2px",
+              boxShadow: `0 0 25px ${ring.color}4d` // 30% opacity glow
+            }}
           />
         ))}
 
@@ -105,28 +118,30 @@ export default function GPSVisual() {
           <div className="h-full w-[1.5px] bg-primary absolute"></div>
         </div>
 
-        {/* Dynamic Tracking Network - Added more objects */}
-        <TrackedObject radius={190} speed={65} delay={0} type="truck" />
-        <TrackedObject radius={160} speed={55} delay={2} type="marker" />
-        <TrackedObject radius={130} speed={45} delay={4} type="car" />
-        <TrackedObject radius={100} speed={35} delay={6} type="mobile" />
-        <TrackedObject radius={70} speed={25} delay={8} type="bus" />
+        {/* Dynamic Tracking Network - Colors aligned to sections */}
+        <TrackedObject radius={190} speed={65} delay={0} type="truck" color="#10b981" />
+        <TrackedObject radius={160} speed={55} delay={2} type="marker" color="#cc44bf" />
+        <TrackedObject radius={130} speed={45} delay={4} type="car" color="#3b82f6" />
+        <TrackedObject radius={100} speed={35} delay={6} type="mobile" color="#f59e0b" />
+        <TrackedObject radius={70} speed={25} delay={8} type="bus" color="#8b5cf6" />
 
-        {/* Static Signal Pings (Fixed Locations) - Sharper & Brighter */}
+        {/* Static Signal Pings (Fixed Locations) - Sectional Colors */}
         {[
-          { top: "20%", left: "70%" },
-          { top: "55%", left: "15%" },
-          { top: "80%", left: "75%" },
-          { top: "40%", left: "85%" },
+          { top: "20%", left: "70%", color: "#10b981" }, // Outer
+          { top: "55%", left: "15%", color: "#cc44bf" }, // Outer-mid
+          { top: "80%", left: "45%", color: "#3b82f6" }, // Mid
+          { top: "40%", left: "55%", color: "#f59e0b" }, // Mid-inner
         ].map((pos, i) => (
           <div key={i} className="absolute" style={{ top: pos.top, left: pos.left }}>
             <motion.div
-              className="w-2.5 h-2.5 bg-primary rounded-full shadow-[0_0_15px_var(--primary)]"
+              className="w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: pos.color, boxShadow: `0 0 15px ${pos.color}` }}
               animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
               transition={{ duration: 3, repeat: Infinity, delay: i * 0.8 }}
             />
             <motion.div
-              className="absolute inset-0 w-2.5 h-2.5 border-2 border-primary/60 rounded-full"
+              className="absolute inset-0 w-2.5 h-2.5 border-2 rounded-full"
+              style={{ borderColor: `${pos.color}99` }}
               animate={{ scale: [1, 6], opacity: [0.5, 0] }}
               transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.8, repeatDelay: 1.5 }}
             />
