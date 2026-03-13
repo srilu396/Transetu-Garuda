@@ -11,35 +11,99 @@ import {
   Activity,
   Globe,
   Navigation,
-  Fuel
+  Fuel,
+  History,
+  Camera,
+  Smartphone,
+  Bell,
+  Zap,
+  Layers
 } from "lucide-react";
 
-// Iteration 4: Process Flow Data (5 core steps)
-const workflowSteps = [
+// Categorized Feature Data
+const featureCategories = [
   {
-    title: "Track Vehicles in Real Time",
-    description: "Live maps and dashboard overview with sub-second latency.",
-    icon: MapPin
+    name: "Live Tracking & Trip History",
+    focus: "Operational visibility",
+    explanation: "Businesses can track vehicles in real time and replay previous trips for operational transparency.",
+    features: [
+      {
+        title: "Real-time tracking",
+        description: "Live vehicle tracking on ultra-precise maps with sub-second latency.",
+        icon: MapPin
+      },
+      {
+        title: "Route playback",
+        description: "Review exact route paths taken by any vehicle during specific timeframes.",
+        icon: Navigation
+      },
+      {
+        title: "Trip history",
+        description: "Detailed logs of all completed trips, including stops and durations.",
+        icon: History
+      }
+    ]
   },
   {
-    title: "Monitor Driver Behaviour",
-    description: "Instant alerts for speeding, harsh braking, and idling.",
-    icon: ShieldAlert
+    name: "Safety & Driver Monitoring",
+    focus: "Driver accountability and safety",
+    explanation: "Fleet managers can identify risky driving patterns and review incidents through integrated dash cam footage.",
+    features: [
+      {
+        title: "Driver behavior",
+        description: "Monitor speeding, harsh braking, and excessive idling in real-time.",
+        icon: ShieldAlert
+      },
+      {
+        title: "Dash cam integration",
+        description: "Integrated video recording for event verification and safety auditing.",
+        icon: Camera
+      }
+    ]
   },
   {
-    title: "Manage Maintenance",
-    description: "Track asset health, fuel monitoring, and service reminders.",
-    icon: Wrench
+    name: "Fleet Intelligence & Fuel",
+    focus: "Operational efficiency",
+    explanation: "Businesses can analyze fuel usage and fleet performance through analytics dashboards.",
+    features: [
+      {
+        title: "Fuel monitoring",
+        description: "Precise fuel level reports from specialized sensors to prevent theft.",
+        icon: Fuel
+      },
+      {
+        title: "Advanced analytics",
+        description: "Deep analytics and reports on overall fleet performance and ROI.",
+        icon: BarChart3
+      },
+      {
+        title: "Mobile-friendly dashboard",
+        description: "Manage your fleet on the go with our responsive owner dashboard.",
+        icon: Smartphone
+      }
+    ]
   },
   {
-    title: "Analyze Fleet Data",
-    description: "Generate deep performance reports and fuel analytics.",
-    icon: BarChart3
-  },
-  {
-    title: "Optimize Operations",
-    description: "Reduce downtime, improve ROI, and scale your business.",
-    icon: TrendingUp
+    name: "Alerts & Maintenance",
+    focus: "Automation and prevention",
+    explanation: "Automated alerts notify fleet managers about vehicle activity and upcoming maintenance needs.",
+    features: [
+      {
+        title: "Overspeed & Geofence",
+        description: "Instant alerts for speed violations and geofence entry/exit events.",
+        icon: Bell
+      },
+      {
+        title: "Ignition alerts",
+        description: "Real-time notifications for every engine on/off event across the fleet.",
+        icon: Zap
+      },
+      {
+        title: "Maintenance reminders",
+        description: "Automated service alerts based on distance traveled or engine hours.",
+        icon: Wrench
+      }
+    ]
   }
 ];
 
@@ -48,36 +112,33 @@ export default function GPSSoftware() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
-  // Iteration 4: Strictly enforced single consistent animation
-  // Slide-up with opacity transition, Hover: lift + glow border
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
   return (
-    // Iteration 4 Background: Reverted to soft warm tone #fef2cc for critical separation
-    <section id="software" className="relative py-28 bg-[#fef2cc] text-slate-800 overflow-hidden font-sans border-t border-[#f3e3a9]">
+    <section id="software" className="relative py-28 bg-gradient-to-b from-[#f5f9ff] to-[#eef6ff] text-slate-800 overflow-hidden font-sans border-t border-slate-200">
       
       {/* Subtle Background Elements */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/40 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] -ml-40 -mb-40 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] -ml-40 -mb-40 pointer-events-none"></div>
 
       <div className="container-padding max-w-7xl mx-auto relative z-10">
         
         {/* A. Software Hero Overview */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-4xl mx-auto mb-20">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
-            Software Capabilities
+            Garuda Intelligence Hub
           </motion.div>
           
           <motion.h2 
@@ -85,66 +146,95 @@ export default function GPSSoftware() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight"
+            className="text-4xl lg:text-5xl font-extrabold mb-8 tracking-tight text-slate-900"
           >
-            <span className="text-slate-900">The Garuda Intelligence Hub:</span>
-            <br className="hidden sm:block" />
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent inline-block pb-1 mt-2">
-              {" "}Full-Scale GPS Fleet Management
+            Full-Scale GPS {" "}
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Fleet Management Platform
             </span>
           </motion.h2>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto"
-          >
-            Easily monitor, manage, and optimize your fleet operations in real-time. Our software simplifies complex logistics into a clean, actionable process flow.
-          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/50 backdrop-blur-sm p-6 rounded-2xl border border-white shadow-sm"
+            >
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <Globe className="w-5 h-5 text-primary" />
+                </div>
+                <p className="text-slate-700 font-medium leading-relaxed">
+                  Businesses can monitor vehicle movement in real time and gain full operational visibility across their fleet.
+                </p>
+              </div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white/50 backdrop-blur-sm p-6 rounded-2xl border border-white shadow-sm"
+            >
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                  <TrendingUp className="w-5 h-5 text-accent" />
+                </div>
+                <p className="text-slate-700 font-medium leading-relaxed">
+                  Advanced analytics and driver monitoring tools help companies reduce fuel costs and improve fleet efficiency.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* B. Process Flow Container (Replaces old Feature Grid) */}
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 mb-32"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {workflowSteps.map((step, idx) => (
-            <motion.div 
-              key={idx}
-              variants={itemVariants}
-              // STRICTLY CONSISTENT HOVER: subtle lift + glow border
-              className="group relative bg-white/80 backdrop-blur-md border border-white p-6 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(var(--primary-rgb),0.15)] hover:border-primary/40 hover:ring-1 hover:ring-primary/30 flex flex-col h-full"
-            >
-              {/* Connected line connector for desktop only */}
-              {idx !== workflowSteps.length - 1 && (
-                <div className="hidden lg:block absolute top-[50px] -right-5 w-4 h-0.5 bg-primary/20 z-0 group-hover:bg-primary/50 transition-colors"></div>
-              )}
-              
-              <div className="w-12 h-12 flex items-center justify-center rounded-xl mb-5 shadow-sm transition-colors duration-500 bg-slate-50 text-slate-700 border border-slate-100 group-hover:bg-primary group-hover:text-white group-hover:border-primary shrink-0 relative z-10">
-                <step.icon className="w-6 h-6" />
-                {/* Step indicator */}
-                <span className="absolute -top-2 -right-2 w-5 h-5 bg-slate-800 text-white rounded-full text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm group-hover:bg-accent transition-colors">
-                  {idx + 1}
+        {/* B. Structured Feature Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
+          {featureCategories.map((category, catIdx) => (
+            <div key={catIdx} className="space-y-6">
+              <div className="flex items-baseline justify-between border-b border-slate-200 pb-4">
+                <h3 className="text-xl font-bold text-slate-900">{category.name}</h3>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/5 px-2 py-1 rounded">
+                  {category.focus}
                 </span>
               </div>
-              
-              <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors duration-300">
-                {step.title}
-              </h3>
-              
-              <p className="text-sm text-slate-600 font-medium leading-relaxed mt-auto">
-                {step.description}
+              <p className="text-sm text-slate-500 font-medium italic">
+                {category.explanation}
               </p>
-            </motion.div>
+              <motion.div 
+                className="grid grid-cols-1 gap-4"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                {category.features.map((feature, idx) => (
+                  <motion.div 
+                    key={idx}
+                    variants={itemVariants}
+                    className="group bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all flex gap-5 items-center"
+                  >
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors shrink-0">
+                      <feature.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors">
+                        {feature.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* C. Analytics & Management Mockups (Maintains the 3D dashboard supporting Step 4) */}
+        {/* C. Analytics & Management Mockups */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -312,7 +402,13 @@ export default function GPSSoftware() {
           </div>
         </motion.div>
 
-        {/* C. Iteration 4: Completely removed "Ready to Optimize Your Fleet" CTA section */}
+        {/* D. Mobile-Friendly Tag (Additional Visual Hint) */}
+        <div className="mt-12 flex justify-center">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/60 text-slate-600 text-sm font-bold">
+            <Smartphone className="w-4 h-4 text-primary" />
+            Full Mobile Monitoring Support Included
+          </div>
+        </div>
         
       </div>
     </section>
