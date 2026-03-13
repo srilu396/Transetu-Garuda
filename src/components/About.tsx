@@ -52,14 +52,14 @@ export default function About() {
               >
                 About{" "}
                 <span className="text-gradient">
-                  Garuda Technology
+                  Garuda OM
                 </span>
               </h2>
             </header>
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
               <p>
                 Established in <strong className="text-slate-900">2001</strong>,{" "}
-                <strong className="text-slate-900">Garuda Technology</strong> has been a pioneer in{" "}
+                <strong className="text-slate-900">Garuda OM</strong> has been a pioneer in{" "}
                 <strong className="text-slate-900 text-primary underline underline-offset-4 decoration-primary/20">GPS tracking innovation</strong>, 
                 crafting intelligent solutions for fleet management, mining, logistics, and high-impact industrial operations.
               </p>

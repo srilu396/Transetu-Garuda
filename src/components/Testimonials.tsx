@@ -9,21 +9,21 @@ const testimonials = [
     name: "Rajesh Kumar",
     role: "Government Agency",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    quote: "Garuda Technology has revolutionized our fleet management. The GPS tracking with fuel monitoring has helped us reduce fuel theft by 85% and improve our delivery efficiency significantly.",
+    quote: "Garuda OM has revolutionized our fleet management. The GPS tracking with fuel monitoring has helped us reduce fuel theft by 85% and improve our delivery efficiency significantly.",
     rating: 5
   },
   {
     name: "Anil Mehta",
     role: "Mining Owner",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    quote: "The mining GPS solutions from Garuda Technology have been game-changing for our operations. Real-time equipment tracking in harsh environments has improved our productivity by 40%.",
+    quote: "The mining GPS solutions from Garuda OM have been game-changing for our operations. Real-time equipment tracking in harsh environments has improved our productivity by 40%.",
     rating: 5
   },
   {
     name: "Amit Patel",
     role: "International School",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    quote: "Student safety is our top priority. Garuda Technology's school bus tracking system gives parents peace of mind and helps us ensure every child reaches safely. Excellent service!",
+    quote: "Student safety is our top priority. Garuda OM's school bus tracking system gives parents peace of mind and helps us ensure every child reaches safely. Excellent service!",
     rating: 5
   },
   {
@@ -37,7 +37,7 @@ const testimonials = [
     name: "Suresh Reddy",
     role: "Government Agency",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    quote: "Managing our municipal vehicle fleet was challenging until we implemented Garuda Technology's solutions. Now we have complete visibility and have optimized our city services remarkably.",
+    quote: "Managing our municipal vehicle fleet was challenging until we implemented Garuda OM's solutions. Now we have complete visibility and have optimized our city services remarkably.",
     rating: 5
   },
   {
@@ -106,7 +106,7 @@ export default function Testimonials() {
             transition={{ delay: 0.1 }}
             className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed"
           >
-            Trusted by businesses across India and beyond. Here's how Garuda Technology 
+            Trusted by businesses across India and beyond. Here's how Garuda OM
             is redefining operational efficiency through intelligent GPS Tracking.
           </motion.p>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
@@ -7,11 +8,18 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto container-padding">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3 cursor-pointer">
-              <div className="text-2xl font-black tracking-wider text-primary">
-                GARUDA
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-primary/30 bg-primary/10 flex items-center justify-center">
+                <Image
+                  src="/logo-placeholder.svg"
+                  alt="Garuda OM logo"
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                  priority
+                />
               </div>
-              <span className="text-lg sm:text-xl font-bold text-gradient">
-                Garuda Technology
+              <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-gradient leading-none">
+                Garuda OM
               </span>
             </div>
             <div className="hidden lg:flex items-center space-x-8">
@@ -20,9 +28,6 @@ export default function Navbar() {
               </a>
               <a className="nav-link text-sm font-medium" href="/#products">
                 Products
-              </a>
-              <a className="nav-link text-sm font-medium" href="/#services">
-                Services
               </a>
               <a className="nav-link text-sm font-medium" href="/#industries">
                 Industries

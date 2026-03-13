@@ -16,6 +16,7 @@ import {
   Zap,
   ShieldCheck,
   Clock,
+  RotateCcw,
 } from "lucide-react";
 
 export type Feature = {
@@ -43,6 +44,7 @@ export type SolutionData = {
   features: Feature[];
   useCases: UseCase[];
   benefits: Benefit[];
+  steps?: { title: string; description: string }[];
   seoMeta: {
     title: string;
     description: string;
@@ -194,73 +196,75 @@ export const solutions: Record<string, SolutionData> = {
     },
   },
   "gps-tracking-solutions": {
-    title: "Advanced Fleet Tracker",
-    tagline: "Comprehensive real-time tracking and route optimization",
+    title: "Advanced GPS Tracking",
+    tagline: "Total visibility and control over your fleet's movement and performance.",
     bgColor: "#E5F0FF",
     overview:
-      "Gain total control over your mobile assets with our Advanced Fleet GPS Tracker. Built for scale, it delivers pinpoint location accuracy, insightful driver behavior analytics, and powerful routing features. Our solution helps dispatchers ensure on-time deliveries, reduces fuel consumption through optimized routing, and significantly extends the lifespan of your vehicles with automated maintenance scheduling.",
+      "Our Advanced GPS Tracking solution provides a comprehensive ecosystem for monitoring your mobile assets. It goes beyond simple location tracking by offering deep insights into vehicle health, driver safety, and operational efficiency through an intuitive real-time dashboard.",
     features: [
       {
         title: "Real-Time Tracking",
         description:
-          "Monitor vehicle locations globally with precise, up-to-the-second updates.",
-        icon: <MapPin className="w-6 h-6 text-primary" />,
+          "Monitor your entire fleet's exact location globally with sub-second updates and precision mapping technology.",
+        icon: <MapPin className="w-6 h-6 text-[#7375f2]" />,
       },
       {
-        title: "Route Optimization",
+        title: "Route History & Playback",
         description:
-          "Calculate the most efficient routes to save fuel and reduce travel time.",
-        icon: <Activity className="w-6 h-6 text-primary" />,
+          "Access detailed trip logs and replay precise routes taken by any vehicle over the past 90 days to identify unauthorized detours.",
+        icon: <RotateCcw className="w-6 h-6 text-[#7375f2]" />,
       },
       {
-        title: "Geofencing",
+        title: "Driver Behavior Monitoring",
         description:
-          "Create virtual boundaries and receive alerts when vehicles enter or exit specific zones.",
-        icon: <Layers className="w-6 h-6 text-primary" />,
+          "Utilize advanced G-sensors to detect and report harsh braking, rapid acceleration, sharp cornering, and excessive idling.",
+        icon: <Activity className="w-6 h-6 text-[#7375f2]" />,
       },
       {
-        title: "Driver Behavior Analysis",
-        description: "Track speeding, harsh braking, and rapid acceleration.",
-        icon: <BarChart3 className="w-6 h-6 text-primary" />,
+        title: "Smart Alerts & Notifications",
+        description:
+          "Configure instant SMS, email, or app notifications for speeding, geofence breaches, maintenance needs, and security triggers.",
+        icon: <Bell className="w-6 h-6 text-[#7375f2]" />,
       },
     ],
     useCases: [
       {
-        title: "Distribution Fleets",
+        title: "Logistics Optimization",
         description:
-          "Optimize delivery schedules and improve customer ETA accuracy.",
+          "Reduce delivery times and fuel costs with intelligent route planning and dynamic dispatching.",
       },
       {
-        title: "Field Service Teams",
+        title: "Cold Chain Assurance",
         description:
-          "Dispatch the nearest technician to emergency calls quickly.",
+          "Track sensitive cargo alongside temperature data to ensure product integrity during transit.",
       },
       {
-        title: "Rentals & Leasing",
-        description: "Monitor asset usage and prevent unauthorized movement.",
+        title: "Employee Safety",
+        description:
+          "Protect your workforce with SOS alerts and rapid emergency response assistance features.",
       },
     ],
     benefits: [
       {
-        title: "Operational Efficiency",
-        description: "Complete more jobs per day with optimized routing.",
-        icon: <Activity className="w-6 h-6" />,
+        title: "99.9% Up-time",
+        description: "Rely on our enterprise-grade infrastructure built for continuous, uninterrupted tracking.",
+        icon: <ShieldCheck className="w-6 h-6" />,
       },
       {
-        title: "Cost Reduction",
-        description: "Lower fuel consumption and reduce vehicle wear and tear.",
-        icon: <BarChart3 className="w-6 h-6" />,
+        title: "30% Fuel Savings",
+        description: "Optimized routing and reduced idling contribute significantly to lowering fuel expenditures.",
+        icon: <Zap className="w-6 h-6" />,
       },
       {
-        title: "Better Customer Service",
-        description: "Provide accurate arrival times to your clients.",
-        icon: <UserCheck className="w-6 h-6" />,
+        title: "Precision Security",
+        description: "Theft recovery and unauthorized use prevention with remote immobilizer capabilities.",
+        icon: <Lock className="w-6 h-6" />,
       },
     ],
     seoMeta: {
-      title: "Advanced Fleet GPS Tracking | Garuda",
+      title: "Advanced GPS Fleet Tracking Solutions | Garuda",
       description:
-        "Optimize your fleet operations with real-time vehicle tracking, geofencing, and advanced analytics.",
+        "Professional GPS tracking for fleets of all sizes. Real-time location, driver behavior monitoring, and route optimization.",
     },
   },
   "iot-for-mining": {
@@ -773,6 +777,311 @@ export const solutions: Record<string, SolutionData> = {
       title: "AIS 140 Certified GPS Trackers | Garuda",
       description:
         "Government-approved AIS 140 compliant GPS tracking devices for commercial vehicles and public transport.",
+    },
+  },
+  "fastag-recharge": {
+    title: "Automatic FASTag Recharge",
+    tagline: "Never run out of toll balance again",
+    bgColor: "#eef6ff",
+    overview:
+      "Our Automatic FASTag Recharge solution ensures your fleet never faces delays at toll plazas due to insufficient funds. By setting custom low-balance thresholds, the system automatically triggers a top-up from your linked account, maintaining a smooth and uninterrupted journey for every vehicle in your fleet.",
+    features: [
+      {
+        title: "Custom Thresholds",
+        description: "Set individual low-balance alerts and recharge triggers for different vehicle types.",
+        icon: <Zap className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Automated Payments",
+        description: "Seamlessly integrate with your corporate wallet or bank account for hands-free management.",
+        icon: <Layers className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Real-time Notifications",
+        description: "Receive instant SMS and email alerts every time a recharge is triggered or completed.",
+        icon: <Bell className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Predictive Analysis",
+        description: "The system learns your fleet's toll usage to suggest optimal threshold levels.",
+        icon: <BarChart3 className="w-6 h-6 text-primary" />,
+      },
+    ],
+    useCases: [
+      {
+        title: "Long-haul Logistics",
+        description: "Ideal for trucks crossing multiple state borders daily without manual intervention.",
+      },
+      {
+        title: "Bus Operators",
+        description: "Ensures passenger schedules are met by avoiding toll plaza payment issues.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Zero Downtime",
+        description: "Eliminate vehicle stoppages at toll plazas due to low balance.",
+        icon: <Zap className="w-6 h-6" />,
+      },
+      {
+        title: "Reduced Admin Work",
+        description: "Automate the tedious task of monitoring hundreds of individual tag balances.",
+        icon: <Activity className="w-6 h-6" />,
+      },
+    ],
+    steps: [
+      { title: "Balance Monitoring", description: "System continuously syncs with NPCI for live balance updates." },
+      { title: "Threshold Detection", description: "Alerts are triggered when balance falls below your set limit." },
+      { title: "Automatic Top-up", description: "Funds are instantly transferred from your linked account." },
+      { title: "Uninterrupted Travel", description: "Vehicles pass through toll plazas without any payment delays." },
+    ],
+    seoMeta: {
+      title: "Automatic FASTag Recharge Solutions | Garuda",
+      description: "Ensure uninterrupted fleet movement with our automated FASTag recharge system.",
+    },
+  },
+  "fastag-history": {
+    title: "Toll Transaction History",
+    tagline: "Complete transparency for every toll payment",
+    bgColor: "#f0faf5",
+    overview:
+      "Transparency is key to efficient fleet management. Our Toll Transaction History feature provides a detailed, searchable log of every toll payment made by your vehicles. From specific timestamps to exact plaza locations, gain full visibility into your fleet's movements and toll expenditures.",
+    features: [
+      {
+        title: "Detailed Audit Logs",
+        description: "Every transaction is recorded with plaza name, time, date, and amount.",
+        icon: <Layers className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Search & Filter",
+        description: "Easily find specific transactions by vehicle ID, date range, or location.",
+        icon: <MapPin className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Route Verification",
+        description: "Cross-reference toll data with GPS tracks to verify vehicle routes.",
+        icon: <Shield className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Exportable Data",
+        description: "Download transaction reports in CSV/PDF formats for accounting or integration.",
+        icon: <BarChart3 className="w-6 h-6 text-primary" />,
+      },
+    ],
+    useCases: [
+      {
+        title: "Corporate Auditing",
+        description: "Provide verifiable proof of toll expenses for tax and audit purposes.",
+      },
+      {
+        title: "Dispute Resolution",
+        description: "Quickly resolve issues with toll operators using precise transaction data.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Enhanced Accountability",
+        description: "Ensure drivers are following designated routes and toll policies.",
+        icon: <ShieldCheck className="w-6 h-6" />,
+      },
+      {
+        title: "Better Budgeting",
+        description: "Use historical data to accurately forecast future toll expenses.",
+        icon: <BarChart3 className="w-6 h-6" />,
+      },
+    ],
+    steps: [
+      { title: "Data Collection", description: "Transaction details are pulled from toll plazas in real-time." },
+      { title: "Centralized Logging", description: "Details are organized by vehicle ID and timestamp in your dashboard." },
+      { title: "Verification", description: "Cross-reference payments with vehicle location data." },
+      { title: "Reporting", description: "Generate detailed history reports for any time period." },
+    ],
+    seoMeta: {
+      title: "Toll Transaction History & Reporting | Garuda",
+      description: "Track every toll payment with detailed plaza locations and timestamps.",
+    },
+  },
+  "fastag-fleet": {
+    title: "Fleet-wide FASTag Management",
+    tagline: "Centralized control for thousands of tags",
+    bgColor: "#fff7ed",
+    overview:
+      "Manage your entire fleet's FASTag requirements from a single, intuitive interface. Our Fleet-wide Management solution simplifies tag issuance, balance pooling, and vehicle assignment, making it the perfect choice for large-scale logistics and transport operators.",
+    features: [
+      {
+        title: "Centralized Wallet",
+        description: "Manage a single pool of funds shared across all FASTags in your fleet.",
+        icon: <Layers className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Bulk Tag Management",
+        description: "Activate, block, or reassign hundreds of tags simultaneously with ease.",
+        icon: <Shield className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Vehicle Hierarchy",
+        description: "Organize vehicles by region, department, or client for structured management.",
+        icon: <Activity className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Role-based Access",
+        description: "Assign different permission levels to dispatchers, accountants, and managers.",
+        icon: <UserCheck className="w-6 h-6 text-primary" />,
+      },
+    ],
+    useCases: [
+      {
+        title: "National Logistics",
+        description: "Manage tags across multiple hubs and regional offices seamlessly.",
+      },
+      {
+        title: "Leasing Companies",
+        description: "Effortlessly handle tag transitions as vehicles move between clients.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Streamlined Ops",
+        description: "Simplify complex tag management workflows into a few clicks.",
+        icon: <Activity className="w-6 h-6" />,
+      },
+      {
+        title: "Reduced Risk",
+        description: "Centralized controls prevent unauthorized tag usage and fraud.",
+        icon: <ShieldCheck className="w-6 h-6" />,
+      },
+    ],
+    steps: [
+      { title: "Single Wallet Setup", description: "Establish a master funding pool for your entire fleet." },
+      { title: "Tag Association", description: "Bulk assign tags to vehicles in your centralized dashboard." },
+      { title: "Limit Allocation", description: "Set individual spending or balance limits per vehicle group." },
+      { title: "Unified Monitoring", description: "Track the status of thousands of tags from one unified view." },
+    ],
+    seoMeta: {
+      title: "Fleet-wide FASTag Management Solutions | Garuda",
+      description: "Scale your fleet operations with centralized FASTag control and pooling.",
+    },
+  },
+  "fastag-balance": {
+    title: "Balance Monitoring & Alerts",
+    tagline: "Stay informed, stay moving",
+    bgColor: "#f5f3ff",
+    overview:
+      "Don't let a low balance catch you off guard. Our Balance Monitoring & Alerts system provides real-time visibility into the health of your FASTag accounts. With customizable alert profiles, you'll always know when it's time to top up, preventing any disruptions to your fleet's operations.",
+    features: [
+      {
+        title: "Live Balance Sync",
+        description: "Our system syncs directly with NPCI servers for up-to-the-minute balance data.",
+        icon: <Activity className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Multi-channel Alerts",
+        description: "Choose to receive alerts via WhatsApp, SMS, Email, or Web Push notifications.",
+        icon: <Bell className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Low Balance Projection",
+        description: "Get notified before you run out of funds based on scheduled trips.",
+        icon: <BarChart3 className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Health Dashboard",
+        description: "A color-coded view of your fleet's balance status (Critical, Warning, Healthy).",
+        icon: <Layers className="w-6 h-6 text-primary" />,
+      },
+    ],
+    useCases: [
+      {
+        title: "Small Fleet Owners",
+        description: "Perfect for operators who prefer manual control but with automated reminders.",
+      },
+      {
+        title: "Delivery Networks",
+        description: "Ensures local delivery vans are always ready for intra-city toll routes.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Peace of Mind",
+        description: "Never worry about whether a vehicle has enough balance for its route.",
+        icon: <ShieldCheck className="w-6 h-6" />,
+      },
+      {
+        title: "Instant Action",
+        description: "Alerts include direct links to quick-recharge pages for minimal friction.",
+        icon: <Zap className="w-6 h-6" />,
+      },
+    ],
+    steps: [
+      { title: "Sync NPCI Data", description: "Real-time connection ensures your dashboard reflects official balances." },
+      { title: "Configure Alerts", description: "Define who receives notifications and through which channels (SMS/WhatsApp)." },
+      { title: "Auto-Projection", description: "System predicts balance exhaustion based on upcoming route tolls." },
+      { title: "Triggered Warnings", description: "Get instant push notifications the moment a balance becomes critical." },
+    ],
+    seoMeta: {
+      title: "FASTag Balance Monitoring & Real-time Alerts | Garuda",
+      description: "Customizable low-balance alerts to keep your fleet operational 24/7.",
+    },
+  },
+  "fastag-reports": {
+    title: "Toll Expense Reports",
+    tagline: "Data-driven insights into your toll spending",
+    bgColor: "#fff1f2",
+    overview:
+      "Turn your raw toll data into actionable business intelligence. Our Toll Expense Reports provide comprehensive analytics that help you identify cost-saving opportunities, detect anomalies, and simplify your financial reconciliation process.",
+    features: [
+      {
+        title: "Consolidated Billing",
+        description: "Generate monthly statements summarizing all toll expenses across the entire fleet.",
+        icon: <BarChart3 className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Route Analysis",
+        description: "Identify the most expensive toll routes and find more cost-effective alternatives.",
+        icon: <MapPin className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Anomaly Detection",
+        description: "Our AI flags double-deductions or erroneous toll charges for immediate review.",
+        icon: <Shield className="w-6 h-6 text-primary" />,
+      },
+      {
+        title: "Custom Dashboards",
+        description: "Create visual charts and graphs of spending trends by time, vehicle, or region.",
+        icon: <Layers className="w-6 h-6 text-primary" />,
+      },
+    ],
+    useCases: [
+      {
+        title: "Finance Teams",
+        description: "Simplify the month-end reconciliation of toll expenses with automated reports.",
+      },
+      {
+        title: "Operations Managers",
+        description: "Use spending data to optimize route planning and reduce overhead.",
+      },
+    ],
+    benefits: [
+      {
+        title: "Financial Control",
+        description: "Gain 100% accuracy in your toll spending and budget management.",
+        icon: <Activity className="w-6 h-6" />,
+      },
+      {
+        title: "Cost Optimization",
+        description: "Identify and eliminate hidden inefficiencies in your toll expenditures.",
+        icon: <BarChart3 className="w-6 h-6" />,
+      },
+    ],
+    steps: [
+      { title: "Aggregation", description: "Gather all transaction data points across your entire fleet." },
+      { title: "Categorization", description: "Sort expenses by vehicle type, route, or regional hub automatically." },
+      { title: "Analytics Engine", description: "Identify trends and spending anomalies using our AI layer." },
+      { title: "Report Generation", description: "Download white-labeled, audit-ready PDF or CSV reports." },
+    ],
+    seoMeta: {
+      title: "Advanced Toll Expense Reporting & Analytics | Garuda",
+      description: "Comprehensive toll spending analysis to help you optimize fleet costs.",
     },
   },
 };

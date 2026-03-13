@@ -45,7 +45,7 @@ export default function Hero() {
               Advanced GPS & IoT Solutions
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-2xl">
-              <span>Garuda Technologies - </span>
+              <span>Garuda OM - </span>
               <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic inline-block pb-2">
                 Precision Fleet <span className="font-medium">Management</span>
               </span>

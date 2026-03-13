@@ -5,28 +5,39 @@ import SolutionHero from "./SolutionHero";
 import FeaturesSection from "./FeaturesSection";
 import UseCasesSection from "./UseCasesSection";
 import BenefitsSection from "./BenefitsSection";
+import HowItWorksSection from "./HowItWorksSection";
 import CTASection from "./CTASection";
 import { SolutionData } from "@/data/solutions";
 
 interface ProductDetailWrapperProps {
   data: SolutionData;
+  showNavbarFooter?: boolean;
 }
 
-export default function ProductDetailWrapper({ data }: ProductDetailWrapperProps) {
+export default function ProductDetailWrapper({ 
+  data, 
+  showNavbarFooter = true 
+}: ProductDetailWrapperProps) {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+    <div className="min-h-screen bg-white flex flex-col">
+      {showNavbarFooter && <Navbar />}
       
-      <main className="flex-grow pt-20"> {/* PT-20 to account for fixed navbar */}
+      <main className="flex-grow">
         <SolutionHero 
           title={data.title}
           tagline={data.tagline}
+          overview={data.overview}
+          features={data.features}
           bgColor={data.bgColor}
         />
         
         <FeaturesSection 
           features={data.features}
           overview={data.overview}
+        />
+
+        <HowItWorksSection 
+          steps={data.steps}
         />
         
         <UseCasesSection 
@@ -42,7 +53,7 @@ export default function ProductDetailWrapper({ data }: ProductDetailWrapperProps
         />
       </main>
       
-      <Footer />
+      {showNavbarFooter && <Footer />}
     </div>
   );
 }

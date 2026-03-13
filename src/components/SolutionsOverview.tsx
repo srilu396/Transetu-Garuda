@@ -1,32 +1,15 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { motion, Variants } from "framer-motion";
 import { Satellite, CreditCard, ArrowRight, CheckCircle2 } from "lucide-react";
+import SlidePanel from "./SlidePanel";
+import { solutions as solutionsData, SolutionData } from "@/data/solutions";
 
 export default function SolutionsOverview() {
-  const router = useRouter();
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80; // Account for fixed navbar
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    } else {
-      // If element not found on current page, navigate to dedicated page
-      if (id === "gps-tracking-solutions") {
-        router.push("/gps-tracking-solutions");
-      }
-    }
-  };
+  const [selectedSolution, setSelectedSolution] = useState<typeof solutions[0] | null>(null);
+  const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   const solutions = [
     {
@@ -39,7 +22,9 @@ export default function SolutionsOverview() {
         "Driver Behaviour Monitoring",
       ],
       icon: Satellite,
-      targetId: "gps-tracking-solutions",
+      category: "Fleet Solutions",
+      layoutType: "split" as const,
+      slug: "gps-tracking-solutions",
     },
     {
       title: "FASTag Management Solutions",
@@ -51,11 +36,24 @@ export default function SolutionsOverview() {
         "Balance & Recharge Management",
       ],
       icon: CreditCard,
-      targetId: "fastag",
+      category: "Toll Feature",
+      layoutType: "grid" as const,
+      slug: "fastag",
     },
   ];
 
-  const cardVariants: any = {
+  const handleLearnMore = (solution: typeof solutions[0]) => {
+    setSelectedSolution(solution);
+    if (solution.slug && solutionsData[solution.slug]) {
+      setSelectedSolutionData(solutionsData[solution.slug]);
+    } else {
+      setSelectedSolutionData(null);
+    }
+    setIsPanelOpen(true);
+  };
+
+  const cardVariants: Variants = {
+// ... rest of the component
     hidden: { opacity: 0, y: 30 },
     visible: (index: number) => ({
       opacity: 1,
@@ -102,9 +100,9 @@ export default function SolutionsOverview() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900"
           >
-            Our{" "}
+            Intelligent Fleet{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Solutions
+              Management Solutions
             </span>
           </motion.h2>
 
@@ -196,7 +194,7 @@ export default function SolutionsOverview() {
                   </div>
 
                   <motion.button
-                    onClick={() => scrollToSection(solution.targetId)}
+                    onClick={() => handleLearnMore(solution)}
                     whileHover={{
                       scale: 1.05,
                       y: -2,
@@ -224,6 +222,23 @@ export default function SolutionsOverview() {
           })}
         </div>
       </div>
+
+      {selectedSolution && (
+        <SlidePanel
+          isOpen={isPanelOpen}
+          onClose={() => {
+            setIsPanelOpen(false);
+            setSelectedSolutionData(null);
+          }}
+          title={selectedSolution.title}
+          description={selectedSolution.description}
+          features={selectedSolution.features}
+          icon={selectedSolution.icon}
+          category={selectedSolution.category}
+          layoutType={selectedSolution.layoutType}
+          solutionData={selectedSolutionData || undefined}
+        />
+      )}
     </section>
   );
 }

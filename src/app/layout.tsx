@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Garuda \u2013 Smart Fleet Tracking Platform",
+  title: "Garuda OM – Smart Fleet Tracking Platform",
   description:
     "Advanced GPS fleet management and vehicle tracking solutions for businesses.",
 };

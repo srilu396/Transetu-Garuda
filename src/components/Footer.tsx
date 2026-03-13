@@ -8,10 +8,10 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <div className="text-2xl font-black tracking-wider text-primary">
-                GARUDA
+                Garuda OM
               </div>
               <span className="text-xl font-bold text-gradient hidden sm:block">
-                Garuda Technology
+                Smart Fleet Tracking
               </span>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -212,59 +212,6 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/services/gps-tracking"
-                >
-                  GPS Tracking
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/services/gps-fuel"
-                >
-                  Fuel Monitoring
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/services/gps-temperature"
-                >
-                  Temperature Control
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/services/gps-video"
-                >
-                  Video Surveillance
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/services/gps-padlock"
-                >
-                  Padlock Security
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/services/gps-mining"
-                >
-                  Mining Tracking
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-3">
               <li>
@@ -290,7 +237,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-border/50">
           <div className="text-sm text-muted-foreground">
-            © 2025 Garuda Technology. All rights reserved.
+            © 2025 Garuda OM. All rights reserved.
           </div>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <a

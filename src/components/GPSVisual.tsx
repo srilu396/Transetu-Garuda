@@ -81,24 +81,12 @@ export default function GPSVisual() {
       {/* Radar Container */}
       <div className="relative w-full h-full flex items-center justify-center">
         
-        {/* Radar Rings - Maximum Visibility */}
-        {[
-          { scale: 0.2, color: "#8b5cf6" }, // Inner
-          { scale: 0.4, color: "#f59e0b" }, 
-          { scale: 0.6, color: "#3b82f6" }, 
-          { scale: 0.8, color: "#cc44bf" }, 
-          { scale: 1.0, color: "#10b981" }, // Outer
-        ].map((ring, i) => (
+        {/* Radar Rings - Higher Opacity for Visibility */}
+        {[0.2, 0.4, 0.6, 0.8, 1].map((scale, i) => (
           <div
             key={i}
-            className="absolute border rounded-full"
-            style={{ 
-              width: `${ring.scale * 100}%`, 
-              height: `${ring.scale * 100}%`,
-              borderColor: `${ring.color}cc`, // 80% opacity (Very Dark/Visible)
-              borderWidth: "2px",
-              boxShadow: `0 0 25px ${ring.color}4d` // 30% opacity glow
-            }}
+            className="absolute border border-primary/25 rounded-full shadow-[0_0_15px_rgba(var(--primary-rgb),0.1)]"
+            style={{ width: `${scale * 100}%`, height: `${scale * 100}%` }}
           />
         ))}
 
@@ -118,19 +106,19 @@ export default function GPSVisual() {
           <div className="h-full w-[1.5px] bg-primary absolute"></div>
         </div>
 
-        {/* Dynamic Tracking Network - Colors aligned to sections */}
+        {/* Dynamic Tracking Network - Added more objects */}
         <TrackedObject radius={190} speed={65} delay={0} type="truck" color="#10b981" />
         <TrackedObject radius={160} speed={55} delay={2} type="marker" color="#cc44bf" />
         <TrackedObject radius={130} speed={45} delay={4} type="car" color="#3b82f6" />
         <TrackedObject radius={100} speed={35} delay={6} type="mobile" color="#f59e0b" />
         <TrackedObject radius={70} speed={25} delay={8} type="bus" color="#8b5cf6" />
 
-        {/* Static Signal Pings (Fixed Locations) - Sectional Colors */}
+        {/* Static Signal Pings (Fixed Locations) - Sharper & Brighter */}
         {[
-          { top: "20%", left: "70%", color: "#10b981" }, // Outer
-          { top: "55%", left: "15%", color: "#cc44bf" }, // Outer-mid
-          { top: "80%", left: "45%", color: "#3b82f6" }, // Mid
-          { top: "40%", left: "55%", color: "#f59e0b" }, // Mid-inner
+          { top: "20%", left: "70%", color: "#10b981" },
+          { top: "55%", left: "15%", color: "#cc44bf" },
+          { top: "80%", left: "75%", color: "#3b82f6" },
+          { top: "40%", left: "85%", color: "#f59e0b" },
         ].map((pos, i) => (
           <div key={i} className="absolute" style={{ top: pos.top, left: pos.left }}>
             <motion.div
@@ -184,4 +172,3 @@ export default function GPSVisual() {
     </div>
   );
 }
-

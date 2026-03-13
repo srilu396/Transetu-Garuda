@@ -47,7 +47,7 @@ export default function Innovation() {
         <div className="mt-20 p-12 bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl border text-center">
           <h3 className="text-2xl font-bold mb-4">Empanelled with ISRO</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Garuda Technology is proud to be empanelled with the Indian Space Research Organisation (ISRO), leveraging elite satellite data for unmatched tracking precision.
+            Garuda OM is proud to be empanelled with the Indian Space Research Organisation (ISRO), leveraging elite satellite data for unmatched tracking precision.
           </p>
           <div className="inline-flex items-center gap-2 px-6 py-3 border border-primary/20 rounded-full bg-background text-primary font-medium">
             <Rocket className="w-4 h-4" />

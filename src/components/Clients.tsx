@@ -74,7 +74,7 @@ export default function Clients() {
             transition={{ delay: 0.2 }}
             className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            Garuda Technologies is trusted by leading organizations globally for our robust GPS tracking, 
+            Garuda OM is trusted by leading organizations globally for our robust GPS tracking, 
             AI-driven security, and industrial-grade logistics solutions.
           </motion.p>
         </div>

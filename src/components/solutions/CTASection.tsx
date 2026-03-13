@@ -49,9 +49,9 @@ export default function CTASection({ title }: { title: string }) {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.button 
-                whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(var(--primary-rgb),0.6)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(100,103,242,0.6)" }}
                 whileTap={{ scale: 0.95 }}
-                className="group flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold text-lg h-16 px-12 transition-all shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)] w-full sm:w-auto overflow-hidden relative"
+                className="group flex items-center justify-center gap-2 rounded-full bg-[#6467f2] text-white font-bold text-lg h-16 px-12 transition-all shadow-[0_0_20px_rgba(100,103,242,0.4)] w-full sm:w-auto overflow-hidden relative"
               >
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 <span className="relative z-10">Contact Sales</span>

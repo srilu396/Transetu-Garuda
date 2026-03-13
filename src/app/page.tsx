@@ -2,14 +2,13 @@ import SolutionsOverview from "@/components/SolutionsOverview";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
-import Services from "@/components/Services";
 import Features from "@/components/Features";
 import Industries from "@/components/Industries";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import Clients from "@/components/Clients";
-import GPSSoftware from "@/components/GPSSoftware";
+import FASTagManagement from "@/components/FASTagManagement";
 import Innovation from "@/components/Innovation";
 
 export default function Home() {
@@ -20,8 +19,7 @@ export default function Home() {
         <Hero />
         <SolutionsOverview />
         <Products />
-        <GPSSoftware />
-        <Services />
+        <FASTagManagement />
         <Features />
         <Industries />
         <About />
