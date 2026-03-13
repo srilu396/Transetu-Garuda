@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Feature } from "@/data/solutions";
+import { Feature } from "@/content/solutions";
 
 interface FeaturesSectionProps {
   features: Feature[];

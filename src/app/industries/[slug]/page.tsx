@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { industries } from "@/data/industries";
+import Navbar from "@/components/Layout/Navbar";
+import Footer from "@/components/Layout/Footer";
+import { industries } from "@/content/industries";
 import { CheckCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

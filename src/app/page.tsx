@@ -1,31 +1,31 @@
-import SolutionsOverview from "@/components/SolutionsOverview";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Products from "@/components/Products";
-import Features from "@/components/Features";
-import Industries from "@/components/Industries";
-import About from "@/components/About";
-import Testimonials from "@/components/Testimonials";
-import Footer from "@/components/Footer";
-import Clients from "@/components/Clients";
-import FASTagManagement from "@/components/FASTagManagement";
-import Innovation from "@/components/Innovation";
+import SolutionsOverviewSection from "@/components/Products/SolutionsOverview";
+import Navbar from "@/components/Layout/Navbar";
+import HeroSection from "@/components/Hero/Hero";
+import ProductsSection from "@/components/Products/Products";
+import FeaturesSection from "@/components/PowerfulFeatures/PowerfulFeatures";
+import IndustriesSection from "@/components/Industries/Industries";
+import AboutSection from "@/components/About/About";
+import TestimonialsSection from "@/components/Testimonials/Testimonials";
+import Footer from "@/components/Layout/Footer";
+import ClientsSection from "@/components/Clients/Clients";
+import FASTagManagement from "@/components/UI/FASTagManagement";
+import InnovationSection from "@/components/PowerfulFeatures/Innovation";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        <Hero />
-        <SolutionsOverview />
-        <Products />
+        <HeroSection />
+        <SolutionsOverviewSection />
+        <ProductsSection />
         <FASTagManagement />
-        <Features />
-        <Industries />
-        <About />
-        <Clients />
-        <Innovation />
-        <Testimonials />
+        <FeaturesSection />
+        <IndustriesSection />
+        <AboutSection />
+        <ClientsSection />
+        <InnovationSection />
+        <TestimonialsSection />
       </main>
       <Footer />
     </div>

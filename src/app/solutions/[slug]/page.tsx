@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { solutions } from "@/data/solutions";
-import ProductDetailWrapper from "@/components/solutions/ProductDetailWrapper";
+import { solutions } from "@/content/solutions";
+import ProductDetailWrapper from "@/components/Solutions/ProductDetailWrapper";
 
 export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> } // Fix for Next.js 15 route params
+  { params }: { params: Promise<{ slug: string }> }, // Fix for Next.js 15 route params
 ): Promise<Metadata> {
   const { slug } = await params;
   const solution = solutions[slug];

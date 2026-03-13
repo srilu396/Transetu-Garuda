@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { UseCase } from "@/data/solutions";
+import { UseCase } from "@/content/solutions";
 
 interface UseCasesSectionProps {
   useCases: UseCase[];

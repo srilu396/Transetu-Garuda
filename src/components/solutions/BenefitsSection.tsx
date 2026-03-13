@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Benefit } from "@/data/solutions";
+import { Benefit } from "@/content/solutions";
 
 interface BenefitsSectionProps {
   benefits: Benefit[];
