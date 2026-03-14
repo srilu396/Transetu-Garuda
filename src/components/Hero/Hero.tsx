@@ -38,22 +38,21 @@ export default function HeroSection() {
           >
             <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium mb-6 shadow-xl">
               <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
-              Empanelled with ISRO
+              GPS Tracking & Monitoring
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-primary/30 border border-primary/40 rounded-full text-white text-sm font-semibold mb-8 backdrop-blur-md shadow-lg">
               <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse shadow-[0_0_8px_var(--primary)]"></span>
-              Advanced GPS & IoT Solutions
+              FASTag Issuance & Partnerships
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-2xl">
               <span>Garuda OM - </span>
               <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic inline-block pb-2">
-                Precision Fleet <span className="font-medium">Management</span>
+                GPS Tracking <span className="font-medium">& FASTag Solutions</span>
               </span>
             </h1>
             <p className="text-lg text-white font-bold mb-10 leading-relaxed max-w-xl drop-shadow-lg">
-              Empowering global industries with AI-driven GPS tracking,
-              real-time fuel analytics, and integrated security solutions for
-              complete operational visibility and safety.
+              Track, monitor, and manage your fleet with real-time GPS, fuel sensors, dash cams, and FASTag integration,
+              — everything you need on one powerful platform for complete operational control.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
               <motion.button
@@ -113,10 +112,10 @@ export default function HeroSection() {
             {/* Feature Highlights - High Contrast Tag style */}
             <div className="flex flex-wrap gap-3">
               {[
-                "Advanced Mining GPS",
-                "Real-time Fuel Analytics",
-                "AI Video Surveillance",
-                "Industrial IoT Platforms",
+                "GPS Vehicle Tracking",
+                "Dash Cam Security",
+                "Fuel Monitoring Systems",
+                "FASTag Solutions",
               ].map((feature, i) => (
                 <div
                   key={i}

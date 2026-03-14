@@ -171,7 +171,7 @@ export default function ProductsSection() {
             viewport={{ once: true }}
             className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
-            Our Fleet Solutions
+            Our GPS Solutions
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -192,12 +192,9 @@ export default function ProductsSection() {
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed"
           >
-            We offer a wide range of GPS tracking solutions designed to help
-            businesses monitor vehicles, equipment, and valuable assets. Whether
-            you manage a transport fleet, mining equipment, or
-            temperature-sensitive cargo, our technology provides real-time
-            visibility, safety monitoring, and detailed analytics to improve
-            operations.
+            Built for Mining, Logistics, Transportation & More
+            Rugged GPS tracking devices, accurate fuel level sensors, and HD
+            dash cams designed for harsh environments and 24/7 operations.
           </motion.p>
         </div>
 
