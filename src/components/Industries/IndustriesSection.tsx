@@ -1,23 +1,60 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { industries, IndustryData } from "@/content/industries";
-import { ArrowRight, TrendingUp, CheckCircle2, Building2 } from "lucide-react";
+import { industries as importedIndustries, IndustryData } from "@/content/industries";
+import { ArrowRight, Building2, Flame, DrillIcon, Fuel, Shield, Activity, Gauge } from "lucide-react";
 import SlidePanel from "../UI/SlidePanel";
 
+// Add Oil & Gas to the industries list with complete detailed data
+const industries: IndustryData[] = [
+  ...importedIndustries,
+  {
+    title: "Oil & Gas Operations",
+    description: "Track drilling rigs, pipeline assets, and energy fleet vehicles with rugged GPS devices and fuel monitoring systems designed for remote oil field environments.",
+    icon: Flame,
+    category: "Energy",
+    imageUrl: "/images/industries/oil-gas-operations.jpg", // Make sure to add this image
+    features: [
+      "Real-time drilling rig GPS tracking",
+      "Pipeline asset monitoring & leak detection",
+      "Fuel consumption tracking for heavy equipment",
+      "Remote location satellite coverage",
+      "Harsh environment certified hardware",
+      "Geofencing for restricted zones",
+      "Engine hours & maintenance alerts",
+      "Tanker fleet management"
+    ],
+    stats: [
+      { label: "Rigs Tracked", value: "500+", icon: DrillIcon },
+      { label: "Fuel Savings", value: "25%", icon: Fuel },
+      { label: "Pipeline Miles", value: "10,000+", icon: Activity }
+    ],
+    detailedDescription: "The oil and gas industry operates in some of the most challenging environments on earth, from remote desert locations to offshore platforms and arctic conditions. Our specialized GPS tracking solutions are engineered to withstand extreme temperatures, vibration, and harsh conditions while providing reliable real-time data on asset location, utilization, and performance. We help energy companies optimize their operations by tracking everything from drilling rigs and pipeline inspection vehicles to fuel trucks and service fleet. Our integrated fuel monitoring systems provide critical insights into consumption patterns, helping detect theft and inefficiencies that can cost millions annually. With satellite-based communication ensuring coverage even in the most remote locations, our solutions give energy companies complete visibility and control over their valuable assets, improving safety, reducing downtime, and maximizing operational efficiency.",
+    solutions: [
+      "Drilling Rig GPS Tracking",
+      "Pipeline Asset Monitoring",
+      "Fuel Theft Detection System",
+      "Heavy Equipment Telematics",
+      "Tanker Fleet Management",
+      "Remote Location Satellite Tracking",
+      "Well Site Security Monitoring",
+      "Equipment Maintenance Alerts"
+    ],
+    benefits: [
+      "Reduce fuel theft by up to 30% with real-time consumption monitoring",
+      "Minimize downtime with predictive maintenance alerts",
+      "Improve safety with geofencing and restricted zone alerts",
+      "Optimize rig utilization with detailed usage analytics",
+      "Enhance security with tamper-proof asset tracking",
+      "Lower operational costs through efficient route planning",
+      "Ensure compliance with environmental and safety regulations",
+      "Gain complete visibility across remote operations"
+    ]
+  }
+];
+
 export default function IndustriesSection() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedIndustry, setSelectedIndustry] = useState<IndustryData | null>(null);
-
-  const categories = [
-    "All",
-    ...Array.from(new Set(industries.map((ind) => ind.category))),
-  ];
-
-  const filteredIndustries =
-    selectedCategory === "All"
-      ? industries
-      : industries.filter((ind) => ind.category === selectedCategory);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,7 +71,72 @@ export default function IndustriesSection() {
     visible: {
       opacity: 1,
       y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 12
+      }
     },
+    hover: {
+      y: -8,
+      scale: 1.02,
+      transition: {
+        type: "spring" as const,
+        stiffness: 400,
+        damping: 17
+      }
+    },
+    tap: {
+      scale: 0.98,
+      transition: {
+        type: "spring" as const,
+        stiffness: 400,
+        damping: 17
+      }
+    }
+  };
+
+  const cardBorderVariants = {
+    hover: {
+      borderColor: "rgba(249, 115, 22, 0.4)",
+      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut" as const
+      }
+    }
+  };
+
+  const iconVariants = {
+    hover: {
+      rotate: [0, -5, 5, -5, 0],
+      scale: 1.1,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut" as const
+      }
+    }
+  };
+
+  const badgeVariants = {
+    hover: {
+      scale: 1.05,
+      backgroundColor: "rgba(249, 115, 22, 0.15)",
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  const arrowVariants = {
+    hover: {
+      x: 5,
+      transition: {
+        type: "spring" as const,
+        stiffness: 400,
+        damping: 17
+      }
+    }
   };
 
   const handleIndustryClick = (industry: IndustryData) => {
@@ -56,7 +158,7 @@ export default function IndustriesSection() {
 
       <div className="max-w-7xl mx-auto container-padding">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -87,92 +189,79 @@ export default function IndustriesSection() {
           </motion.p>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedCategory === category
-                  ? "bg-primary text-white shadow-lg shadow-primary/25"
-                  : "bg-white/50 text-slate-600 hover:bg-white border border-slate-200"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        {/* Industry Grid */}
+        {/* Industry Grid - Compact Cards with Animations */}
         <motion.div
            variants={containerVariants}
            initial="hidden"
            whileInView="visible"
            viewport={{ once: true, margin: "-80px" }}
-           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr"
+           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr"
         >
-          {filteredIndustries.map((industry, index) => {
+          {industries.map((industry, index) => {
             const Icon = industry.icon;
             return (
               <motion.div
                 key={index}
                 variants={cardVariants}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="group relative"
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                whileTap="tap"
+                viewport={{ once: true }}
+                custom={index}
+                className="group relative h-full cursor-pointer"
+                onClick={() => handleIndustryClick(industry)}
               >
-                <div
-                  onClick={() => handleIndustryClick(industry)}
-                  className="h-full flex flex-col bg-white border border-slate-200/60 rounded-2xl p-8 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_-15px_rgba(var(--primary-rgb),0.25)] hover:border-primary/40 cursor-pointer"
-                >
-                  {/* Icon & Category */}
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:scale-110 group-hover:rotate-3">
-                      <Icon className="w-7 h-7" />
-                    </div>
-                    <span className="text-[10px] font-bold text-primary uppercase tracking-wide bg-primary/5 px-3 py-1.5 rounded-full border border-primary/10">
-                      {industry.category}
-                    </span>
+                <div className="h-full flex flex-col bg-white border-2 border-slate-200/60 rounded-xl p-5 transition-all duration-300 relative">
+                  {/* Border overlay with hover animation */}
+                  <motion.div 
+                    variants={cardBorderVariants}
+                    className="absolute inset-0 rounded-xl pointer-events-none"
+                    style={{
+                      border: "2px solid transparent",
+                    }}
+                  />
+                  
+                  {/* Icon & Title Row */}
+                  <div className="flex items-center gap-3 mb-3 relative z-10">
+                    <motion.div 
+                      variants={iconVariants}
+                      className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300"
+                    >
+                      <Icon className="w-5 h-5" />
+                    </motion.div>
+                    <h3 className="text-base font-bold group-hover:text-primary transition-colors text-slate-900 line-clamp-1">
+                      {industry.title}
+                    </h3>
                   </div>
 
-                  {/* Content */}
-                  <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors text-slate-900">
-                    {industry.title}
-                  </h3>
-                  <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                  {/* Short Description */}
+                  <p className="text-slate-600 text-xs leading-relaxed mb-3 line-clamp-2 relative z-10">
                     {industry.description}
                   </p>
 
-                  {/* Highlights/Features */}
-                  <div className="space-y-3 mb-8">
-                    {industry.features.slice(0, 2).map((feature, fIndex) => (
-                      <div
-                        key={fIndex}
-                        className="flex items-center gap-2.5 text-xs font-semibold text-slate-700"
-                      >
-                        <div className="p-0.5 rounded-full bg-primary/10 text-primary">
-                          <CheckCircle2 size={12} />
-                        </div>
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
+                  {/* Category Badge - Small and Subtle with hover animation */}
+                  <motion.div 
+                    variants={badgeVariants}
+                    className="mb-2 relative z-10"
+                  >
+                    <span className="text-[8px] font-semibold text-primary uppercase tracking-wide bg-primary/5 px-2 py-1 rounded-full border border-primary/10 inline-block">
+                      {industry.category}
+                    </span>
+                  </motion.div>
 
-                  {/* Stats Preview */}
-                  {industry.stats && industry.stats[1] && (
-                    <div className="flex items-center gap-2 text-primary font-bold mb-6 bg-primary/5 p-3 rounded-xl border border-primary/10 group-hover:bg-primary/10 transition-colors">
-                      <TrendingUp className="w-4 h-4" />
-                      <span className="text-xs">
-                        {industry.stats[1].label}: {industry.stats[1].value}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Call to Action */}
-                  <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform duration-300 mt-auto">
-                    View Industry Details
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
+                  {/* Call to Action - Subtle Indicator with animated arrow */}
+                  <motion.div 
+                    variants={arrowVariants}
+                    className="flex items-center gap-1 text-primary text-[10px] font-semibold uppercase tracking-wider mt-auto relative z-10"
+                  >
+                    View Details
+                    <motion.div
+                      variants={arrowVariants}
+                    >
+                      <ArrowRight className="w-3 h-3" />
+                    </motion.div>
+                  </motion.div>
                 </div>
               </motion.div>
             );
@@ -185,35 +274,35 @@ export default function IndustriesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
+          className="mt-16 relative text-center bg-white rounded-2xl p-8 lg:p-12 border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden"
         >
           {/* Background Decorative Gradients */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl -ml-40 -mb-40"></div>
 
           <div className="relative z-10">
-            <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
+            <h3 className="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900 tracking-tight">
               Don't see your <span className="text-primary">industry listed?</span>
             </h3>
-            <p className="text-lg text-slate-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base text-slate-600 font-medium mb-6 max-w-2xl mx-auto leading-relaxed">
               Our technology is highly adaptable. Contact us to discuss how we can
               build a custom tracking solution for your specific business needs.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <motion.button
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-14 px-10 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
               >
                 Consult Our Experts
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-14 px-10 transition-all w-full sm:w-auto bg-transparent"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
               >
                 Request Customization
               </motion.button>

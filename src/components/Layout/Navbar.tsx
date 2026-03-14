@@ -10,7 +10,7 @@ export default function Navbar() {
             <div className="flex items-center space-x-3 cursor-pointer">
               <div className="relative w-10 h-10 rounded-full overflow-hidden border border-primary/30 bg-primary/10 flex items-center justify-center">
                 <Image
-                  src="/logo-placeholder.svg"
+                  src="/logo.png"
                   alt="Garuda OM logo"
                   fill
                   sizes="40px"

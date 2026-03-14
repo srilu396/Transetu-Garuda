@@ -67,7 +67,7 @@ export default function SolutionsOverviewSection() {
       y: 0,
       transition: {
         duration: 0.7,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
         delay: index * 0.15,
       },
     }),
@@ -80,7 +80,7 @@ export default function SolutionsOverviewSection() {
       filter: "drop-shadow(0 0 12px rgba(100, 103, 242, 0.4))",
       transition: {
         duration: 0.5,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     }
   };
@@ -102,7 +102,7 @@ export default function SolutionsOverviewSection() {
       backgroundColor: "#5a5ce0",
       boxShadow: "0 20px 25px -5px rgba(100, 103, 242, 0.3)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17
       }
@@ -118,7 +118,7 @@ export default function SolutionsOverviewSection() {
       boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(100, 103, 242, 0.2)",
       transition: {
         duration: 0.3,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };

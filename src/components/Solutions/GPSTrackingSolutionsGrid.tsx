@@ -156,7 +156,7 @@ export default function ProductsSection() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12
       }
@@ -165,7 +165,7 @@ export default function ProductsSection() {
       y: -12,
       scale: 1.02,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17
       }
@@ -173,7 +173,7 @@ export default function ProductsSection() {
     tap: {
       scale: 0.98,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17
       }
@@ -186,7 +186,7 @@ export default function ProductsSection() {
       boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
       transition: {
         duration: 0.3,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -197,7 +197,7 @@ export default function ProductsSection() {
       scale: 1.1,
       transition: {
         duration: 0.5,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     }
   };
@@ -227,7 +227,7 @@ export default function ProductsSection() {
       scale: 1.05,
       boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.3)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17
       }
@@ -374,7 +374,7 @@ export default function ProductsSection() {
                     className="lucide lucide-arrow-right"
                     animate={{ x: 0 }}
                     whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
                   >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
