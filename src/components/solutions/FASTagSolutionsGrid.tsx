@@ -113,11 +113,12 @@ export default function FASTagSolutionsGrid() {
 
                 <Link
                   href={`/solutions/${solution.slug}`}
+                  style={{ backgroundColor: "#6467f2" }}
                   className={[
                     "group/btn flex items-center justify-center gap-2",
                     "py-3.5 px-4 rounded-full",
                     "text-sm font-bold transition-all duration-300",
-                    "bg-[#6467f2] hover:bg-[#5a5ce0] text-white",
+                    "hover:bg-[#5a5ce0] text-white",
                     "shadow-md hover:shadow-xl hover:shadow-[#6467f2]/20",
                     "group-hover:translate-y-[-2px]",
                     "w-full mt-auto",

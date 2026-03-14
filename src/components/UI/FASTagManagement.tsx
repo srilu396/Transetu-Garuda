@@ -201,14 +201,17 @@ export default function FASTagManagement() {
                       setSelectedSolutionData(null);
                     }
                   }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    backgroundColor: "#5a5ce0",
+                  }}
                   whileTap={{ scale: 0.95 }}
+                  style={{ backgroundColor: "#6467f2" }}
                   className={[
                     "group/btn flex items-center justify-center gap-2",
                     "py-3.5 px-4 rounded-full",
                     "text-sm font-bold transition-all duration-300",
-                    "bg-[#6467f2] hover:bg-[#5a5ce0] text-white",
-                    "shadow-md hover:shadow-xl hover:shadow-[#6467f2]/20",
+                    "text-white shadow-md hover:shadow-xl hover:shadow-[#6467f2]/20",
                     "group-hover:translate-y-[-2px]",
                     "w-full mt-auto cursor-pointer",
                   ].join(" ")}

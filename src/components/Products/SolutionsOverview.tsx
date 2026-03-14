@@ -204,17 +204,17 @@ export default function SolutionsOverviewSection() {
                       backgroundColor: "#5a5ce0", // Slightly darker on hover
                     }}
                     whileTap={{ scale: 0.95 }}
-                    style={{ backgroundColor: "#7375f2" }}
+                    style={{ backgroundColor: "#6467f2" }}
                     className={[
-                      "group/btn inline-flex items-center gap-2",
-                      "rounded-xl px-7 py-3.5",
-                      "font-bold transition-all duration-300",
-                      "text-white shadow-md hover:shadow-xl",
-                      "w-full justify-center relative z-20",
-                      "mt-4", // Explicit margin from content above
+                      "group/btn flex items-center justify-center gap-2",
+                      "py-3.5 px-4 rounded-full",
+                      "text-sm font-bold transition-all duration-300",
+                      "text-white shadow-md hover:shadow-xl hover:shadow-[#6467f2]/20",
+                      "group-hover:translate-y-[-2px]",
+                      "w-full mt-auto cursor-pointer",
                     ].join(" ")}
                   >
-                    <span className="text-base font-bold text-white">
+                    <span className="text-sm font-bold text-white">
                       Learn More
                     </span>
                     <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
