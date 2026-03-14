@@ -246,14 +246,17 @@ export default function GPSDetailWrapper({
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <Link
-                href="/contact"
+                href="/#contact"
                 className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl"
               >
                 Contact Sales
               </Link>
-              <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all">
+              <Link
+                href="/#contact"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center justify-center"
+              >
                 Request a Demo
-              </button>
+              </Link>
             </div>
           </div>
         </div>

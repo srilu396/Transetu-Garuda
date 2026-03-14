@@ -1,61 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { industries as importedIndustries, IndustryData } from "@/content/industries";
-import { ArrowRight, Building2, Flame, DrillIcon, Fuel, Activity } from "lucide-react";
-import SlidePanel from "../UI/SlidePanel";
+import { industries, IndustryData } from "@/content/industries";
+import { Building2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-// Add Oil & Gas to the industries list with complete detailed data
-const industries: IndustryData[] = [
-  ...importedIndustries,
-  {
-    slug: "oil-gas-operations",
-    title: "Oil & Gas Operations",
-    description: "Track drilling rigs, pipeline assets, and energy fleet vehicles with rugged GPS devices and fuel monitoring systems designed for remote oil field environments.",
-    icon: Flame,
-    category: "Energy",
-    imageUrl: "/images/industries/oil-gas-operations.jpg", // Make sure to add this image
-    features: [
-      "Real-time drilling rig GPS tracking",
-      "Pipeline asset monitoring & leak detection",
-      "Fuel consumption tracking for heavy equipment",
-      "Remote location satellite coverage",
-      "Harsh environment certified hardware",
-      "Geofencing for restricted zones",
-      "Engine hours & maintenance alerts",
-      "Tanker fleet management"
-    ],
-    stats: [
-      { label: "Rigs Tracked", value: "500+", icon: DrillIcon },
-      { label: "Fuel Savings", value: "25%", icon: Fuel },
-      { label: "Pipeline Miles", value: "10,000+", icon: Activity }
-    ],
-    detailedDescription: "The oil and gas industry operates in some of the most challenging environments on earth, from remote desert locations to offshore platforms and arctic conditions. Our specialized GPS tracking solutions are engineered to withstand extreme temperatures, vibration, and harsh conditions while providing reliable real-time data on asset location, utilization, and performance. We help energy companies optimize their operations by tracking everything from drilling rigs and pipeline inspection vehicles to fuel trucks and service fleet. Our integrated fuel monitoring systems provide critical insights into consumption patterns, helping detect theft and inefficiencies that can cost millions annually. With satellite-based communication ensuring coverage even in the most remote locations, our solutions give energy companies complete visibility and control over their valuable assets, improving safety, reducing downtime, and maximizing operational efficiency.",
-    solutions: [
-      "Drilling Rig GPS Tracking",
-      "Pipeline Asset Monitoring",
-      "Fuel Theft Detection System",
-      "Heavy Equipment Telematics",
-      "Tanker Fleet Management",
-      "Remote Location Satellite Tracking",
-      "Well Site Security Monitoring",
-      "Equipment Maintenance Alerts"
-    ],
-    benefits: [
-      "Reduce fuel theft by up to 30% with real-time consumption monitoring",
-      "Minimize downtime with predictive maintenance alerts",
-      "Improve safety with geofencing and restricted zone alerts",
-      "Optimize rig utilization with detailed usage analytics",
-      "Enhance security with tamper-proof asset tracking",
-      "Lower operational costs through efficient route planning",
-      "Ensure compliance with environmental and safety regulations",
-      "Gain complete visibility across remote operations"
-    ]
-  }
-];
 
 export default function IndustriesSection() {
-  const [selectedIndustry, setSelectedIndustry] = useState<IndustryData | null>(null);
+  const router = useRouter();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,12 +93,9 @@ export default function IndustriesSection() {
   };
 
   const handleIndustryClick = (industry: IndustryData) => {
-    setSelectedIndustry(industry);
+    router.push(`/industries/${industry.slug}`);
   };
 
-  const handleClosePanel = () => {
-    setSelectedIndustry(null);
-  };
 
   return (
     <section
@@ -240,29 +189,6 @@ export default function IndustriesSection() {
                   <p className="text-slate-600 text-xs leading-relaxed mb-3 line-clamp-2 relative z-10">
                     {industry.description}
                   </p>
-
-                  {/* Category Badge - Small and Subtle with hover animation */}
-                  <motion.div 
-                    variants={badgeVariants}
-                    className="mb-2 relative z-10"
-                  >
-                    <span className="text-[8px] font-semibold text-primary uppercase tracking-wide bg-primary/5 px-2 py-1 rounded-full border border-primary/10 inline-block">
-                      {industry.category}
-                    </span>
-                  </motion.div>
-
-                  {/* Call to Action - Subtle Indicator with animated arrow */}
-                  <motion.div 
-                    variants={arrowVariants}
-                    className="flex items-center gap-1 text-primary text-[10px] font-semibold uppercase tracking-wider mt-auto relative z-10"
-                  >
-                    View Details
-                    <motion.div
-                      variants={arrowVariants}
-                    >
-                      <ArrowRight className="w-3 h-3" />
-                    </motion.div>
-                  </motion.div>
                 </div>
               </motion.div>
             );
@@ -312,16 +238,6 @@ export default function IndustriesSection() {
         </motion.div>
       </div>
 
-      <SlidePanel
-        isOpen={!!selectedIndustry}
-        onClose={handleClosePanel}
-        title={selectedIndustry?.title || ""}
-        description={selectedIndustry?.description || ""}
-        features={selectedIndustry?.features || []}
-        icon={selectedIndustry?.icon || Building2}
-        category={selectedIndustry?.category || "Industry Solution"}
-        industryData={selectedIndustry || undefined}
-      />
     </section>
   );
 }

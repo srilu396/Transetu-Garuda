@@ -13,6 +13,7 @@ import {
   MapPin,
   Shield,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { solutions as solutionsData, SolutionData } from "@/content/solutions";
 
 const products = [
@@ -137,6 +138,7 @@ const products = [
 ];
 
 export default function ProductsSection() {
+  const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
   
@@ -427,6 +429,7 @@ export default function ProductsSection() {
                   boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => router.push("/#contact")}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
               >
                 Consult Our Experts
@@ -434,6 +437,7 @@ export default function ProductsSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => router.push("/#contact")}
                 className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
               >
                 Request Customization

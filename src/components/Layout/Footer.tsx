@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary/50 border-t border-border/50">
+    <footer className="border-t border-border/50" style={{ backgroundColor: '#e3d8dd' }}>
       <div className="max-w-7xl mx-auto container-padding py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
@@ -182,7 +182,7 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -190,6 +190,30 @@ export default function Footer() {
                   href="/#about"
                 >
                   About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/#solutions"
+                >
+                  Solutions
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/#products"
+                >
+                  Products
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/#fastag-management"
+                >
+                  FASTag
                 </a>
               </li>
               <li>
@@ -203,17 +227,17 @@ export default function Footer() {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/blog"
+                  href="/#features"
                 >
-                  Blog
+                  Why Us
                 </a>
               </li>
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/events"
+                  href="/#videos"
                 >
-                  Events
+                  Videos
                 </a>
               </li>
             </ul>
@@ -226,17 +250,76 @@ export default function Footer() {
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   href="/#contact"
                 >
-                  Help Center
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Important Solutions</h3>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/gps-tracking-solutions"
+                >
+                  Fleet GPS Tracking
                 </a>
               </li>
               <li>
                 <a
-                  href="https://gpsreports.in/api_document/api/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/fuel-level-sensors"
                 >
-                  API Reference
+                  Fuel Monitoring
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/dash-cam-system"
+                >
+                  Dash Cam System
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/fastag-management"
+                >
+                  FASTag Management
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/ais-140-tracker"
+                >
+                  AIS 140 Compliance
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/temperature-monitor"
+                >
+                  Temperature Monitoring
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/padlock-gps"
+                >
+                  GPS Smart Padlock
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  href="/solutions/video-telematics"
+                >
+                  Video Telematics
                 </a>
               </li>
             </ul>
