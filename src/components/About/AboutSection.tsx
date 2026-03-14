@@ -44,7 +44,7 @@ export default function AboutSection() {
       y: 0,
       transition: { 
         duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1]
+        ease: [0.25, 0.1, 0.25, 1] as const
       }
     }
   };
@@ -66,7 +66,7 @@ export default function AboutSection() {
       opacity: 1, 
       scale: 1,
       transition: { 
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12
       }
@@ -79,7 +79,7 @@ export default function AboutSection() {
       opacity: 1, 
       x: 0,
       transition: { 
-        type: "spring",
+        type: "spring" as const,
         stiffness: 80,
         damping: 15
       }
@@ -92,7 +92,7 @@ export default function AboutSection() {
       opacity: 1, 
       x: 0,
       transition: { 
-        type: "spring",
+        type: "spring" as const,
         stiffness: 80,
         damping: 15
       }
@@ -106,7 +106,7 @@ export default function AboutSection() {
       transition: {
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     }
   };
@@ -121,7 +121,7 @@ export default function AboutSection() {
       y: -4,
       boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 25
       }
@@ -134,7 +134,7 @@ export default function AboutSection() {
     hover: { 
       scale: 1.1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 500,
         damping: 20
       }
@@ -257,7 +257,6 @@ export default function AboutSection() {
                 variants={scaleIn}
                 initial="rest"
                 whileHover="hover"
-                variants={cardHover}
                 className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"
               >
                 <motion.div 
@@ -283,9 +282,7 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            initial="rest"
             whileHover="hover"
-            variants={cardHover}
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden group"
           >
             <motion.div
@@ -390,9 +387,7 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            initial="rest"
             whileHover="hover"
-            variants={cardHover}
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl"
           >
             <motion.div 
@@ -430,7 +425,6 @@ export default function AboutSection() {
                   variants={scaleIn}
                   initial="rest"
                   whileHover="hover"
-                  variants={cardHover}
                   className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200"
                 >
                   <motion.div
@@ -486,7 +480,6 @@ export default function AboutSection() {
                     variants={scaleIn}
                     initial="rest"
                     whileHover="hover"
-                    variants={cardHover}
                     className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20"
                   >
                     <motion.div 
@@ -506,7 +499,6 @@ export default function AboutSection() {
                     variants={scaleIn}
                     initial="rest"
                     whileHover="hover"
-                    variants={cardHover}
                     className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20"
                   >
                     <motion.div 
@@ -541,7 +533,6 @@ export default function AboutSection() {
                         variants={scaleIn}
                         initial="rest"
                         whileHover="hover"
-                        variants={cardHover}
                         className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200"
                       >
                         <motion.div
@@ -567,7 +558,6 @@ export default function AboutSection() {
                         variants={scaleIn}
                         initial="rest"
                         whileHover="hover"
-                        variants={cardHover}
                         className="p-4 bg-gray-50 rounded-xl border border-gray-200 group"
                       >
                         <motion.div 
@@ -589,38 +579,6 @@ export default function AboutSection() {
           )}
         </AnimatePresence>
 
-        {/* Client Organizations */}
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h3 className="text-2xl font-bold mb-8 text-gray-900">Trusted By Industry Leaders</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {clientLogos.map((client, idx) => (
-              <motion.div
-                key={idx}
-                variants={scaleIn}
-                initial="rest"
-                whileHover="hover"
-                variants={cardHover}
-                className="bg-white px-6 py-4 rounded-xl border border-gray-200 shadow-sm flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer"
-              >
-                <motion.div 
-                  initial="rest"
-                  whileHover="hover"
-                  variants={iconHover}
-                  className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary"
-                >
-                  {client.icon}
-                </motion.div>
-                <span className="font-semibold text-gray-800 text-sm">{client.name}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

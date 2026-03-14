@@ -6,6 +6,7 @@ import FeaturesSection from "@/components/PowerfulFeatures/PowerfulFeatures";
 import IndustriesSection from "@/components/Industries/IndustriesSection";
 import AboutSection from "@/components/About/AboutSection";
 import VideosSection from "@/components/Videos/Videos";
+import ClientsSection from "@/components/Clients/ClientsSection";
 import Footer from "@/components/Layout/Footer";
 import FASTagManagement from "@/components/FASTag/FASTagManagementSection";
 
@@ -22,6 +23,7 @@ export default function Home() {
         <IndustriesSection />
         <AboutSection />
         <VideosSection />
+        <ClientsSection />
       </main>
       <Footer />
     </div>

@@ -120,22 +120,30 @@ export default function VideosSection() {
       </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
+          >
+            Watch Demos
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl lg:text-5xl font-black mb-6 tracking-tight text-slate-900"
+            className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900"
           >
-            WHY CHOOSE OUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">GPS FLEET MANAGEMENT SYSTEM?</span>
+            Watch <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Platform Demo</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
+            className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed"
           >
             With our advanced fleet vehicle tracking systems you have complete control over your fleet and their activities.
           </motion.p>
