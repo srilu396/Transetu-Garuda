@@ -139,6 +139,7 @@ const products = [
 export default function ProductsSection() {
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -154,7 +155,86 @@ export default function ProductsSection() {
     visible: {
       opacity: 1,
       y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
     },
+    hover: {
+      y: -12,
+      scale: 1.02,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 17
+      }
+    },
+    tap: {
+      scale: 0.98,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 17
+      }
+    }
+  };
+
+  const cardBorderVariants = {
+    hover: {
+      borderColor: "rgba(249, 115, 22, 0.4)",
+      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const iconVariants = {
+    hover: {
+      rotate: [0, -5, 5, -5, 0],
+      scale: 1.1,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const badgeVariants = {
+    hover: {
+      scale: 1.05,
+      backgroundColor: "rgba(249, 115, 22, 0.15)",
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  const featureItemVariants = {
+    hover: (index: number) => ({
+      x: 5,
+      transition: {
+        delay: index * 0.05,
+        duration: 0.2
+      }
+    })
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.3)",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 17
+      }
+    },
+    tap: {
+      scale: 0.95
+    }
   };
 
   return (
@@ -204,28 +284,47 @@ export default function ProductsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-20 auto-rows-fr"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-32 auto-rows-fr"
         >
           {products.map((product, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative flex flex-col h-full bg-white border border-slate-200/60 rounded-2xl p-6 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_-15px_rgba(var(--primary-rgb),0.25)] hover:border-primary/40 flex-grow"
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              whileTap="tap"
+              viewport={{ once: true }}
+              custom={index}
+              className="group relative flex flex-col h-full bg-white border-2 border-slate-200/60 rounded-2xl p-6 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
             >
+              <motion.div 
+                variants={cardBorderVariants}
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  border: "2px solid transparent",
+                }}
+              />
+              
               <div className="flex items-start justify-between mb-6">
-                <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:scale-110 group-hover:rotate-3">
+                <motion.div 
+                  variants={iconVariants}
+                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 text-primary"
+                >
                   {(() => {
                     const Icon = product.icon;
                     return <Icon className="w-6 h-6" />;
                   })()}
-                </div>
-                <div className="px-3 py-1.5 rounded-full bg-slate-100/80 text-primary font-bold text-[10px] uppercase tracking-wide border border-slate-200">
+                </motion.div>
+                <motion.div 
+                  variants={badgeVariants}
+                  className="px-3 py-1.5 rounded-full bg-slate-100/80 text-primary font-bold text-[10px] uppercase tracking-wide border border-slate-200"
+                >
                   {product.badge}
-                </div>
+                </motion.div>
               </div>
 
-              <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-bold mb-3 text-slate-900">
                 {product.title}
               </h3>
               <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6 flex-grow">
@@ -234,18 +333,23 @@ export default function ProductsSection() {
 
               <div className="space-y-3 mb-8">
                 {product.features.map((feature, fIndex) => (
-                  <div
+                  <motion.div
                     key={fIndex}
+                    custom={fIndex}
+                    variants={featureItemVariants}
                     className="flex items-center text-sm text-slate-600 font-medium"
                   >
-                    <div className="w-1.5 h-1.5 bg-primary/50 rounded-full mr-2 group-hover:bg-primary transition-colors"></div>
+                    <div className="w-2 h-2 bg-primary rounded-full mr-2"></div>
                     {feature}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
               <div className="mt-auto">
-                <button
+                <motion.button
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  whileTap="tap"
                   onClick={() => {
                     setSelectedProduct(product);
                     if (product.slug && solutionsData[product.slug]) {
@@ -254,10 +358,10 @@ export default function ProductsSection() {
                       setSelectedSolutionData(null);
                     }
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 hover:bg-primary/90 shadow-md hover:shadow-xl hover:shadow-primary/20 group-hover:translate-y-[-2px]"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
                 >
                   Learn More
-                  <svg
+                  <motion.svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -267,12 +371,15 @@ export default function ProductsSection() {
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"
+                    className="lucide lucide-arrow-right"
+                    animate={{ x: 0 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
-                  </svg>
-                </button>
+                  </motion.svg>
+                </motion.button>
               </div>
             </motion.div>
           ))}
@@ -292,13 +399,13 @@ export default function ProductsSection() {
           solutionData={selectedSolutionData || undefined}
         />
 
-        {/* Custom Solution Callout */}
+        {/* Custom Solution Callout - Updated to match reference style */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
+          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
         >
           {/* Background Decorative Gradients */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
@@ -320,16 +427,16 @@ export default function ProductsSection() {
                   boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-14 px-10 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
               >
-                Contact Sales
+                Consult Our Experts
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-14 px-10 transition-all w-full sm:w-auto bg-transparent"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
               >
-                Request Quote
+                Request Customization
               </motion.button>
             </div>
           </div>
