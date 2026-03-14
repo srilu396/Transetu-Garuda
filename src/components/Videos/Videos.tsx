@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 
 export default function VideosSection() {
   const containerVariants = {
@@ -10,86 +10,73 @@ export default function VideosSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
     },
   };
 
   const videos = [
     {
-      title: "Tracks Monitoring through Our Cloud Platform",
+      title: "GPS Tracking Dashboard",
       description:
-        "Experience comprehensive vehicle tracking through our advanced cloud-based platform. Monitor your entire fleet in real-time with detailed analytics, route optimization, and instant alerts. See how our intuitive dashboard provides complete visibility into vehicle locations, driver behavior, and operational efficiency across all your assets.",
+        "Watch how our GPS tracking platform provides real-time vehicle monitoring, route playback, and fleet visibility. Explain how the solution works and what users can see in the demo video.",
       videoUrl: "https://www.youtube.com/watch?v=hL0lz9FS5R8",
-      thumbnail: "https://img.youtube.com/vi/hL0lz9FS5R8/hqdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/hL0lz9FS5R8/maxresdefault.jpg",
     },
     {
-      title: "Monitoring the Vehicles",
+      title: "Fuel Monitoring System",
       description:
-        "Discover advanced vehicle monitoring capabilities that go beyond basic tracking. Our comprehensive system provides real-time insights into vehicle performance, driver behavior analysis, maintenance alerts, and fuel consumption patterns. Watch how businesses optimize their fleet operations with our intelligent monitoring solutions.",
+        "See how the fuel monitoring solution tracks fuel usage, detects fuel theft, and generates consumption reports. Explain how the solution works and what users can see in the demo video.",
       videoUrl: "https://www.youtube.com/watch?v=dVBscmoieDg",
-      thumbnail: "https://img.youtube.com/vi/dVBscmoieDg/hqdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/dVBscmoieDg/maxresdefault.jpg",
     },
     {
-      title: "Geofences",
+      title: "Video Telematics Solution",
       description:
-        "Learn about our powerful geofencing technology that creates virtual boundaries for enhanced security and operational control. Set up custom zones, receive instant notifications when vehicles enter or exit designated areas, and improve compliance with automated reporting. Perfect for construction sites, mining operations, and restricted zones.",
+        "Explore how dash cam technology improves driver safety and records real-time driving events. Explain how the solution works and what users can see in the demo video.",
       videoUrl: "https://www.youtube.com/watch?v=JAfhk9CKOtc",
-      thumbnail: "https://img.youtube.com/vi/JAfhk9CKOtc/hqdefault.jpg",
-    },
-    {
-      title: "Engine Hours Location",
-      description:
-        "Explore our engine hour tracking and location monitoring system designed for heavy machinery and industrial equipment. Track engine usage, schedule preventive maintenance, monitor equipment utilization, and optimize operational costs. Essential for mining, construction, and agricultural operations where engine hours directly impact profitability.",
-      videoUrl: "https://www.youtube.com/watch?v=4CPrdveVpp4",
-      thumbnail: "https://img.youtube.com/vi/4CPrdveVpp4/hqdefault.jpg",
+      thumbnail: "https://img.youtube.com/vi/JAfhk9CKOtc/maxresdefault.jpg",
     },
   ];
 
   return (
-    <section id="videos" className="py-24 bg-slate-50 relative overflow-hidden" aria-label="Demo Videos">
-      {/* Decorative blurs matching Testimonials section */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2" />
+    <section id="videos" className="py-24 bg-white relative overflow-hidden" aria-label="Demo Videos">
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48" />
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -ml-48" />
+      </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
-          >
-            Demo Videos
-          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900"
+            className="text-4xl lg:text-5xl font-black mb-6 tracking-tight text-slate-900"
           >
-            Watch Our <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Solutions</span> in
-            Action
+            Watch Our <span className="text-primary">Solutions</span> in Action
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed"
+            transition={{ delay: 0.1 }}
+            className="text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
           >
-            Discover how Trans Global IOT's GPS tracking solutions work in
-            real-world scenarios. See our technology in action across
-            different industries and applications.
+            Watch live demonstrations of our powerful fleet management solutions and see how they can transform your operations.
           </motion.p>
         </div>
 
@@ -98,64 +85,51 @@ export default function VideosSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {videos.map((video, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              whileHover={{ y: -8, scale: 1.01 }}
-              className="group relative flex flex-col h-full bg-white border border-slate-200/60 rounded-2xl transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_-15px_rgba(var(--primary-rgb),0.25)] hover:border-primary/40 overflow-hidden"
+              whileHover={{ y: -10 }}
+              className="bg-white rounded-3xl border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] transition-all duration-300 overflow-hidden group flex flex-col h-full"
             >
-              <div className="relative aspect-video overflow-hidden border-b border-slate-100">
+              {/* Thumbnail with Play Button Overlay */}
+              <a 
+                href={video.videoUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="relative aspect-video block overflow-hidden"
+              >
                 <img
                   src={video.thumbnail}
                   alt={video.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/40 transition-colors duration-300 flex items-center justify-center cursor-pointer">
-                  <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg group-hover:shadow-primary/50 text-primary">
-                    <Play className="w-8 h-8 ml-1" fill="currentColor" />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                    <Play className="w-6 h-6 text-primary ml-1" fill="currentColor" />
                   </div>
                 </div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex items-center gap-1.5 bg-red-600/95 backdrop-blur-sm px-3 py-1.5 rounded-md text-white text-xs font-bold shadow-sm">
-                    <Play className="w-3.5 h-3.5" fill="currentColor" />
-                    <span>YouTube</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-8 flex flex-col flex-grow">
-                <h3 className="text-xl lg:text-2xl font-bold mb-4 text-slate-900 group-hover:text-primary transition-colors tracking-tight">
+              </a>
+
+              {/* Card Content */}
+              <div className="p-8 flex flex-col flex-grow text-left">
+                <h3 className="text-2xl font-black mb-4 text-slate-900 leading-tight">
                   {video.title}
                 </h3>
-                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6 flex-grow">
+                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-8 flex-grow">
                   {video.description}
                 </p>
-                <div className="mt-auto pt-6 border-t border-slate-100/80">
+                <div className="mt-auto">
                   <a
                     href={video.videoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-[#6467f2] font-bold text-sm group/link hover:text-[#5a5ce0] transition-colors"
+                    className="inline-flex items-center text-primary font-bold text-sm tracking-wide group/link"
                   >
-                    <Play className="w-4 h-4 mr-2" />
-                    Watch Video
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="ml-2 group-hover/link:translate-x-1 transition-transform"
-                    >
-                      <path d="M5 12h14"></path>
-                      <path d="m12 5 7 7-7 7"></path>
-                    </svg>
+                    Explore now
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </div>
@@ -163,25 +137,26 @@ export default function VideosSection() {
           ))}
         </motion.div>
 
+        {/* Action Card Section */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mt-20"
         >
-          <div className="relative bg-white border border-slate-200/80 p-10 lg:p-14 rounded-[2.5rem] shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden inline-block group w-full max-w-4xl mx-auto">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+          <div className="relative bg-white border border-slate-100 p-10 lg:p-14 rounded-[3rem] shadow-[0_15px_50px_-20px_rgba(0,0,0,0.1)] overflow-hidden inline-block group w-full max-w-4xl mx-auto">
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
             
             <div className="relative z-10 max-w-2xl mx-auto">
-              <h3 className="text-3xl md:text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">
+              <h3 className="text-3xl md:text-3xl font-black text-slate-900 mb-4 tracking-tight">
                 Want to See a Live Demo?
               </h3>
-              <p className="text-slate-600 text-lg mb-8 leading-relaxed font-medium">
+              <p className="text-slate-600 text-lg mb-10 leading-relaxed font-medium">
                 Schedule a personalized demonstration of our GPS tracking
                 solutions. See how our technology can transform your operations.
               </p>
-              <button className="px-10 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary/90 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
+              <button className="h-14 px-10 bg-primary text-white font-bold rounded-full hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] transition-all duration-300">
                 Schedule Live Demo
               </button>
             </div>

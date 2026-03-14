@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
-import { motion, Variants } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   Target,
   Eye,
@@ -24,11 +25,32 @@ import {
   CreditCard,
   Rocket,
   TrendingUp,
-  Compass,
+  ChevronDown,
+  ChevronUp,
+  Award,
+  Star,
+  Zap,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 
 export default function AboutSection() {
-  const containerVariants: Variants = {
+  const [showMore, setShowMore] = useState(false);
+
+  // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    }
+  };
+
+  const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -39,758 +61,564 @@ export default function AboutSection() {
     },
   };
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1], // Custom cubic-bezier for smoothness
-      },
-    },
-    hover: {
-      y: -5,
-      transition: { duration: 0.3 },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 40, scale: 0.98 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-    hover: {
-      y: -8,
-      scale: 1.02,
-      transition: { duration: 0.3, ease: "easeOut" },
-    },
-  };
-
-  const iconVariants: Variants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "backOut" },
-    },
-    hover: {
-      scale: 1.2,
-      rotate: 5,
-      transition: { duration: 0.3 },
-    },
-  };
-
-  const statVariants: Variants = {
+  const scaleIn = {
     hidden: { opacity: 0, scale: 0.9 },
-    visible: (i: number) => ({
-      opacity: 1,
+    visible: { 
+      opacity: 1, 
       scale: 1,
+      transition: { 
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { 
+        type: "spring",
+        stiffness: 80,
+        damping: 15
+      }
+    }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { 
+        type: "spring",
+        stiffness: 80,
+        damping: 15
+      }
+    }
+  };
+
+  const floatAnimation = {
+    initial: { y: 0 },
+    animate: {
+      y: [-10, 10, -10],
       transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    }),
-    hover: {
-      y: -5,
-      scale: 1.05,
-      transition: { duration: 0.3 },
-    },
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const pulseAnimation = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
   };
 
   const expertiseAreas = [
     {
       icon: Truck,
       label: "GPS Tracking",
+      description: "Real-time fleet monitoring and management",
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
-      iconColor: "text-blue-500",
     },
     {
       icon: Camera,
       label: "Video Telematics",
+      description: "Driver safety and behavior analysis",
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
-      iconColor: "text-purple-500",
     },
     {
       icon: Fuel,
       label: "Fuel Sensors",
+      description: "Real-time fuel monitoring & theft detection",
       color: "text-green-500",
       bgColor: "bg-green-500/10",
-      iconColor: "text-green-500",
     },
     {
       icon: CreditCard,
       label: "FASTag Systems",
-      color: "text-amber-500",
-      bgColor: "bg-amber-500/10",
-      iconColor: "text-amber-500",
-    },
-    {
-      icon: Package,
-      label: "LCL/FCL Operations",
-      color: "text-orange-500",
-      bgColor: "bg-orange-500/10",
-      iconColor: "text-orange-500",
-    },
-    {
-      icon: Globe,
-      label: "Import/Export",
-      color: "text-cyan-500",
-      bgColor: "bg-cyan-500/10",
-      iconColor: "text-cyan-500",
-    },
-    {
-      icon: BarChart3,
-      label: "Sales Leadership",
-      color: "text-indigo-500",
-      bgColor: "bg-indigo-500/10",
-      iconColor: "text-indigo-500",
-    },
-    {
-      icon: Shield,
-      label: "DG Cargo",
-      color: "text-rose-500",
-      bgColor: "bg-rose-500/10",
-      iconColor: "text-rose-500",
-    },
-  ];
-
-  const achievements = [
-    {
-      value: "2000+",
-      label: "Active Clients",
-      icon: Users,
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10",
-    },
-    {
-      value: "24+",
-      label: "Years Experience",
-      icon: Clock,
-      color: "text-green-500",
-      bgColor: "bg-green-500/10",
-    },
-    {
-      value: "15K+",
-      label: "Vehicles Tracked",
-      icon: Truck,
-      color: "text-purple-500",
-      bgColor: "bg-purple-500/10",
-    },
-    {
-      value: "99.9%",
-      label: "Uptime",
-      icon: Shield,
+      description: "Automated toll payments & compliance",
       color: "text-amber-500",
       bgColor: "bg-amber-500/10",
     },
   ];
 
-  const logisticsAchievements = [
-    {
-      text: "Expert in LCL/FCL freight forwarding",
-      icon: Package,
-      color: "text-orange-500",
-    },
-    {
-      text: "DG & Non-DG shipment handling",
-      icon: Shield,
-      color: "text-rose-500",
-    },
-    {
-      text: "Import/Export operations specialist",
-      icon: Globe,
-      color: "text-cyan-500",
-    },
-  ];
-
-  const salesAchievements = [
-    {
-      text: "Built high-performing sales teams at Paytm",
-      icon: Users,
-      color: "text-blue-500",
-    },
-    {
-      text: "Achieved market growth at BlackBuck",
-      icon: TrendingUp,
-      color: "text-green-500",
-    },
-    {
-      text: "GPS & telematics industry pioneer",
-      icon: Rocket,
-      color: "text-purple-500",
-    },
+  const clientLogos = [
+    { name: "ONGC", icon: <Globe className="w-5 h-5" /> },
+    { name: "Maha Cement", icon: <Package className="w-5 h-5" /> },
+    { name: "Maersk", icon: <Globe className="w-5 h-5" /> },
+    { name: "TS Mining", icon: <Truck className="w-5 h-5" /> },
+    { name: "AP Mining", icon: <Truck className="w-5 h-5" /> },
+    { name: "AP Transportation", icon: <Truck className="w-5 h-5" /> },
+    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" /> },
   ];
 
   return (
-    <section
-      id="about"
-      className="py-24 bg-background relative overflow-hidden"
-    >
+    <section id="about" className="py-24 relative overflow-hidden" style={{ backgroundColor: '#f8fafc' }}>
       {/* Animated Background Elements */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 0.2, scale: 1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none"
+        variants={floatAnimation}
+        initial="initial"
+        animate="animate"
+        className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48 -mt-48"
       />
       <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 0.15, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.3 }}
-        className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none"
+        variants={floatAnimation}
+        initial="initial"
+        animate="animate"
+        custom={1}
+        className="absolute bottom-20 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -ml-48 -mb-48"
       />
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 2, delay: 0.6 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-full blur-[120px] pointer-events-none"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
-        {/* Section Header */}
+        {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-16"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center px-4 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-bold uppercase tracking-wider mb-6"
           >
-            Our Legacy
+            <Sparkles className="w-4 h-4 mr-2" />
+            Why Choose Us
           </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 tracking-tight"
-          >
-            About <span className="text-gradient">Garuda OM</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed"
-          >
-            Pioneering GPS tracking and logistics technology since 2001,
-            delivering intelligent solutions for modern fleet management.
-          </motion.p>
+          <h2 className="text-4xl md:text-5xl font-black mb-6">
+            About <span className="text-primary">Garuda Om</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-medium">
+            A technology-driven logistics and fleet solutions provider with 2000+ active clients
+          </p>
         </motion.div>
 
-        {/* Company Overview & Founder - Side by Side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Company Overview */}
+        {/* Stats Bar */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+        >
+          {[
+            { value: "2000+", label: "Active Clients", icon: Users },
+            { value: "24+", label: "Years Experience", icon: Clock },
+            { value: "15K+", label: "Vehicles Tracked", icon: Truck },
+            { value: "99.9%", label: "Client Retention", icon: Star },
+          ].map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={scaleIn}
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.05,
+                  boxShadow: "0 20px 30px -10px rgba(0,0,0,0.15)"
+                }}
+                className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"
+              >
+                <motion.div 
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                  className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
+                >
+                  <Icon className="w-6 h-6 text-primary" />
+                </motion.div>
+                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Founder & Company Overview */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          {/* Founder Card */}
           <motion.div
-            variants={containerVariants}
+            variants={slideInLeft}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-          >
-            <motion.h3
-              variants={itemVariants}
-              className="text-2xl font-bold mb-6 flex items-center gap-2"
-            >
-              <span>Company Overview</span>
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-              >
-                <Compass className="w-6 h-6 text-primary" />
-              </motion.div>
-            </motion.h3>
-
-            <motion.div
-              variants={itemVariants}
-              className="space-y-4 text-muted-foreground"
-            >
-              <p>
-                <span className="font-bold text-foreground">Garuda OM</span> has
-                been at the forefront of GPS tracking innovation, providing
-                comprehensive fleet management solutions across logistics,
-                mining, and industrial sectors.
-              </p>
-              <p>
-                Our integrated platform combines real-time tracking, video
-                telematics, fuel monitoring, and FASTag management to deliver
-                complete operational visibility.
-              </p>
-            </motion.div>
-
-            {/* Stats Grid */}
-            <motion.div
-              variants={containerVariants}
-              className="grid grid-cols-2 gap-4 mt-8"
-            >
-              {achievements.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    custom={index}
-                    variants={statVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    whileHover="hover"
-                    className={`${item.bgColor} p-6 rounded-xl border border-border/50 text-center backdrop-blur-sm group`}
-                  >
-                    <motion.div variants={iconVariants} whileHover="hover">
-                      <Icon
-                        className={`w-6 h-6 ${item.color} mx-auto mb-2 group-hover:scale-110 transition-transform`}
-                      />
-                    </motion.div>
-                    <p className="text-2xl font-bold">{item.value}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {item.label}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-
-          {/* Founder Profile */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
             whileHover={{ y: -5 }}
-            className="bg-card rounded-2xl border border-border/50 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500"
+            className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden group"
           >
-            {/* Profile Header */}
             <motion.div
-              className="bg-gradient-to-r from-primary to-accent p-8 text-white relative overflow-hidden"
-              whileHover="hover"
-            >
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.2, 0.3, 0.2],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-                className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"
-              />
-
-              <div className="relative z-10 flex items-center gap-6">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+              }}
+              className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl -mr-16 -mt-16"
+            />
+            
+            <div className="relative z-10">
+              <div className="flex items-start gap-8 mb-6">
+                {/* Founder Image - Increased Size */}
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotate: 2 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="w-20 h-20 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center text-3xl font-bold border-2 border-white/30"
+                  className="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-4xl font-bold text-white shadow-lg shrink-0 overflow-hidden"
                 >
-                  PS
+                  {/* Replace with actual image */}
+                  <span>PS</span>
+                  {/* <Image src="/images/founder.jpg" alt="Polimetla Sudhakar" width={128} height={128} className="object-cover w-full h-full" /> */}
                 </motion.div>
                 <div>
-                  <motion.h3
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-2xl font-bold mb-1"
+                  <motion.h3 
+                    variants={fadeInUp}
+                    className="text-2xl font-black mb-1"
                   >
                     Polimetla Sudhakar
                   </motion.h3>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-white/80 text-sm flex items-center gap-1"
+                  <motion.p 
+                    variants={fadeInUp}
+                    className="text-primary font-medium mb-2 flex items-center gap-2"
                   >
-                    <Rocket className="w-3 h-3" />
+                    <Rocket className="w-4 h-4" />
                     Founder & Business Strategist
                   </motion.p>
+                  <motion.div 
+                    variants={fadeInUp}
+                    className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 w-fit"
+                  >
+                    <GraduationCap className="w-4 h-4" />
+                    MBA in Logistics & Supply Chain Management
+                  </motion.div>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Profile Details */}
-            <motion.div
-              className="p-8 space-y-6"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {/* Education */}
-              <motion.div
-                variants={itemVariants}
-                className="flex items-start gap-4 group"
+              {/* Key Info */}
+              <motion.div 
+                variants={staggerContainer}
+                className="space-y-4 mb-6"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500 transition-colors"
+                <motion.div 
+                  variants={fadeInUp}
+                  className="flex items-center gap-3 text-gray-600"
                 >
-                  <GraduationCap className="w-5 h-5 text-blue-500 group-hover:text-white transition-colors" />
+                  <Briefcase className="w-5 h-5 text-primary shrink-0" />
+                  <span>Ex-BlackBuck (Territory Sales Manager) | Ex-Paytm (Senior Manager - Sales)</span>
                 </motion.div>
-                <div>
-                  <p className="font-semibold mb-1 flex items-center gap-2">
-                    Education
-                    <span className="text-xs">🎓</span>
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    MBA in Logistics and Supply Chain Management
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Experience */}
-              <motion.div
-                variants={itemVariants}
-                className="flex items-start gap-4 group"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-500 transition-colors"
+                <motion.p 
+                  variants={fadeInUp}
+                  className="text-gray-600 leading-relaxed"
                 >
-                  <Briefcase className="w-5 h-5 text-green-500 group-hover:text-white transition-colors" />
-                </motion.div>
-                <div>
-                  <p className="font-semibold mb-2 flex items-center gap-2">
-                    Professional Experience
-                    <span className="text-xs">💼</span>
-                  </p>
-                  <ul className="space-y-2">
-                    <motion.li
-                      whileHover={{ x: 5 }}
-                      className="text-sm text-muted-foreground flex items-center gap-2"
-                    >
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                      BlackBuck (TSM)
-                    </motion.li>
-                    <motion.li
-                      whileHover={{ x: 5 }}
-                      className="text-sm text-muted-foreground flex items-center gap-2"
-                    >
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                      Paytm (Senior Manager - Sales)
-                    </motion.li>
-                  </ul>
-                </div>
+                  Experienced in logistics, freight forwarding, and import/export operations including LCL and FCL shipments. Specialized in handling both DG (Dangerous Goods) and Non-DG goods. Strong expertise in transport technology solutions.
+                </motion.p>
               </motion.div>
 
               {/* Contact Icons */}
-              <motion.div
-                variants={itemVariants}
-                className="flex gap-3 pt-4 border-t border-border"
+              <motion.div 
+                variants={staggerContainer}
+                className="flex gap-3"
               >
                 {[
-                  {
-                    icon: Linkedin,
-                    color: "text-blue-600",
-                    bg: "bg-blue-500/10",
-                  },
-                  { icon: Mail, color: "text-red-500", bg: "bg-red-500/10" },
-                  {
-                    icon: Phone,
-                    color: "text-green-500",
-                    bg: "bg-green-500/10",
-                  },
-                  {
-                    icon: MapPin,
-                    color: "text-purple-500",
-                    bg: "bg-purple-500/10",
-                  },
+                  { icon: Linkedin, href: "#", color: "text-blue-600", label: "LinkedIn" },
+                  { icon: Mail, href: "#", color: "text-red-500", label: "Email" },
+                  { icon: Phone, href: "#", color: "text-green-500", label: "Phone" },
                 ].map((item, index) => {
                   const Icon = item.icon;
                   return (
                     <motion.a
                       key={index}
-                      whileHover={{ scale: 1.2, y: -3 }}
+                      whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      href="#"
-                      className={`w-10 h-10 ${item.bg} rounded-lg flex items-center justify-center ${item.color} hover:bg-primary hover:text-white transition-all duration-300`}
+                      href={item.href}
+                      className={`w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center ${item.color} hover:bg-primary hover:text-white transition-all border border-gray-200`}
+                      aria-label={item.label}
                     >
                       <Icon className="w-4 h-4" />
                     </motion.a>
                   );
                 })}
               </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Company Overview Card */}
+          <motion.div
+            variants={slideInRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            whileHover={{ y: -5 }}
+            className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl"
+          >
+            <motion.div 
+              variants={fadeInUp}
+              className="flex items-start gap-4 mb-6"
+            >
+              <motion.div 
+                whileHover={{ rotate: 10 }}
+                className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"
+              >
+                <Target className="w-6 h-6 text-primary" />
+              </motion.div>
+              <div>
+                <h4 className="text-xl font-bold mb-1">Company Overview</h4>
+                <p className="text-sm text-gray-600">Leading fleet technology solutions provider</p>
+              </div>
             </motion.div>
+
+            <motion.p 
+              variants={fadeInUp}
+              className="text-gray-600 leading-relaxed mb-6"
+            >
+              Garuda Om provides comprehensive logistics technology solutions designed to empower modern transportation businesses through GPS tracking, video telematics, fuel monitoring, and FASTag management systems. We emphasize improving fleet visibility, operational transparency, and efficiency.
+            </motion.p>
+
+            <motion.div 
+              variants={staggerContainer}
+              className="grid grid-cols-2 gap-3 mb-6"
+            >
+              {expertiseAreas.slice(0, 2).map((item, idx) => (
+                <motion.div 
+                  key={idx} 
+                  variants={scaleIn}
+                  whileHover={{ scale: 1.05, x: 2 }}
+                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200"
+                >
+                  <div className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center`}>
+                    <item.icon className={`w-4 h-4 ${item.color}`} />
+                  </div>
+                  <span className="text-xs font-semibold text-gray-700">{item.label}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.button
+              onClick={() => setShowMore(!showMore)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl text-primary font-medium transition-all border border-primary/20 group"
+            >
+              <span>{showMore ? "Show Less" : "Read More About Us"}</span>
+              <motion.div
+                animate={{ y: showMore ? 0 : [0, 3, 0] }}
+                transition={{ repeat: showMore ? 0 : Infinity, duration: 1.5 }}
+              >
+                {showMore ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              </motion.div>
+            </motion.button>
           </motion.div>
         </div>
 
-        {/* Vision & Mission Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          {[
-            {
-              icon: Eye,
-              title: "Our Vision",
-              text: "Build a reliable, tech-driven logistics business connecting global markets efficiently through cutting-edge GPS tracking and telematics solutions.",
-              color: "text-blue-500",
-              bgColor: "bg-blue-500/10",
-              emoji: "🚀",
-              delay: 0.1,
-            },
-            {
-              icon: Target,
-              title: "Our Mission",
-              text: "Provide innovative logistics solutions with modern tracking technologies, AI-driven insights, and exceptional customer support for complete operational control.",
-              color: "text-green-500",
-              bgColor: "bg-green-500/10",
-              emoji: "🎯",
-              delay: 0.2,
-            },
-          ].map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.7,
-                  delay: item.delay,
-                  ease: "easeOut",
-                }}
-                whileHover="hover"
-                variants={cardVariants}
-                className="bg-card p-8 rounded-2xl border border-border/50 hover:border-primary/30 relative overflow-hidden group"
-              >
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: index * 0.5,
-                  }}
-                  className={`absolute top-0 right-0 w-64 h-64 ${item.bgColor} rounded-full blur-3xl -mr-32 -mt-32`}
-                />
-
-                <div className="relative z-10">
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className={`w-14 h-14 ${item.bgColor} rounded-xl flex items-center justify-center mb-6 group-hover:bg-gradient-primary group-hover:text-white transition-all duration-500`}
-                  >
-                    <Icon
-                      className={`w-7 h-7 ${item.color} group-hover:text-white transition-colors`}
-                    />
-                  </motion.div>
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                    {item.title}
-                    <span className="text-lg">{item.emoji}</span>
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {item.text}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Expertise & Achievements */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-card rounded-2xl border border-border/50 p-10 relative overflow-hidden"
-        >
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.1, 0.15, 0.1],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"
-          />
-
-          <div className="relative z-10">
-            <motion.h3
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-2xl font-bold text-center mb-10"
-            >
-              Core Expertise
-            </motion.h3>
-
-            {/* Expertise Grid */}
+        {/* Expandable More Details Section */}
+        <AnimatePresence>
+          {showMore && (
             <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              className="overflow-hidden mb-12"
             >
-              {expertiseAreas.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    whileHover="hover"
-                    className="text-center group"
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl"
+              >
+                {/* Vision & Mission */}
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <motion.div 
+                    variants={scaleIn}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20"
                   >
-                    <motion.div
-                      whileHover={{ scale: 1.15, rotate: 5 }}
-                      className={`w-16 h-16 ${item.bgColor} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gradient-primary transition-all duration-300`}
+                    <motion.div 
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center mb-4"
                     >
-                      <Icon
-                        className={`w-7 h-7 ${item.iconColor} group-hover:text-white transition-colors`}
-                      />
+                      <Eye className="w-5 h-5 text-white" />
                     </motion.div>
-                    <p className="text-sm font-medium group-hover:text-primary transition-colors">
-                      {item.label}
+                    <h5 className="font-bold mb-2">Our Vision</h5>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      To build a reliable and technology-driven logistics and freight forwarding business that connects global markets efficiently while ensuring transparency, safety, and customer satisfaction.
                     </p>
                   </motion.div>
-                );
-              })}
+                  <motion.div 
+                    variants={scaleIn}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20"
+                  >
+                    <motion.div 
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center mb-4"
+                    >
+                      <Target className="w-5 h-5 text-white" />
+                    </motion.div>
+                    <h5 className="font-bold mb-2">Our Mission</h5>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      To provide innovative logistics and transportation solutions by integrating modern tracking technologies, efficient supply chain management, and strong customer support to deliver goods safely and on time across domestic and international markets.
+                    </p>
+                  </motion.div>
+                </div>
+
+                {/* Achievements */}
+                <motion.div variants={fadeInUp} className="mb-8">
+                  <h5 className="font-bold mb-4 flex items-center gap-2">
+                    <Award className="w-5 h-5 text-primary" />
+                    Key Achievements
+                  </h5>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {[
+                      "Developed strong expertise in GPS, video telematics, fuel sensors, and FASTag integration",
+                      "Successfully handled freight forwarding operations including LCL and FCL import/export shipments",
+                      "Built high-performing sales teams and achieved strong market growth during tenure at Paytm and BlackBuck",
+                    ].map((item, idx) => (
+                      <motion.div 
+                        key={idx} 
+                        variants={scaleIn}
+                        whileHover={{ x: 5 }}
+                        className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200"
+                      >
+                        <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm text-gray-600">{item}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Full Expertise Grid */}
+                <motion.div variants={fadeInUp}>
+                  <h5 className="font-bold mb-4">Core Expertise</h5>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {expertiseAreas.map((item, idx) => (
+                      <motion.div 
+                        key={idx} 
+                        variants={scaleIn}
+                        whileHover={{ y: -5, scale: 1.05 }}
+                        className="p-4 bg-gray-50 rounded-xl border border-gray-200 group"
+                      >
+                        <motion.div 
+                          whileHover={{ rotate: 10 }}
+                          className={`w-10 h-10 ${item.bgColor} rounded-lg flex items-center justify-center mb-2 group-hover:bg-primary transition-colors`}
+                        >
+                          <item.icon className={`w-5 h-5 ${item.color} group-hover:text-white transition-colors`} />
+                        </motion.div>
+                        <p className="font-semibold text-sm mb-1 text-gray-800">{item.label}</p>
+                        <p className="text-xs text-gray-600">{item.description}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
+          )}
+        </AnimatePresence>
 
-            {/* Achievements List */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Logistics Expertise */}
+        {/* Client Organizations */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h3 className="text-2xl font-bold mb-8 text-gray-900">Trusted By Industry Leaders</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {clientLogos.map((client, idx) => (
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="space-y-4"
+                key={idx}
+                variants={scaleIn}
+                whileHover={{ y: -8, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white px-6 py-4 rounded-xl border border-gray-200 shadow-sm flex items-center gap-3 hover:border-primary/30 hover:shadow-lg transition-all cursor-pointer"
               >
-                <h4 className="font-semibold mb-4 flex items-center gap-2 text-lg">
-                  <Package className="w-5 h-5 text-orange-500" />
-                  Logistics Expertise
-                  <span className="text-sm">📦</span>
-                </h4>
-                {logisticsAchievements.map((item, index) => {
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      whileHover={{ x: 5 }}
-                      className="flex items-start gap-3 group"
-                    >
-                      <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        className="flex-shrink-0"
-                      >
-                        <CheckCircle
-                          className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform`}
-                        />
-                      </motion.div>
-                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                        {item.text}
-                      </span>
-                    </motion.div>
-                  );
-                })}
+                <motion.div 
+                  whileHover={{ rotate: 10 }}
+                  className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary"
+                >
+                  {client.icon}
+                </motion.div>
+                <span className="font-semibold text-gray-800 text-sm">{client.name}</span>
               </motion.div>
-
-              {/* Sales Achievements */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="space-y-4"
-              >
-                <h4 className="font-semibold mb-4 flex items-center gap-2 text-lg">
-                  <TrendingUp className="w-5 h-5 text-green-500" />
-                  Sales Achievements
-                  <span className="text-sm">📈</span>
-                </h4>
-                {salesAchievements.map((item, index) => {
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      whileHover={{ x: 5 }}
-                      className="flex items-start gap-3 group"
-                    >
-                      <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        className="flex-shrink-0"
-                      >
-                        <CheckCircle
-                          className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform`}
-                        />
-                      </motion.div>
-                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                        {item.text}
-                      </span>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* Bottom CTA */}
+        {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
+          className="mt-16 text-center"
         >
-          {/* Background Decorative Gradients */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl -ml-40 -mb-40"></div>
-
-          <div className="relative z-10">
-            <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
-              Ready to transform your{" "}
-              <span className="text-primary">fleet operations?</span>
-            </h3>
-            <p className="text-lg text-slate-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
-              Connect with our team to discuss how Garuda OM can help you
-              achieve complete visibility and control.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-r from-primary to-accent rounded-2xl p-8 text-white relative overflow-hidden group"
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+              }}
+              className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"
+            />
+            <motion.div
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                delay: 1,
+              }}
+              className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -ml-32 -mb-32"
+            />
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold mb-2">Ready to Transform Your Fleet Operations?</h3>
+              <p className="text-white/80 mb-6">Schedule a live demo with our experts today</p>
               <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
-                }}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 30px -10px rgba(0,0,0,0.2)" }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-auto"
+                className="bg-white text-primary px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 group"
               >
-                Consult Our Experts
+                Schedule Live Demo
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
