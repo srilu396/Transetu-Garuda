@@ -1,12 +1,10 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Car,
   Briefcase,
-  CheckCircle2,
-  ArrowRight,
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";

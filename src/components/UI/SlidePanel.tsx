@@ -85,7 +85,7 @@ export default function SlidePanel({
       x: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 35,
         stiffness: 300,
         mass: 1,
@@ -96,7 +96,7 @@ export default function SlidePanel({
       opacity: 0.5,
       transition: {
         duration: 0.4,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
       },
     },
   };
@@ -117,7 +117,7 @@ export default function SlidePanel({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: "easeOut" as const },
     },
   };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   MapPin,
   Shield,
@@ -98,7 +98,7 @@ export default function FeaturesSection() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12,
       },
@@ -106,7 +106,7 @@ export default function FeaturesSection() {
     hover: {
       y: -12,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17,
       },
@@ -114,7 +114,7 @@ export default function FeaturesSection() {
     tap: {
       scale: 0.98,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17,
       },
@@ -127,7 +127,7 @@ export default function FeaturesSection() {
       borderColor: "rgba(249, 115, 22, 0.2)",
       transition: {
         duration: 0.2,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -137,7 +137,7 @@ export default function FeaturesSection() {
       borderColor: "rgba(249, 115, 22, 0.4)",
       transition: {
         duration: 0.3,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -148,7 +148,7 @@ export default function FeaturesSection() {
       scale: 1.1,
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
       },
     },
   };
@@ -164,7 +164,7 @@ export default function FeaturesSection() {
     const scrollAmount = cardWidth + gap;
     
     const currentScroll = container.scrollLeft;
-    const maxScroll = container.scrollWidth - container.clientWidth;
+
     
     let newScrollPosition;
     

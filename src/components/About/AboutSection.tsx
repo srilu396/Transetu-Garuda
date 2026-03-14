@@ -2,35 +2,26 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import {
   Target,
   Eye,
   Briefcase,
   GraduationCap,
   Truck,
-  Shield,
   Users,
-  Globe,
-  Package,
   Clock,
   CheckCircle,
-  MapPin,
   Phone,
   Mail,
   Linkedin,
-  BarChart3,
   Fuel,
   Camera,
   CreditCard,
   Rocket,
-  TrendingUp,
   ChevronDown,
   ChevronUp,
   Award,
   Star,
-  Zap,
-  ArrowRight,
 } from "lucide-react";
 
 export default function AboutSection() {
@@ -172,15 +163,7 @@ export default function AboutSection() {
     },
   ];
 
-  const clientLogos = [
-    { name: "ONGC", icon: <Globe className="w-5 h-5" /> },
-    { name: "Maha Cement", icon: <Package className="w-5 h-5" /> },
-    { name: "Maersk", icon: <Globe className="w-5 h-5" /> },
-    { name: "TS Mining", icon: <Truck className="w-5 h-5" /> },
-    { name: "AP Mining", icon: <Truck className="w-5 h-5" /> },
-    { name: "AP Transportation", icon: <Truck className="w-5 h-5" /> },
-    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" /> },
-  ];
+
 
   return (
     <section id="about" className="py-24 relative overflow-hidden" style={{ backgroundColor: '#f8fafc' }}>

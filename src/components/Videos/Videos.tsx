@@ -21,7 +21,7 @@ export default function VideosSection() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 15,
         mass: 1
@@ -33,7 +33,7 @@ export default function VideosSection() {
       boxShadow: "0 30px 60px -15px rgba(0,119,182,0.25)",
       borderColor: "rgba(0,119,182,0.2)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 20
       }
@@ -45,7 +45,7 @@ export default function VideosSection() {
       scale: 1.08,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -55,7 +55,7 @@ export default function VideosSection() {
       scale: 1.15,
       backgroundColor: "rgba(255,255,255,1)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 15
       }
@@ -96,27 +96,21 @@ export default function VideosSection() {
   ];
 
   return (
-    <section id="videos" className="py-24 bg-[#fffbf3] relative overflow-hidden" aria-label="Demo Videos">
-      {/* Enhanced Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute top-20 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -mr-48"
-        />
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          className="absolute bottom-20 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -ml-48"
-        />
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ duration: 2 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"
-        />
+    <section
+      id="videos"
+      className="relative py-24 overflow-hidden"
+      style={{
+        backgroundColor: "#fff9ec",
+        backgroundImage:
+          "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,249,236,1) 45%, rgba(255,244,220,1) 100%), radial-gradient(900px 380px at 22% 18%, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0) 60%), radial-gradient(900px 380px at 78% 22%, rgba(236,72,153,0.08) 0%, rgba(236,72,153,0) 62%)",
+      }}
+      aria-label="Demo Videos"
+    >
+      {/* Soft lighting elements - reference from SolutionsOverviewSection */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-[58%] h-[420px] w-[980px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/50 blur-3xl" />
+        <div className="absolute left-[18%] top-[65%] h-[340px] w-[340px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-[14%] top-[62%] h-[320px] w-[320px] rounded-full bg-accent/10 blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">

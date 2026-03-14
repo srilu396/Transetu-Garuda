@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { industries as importedIndustries, IndustryData } from "@/content/industries";
-import { ArrowRight, Building2, Flame, DrillIcon, Fuel, Shield, Activity, Gauge } from "lucide-react";
+import { ArrowRight, Building2, Flame, DrillIcon, Fuel, Activity } from "lucide-react";
 import SlidePanel from "../UI/SlidePanel";
 
 // Add Oil & Gas to the industries list with complete detailed data
 const industries: IndustryData[] = [
   ...importedIndustries,
   {
+    slug: "oil-gas-operations",
     title: "Oil & Gas Operations",
     description: "Track drilling rigs, pipeline assets, and energy fleet vehicles with rugged GPS devices and fuel monitoring systems designed for remote oil field environments.",
     icon: Flame,

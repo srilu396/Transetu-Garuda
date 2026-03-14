@@ -67,7 +67,7 @@ export default function SolutionsOverviewSection() {
       y: 0,
       transition: {
         duration: 0.7,
-        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+        ease: [0.22, 1, 0.36, 1] as const,
         delay: index * 0.15,
       },
     }),
@@ -268,7 +268,7 @@ export default function SolutionsOverviewSection() {
                     <motion.div
                       animate={{ x: 0 }}
                       whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
                     >
                       <ArrowRight className="w-5 h-5" />
                     </motion.div>

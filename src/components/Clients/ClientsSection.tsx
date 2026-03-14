@@ -7,9 +7,7 @@ import {
   Truck, 
   Ship, 
   Pickaxe, 
-  Factory, 
-  Globe, 
-  Zap 
+  Factory
 } from "lucide-react";
 
 const clients = [
