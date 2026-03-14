@@ -8,12 +8,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto container-padding">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3 cursor-pointer">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-primary/30 bg-primary/10 flex items-center justify-center">
+              <div className="relative w-12 h-10 overflow-hidden flex items-center justify-center">
                 <Image
-                  src="/logo.png"
+                  src="/assets/logos/logo.png"
                   alt="Garuda OM logo"
                   fill
-                  sizes="40px"
+                  sizes="48px"
                   className="object-contain"
                   priority
                 />

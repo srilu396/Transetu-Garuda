@@ -30,7 +30,6 @@ import {
   Award,
   Star,
   Zap,
-  Sparkles,
   ArrowRight,
 } from "lucide-react";
 
@@ -112,14 +111,32 @@ export default function AboutSection() {
     }
   };
 
-  const pulseAnimation = {
-    initial: { scale: 1 },
-    animate: {
-      scale: [1, 1.05, 1],
+  // Card hover animation - subtle and professional
+  const cardHover = {
+    rest: { 
+      y: 0,
+      boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+    },
+    hover: { 
+      y: -4,
+      boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
       transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
+        type: "spring",
+        stiffness: 400,
+        damping: 25
+      }
+    }
+  };
+
+  // Icon hover animation - simple scale
+  const iconHover = {
+    rest: { scale: 1 },
+    hover: { 
+      scale: 1.1,
+      transition: {
+        type: "spring",
+        stiffness: 500,
+        damping: 20
       }
     }
   };
@@ -204,16 +221,17 @@ export default function AboutSection() {
           className="text-center mb-16"
         >
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 rounded-full text-primary text-sm font-bold uppercase tracking-wider mb-6"
+            initial="rest"
+            whileHover="hover"
+            variants={iconHover}
+            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
-            <Sparkles className="w-4 h-4 mr-2" />
             Why Choose Us
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-black mb-6">
-            About <span className="text-primary">Garuda Om</span>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900">
+            About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Garuda OM</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-medium">
+          <p className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed">
             A technology-driven logistics and fleet solutions provider with 2000+ active clients
           </p>
         </motion.div>
@@ -237,16 +255,15 @@ export default function AboutSection() {
               <motion.div
                 key={index}
                 variants={scaleIn}
-                whileHover={{ 
-                  y: -8,
-                  scale: 1.05,
-                  boxShadow: "0 20px 30px -10px rgba(0,0,0,0.15)"
-                }}
+                initial="rest"
+                whileHover="hover"
+                variants={cardHover}
                 className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"
               >
                 <motion.div 
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  initial="rest"
+                  whileHover="hover"
+                  variants={iconHover}
                   className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3"
                 >
                   <Icon className="w-6 h-6 text-primary" />
@@ -266,7 +283,9 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            whileHover={{ y: -5 }}
+            initial="rest"
+            whileHover="hover"
+            variants={cardHover}
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden group"
           >
             <motion.div
@@ -283,15 +302,14 @@ export default function AboutSection() {
             
             <div className="relative z-10">
               <div className="flex items-start gap-8 mb-6">
-                {/* Founder Image - Increased Size */}
+                {/* Founder Image */}
                 <motion.div 
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  initial="rest"
+                  whileHover="hover"
+                  variants={iconHover}
                   className="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-4xl font-bold text-white shadow-lg shrink-0 overflow-hidden"
                 >
-                  {/* Replace with actual image */}
                   <span>PS</span>
-                  {/* <Image src="/images/founder.jpg" alt="Polimetla Sudhakar" width={128} height={128} className="object-cover w-full h-full" /> */}
                 </motion.div>
                 <div>
                   <motion.h3 
@@ -351,10 +369,11 @@ export default function AboutSection() {
                   return (
                     <motion.a
                       key={index}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
+                      initial="rest"
+                      whileHover="hover"
+                      variants={iconHover}
                       href={item.href}
-                      className={`w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center ${item.color} hover:bg-primary hover:text-white transition-all border border-gray-200`}
+                      className={`w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center ${item.color} hover:bg-primary hover:text-white transition-colors border border-gray-200`}
                       aria-label={item.label}
                     >
                       <Icon className="w-4 h-4" />
@@ -371,7 +390,9 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            whileHover={{ y: -5 }}
+            initial="rest"
+            whileHover="hover"
+            variants={cardHover}
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl"
           >
             <motion.div 
@@ -379,7 +400,9 @@ export default function AboutSection() {
               className="flex items-start gap-4 mb-6"
             >
               <motion.div 
-                whileHover={{ rotate: 10 }}
+                initial="rest"
+                whileHover="hover"
+                variants={iconHover}
                 className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"
               >
                 <Target className="w-6 h-6 text-primary" />
@@ -394,7 +417,7 @@ export default function AboutSection() {
               variants={fadeInUp}
               className="text-gray-600 leading-relaxed mb-6"
             >
-              Garuda Om provides comprehensive logistics technology solutions designed to empower modern transportation businesses through GPS tracking, video telematics, fuel monitoring, and FASTag management systems. We emphasize improving fleet visibility, operational transparency, and efficiency.
+              Garuda OM provides comprehensive logistics technology solutions designed to empower modern transportation businesses through GPS tracking, video telematics, fuel monitoring, and FASTag management systems. We emphasize improving fleet visibility, operational transparency, and efficiency.
             </motion.p>
 
             <motion.div 
@@ -405,12 +428,19 @@ export default function AboutSection() {
                 <motion.div 
                   key={idx} 
                   variants={scaleIn}
-                  whileHover={{ scale: 1.05, x: 2 }}
+                  initial="rest"
+                  whileHover="hover"
+                  variants={cardHover}
                   className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200"
                 >
-                  <div className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center`}>
+                  <motion.div
+                    initial="rest"
+                    whileHover="hover"
+                    variants={iconHover}
+                    className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center`}
+                  >
                     <item.icon className={`w-4 h-4 ${item.color}`} />
-                  </div>
+                  </motion.div>
                   <span className="text-xs font-semibold text-gray-700">{item.label}</span>
                 </motion.div>
               ))}
@@ -418,14 +448,15 @@ export default function AboutSection() {
 
             <motion.button
               onClick={() => setShowMore(!showMore)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl text-primary font-medium transition-all border border-primary/20 group"
+              initial="rest"
+              whileHover="hover"
+              variants={cardHover}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl text-primary font-medium transition-colors border border-primary/20"
             >
               <span>{showMore ? "Show Less" : "Read More About Us"}</span>
               <motion.div
-                animate={{ y: showMore ? 0 : [0, 3, 0] }}
-                transition={{ repeat: showMore ? 0 : Infinity, duration: 1.5 }}
+                animate={{ rotate: showMore ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
               >
                 {showMore ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </motion.div>
@@ -453,12 +484,15 @@ export default function AboutSection() {
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                   <motion.div 
                     variants={scaleIn}
-                    whileHover={{ y: -5 }}
+                    initial="rest"
+                    whileHover="hover"
+                    variants={cardHover}
                     className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20"
                   >
                     <motion.div 
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
+                      initial="rest"
+                      whileHover="hover"
+                      variants={iconHover}
                       className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center mb-4"
                     >
                       <Eye className="w-5 h-5 text-white" />
@@ -470,12 +504,15 @@ export default function AboutSection() {
                   </motion.div>
                   <motion.div 
                     variants={scaleIn}
-                    whileHover={{ y: -5 }}
+                    initial="rest"
+                    whileHover="hover"
+                    variants={cardHover}
                     className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20"
                   >
                     <motion.div 
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
+                      initial="rest"
+                      whileHover="hover"
+                      variants={iconHover}
                       className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center mb-4"
                     >
                       <Target className="w-5 h-5 text-white" />
@@ -502,10 +539,18 @@ export default function AboutSection() {
                       <motion.div 
                         key={idx} 
                         variants={scaleIn}
-                        whileHover={{ x: 5 }}
+                        initial="rest"
+                        whileHover="hover"
+                        variants={cardHover}
                         className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200"
                       >
-                        <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <motion.div
+                          initial="rest"
+                          whileHover="hover"
+                          variants={iconHover}
+                        >
+                          <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        </motion.div>
                         <span className="text-sm text-gray-600">{item}</span>
                       </motion.div>
                     ))}
@@ -520,11 +565,15 @@ export default function AboutSection() {
                       <motion.div 
                         key={idx} 
                         variants={scaleIn}
-                        whileHover={{ y: -5, scale: 1.05 }}
+                        initial="rest"
+                        whileHover="hover"
+                        variants={cardHover}
                         className="p-4 bg-gray-50 rounded-xl border border-gray-200 group"
                       >
                         <motion.div 
-                          whileHover={{ rotate: 10 }}
+                          initial="rest"
+                          whileHover="hover"
+                          variants={iconHover}
                           className={`w-10 h-10 ${item.bgColor} rounded-lg flex items-center justify-center mb-2 group-hover:bg-primary transition-colors`}
                         >
                           <item.icon className={`w-5 h-5 ${item.color} group-hover:text-white transition-colors`} />
@@ -554,12 +603,15 @@ export default function AboutSection() {
               <motion.div
                 key={idx}
                 variants={scaleIn}
-                whileHover={{ y: -8, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white px-6 py-4 rounded-xl border border-gray-200 shadow-sm flex items-center gap-3 hover:border-primary/30 hover:shadow-lg transition-all cursor-pointer"
+                initial="rest"
+                whileHover="hover"
+                variants={cardHover}
+                className="bg-white px-6 py-4 rounded-xl border border-gray-200 shadow-sm flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer"
               >
                 <motion.div 
-                  whileHover={{ rotate: 10 }}
+                  initial="rest"
+                  whileHover="hover"
+                  variants={iconHover}
                   className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary"
                 >
                   {client.icon}
@@ -568,57 +620,6 @@ export default function AboutSection() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-r from-primary to-accent rounded-2xl p-8 text-white relative overflow-hidden group"
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.1, 0.2, 0.1],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-              }}
-              className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"
-            />
-            <motion.div
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.1, 0.2, 0.1],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                delay: 1,
-              }}
-              className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -ml-32 -mb-32"
-            />
-            
-            <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-2">Ready to Transform Your Fleet Operations?</h3>
-              <p className="text-white/80 mb-6">Schedule a live demo with our experts today</p>
-              <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 30px -10px rgba(0,0,0,0.2)" }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 group"
-              >
-                Schedule Live Demo
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

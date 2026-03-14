@@ -117,7 +117,7 @@ export default function GPSDetailWrapper({
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-32">
             {/* Core Features */}
             <div className="lg:col-span-2">
               <section className="mb-16">
@@ -232,8 +232,8 @@ export default function GPSDetailWrapper({
             </div>
           </div>
 
-          {/* Contact CTA */}
-          <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden">
+          {/* Contact CTA - Moved further down with more spacing */}
+          <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
 

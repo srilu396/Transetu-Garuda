@@ -7,17 +7,24 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="text-2xl font-black tracking-wider text-primary">
-                Garuda OM
+              <div className="relative w-12 h-10 flex items-center justify-center">
+                <img
+                  src="/assets/logos/logo.png"
+                  alt="Garuda OM logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-xl font-bold text-gradient hidden sm:block">
-                Smart Fleet Tracking
-              </span>
+              <div className="flex flex-col">
+                <div className="text-2xl font-black tracking-wider text-primary leading-none">
+                  Garuda OM
+                </div>
+                <span className="text-sm font-bold text-gradient mt-1 italic">
+                  Integrated GPS & FASTag Solutions
+                </span>
+              </div>
             </div>
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              Leading provider of advanced GPS tracking solutions and fleet
-              management technologies. We help businesses monitor, protect, and
-              optimize their valuable assets worldwide.
+            <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
+              Track, monitor, and manage your fleet with real-time GPS, fuel sensors, dash cams, and FASTag integration — everything you need on one powerful platform for complete operational control.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -237,41 +244,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-border/50">
           <div className="text-sm text-muted-foreground">
-            © 2025 Garuda OM. All rights reserved.
-          </div>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-            <a
-              href="/privacy-policy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors text-sm"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="https://merchant.razorpay.com/policy/MYJHJgIWIOwmEz/terms"
-              target="_self"
-              rel=""
-              className="text-muted-foreground hover:text-primary transition-colors text-sm"
-            >
-              Terms &amp; Conditions
-            </a>
-            <a
-              href="https://merchant.razorpay.com/policy/MYJHJgIWIOwmEz/refund"
-              target="_self"
-              rel=""
-              className="text-muted-foreground hover:text-primary transition-colors text-sm"
-            >
-              Cancellation &amp; Refund Policy
-            </a>
-            <a
-              href="https://merchant.razorpay.com/policy/MYJHJgIWIOwmEz/shipping"
-              target="_self"
-              rel=""
-              className="text-muted-foreground hover:text-primary transition-colors text-sm"
-            >
-              Shipping &amp; Delivery Policy
-            </a>
+            © 2026 Garuda OM. All rights reserved.
           </div>
         </div>
       </div>

@@ -150,13 +150,19 @@ export default function GPSVisual() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-            <circle cx="12" cy="11" r="3" />
-            <path d="M12 18V14" />
+            <path d="M13 7 9 3 5 7l4 4" />
+            <path d="m17 11 4 4-4 4-4-4" />
+            <path d="m4.5 15.5 2 2" />
+            <path d="m8.5 11.5 2 2" />
+            <path d="m13 15h2" />
+            <path d="M13 19h2" />
+            <path d="M9 15h2" />
+            <path d="M9 19h2" />
+            <path d="M12 12l-3 3" />
           </svg>
         </motion.div>
 
