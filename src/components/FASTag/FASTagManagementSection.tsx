@@ -10,7 +10,7 @@ import {
   BarChart3,
   ArrowRight,
 } from "lucide-react";
-import SlidePanel from "./SlidePanel";
+import SlidePanel from "../UI/SlidePanel";
 import { solutions as solutionsData, SolutionData } from "@/content/solutions";
 
 const fastagFeatures = [

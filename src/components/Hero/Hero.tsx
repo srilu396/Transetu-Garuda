@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import GPSVisual from "../GPS/GPS";
+import GPSVisual from "../GPSTrackingSolutions/GPSVisual";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {

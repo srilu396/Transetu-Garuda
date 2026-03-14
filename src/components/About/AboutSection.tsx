@@ -1,22 +1,19 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
-  Award,
   Target,
   Eye,
   Briefcase,
   GraduationCap,
   Truck,
   Shield,
-  Zap,
   Users,
   Globe,
   Package,
   Clock,
   CheckCircle,
-  Star,
   MapPin,
   Phone,
   Mail,
@@ -25,15 +22,13 @@ import {
   Fuel,
   Camera,
   CreditCard,
-  Sparkles,
   Rocket,
   TrendingUp,
-  Heart,
   Compass,
 } from "lucide-react";
 
 export default function AboutSection() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -44,25 +39,29 @@ export default function AboutSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.7,
         ease: [0.25, 0.1, 0.25, 1], // Custom cubic-bezier for smoothness
       },
     },
+    hover: {
+      y: -5,
+      transition: { duration: 0.3 },
+    },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 40, scale: 0.98 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { 
+      transition: {
         duration: 0.6,
         ease: "easeOut",
       },
@@ -74,7 +73,7 @@ export default function AboutSection() {
     },
   };
 
-  const iconVariants = {
+  const iconVariants: Variants = {
     hidden: { scale: 0.8, opacity: 0 },
     visible: {
       scale: 1,
@@ -88,51 +87,155 @@ export default function AboutSection() {
     },
   };
 
-  const statVariants = {
+  const statVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: (i: number) => ({
       opacity: 1,
       scale: 1,
-      transition: { 
+      transition: {
         delay: i * 0.1,
         duration: 0.5,
         ease: "easeOut",
       },
     }),
+    hover: {
+      y: -5,
+      scale: 1.05,
+      transition: { duration: 0.3 },
+    },
   };
 
   const expertiseAreas = [
-    { icon: Truck, label: "GPS Tracking", color: "text-blue-500", bgColor: "bg-blue-500/10", iconColor: "text-blue-500" },
-    { icon: Camera, label: "Video Telematics", color: "text-purple-500", bgColor: "bg-purple-500/10", iconColor: "text-purple-500" },
-    { icon: Fuel, label: "Fuel Sensors", color: "text-green-500", bgColor: "bg-green-500/10", iconColor: "text-green-500" },
-    { icon: CreditCard, label: "FASTag Systems", color: "text-amber-500", bgColor: "bg-amber-500/10", iconColor: "text-amber-500" },
-    { icon: Package, label: "LCL/FCL Operations", color: "text-orange-500", bgColor: "bg-orange-500/10", iconColor: "text-orange-500" },
-    { icon: Globe, label: "Import/Export", color: "text-cyan-500", bgColor: "bg-cyan-500/10", iconColor: "text-cyan-500" },
-    { icon: BarChart3, label: "Sales Leadership", color: "text-indigo-500", bgColor: "bg-indigo-500/10", iconColor: "text-indigo-500" },
-    { icon: Shield, label: "DG Cargo", color: "text-rose-500", bgColor: "bg-rose-500/10", iconColor: "text-rose-500" },
+    {
+      icon: Truck,
+      label: "GPS Tracking",
+      color: "text-blue-500",
+      bgColor: "bg-blue-500/10",
+      iconColor: "text-blue-500",
+    },
+    {
+      icon: Camera,
+      label: "Video Telematics",
+      color: "text-purple-500",
+      bgColor: "bg-purple-500/10",
+      iconColor: "text-purple-500",
+    },
+    {
+      icon: Fuel,
+      label: "Fuel Sensors",
+      color: "text-green-500",
+      bgColor: "bg-green-500/10",
+      iconColor: "text-green-500",
+    },
+    {
+      icon: CreditCard,
+      label: "FASTag Systems",
+      color: "text-amber-500",
+      bgColor: "bg-amber-500/10",
+      iconColor: "text-amber-500",
+    },
+    {
+      icon: Package,
+      label: "LCL/FCL Operations",
+      color: "text-orange-500",
+      bgColor: "bg-orange-500/10",
+      iconColor: "text-orange-500",
+    },
+    {
+      icon: Globe,
+      label: "Import/Export",
+      color: "text-cyan-500",
+      bgColor: "bg-cyan-500/10",
+      iconColor: "text-cyan-500",
+    },
+    {
+      icon: BarChart3,
+      label: "Sales Leadership",
+      color: "text-indigo-500",
+      bgColor: "bg-indigo-500/10",
+      iconColor: "text-indigo-500",
+    },
+    {
+      icon: Shield,
+      label: "DG Cargo",
+      color: "text-rose-500",
+      bgColor: "bg-rose-500/10",
+      iconColor: "text-rose-500",
+    },
   ];
 
   const achievements = [
-    { value: "2000+", label: "Active Clients", icon: Users, color: "text-blue-500", bgColor: "bg-blue-500/10" },
-    { value: "24+", label: "Years Experience", icon: Clock, color: "text-green-500", bgColor: "bg-green-500/10" },
-    { value: "15K+", label: "Vehicles Tracked", icon: Truck, color: "text-purple-500", bgColor: "bg-purple-500/10" },
-    { value: "99.9%", label: "Uptime", icon: Shield, color: "text-amber-500", bgColor: "bg-amber-500/10" },
+    {
+      value: "2000+",
+      label: "Active Clients",
+      icon: Users,
+      color: "text-blue-500",
+      bgColor: "bg-blue-500/10",
+    },
+    {
+      value: "24+",
+      label: "Years Experience",
+      icon: Clock,
+      color: "text-green-500",
+      bgColor: "bg-green-500/10",
+    },
+    {
+      value: "15K+",
+      label: "Vehicles Tracked",
+      icon: Truck,
+      color: "text-purple-500",
+      bgColor: "bg-purple-500/10",
+    },
+    {
+      value: "99.9%",
+      label: "Uptime",
+      icon: Shield,
+      color: "text-amber-500",
+      bgColor: "bg-amber-500/10",
+    },
   ];
 
   const logisticsAchievements = [
-    { text: "Expert in LCL/FCL freight forwarding", icon: Package, color: "text-orange-500" },
-    { text: "DG & Non-DG shipment handling", icon: Shield, color: "text-rose-500" },
-    { text: "Import/Export operations specialist", icon: Globe, color: "text-cyan-500" },
+    {
+      text: "Expert in LCL/FCL freight forwarding",
+      icon: Package,
+      color: "text-orange-500",
+    },
+    {
+      text: "DG & Non-DG shipment handling",
+      icon: Shield,
+      color: "text-rose-500",
+    },
+    {
+      text: "Import/Export operations specialist",
+      icon: Globe,
+      color: "text-cyan-500",
+    },
   ];
 
   const salesAchievements = [
-    { text: "Built high-performing sales teams at Paytm", icon: Users, color: "text-blue-500" },
-    { text: "Achieved market growth at BlackBuck", icon: TrendingUp, color: "text-green-500" },
-    { text: "GPS & telematics industry pioneer", icon: Rocket, color: "text-purple-500" },
+    {
+      text: "Built high-performing sales teams at Paytm",
+      icon: Users,
+      color: "text-blue-500",
+    },
+    {
+      text: "Achieved market growth at BlackBuck",
+      icon: TrendingUp,
+      color: "text-green-500",
+    },
+    {
+      text: "GPS & telematics industry pioneer",
+      icon: Rocket,
+      color: "text-purple-500",
+    },
   ];
 
   return (
-    <section id="about" className="py-24 bg-background relative overflow-hidden">
+    <section
+      id="about"
+      className="py-24 bg-background relative overflow-hidden"
+    >
       {/* Animated Background Elements */}
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
@@ -171,7 +274,7 @@ export default function AboutSection() {
           >
             Our Legacy
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -181,7 +284,7 @@ export default function AboutSection() {
           >
             About <span className="text-gradient">Garuda OM</span>
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -189,7 +292,8 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed"
           >
-            Pioneering GPS tracking and logistics technology since 2001, delivering intelligent solutions for modern fleet management.
+            Pioneering GPS tracking and logistics technology since 2001,
+            delivering intelligent solutions for modern fleet management.
           </motion.p>
         </motion.div>
 
@@ -202,7 +306,10 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
           >
-            <motion.h3 variants={itemVariants} className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <motion.h3
+              variants={itemVariants}
+              className="text-2xl font-bold mb-6 flex items-center gap-2"
+            >
               <span>Company Overview</span>
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
@@ -211,18 +318,26 @@ export default function AboutSection() {
                 <Compass className="w-6 h-6 text-primary" />
               </motion.div>
             </motion.h3>
-            
-            <motion.div variants={itemVariants} className="space-y-4 text-muted-foreground">
+
+            <motion.div
+              variants={itemVariants}
+              className="space-y-4 text-muted-foreground"
+            >
               <p>
-                <span className="font-bold text-foreground">Garuda OM</span> has been at the forefront of GPS tracking innovation, providing comprehensive fleet management solutions across logistics, mining, and industrial sectors.
+                <span className="font-bold text-foreground">Garuda OM</span> has
+                been at the forefront of GPS tracking innovation, providing
+                comprehensive fleet management solutions across logistics,
+                mining, and industrial sectors.
               </p>
               <p>
-                Our integrated platform combines real-time tracking, video telematics, fuel monitoring, and FASTag management to deliver complete operational visibility.
+                Our integrated platform combines real-time tracking, video
+                telematics, fuel monitoring, and FASTag management to deliver
+                complete operational visibility.
               </p>
             </motion.div>
 
             {/* Stats Grid */}
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               className="grid grid-cols-2 gap-4 mt-8"
             >
@@ -237,17 +352,17 @@ export default function AboutSection() {
                     whileInView="visible"
                     viewport={{ once: true }}
                     whileHover="hover"
-                    variants={cardVariants}
                     className={`${item.bgColor} p-6 rounded-xl border border-border/50 text-center backdrop-blur-sm group`}
                   >
-                    <motion.div
-                      variants={iconVariants}
-                      whileHover="hover"
-                    >
-                      <Icon className={`w-6 h-6 ${item.color} mx-auto mb-2 group-hover:scale-110 transition-transform`} />
+                    <motion.div variants={iconVariants} whileHover="hover">
+                      <Icon
+                        className={`w-6 h-6 ${item.color} mx-auto mb-2 group-hover:scale-110 transition-transform`}
+                      />
                     </motion.div>
                     <p className="text-2xl font-bold">{item.value}</p>
-                    <p className="text-xs text-muted-foreground">{item.label}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {item.label}
+                    </p>
                   </motion.div>
                 );
               })}
@@ -264,7 +379,7 @@ export default function AboutSection() {
             className="bg-card rounded-2xl border border-border/50 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500"
           >
             {/* Profile Header */}
-            <motion.div 
+            <motion.div
               className="bg-gradient-to-r from-primary to-accent p-8 text-white relative overflow-hidden"
               whileHover="hover"
             >
@@ -280,7 +395,7 @@ export default function AboutSection() {
                 }}
                 className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"
               />
-              
+
               <div className="relative z-10 flex items-center gap-6">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -290,7 +405,7 @@ export default function AboutSection() {
                   PS
                 </motion.div>
                 <div>
-                  <motion.h3 
+                  <motion.h3
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
@@ -298,7 +413,7 @@ export default function AboutSection() {
                   >
                     Polimetla Sudhakar
                   </motion.h3>
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
@@ -312,7 +427,7 @@ export default function AboutSection() {
             </motion.div>
 
             {/* Profile Details */}
-            <motion.div 
+            <motion.div
               className="p-8 space-y-6"
               variants={containerVariants}
               initial="hidden"
@@ -320,8 +435,11 @@ export default function AboutSection() {
               viewport={{ once: true }}
             >
               {/* Education */}
-              <motion.div variants={itemVariants} className="flex items-start gap-4 group">
-                <motion.div 
+              <motion.div
+                variants={itemVariants}
+                className="flex items-start gap-4 group"
+              >
+                <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500 transition-colors"
                 >
@@ -332,13 +450,18 @@ export default function AboutSection() {
                     Education
                     <span className="text-xs">🎓</span>
                   </p>
-                  <p className="text-sm text-muted-foreground">MBA in Logistics and Supply Chain Management</p>
+                  <p className="text-sm text-muted-foreground">
+                    MBA in Logistics and Supply Chain Management
+                  </p>
                 </div>
               </motion.div>
 
               {/* Experience */}
-              <motion.div variants={itemVariants} className="flex items-start gap-4 group">
-                <motion.div 
+              <motion.div
+                variants={itemVariants}
+                className="flex items-start gap-4 group"
+              >
+                <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-500 transition-colors"
                 >
@@ -350,14 +473,14 @@ export default function AboutSection() {
                     <span className="text-xs">💼</span>
                   </p>
                   <ul className="space-y-2">
-                    <motion.li 
+                    <motion.li
                       whileHover={{ x: 5 }}
                       className="text-sm text-muted-foreground flex items-center gap-2"
                     >
                       <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
                       BlackBuck (TSM)
                     </motion.li>
-                    <motion.li 
+                    <motion.li
                       whileHover={{ x: 5 }}
                       className="text-sm text-muted-foreground flex items-center gap-2"
                     >
@@ -369,15 +492,27 @@ export default function AboutSection() {
               </motion.div>
 
               {/* Contact Icons */}
-              <motion.div 
+              <motion.div
                 variants={itemVariants}
                 className="flex gap-3 pt-4 border-t border-border"
               >
                 {[
-                  { icon: Linkedin, color: "text-blue-600", bg: "bg-blue-500/10" },
+                  {
+                    icon: Linkedin,
+                    color: "text-blue-600",
+                    bg: "bg-blue-500/10",
+                  },
                   { icon: Mail, color: "text-red-500", bg: "bg-red-500/10" },
-                  { icon: Phone, color: "text-green-500", bg: "bg-green-500/10" },
-                  { icon: MapPin, color: "text-purple-500", bg: "bg-purple-500/10" },
+                  {
+                    icon: Phone,
+                    color: "text-green-500",
+                    bg: "bg-green-500/10",
+                  },
+                  {
+                    icon: MapPin,
+                    color: "text-purple-500",
+                    bg: "bg-purple-500/10",
+                  },
                 ].map((item, index) => {
                   const Icon = item.icon;
                   return (
@@ -400,24 +535,24 @@ export default function AboutSection() {
         {/* Vision & Mission Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {[
-            { 
-              icon: Eye, 
-              title: "Our Vision", 
+            {
+              icon: Eye,
+              title: "Our Vision",
               text: "Build a reliable, tech-driven logistics business connecting global markets efficiently through cutting-edge GPS tracking and telematics solutions.",
               color: "text-blue-500",
               bgColor: "bg-blue-500/10",
               emoji: "🚀",
-              delay: 0.1
+              delay: 0.1,
             },
-            { 
-              icon: Target, 
-              title: "Our Mission", 
+            {
+              icon: Target,
+              title: "Our Mission",
               text: "Provide innovative logistics solutions with modern tracking technologies, AI-driven insights, and exceptional customer support for complete operational control.",
               color: "text-green-500",
               bgColor: "bg-green-500/10",
               emoji: "🎯",
-              delay: 0.2
-            }
+              delay: 0.2,
+            },
           ].map((item, index) => {
             const Icon = item.icon;
             return (
@@ -426,7 +561,11 @@ export default function AboutSection() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: item.delay, ease: "easeOut" }}
+                transition={{
+                  duration: 0.7,
+                  delay: item.delay,
+                  ease: "easeOut",
+                }}
                 whileHover="hover"
                 variants={cardVariants}
                 className="bg-card p-8 rounded-2xl border border-border/50 hover:border-primary/30 relative overflow-hidden group"
@@ -444,14 +583,16 @@ export default function AboutSection() {
                   }}
                   className={`absolute top-0 right-0 w-64 h-64 ${item.bgColor} rounded-full blur-3xl -mr-32 -mt-32`}
                 />
-                
+
                 <div className="relative z-10">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                     className={`w-14 h-14 ${item.bgColor} rounded-xl flex items-center justify-center mb-6 group-hover:bg-gradient-primary group-hover:text-white transition-all duration-500`}
                   >
-                    <Icon className={`w-7 h-7 ${item.color} group-hover:text-white transition-colors`} />
+                    <Icon
+                      className={`w-7 h-7 ${item.color} group-hover:text-white transition-colors`}
+                    />
                   </motion.div>
                   <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                     {item.title}
@@ -486,9 +627,9 @@ export default function AboutSection() {
             }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"
           />
-          
+
           <div className="relative z-10">
-            <motion.h3 
+            <motion.h3
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
@@ -497,9 +638,9 @@ export default function AboutSection() {
             >
               Core Expertise
             </motion.h3>
-          
+
             {/* Expertise Grid */}
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -513,16 +654,19 @@ export default function AboutSection() {
                     key={index}
                     variants={itemVariants}
                     whileHover="hover"
-                    variants={iconVariants}
                     className="text-center group"
                   >
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.15, rotate: 5 }}
                       className={`w-16 h-16 ${item.bgColor} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gradient-primary transition-all duration-300`}
                     >
-                      <Icon className={`w-7 h-7 ${item.iconColor} group-hover:text-white transition-colors`} />
+                      <Icon
+                        className={`w-7 h-7 ${item.iconColor} group-hover:text-white transition-colors`}
+                      />
                     </motion.div>
-                    <p className="text-sm font-medium group-hover:text-primary transition-colors">{item.label}</p>
+                    <p className="text-sm font-medium group-hover:text-primary transition-colors">
+                      {item.label}
+                    </p>
                   </motion.div>
                 );
               })}
@@ -544,7 +688,6 @@ export default function AboutSection() {
                   <span className="text-sm">📦</span>
                 </h4>
                 {logisticsAchievements.map((item, index) => {
-                  const Icon = item.icon;
                   return (
                     <motion.div
                       key={index}
@@ -559,7 +702,9 @@ export default function AboutSection() {
                         whileHover={{ scale: 1.2 }}
                         className="flex-shrink-0"
                       >
-                        <CheckCircle className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform`} />
+                        <CheckCircle
+                          className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform`}
+                        />
                       </motion.div>
                       <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
                         {item.text}
@@ -568,7 +713,7 @@ export default function AboutSection() {
                   );
                 })}
               </motion.div>
-              
+
               {/* Sales Achievements */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
@@ -583,7 +728,6 @@ export default function AboutSection() {
                   <span className="text-sm">📈</span>
                 </h4>
                 {salesAchievements.map((item, index) => {
-                  const Icon = item.icon;
                   return (
                     <motion.div
                       key={index}
@@ -598,7 +742,9 @@ export default function AboutSection() {
                         whileHover={{ scale: 1.2 }}
                         className="flex-shrink-0"
                       >
-                        <CheckCircle className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform`} />
+                        <CheckCircle
+                          className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform`}
+                        />
                       </motion.div>
                       <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
                         {item.text}
@@ -625,10 +771,12 @@ export default function AboutSection() {
 
           <div className="relative z-10">
             <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
-              Ready to transform your <span className="text-primary">fleet operations?</span>
+              Ready to transform your{" "}
+              <span className="text-primary">fleet operations?</span>
             </h3>
             <p className="text-lg text-slate-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
-              Connect with our team to discuss how Garuda OM can help you achieve complete visibility and control.
+              Connect with our team to discuss how Garuda OM can help you
+              achieve complete visibility and control.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
               <motion.button

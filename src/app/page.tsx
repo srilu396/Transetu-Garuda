@@ -1,15 +1,13 @@
-import SolutionsOverviewSection from "@/components/Products/SolutionsOverview";
+import SolutionsOverviewSection from "@/components/Solutions/SolutionsOverviewSection";
 import Navbar from "@/components/Layout/Navbar";
 import HeroSection from "@/components/Hero/Hero";
-import ProductsSection from "@/components/Products/Products";
+import ProductsSection from "@/components/Solutions/GPSTrackingSolutionsGrid";
 import FeaturesSection from "@/components/PowerfulFeatures/PowerfulFeatures";
-import IndustriesSection from "@/components/Industries/Industries";
-import AboutSection from "@/components/About/About";
-import TestimonialsSection from "@/components/Testimonials/Testimonials";
+import IndustriesSection from "@/components/Industries/IndustriesSection";
+import AboutSection from "@/components/About/AboutSection";
+import VideosSection from "@/components/Videos/Videos";
 import Footer from "@/components/Layout/Footer";
-import ClientsSection from "@/components/Clients/Clients";
-import FASTagManagement from "@/components/UI/FASTagManagement";
-import InnovationSection from "@/components/PowerfulFeatures/Innovation";
+import FASTagManagement from "@/components/FASTag/FASTagManagementSection";
 
 export default function Home() {
   return (
@@ -23,9 +21,7 @@ export default function Home() {
         <FeaturesSection />
         <IndustriesSection />
         <AboutSection />
-        <ClientsSection />
-        <InnovationSection />
-        <TestimonialsSection />
+        <VideosSection />
       </main>
       <Footer />
     </div>

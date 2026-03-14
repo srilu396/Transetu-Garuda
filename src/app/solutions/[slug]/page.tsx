@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { solutions } from "@/content/solutions";
-import GPSDetailWrapper from "@/components/GPS/GPSDetailWrapper";
+import GPSDetailWrapper from "@/components/GPSTrackingSolutions/GPSDetailWrapper";
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }, // Fix for Next.js 15 route params

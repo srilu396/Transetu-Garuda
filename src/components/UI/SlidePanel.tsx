@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { SolutionData } from "@/content/solutions";
 import { IndustryData } from "@/content/industries";
-import GPSDetailWrapper from "../GPS/GPSDetailWrapper";
+import GPSDetailWrapper from "../GPSTrackingSolutions/GPSDetailWrapper";
 import IndustryDetailWrapper from "../Industries/IndustryDetailWrapper";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
@@ -50,13 +50,17 @@ export default function SlidePanel({
     if (isOpen) {
       document.body.style.overflow = "hidden";
       // Push state for deep linking
-      const hash = `#${title.toLowerCase().replace(/\s+/g, '-')}`;
+      const hash = `#${title.toLowerCase().replace(/\s+/g, "-")}`;
       window.history.pushState({ panelOpen: true, id: hash }, "", hash);
     } else {
       document.body.style.overflow = "unset";
       // Clean up hash if panel closes via UI, not via back button
       if (window.location.hash) {
-        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search,
+        );
       }
     }
 
@@ -110,10 +114,17 @@ export default function SlidePanel({
 
   const fadeIn: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
-  const renderIcon = (IconInput: LucideIcon | React.ReactNode, size: number = 28) => {
+  const renderIcon = (
+    IconInput: LucideIcon | React.ReactNode,
+    size: number = 28,
+  ) => {
     if (!IconInput) return <Box size={size} />;
     if (typeof IconInput === "function") {
       const LucideIconComp = IconInput as LucideIcon;
@@ -154,12 +165,18 @@ export default function SlidePanel({
             <div className="flex-grow overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
               {solutionData ? (
                 <div className="flex flex-col">
-                  <GPSDetailWrapper data={solutionData} showNavbarFooter={false} />
+                  <GPSDetailWrapper
+                    data={solutionData}
+                    showNavbarFooter={false}
+                  />
                   <Footer />
                 </div>
               ) : industryData ? (
                 <div className="flex flex-col">
-                  <IndustryDetailWrapper industry={industryData} showNavbarFooter={false} />
+                  <IndustryDetailWrapper
+                    industry={industryData}
+                    showNavbarFooter={false}
+                  />
                   <Footer />
                 </div>
               ) : (
@@ -171,7 +188,10 @@ export default function SlidePanel({
                     className="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32"
                   >
                     {/* Header Info */}
-                    <motion.div variants={fadeIn} className="mb-16 text-center max-w-4xl mx-auto">
+                    <motion.div
+                      variants={fadeIn}
+                      className="mb-16 text-center max-w-4xl mx-auto"
+                    >
                       <div className="inline-flex items-center px-4 py-1.5 bg-[#6467f2]/10 border border-[#6467f2]/20 text-[#6467f2] text-xs font-black uppercase tracking-widest mb-6">
                         {category}
                       </div>
@@ -186,7 +206,10 @@ export default function SlidePanel({
                     {layoutType === "split" ? (
                       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                         {/* Left Side: Visual Content (60%) */}
-                        <motion.div variants={fadeIn} className="lg:col-span-7 relative">
+                        <motion.div
+                          variants={fadeIn}
+                          className="lg:col-span-7 relative"
+                        >
                           <div className="relative z-10 bg-white p-6 shadow-xl border border-slate-800/10 h-full min-h-[500px] flex flex-col">
                             {/* Visualization Dashboard */}
                             <div className="bg-slate-50 border border-slate-200 flex-grow flex flex-col">
@@ -205,25 +228,44 @@ export default function SlidePanel({
                                   <div className="h-32 bg-white border border-slate-200 p-5 flex flex-col justify-between shadow-sm">
                                     <Activity className="text-[#6467f2] w-6 h-6" />
                                     <div>
-                                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">REAL-TIME LATENCY</p>
-                                      <p className="text-2xl font-black text-slate-900">&lt;10MS</p>
+                                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                        REAL-TIME LATENCY
+                                      </p>
+                                      <p className="text-2xl font-black text-slate-900">
+                                        &lt;10MS
+                                      </p>
                                     </div>
                                   </div>
                                   <div className="h-32 bg-[#6467f2] p-5 flex flex-col justify-between shadow-md">
                                     <Zap className="text-white w-6 h-6" />
                                     <div className="text-white">
-                                      <p className="text-[9px] font-black text-white/60 uppercase tracking-widest">SYSTEM UPTIME</p>
-                                      <p className="text-2xl font-black">99.99%</p>
+                                      <p className="text-[9px] font-black text-white/60 uppercase tracking-widest">
+                                        SYSTEM UPTIME
+                                      </p>
+                                      <p className="text-2xl font-black">
+                                        99.99%
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
-                                
+
                                 <div className="h-64 bg-slate-900 relative group border border-slate-800">
-                                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "linear-gradient(#6467f2 1px, transparent 1px), linear-gradient(90deg, #6467f2 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
+                                  <div
+                                    className="absolute inset-0 opacity-20"
+                                    style={{
+                                      backgroundImage:
+                                        "linear-gradient(#6467f2 1px, transparent 1px), linear-gradient(90deg, #6467f2 1px, transparent 1px)",
+                                      backgroundSize: "30px 30px",
+                                    }}
+                                  />
                                   <div className="absolute inset-0 flex items-center justify-center">
-                                    <motion.div 
+                                    <motion.div
                                       animate={{ scale: [1, 1.1, 1] }}
-                                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                      transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "linear",
+                                      }}
                                       className="w-16 h-16 bg-[#6467f2]/20 border border-[#6467f2]/40 flex items-center justify-center"
                                     >
                                       <div className="w-4 h-4 bg-[#6467f2] shadow-[0_0_20px_#6467f2]" />
@@ -232,7 +274,9 @@ export default function SlidePanel({
                                   <div className="absolute bottom-4 left-4 right-4 h-12 bg-black/50 backdrop-blur-md border border-white/10 flex items-center px-4 justify-between">
                                     <div className="flex items-center gap-3">
                                       <div className="w-2 h-2 bg-emerald-400 animate-pulse" />
-                                      <span className="text-[10px] font-black text-white uppercase tracking-widest">LIVE TRACKING ACTIVE</span>
+                                      <span className="text-[10px] font-black text-white uppercase tracking-widest">
+                                        LIVE TRACKING ACTIVE
+                                      </span>
                                     </div>
                                     <ChevronRight className="text-white/40 w-5 h-5" />
                                   </div>
@@ -243,7 +287,10 @@ export default function SlidePanel({
                         </motion.div>
 
                         {/* Right Side: Content (40%) */}
-                        <motion.div variants={fadeIn} className="lg:col-span-5 space-y-12">
+                        <motion.div
+                          variants={fadeIn}
+                          className="lg:col-span-5 space-y-12"
+                        >
                           <div className="space-y-8">
                             <h4 className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-[#6467f2]">
                               <span className="w-12 h-[2px] bg-[#6467f2]"></span>
@@ -279,20 +326,30 @@ export default function SlidePanel({
                     ) : (
                       <div className="space-y-16">
                         {/* Grid Layout features */}
-                        <motion.div variants={fadeIn} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <motion.div
+                          variants={fadeIn}
+                          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        >
                           {features.map((feature, index) => (
-                            <div key={index} className="p-8 bg-white border border-slate-800/10 shadow-sm hover:border-[#6467f2]/50 transition-all duration-300 group">
+                            <div
+                              key={index}
+                              className="p-8 bg-white border border-slate-800/10 shadow-sm hover:border-[#6467f2]/50 transition-all duration-300 group"
+                            >
                               <div className="w-14 h-14 bg-[#6467f2]/10 text-[#6467f2] flex items-center justify-center mb-6 group-hover:bg-[#6467f2] group-hover:text-white transition-all duration-300 rounded-sm">
                                 {renderIcon(Icon, 28)}
                               </div>
-                              <h3 className="text-lg font-black text-slate-900 mb-4 uppercase tracking-tighter">{feature}</h3>
+                              <h3 className="text-lg font-black text-slate-900 mb-4 uppercase tracking-tighter">
+                                {feature}
+                              </h3>
                               <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                                Detailed analysis and intelligent monitoring designed to optimize your fleet's {feature.toLowerCase()}.
+                                Detailed analysis and intelligent monitoring
+                                designed to optimize your fleet's{" "}
+                                {feature.toLowerCase()}.
                               </p>
                             </div>
                           ))}
                         </motion.div>
-                        
+
                         <motion.div variants={fadeIn} className="text-center">
                           <button className="inline-flex items-center justify-center gap-3 px-10 h-16 bg-[#6467f2] text-white font-black text-sm uppercase tracking-widest hover:bg-[#5a5ce0] transition-colors rounded-none">
                             GET STARTED WITH {title}
@@ -303,8 +360,12 @@ export default function SlidePanel({
                     )}
                     <div className="mt-32 pt-16 border-t border-slate-800/10 flex flex-col md:flex-row justify-between items-center gap-6">
                       <div className="text-left">
-                        <h5 className="font-black text-slate-900 text-lg uppercase tracking-tight">Garuda Enterprise GPS</h5>
-                        <p className="text-sm font-medium text-slate-600 mt-1">Industrial-Grade Tracking Solutions</p>
+                        <h5 className="font-black text-slate-900 text-lg uppercase tracking-tight">
+                          Garuda Enterprise GPS
+                        </h5>
+                        <p className="text-sm font-medium text-slate-600 mt-1">
+                          Industrial-Grade Tracking Solutions
+                        </p>
                       </div>
                       <div className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-4">
                         <span>© 2026</span>

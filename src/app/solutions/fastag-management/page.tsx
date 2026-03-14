@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
-import FASTagSolutionsGrid from "@/components/Solutions/FASTagSolutionsGrid";
+import FASTagSolutionsGrid from "@/components/FASTag/FASTagSolutionsGrid";
 
 export const metadata = {
   title: "FASTag Management Solutions | Garuda OM",
@@ -22,10 +22,15 @@ export default function FASTagManagementPage() {
               Garuda Toll Hub
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight text-slate-900">
-              FASTag <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Management Solutions</span>
+              FASTag{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Management Solutions
+              </span>
             </h1>
             <p className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed">
-              Our advanced platform simplifies FASTag management for fleets of all sizes. Automate your toll payments, reduce administrative overhead, and gain full visibility into your toll expenditures.
+              Our advanced platform simplifies FASTag management for fleets of
+              all sizes. Automate your toll payments, reduce administrative
+              overhead, and gain full visibility into your toll expenditures.
             </p>
           </div>
         </section>
@@ -36,9 +41,12 @@ export default function FASTagManagementPage() {
         {/* Call to Action */}
         <section className="py-20 bg-[#eef6ff]">
           <div className="container-padding max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 text-slate-900">Ready to streamline your toll management?</h2>
+            <h2 className="text-3xl font-bold mb-6 text-slate-900">
+              Ready to streamline your toll management?
+            </h2>
             <p className="text-slate-600 mb-10 text-lg">
-              Contact our sales team today for a personalized demo and see how Garuda can transform your fleet operations.
+              Contact our sales team today for a personalized demo and see how
+              Garuda can transform your fleet operations.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <button className="px-8 py-4 bg-primary text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">
