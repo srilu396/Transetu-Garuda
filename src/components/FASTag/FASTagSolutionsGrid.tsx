@@ -93,7 +93,7 @@ export default function FASTagSolutionsGrid() {
                   className={[
                     "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
                     "transition-all duration-500",
-                    "bg-primary/5 group-hover:bg-primary group-hover:text-white group-hover:scale-110",
+                    "bg-gradient-to-br from-primary/10 to-accent/10 group-hover:bg-gradient-primary group-hover:text-white group-hover:scale-110",
                     "border border-primary/10 group-hover:shadow-lg group-hover:shadow-primary/20",
                   ].join(" ")}
                 >
@@ -113,12 +113,11 @@ export default function FASTagSolutionsGrid() {
 
                 <Link
                   href={`/solutions/${solution.slug}`}
-                  style={{ backgroundColor: "#6467f2" }}
                   className={[
                     "group/btn flex items-center justify-center gap-2",
                     "py-3.5 px-4 rounded-full",
                     "text-sm font-bold transition-all duration-300",
-                    "hover:bg-[#5a5ce0] text-white",
+                    "bg-gradient-primary hover:opacity-90 text-white",
                     "shadow-md hover:shadow-xl hover:shadow-[#6467f2]/20",
                     "group-hover:translate-y-[-2px]",
                     "w-full mt-auto",

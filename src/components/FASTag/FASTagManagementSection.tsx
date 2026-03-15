@@ -166,7 +166,7 @@ export default function FASTagManagement() {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-indigo-600 text-xs font-bold uppercase tracking-wider mb-6"
+            className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
             Toll Management
           </motion.div>
@@ -230,7 +230,7 @@ export default function FASTagManagement() {
                 <div className="flex items-start justify-between mb-6">
                   <motion.div
                     variants={iconVariants}
-                    className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 text-primary"
+                    className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-accent/15 text-primary"
                   >
                     <Icon size={24} />
                   </motion.div>
@@ -271,7 +271,7 @@ export default function FASTagManagement() {
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
                   >
                     {option.buttonText}
                     <motion.svg

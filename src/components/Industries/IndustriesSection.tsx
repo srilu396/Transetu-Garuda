@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { industries as importedIndustries, IndustryData } from "@/content/industries";
-import { ArrowRight, Building2, Flame, DrillIcon, Fuel, Shield, Activity, Gauge } from "lucide-react";
+import { Building2, Flame, DrillIcon, Fuel, Shield, Activity, Gauge } from "lucide-react";
 import SlidePanel from "../UI/SlidePanel";
 
 // Add Oil & Gas to the industries list with complete detailed data
 const industries: IndustryData[] = [
   ...importedIndustries,
   {
+    slug: "oil-gas-operations",
     title: "Oil & Gas Operations",
     description: "Track drilling rigs, pipeline assets, and energy fleet vehicles with rugged GPS devices and fuel monitoring systems designed for remote oil field environments.",
     icon: Flame,
@@ -120,22 +121,8 @@ export default function IndustriesSection() {
 
   const badgeVariants = {
     hover: {
-      scale: 1.05,
-      backgroundColor: "rgba(249, 115, 22, 0.15)",
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
-
-  const arrowVariants = {
-    hover: {
-      x: 5,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 17
-      }
+      opacity: 0.9,
+      transition: { duration: 0.2 }
     }
   };
 
@@ -163,7 +150,7 @@ export default function IndustriesSection() {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
+            className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
             Custom Solutions
           </motion.div>
@@ -226,7 +213,7 @@ export default function IndustriesSection() {
                   <div className="flex items-center gap-3 mb-3 relative z-10">
                     <motion.div 
                       variants={iconVariants}
-                      className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300"
+                      className="w-10 h-10 bg-gradient-to-br from-primary/15 to-accent/15 rounded-lg flex items-center justify-center text-primary group-hover:bg-gradient-primary transition-all duration-300"
                     >
                       <Icon className="w-5 h-5" />
                     </motion.div>
@@ -240,27 +227,14 @@ export default function IndustriesSection() {
                     {industry.description}
                   </p>
 
-                  {/* Category Badge - Small and Subtle with hover animation */}
-                  <motion.div 
+                  {/* Category badge - part of system, secondary to icon/title */}
+                  <motion.div
                     variants={badgeVariants}
-                    className="mb-2 relative z-10"
+                    className="mt-auto relative z-10 w-fit"
                   >
-                    <span className="text-[8px] font-semibold text-primary uppercase tracking-wide bg-primary/5 px-2 py-1 rounded-full border border-primary/10 inline-block">
+                    <span className="inline-block rounded-md border border-primary/25 bg-gradient-to-r from-primary/10 to-accent/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-primary/90">
                       {industry.category}
                     </span>
-                  </motion.div>
-
-                  {/* Call to Action - Subtle Indicator with animated arrow */}
-                  <motion.div 
-                    variants={arrowVariants}
-                    className="flex items-center gap-1 text-primary text-[10px] font-semibold uppercase tracking-wider mt-auto relative z-10"
-                  >
-                    View Details
-                    <motion.div
-                      variants={arrowVariants}
-                    >
-                      <ArrowRight className="w-3 h-3" />
-                    </motion.div>
                   </motion.div>
                 </div>
               </motion.div>
@@ -277,8 +251,8 @@ export default function IndustriesSection() {
           className="mt-16 relative text-center bg-white rounded-2xl p-8 lg:p-12 border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden"
         >
           {/* Background Decorative Gradients */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl -ml-40 -mb-40"></div>
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/15 rounded-full blur-3xl -ml-40 -mb-40"></div>
 
           <div className="relative z-10">
             <h3 className="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900 tracking-tight">
@@ -295,7 +269,7 @@ export default function IndustriesSection() {
                   boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
               >
                 Consult Our Experts
               </motion.button>

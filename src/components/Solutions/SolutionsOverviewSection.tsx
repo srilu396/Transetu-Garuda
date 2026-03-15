@@ -99,8 +99,7 @@ export default function SolutionsOverviewSection() {
     hover: {
       scale: 1.05,
       y: -2,
-      backgroundColor: "#5a5ce0",
-      boxShadow: "0 20px 25px -5px rgba(100, 103, 242, 0.3)",
+      boxShadow: "0 20px 25px -5px rgba(100, 103, 242, 0.35)",
       transition: {
         type: "spring" as const,
         stiffness: 400,
@@ -114,8 +113,8 @@ export default function SolutionsOverviewSection() {
 
   const cardBorderVariants = {
     hover: {
-      borderColor: "#6467f2",
-      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(100, 103, 242, 0.2)",
+      borderColor: "rgba(99, 102, 241, 0.35)",
+      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(99, 102, 241, 0.2)",
       transition: {
         duration: 0.3,
         ease: "easeOut" as const
@@ -145,7 +144,7 @@ export default function SolutionsOverviewSection() {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-indigo-600 text-xs font-bold uppercase tracking-wider mb-6"
+            className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
             Our Expertise
           </motion.div>
@@ -208,7 +207,7 @@ export default function SolutionsOverviewSection() {
                   <motion.div
                     variants={iconVariants}
                     whileHover="hover"
-                    className="w-20 h-20 rounded-xl flex items-center justify-center mb-6 overflow-hidden bg-white p-2 border border-[#7375f2]/10"
+                    className="w-20 h-20 rounded-xl flex items-center justify-center mb-6 overflow-hidden bg-gradient-to-br from-primary/5 to-accent/5 p-2 border border-primary/10"
                   >
                     <Image
                       src={solution.imageLogo}
@@ -239,7 +238,7 @@ export default function SolutionsOverviewSection() {
                       >
                         <motion.div 
                           whileHover={{ scale: 1.2, rotate: 5 }}
-                          className="p-1 rounded-full bg-[#7375f2]/10 text-[#7375f2] flex-shrink-0"
+                          className="p-1 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 text-primary flex-shrink-0"
                         >
                           <CheckCircle2 size={14} />
                         </motion.div>
@@ -253,12 +252,11 @@ export default function SolutionsOverviewSection() {
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
-                    style={{ backgroundColor: "#6467f2" }}
                     className={[
                       "group/btn flex items-center justify-center gap-2",
                       "py-3.5 px-4 rounded-full",
                       "text-sm font-bold transition-all duration-300",
-                      "text-white shadow-md",
+                      "bg-gradient-primary text-white shadow-md",
                       "w-full mt-auto cursor-pointer",
                     ].join(" ")}
                   >

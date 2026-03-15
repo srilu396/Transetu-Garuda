@@ -100,7 +100,7 @@ export default function ClientsSection() {
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-[2rem] opacity-0 group-hover:opacity-100 blur transition duration-500" />
               
               <div className="relative z-10 flex flex-col items-center">
-                <div className="mb-4 p-4 bg-slate-50 rounded-2xl group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
+                <div className="mb-4 p-4 bg-slate-50 rounded-2xl group-hover:bg-gradient-to-br group-hover:from-primary/15 group-hover:to-accent/15 group-hover:scale-110 transition-all duration-300">
                   <client.icon className="w-8 h-8 text-slate-400 group-hover:text-primary transition-colors duration-300" />
                 </div>
                 <span className="text-xs font-black text-slate-500 group-hover:text-slate-900 uppercase tracking-widest text-center transition-colors duration-300">

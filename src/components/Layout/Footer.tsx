@@ -15,11 +15,11 @@ export default function Footer() {
                 />
               </div>
               <div className="flex flex-col">
-                <div className="text-2xl font-black tracking-wider text-primary leading-none">
+                <div className="text-2xl font-black tracking-wider text-gradient leading-none">
                   Garuda OM
                 </div>
-                <span className="text-sm font-bold text-gradient mt-1 italic">
-                  Integrated GPS & FASTag Solutions
+                <span className="text-sm font-bold text-primary mt-1 italic">
+                  GPS Tracking & FASTag Solutions
                 </span>
               </div>
             </div>

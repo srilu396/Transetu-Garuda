@@ -58,7 +58,7 @@ export default function GPSDetailWrapper({
                 <Icon size={48} className="text-white drop-shadow-md" />
               </div>
               <div>
-                <span className="text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
+                <span className="text-sm font-medium text-primary bg-gradient-to-r from-primary/10 to-accent/10 px-4 py-2 rounded-full inline-block mb-3">
                   {category}
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-bold">{data.title}</h1>
@@ -101,7 +101,7 @@ export default function GPSDetailWrapper({
                   className="card-glass p-8 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary/10"
                 >
                   <div className="flex justify-start mb-6">
-                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shadow-inner">
+                    <div className="w-14 h-14 bg-gradient-to-br from-primary/15 to-accent/15 rounded-2xl flex items-center justify-center text-primary shadow-inner">
                       {benefit.icon}
                     </div>
                   </div>
@@ -131,7 +131,7 @@ export default function GPSDetailWrapper({
                       key={index}
                       className="flex flex-col gap-3 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center shrink-0 group-hover:bg-gradient-primary group-hover:text-white transition-colors">
                         {feature.icon}
                       </div>
                       <div>
@@ -159,7 +159,7 @@ export default function GPSDetailWrapper({
                       key={index}
                       className="flex items-start gap-4 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 font-bold text-sm mt-1">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/15 to-accent/15 text-primary flex items-center justify-center shrink-0 font-bold text-sm mt-1">
                         {index + 1}
                       </div>
                       <div>

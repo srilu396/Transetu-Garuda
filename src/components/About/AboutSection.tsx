@@ -39,14 +39,14 @@ export default function AboutSection() {
   // Animation Variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1]
-      }
-    }
+        ease: [0.25, 0.1, 0.25, 1] as const,
+      },
+    },
   };
 
   const staggerContainer = {
@@ -62,41 +62,41 @@ export default function AboutSection() {
 
   const scaleIn = {
     hidden: { opacity: 0, scale: 0.9 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
-      transition: { 
-        type: "spring",
+      transition: {
+        type: "spring" as const,
         stiffness: 100,
-        damping: 12
-      }
-    }
+        damping: 12,
+      },
+    },
   };
 
   const slideInLeft = {
     hidden: { opacity: 0, x: -50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { 
-        type: "spring",
+      transition: {
+        type: "spring" as const,
         stiffness: 80,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   const slideInRight = {
     hidden: { opacity: 0, x: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { 
-        type: "spring",
+      transition: {
+        type: "spring" as const,
         stiffness: 80,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   const floatAnimation = {
@@ -106,39 +106,39 @@ export default function AboutSection() {
       transition: {
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut" as const,
+      },
+    },
   };
 
   // Card hover animation - subtle and professional
   const cardHover = {
-    rest: { 
+    rest: {
       y: 0,
-      boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+      boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
     },
-    hover: { 
+    hover: {
       y: -4,
       boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
-        damping: 25
-      }
-    }
+        damping: 25,
+      },
+    },
   };
 
   // Icon hover animation - simple scale
   const iconHover = {
     rest: { scale: 1 },
-    hover: { 
+    hover: {
       scale: 1.1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 500,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const expertiseAreas = [
@@ -173,13 +173,13 @@ export default function AboutSection() {
   ];
 
   const clientLogos = [
-    { name: "ONGC", icon: <Globe className="w-5 h-5" /> },
-    { name: "Maha Cement", icon: <Package className="w-5 h-5" /> },
-    { name: "Maersk", icon: <Globe className="w-5 h-5" /> },
-    { name: "TS Mining", icon: <Truck className="w-5 h-5" /> },
-    { name: "AP Mining", icon: <Truck className="w-5 h-5" /> },
-    { name: "AP Transportation", icon: <Truck className="w-5 h-5" /> },
-    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" /> },
+    { name: "ONGC", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/ongc.png", website: "https://www.ongcindia.com/" },
+    { name: "Maha Cement", icon: <Package className="w-5 h-5" />, logo: "/images/clients/maha-cement.png", website: "https://www.mahacement.com/" },
+    { name: "Maersk", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/maersk.png", website: "https://www.maersk.com/" },
+    { name: "TS Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/telangana-mining.png", website: "https://tgmdc.telangana.gov.in/" },
+    { name: "AP Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-govt.png", website: "https://www.mines.ap.gov.in/miningportal/" },
+    { name: "AP Transportation", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-transport.png", website: "https://www.aptransport.org/" },
+    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/singareni.png", website: "https://scclmines.com/" },
   ];
 
   return (
@@ -206,7 +206,7 @@ export default function AboutSection() {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut" as const,
         }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
@@ -254,10 +254,9 @@ export default function AboutSection() {
             return (
               <motion.div
                 key={index}
-                variants={scaleIn}
+                variants={cardHover}
                 initial="rest"
                 whileHover="hover"
-                variants={cardHover}
                 className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"
               >
                 <motion.div 
@@ -283,9 +282,6 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            initial="rest"
-            whileHover="hover"
-            variants={cardHover}
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden group"
           >
             <motion.div
@@ -303,13 +299,19 @@ export default function AboutSection() {
             <div className="relative z-10">
               <div className="flex items-start gap-8 mb-6">
                 {/* Founder Image */}
-                <motion.div 
+                <motion.div
                   initial="rest"
                   whileHover="hover"
                   variants={iconHover}
-                  className="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-4xl font-bold text-white shadow-lg shrink-0 overflow-hidden"
+                  className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-lg shrink-0 overflow-hidden border-2 border-gray-100"
                 >
-                  <span>PS</span>
+                  <Image
+                    src="/images/founder-sudhakar.png"
+                    alt="Polimetla Sudhakar - Founder & Business Strategist"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
                 <div>
                   <motion.h3 
@@ -390,9 +392,6 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            initial="rest"
-            whileHover="hover"
-            variants={cardHover}
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl"
           >
             <motion.div 
@@ -427,19 +426,18 @@ export default function AboutSection() {
               {expertiseAreas.slice(0, 2).map((item, idx) => (
                 <motion.div 
                   key={idx} 
-                  variants={scaleIn}
+                  variants={cardHover}
                   initial="rest"
                   whileHover="hover"
-                  variants={cardHover}
-                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200"
+                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200 group"
                 >
                   <motion.div
                     initial="rest"
                     whileHover="hover"
                     variants={iconHover}
-                    className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center`}
+                    className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors`}
                   >
-                    <item.icon className={`w-4 h-4 ${item.color}`} />
+                    <item.icon className={`w-4 h-4 ${item.color} group-hover:text-white transition-colors`} />
                   </motion.div>
                   <span className="text-xs font-semibold text-gray-700">{item.label}</span>
                 </motion.div>
@@ -471,7 +469,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }}
               className="overflow-hidden mb-12"
             >
               <motion.div 
@@ -483,10 +481,9 @@ export default function AboutSection() {
                 {/* Vision & Mission */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                   <motion.div 
-                    variants={scaleIn}
+                    variants={cardHover}
                     initial="rest"
                     whileHover="hover"
-                    variants={cardHover}
                     className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20"
                   >
                     <motion.div 
@@ -503,10 +500,9 @@ export default function AboutSection() {
                     </p>
                   </motion.div>
                   <motion.div 
-                    variants={scaleIn}
+                    variants={cardHover}
                     initial="rest"
                     whileHover="hover"
-                    variants={cardHover}
                     className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20"
                   >
                     <motion.div 
@@ -538,10 +534,9 @@ export default function AboutSection() {
                     ].map((item, idx) => (
                       <motion.div 
                         key={idx} 
-                        variants={scaleIn}
+                        variants={cardHover}
                         initial="rest"
                         whileHover="hover"
-                        variants={cardHover}
                         className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200"
                       >
                         <motion.div
@@ -564,10 +559,9 @@ export default function AboutSection() {
                     {expertiseAreas.map((item, idx) => (
                       <motion.div 
                         key={idx} 
-                        variants={scaleIn}
+                        variants={cardHover}
                         initial="rest"
                         whileHover="hover"
-                        variants={cardHover}
                         className="p-4 bg-gray-50 rounded-xl border border-gray-200 group"
                       >
                         <motion.div 
@@ -598,27 +592,46 @@ export default function AboutSection() {
           className="text-center"
         >
           <h3 className="text-2xl font-bold mb-8 text-gray-900">Trusted By Industry Leaders</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {clientLogos.map((client, idx) => (
-              <motion.div
-                key={idx}
-                variants={scaleIn}
-                initial="rest"
-                whileHover="hover"
-                variants={cardHover}
-                className="bg-white px-6 py-4 rounded-xl border border-gray-200 shadow-sm flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer"
-              >
-                <motion.div 
+          <div className="flex flex-wrap justify-center gap-6">
+            {clientLogos.map((client, idx) => {
+              const Wrapper = client.website ? motion.a : motion.div;
+              const wrapperProps = client.website
+                ? { href: client.website, target: "_blank", rel: "noopener noreferrer" }
+                : {};
+              return (
+                <Wrapper
+                  key={idx}
+                  variants={cardHover}
                   initial="rest"
                   whileHover="hover"
-                  variants={iconHover}
-                  className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary"
+                  className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-primary/30 hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col items-center justify-center min-h-[120px] min-w-[160px] px-6 py-5"
+                  {...wrapperProps}
                 >
-                  {client.icon}
-                </motion.div>
-                <span className="font-semibold text-gray-800 text-sm">{client.name}</span>
-              </motion.div>
-            ))}
+                  {client.logo ? (
+                    <div className="relative w-full min-h-[72px] flex items-center justify-center flex-1">
+                      <Image
+                        src={client.logo}
+                        alt={client.name}
+                        width={280}
+                        height={80}
+                        unoptimized
+                        className="object-contain object-center w-full max-w-[200px] h-14 sm:h-16"
+                      />
+                    </div>
+                  ) : (
+                    <motion.div
+                      initial="rest"
+                      whileHover="hover"
+                      variants={iconHover}
+                      className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 mb-1"
+                    >
+                      {client.icon}
+                    </motion.div>
+                  )}
+                  <span className="font-semibold text-gray-800 text-sm text-center mt-2 leading-tight">{client.name}</span>
+                </Wrapper>
+              );
+            })}
           </div>
         </motion.div>
       </div>

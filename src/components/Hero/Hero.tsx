@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import GPSVisual from "../GPSTrackingSolutions/GPSVisual";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {
@@ -23,38 +22,40 @@ export default function HeroSection() {
           Your browser does not support the video tag.
         </video>
         {/* Modern SaaS Gradient Overlay for maximum readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
         <div className="absolute inset-0 backdrop-blur-[2px]"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto container-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content Area */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto container-padding px-4 sm:px-6">
+        <div className="flex flex-col items-center justify-center text-center">
           <motion.div
-            className="text-left max-w-2xl"
+            className="w-full max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium mb-6 shadow-xl">
-              <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
-              GPS Tracking & Monitoring
-            </div>
-            <div className="inline-flex items-center px-4 py-2 bg-primary/30 border border-primary/40 rounded-full text-white text-sm font-semibold mb-8 backdrop-blur-md shadow-lg">
-              <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse shadow-[0_0_8px_var(--primary)]"></span>
-              FASTag Issuance & Partnerships
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium shadow-xl">
+                <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
+                GPS Tracking & Monitoring
+              </div>
+              <div className="inline-flex items-center px-4 py-2 bg-primary/30 border border-primary/40 rounded-full text-white text-sm font-semibold backdrop-blur-md shadow-lg">
+                <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse shadow-[0_0_8px_var(--primary)]"></span>
+                FASTag Issuance & Partnerships
+              </div>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-2xl">
               <span>Garuda OM - </span>
-              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent italic inline-block pb-2">
+              <br />
+              <span className="text-white font-semibold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
                 GPS Tracking <span className="font-medium">& FASTag Solutions</span>
               </span>
             </h1>
-            <p className="text-lg text-white font-bold mb-10 leading-relaxed max-w-xl drop-shadow-lg">
+            <p className="text-lg text-white font-bold mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-lg">
               Track, monitor, and manage your fleet with real-time GPS, fuel sensors, dash cams, and FASTag integration,
               — everything you need on one powerful platform for complete operational control.
             </p>
-            <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <motion.button
                 whileHover={{
                   scale: 1.04,
@@ -110,7 +111,7 @@ export default function HeroSection() {
             </div>
 
             {/* Feature Highlights - High Contrast Tag style */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center gap-3">
               {[
                 "GPS Vehicle Tracking",
                 "Dash Cam Security",
@@ -128,16 +129,6 @@ export default function HeroSection() {
                 </div>
               ))}
             </div>
-          </motion.div>
-
-          {/* Right Visual Area */}
-          <motion.div
-            className="flex items-center justify-center relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
-            <GPSVisual />
           </motion.div>
         </div>
       </div>

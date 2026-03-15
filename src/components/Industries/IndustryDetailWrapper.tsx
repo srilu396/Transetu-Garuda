@@ -118,7 +118,7 @@ export default function IndustryDetailWrapper({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {industry.solutions.map((solution, index) => (
                     <div key={index} className="flex items-center gap-4 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center shrink-0 group-hover:bg-gradient-primary group-hover:text-white transition-colors">
                         <span className="font-bold">{index + 1}</span>
                       </div>
                       <span className="font-medium">{solution}</span>

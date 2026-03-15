@@ -309,7 +309,7 @@ export default function ProductsSection() {
               <div className="flex items-start justify-between mb-6">
                 <motion.div 
                   variants={iconVariants}
-                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 text-primary"
+                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-primary text-white"
                 >
                   {(() => {
                     const Icon = product.icon;

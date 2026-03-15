@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   MapPin,
   Shield,
@@ -76,9 +76,6 @@ const features = [
   },
 ];
 
-// Duplicate features array to create seamless loop
-const duplicatedFeatures = [...features, ...features];
-
 export default function FeaturesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -98,7 +95,7 @@ export default function FeaturesSection() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12,
       },
@@ -106,7 +103,7 @@ export default function FeaturesSection() {
     hover: {
       y: -12,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17,
       },
@@ -114,7 +111,7 @@ export default function FeaturesSection() {
     tap: {
       scale: 0.98,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 17,
       },
@@ -127,7 +124,7 @@ export default function FeaturesSection() {
       borderColor: "rgba(249, 115, 22, 0.2)",
       transition: {
         duration: 0.2,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -137,7 +134,7 @@ export default function FeaturesSection() {
       borderColor: "rgba(249, 115, 22, 0.4)",
       transition: {
         duration: 0.3,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -148,49 +145,40 @@ export default function FeaturesSection() {
       scale: 1.1,
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
       },
     },
   };
 
+  // Card width + gap for scroll-snap (matches flex gap-6 and card width)
+  const CARD_WIDTH = 340;
+  const GAP = 24;
+  const SCROLL_SNAP_ITEM = CARD_WIDTH + GAP;
+
   const scroll = (direction: 'left' | 'right') => {
     if (!scrollRef.current || isAnimating) return;
-    
+
     setIsAnimating(true);
-    
+
     const container = scrollRef.current;
-    const cardWidth = container.querySelector('div > div')?.clientWidth || 340;
-    const gap = 24; // gap-6 = 1.5rem = 24px
-    const scrollAmount = cardWidth + gap;
-    
     const currentScroll = container.scrollLeft;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    
-    let newScrollPosition;
-    
+    const itemWidth = SCROLL_SNAP_ITEM;
+    const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+
+    let newScrollPosition: number;
+
     if (direction === 'left') {
-      newScrollPosition = currentScroll - scrollAmount;
-      // If we're at the beginning, jump to the duplicated set
-      if (newScrollPosition < 0) {
-        newScrollPosition = container.scrollWidth / 2 - scrollAmount;
-      }
+      newScrollPosition = Math.max(0, currentScroll - itemWidth);
     } else {
-      newScrollPosition = currentScroll + scrollAmount;
-      // If we're at the end of original set, jump to beginning of duplicated set
-      if (newScrollPosition > container.scrollWidth / 2) {
-        newScrollPosition = 0;
-      }
+      newScrollPosition = Math.min(maxScroll, currentScroll + itemWidth);
     }
-    
+
     container.scrollTo({
       left: newScrollPosition,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
-    
-    // Reset animation lock after transition completes
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 500);
+
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   return (
@@ -198,7 +186,7 @@ export default function FeaturesSection() {
       {/* Decorative background elements to enhance the "showing through" effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-orange-100/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/10 rounded-full blur-3xl"></div>
       </div>
 
       <section className="py-20 overflow-hidden relative">
@@ -209,7 +197,7 @@ export default function FeaturesSection() {
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-indigo-600 text-xs font-bold uppercase tracking-wider mb-6"
+              className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
             >
               Innovation & Technology
             </motion.div>
@@ -245,11 +233,7 @@ export default function FeaturesSection() {
               disabled={isAnimating}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -left-4 sm:-left-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ 
-                backgroundColor: '#6467f2',
-                color: 'white'
-              }}
+              className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -left-4 sm:-left-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary text-white"
               aria-label="Previous slide"
             >
               <ChevronLeft className="h-6 w-6" />
@@ -260,45 +244,27 @@ export default function FeaturesSection() {
               disabled={isAnimating}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -right-4 sm:-right-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ 
-                backgroundColor: '#6467f2',
-                color: 'white'
-              }}
+              className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -right-4 sm:-right-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary text-white"
               aria-label="Next slide"
             >
               <ChevronRight className="h-6 w-6" />
             </motion.button>
 
-            {/* Horizontal scrolling container - scrollbar colored to match background */}
+            {/* Horizontal scrolling container - no scrollbar */}
             <div
               ref={scrollRef}
-              className="overflow-x-auto"
+              className="features-scroll overflow-x-auto overflow-y-hidden [scrollbar-width:none] [-ms-overflow-style:none] py-12"
               style={{
-                scrollbarWidth: 'thin',
-                scrollbarColor: '#fffcf8 #fffcf8',
-                msOverflowStyle: 'auto',
                 WebkitOverflowScrolling: 'touch',
                 scrollBehavior: 'smooth',
+                scrollSnapType: 'x mandatory',
               }}
             >
               <style>{`
-                div::-webkit-scrollbar {
-                  height: 8px;
-                  background-color: #fffcf8;
-                }
-                div::-webkit-scrollbar-thumb {
-                  background-color: #fffcf8;
-                  border-radius: 4px;
-                }
-                div::-webkit-scrollbar-track {
-                  background-color: #fffcf8;
-                }
-                div::-webkit-scrollbar-button {
-                  display: none;
-                }
-                div::-webkit-scrollbar-corner {
-                  background-color: #fffcf8;
+                .features-scroll::-webkit-scrollbar {
+                  display: none !important;
+                  width: 0 !important;
+                  height: 0 !important;
                 }
               `}</style>
 
@@ -307,12 +273,13 @@ export default function FeaturesSection() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
-                className="flex gap-6 py-12 my-4"
+                className="flex gap-6"
+                style={{ width: 'max-content' }}
               >
-                {duplicatedFeatures.map((feature, index) => (
+                {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px]"
+                    className="flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px] snap-center"
                   >
                     <motion.div
                       variants={cardVariants}
