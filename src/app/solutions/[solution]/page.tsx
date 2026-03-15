@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { gpsSolutions } from "../../../../sections/gps/data/gpsData";
-import { fastagSolutions } from "../../../../sections/fastag/data/fastagData";
-import GPSTrackingDetails from "../../../../sections/gps/GPSTrackingDetails";
+import { gpsSolutions } from "../../../sections/gps/data/gpsData";
+import { fastagSolutions } from "../../../sections/fastag/data/fastagData";
+import GPSTrackingDetails from "../../../sections/gps/GPSTrackingDetails";
 
 const solutions = { ...gpsSolutions, ...fastagSolutions };
 
