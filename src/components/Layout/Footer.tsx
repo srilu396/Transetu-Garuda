@@ -2,7 +2,10 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border/50" style={{ backgroundColor: '#e3d8dd' }}>
+    <footer
+      className="border-t border-border/50"
+      style={{ backgroundColor: "#e3d8dd" }}
+    >
       <div className="max-w-7xl mx-auto container-padding py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
@@ -24,7 +27,9 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
-              Track, monitor, and manage your fleet with real-time GPS, fuel sensors, dash cams, and FASTag integration — everything you need on one powerful platform for complete operational control.
+              Track, monitor, and manage your fleet with real-time GPS, fuel
+              sensors, dash cams, and FASTag integration — everything you need
+              on one powerful platform for complete operational control.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -211,42 +216,64 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">Our Industries</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">
+              Our Industries
+            </h3>
             <ul className="space-y-3">
               <li>
-                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/industries/logistics-transportation"
+                >
                   Logistics & Transport
                 </a>
               </li>
               <li>
-                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/industries/mining-operations"
+                >
                   Mining Operations
                 </a>
               </li>
               <li>
-                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/industries/school-fleet-safety"
+                >
                   School Fleet Safety
                 </a>
               </li>
               <li>
-                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/industries/oil-and-gas-operations"
+                >
                   Oil & Gas Operations
                 </a>
               </li>
               <li>
-                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/industries/ready-mix-concrete"
+                >
                   Ready Mix Concrete
                 </a>
               </li>
               <li>
-                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/industries/pharmaceutical-logistics"
+                >
                   Healthcare Logistics
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">Support</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">
+              Support
+            </h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -275,7 +302,9 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">Important Solutions</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">
+              Important Solutions
+            </h3>
             <ul className="space-y-3">
               <li>
                 <a
