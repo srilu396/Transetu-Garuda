@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import SlidePanel from "@/components/UI/SlidePanel";
+import SlidePanel from "../../components/UI/SlidePanel";
 import {
   Camera,
   Truck,
@@ -14,14 +14,14 @@ import {
   Shield,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { gpsSolutions as solutionsData, SolutionData } from "@/sections/gps/data/gpsData";
+import { gpsSolutions as solutionsData, SolutionData } from "./data/gpsData";
 
 const products = [
   {
     title: "Dash Cam System",
     description:
       "Improve driver safety with a smart dash camera that records both road and cabin activity while providing real-time alerts and video monitoring.",
-    icon: Camera,
+    icon: "Camera",
     badge: "Video Safety",
     features: [
       "Dual camera recording",
@@ -35,7 +35,7 @@ const products = [
     title: "Fleet GPS Tracker",
     description:
       "Track and manage your fleet in real time with a powerful GPS tracking system that helps optimize routes and monitor driver performance.",
-    icon: Truck,
+    icon: "Truck",
     badge: "Fleet Management",
     features: [
       "Real-time vehicle tracking",
@@ -49,7 +49,7 @@ const products = [
     title: "Mining Equipment Tracking",
     description:
       "A rugged GPS tracking solution designed for heavy mining equipment, helping monitor machinery and improve operational visibility in harsh environments.",
-    icon: Satellite,
+    icon: "Satellite",
     badge: "Mining Solutions",
     features: [
       "Durable GPS devices",
@@ -63,7 +63,7 @@ const products = [
     title: "Fuel Monitoring System",
     description:
       "Monitor fuel levels accurately and detect fuel theft using advanced sensors integrated with your vehicle tracking system.",
-    icon: Fuel,
+    icon: "Fuel",
     badge: "Fuel Management",
     features: [
       "Fuel level tracking",
@@ -77,7 +77,7 @@ const products = [
     title: "Video Telematics",
     description:
       "Combine GPS tracking with video monitoring to improve security and gain better visibility into vehicle activity and driver behavior.",
-    icon: Camera,
+    icon: "Camera",
     badge: "Security Solutions",
     features: [
       "Live video streaming",
@@ -91,7 +91,7 @@ const products = [
     title: "Temperature Monitoring",
     description:
       "Track temperature conditions during transportation to protect sensitive goods such as food, medicine, and other perishable items.",
-    icon: Thermometer,
+    icon: "Thermometer",
     badge: "Cold Chain",
     features: [
       "Real-time temperature tracking",
@@ -105,7 +105,7 @@ const products = [
     title: "GPS Smart Padlock",
     description:
       "Secure cargo, containers, and valuable assets with a smart padlock that provides location tracking and tamper alerts.",
-    icon: Lock,
+    icon: "Lock",
     badge: "Asset Security",
     features: ["Remote lock control", "GPS location tracking", "Tamper alerts"],
     link: "/solutions/padlock-gps",
@@ -115,7 +115,7 @@ const products = [
     title: "Photogrammetry Services",
     description:
       "High-precision mapping and surveying services using advanced GPS and photogrammetry technology for accurate geographic data.",
-    icon: MapPin,
+    icon: "MapPin",
     badge: "Mapping Services",
     features: ["Survey data collection", "Precision mapping", "3D modeling"],
     link: "/solutions/photogrammetry-services",
@@ -125,7 +125,7 @@ const products = [
     title: "AIS 140 GPS Tracker",
     description:
       "Government-approved GPS tracking device designed to meet AIS 140 compliance standards for commercial vehicles.",
-    icon: Shield,
+    icon: "Shield",
     badge: "Compliance",
     features: [
       "Emergency panic button",
@@ -136,6 +136,18 @@ const products = [
     slug: "ais-140-tracker",
   },
 ];
+
+// Icon mapping for dynamic rendering
+const IconMap: Record<string, React.ElementType> = {
+  Camera,
+  Truck,
+  Satellite,
+  Fuel,
+  Thermometer,
+  Lock,
+  MapPin,
+  Shield,
+};
 
 export default function GPSTrackingSection() {
   const router = useRouter();
@@ -314,7 +326,7 @@ export default function GPSTrackingSection() {
                   className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 text-primary"
                 >
                   {(() => {
-                    const Icon = product.icon;
+                    const Icon = IconMap[product.icon] || Truck;
                     return <Icon className="w-6 h-6" />;
                   })()}
                 </motion.div>
@@ -396,7 +408,7 @@ export default function GPSTrackingSection() {
           title={selectedProduct?.title || ""}
           description={selectedProduct?.description || ""}
           features={selectedProduct?.features || []}
-          icon={selectedProduct?.icon || Truck}
+          icon={selectedProduct ? (IconMap[selectedProduct.icon] || Truck) as React.ElementType : Truck}
           category={selectedProduct?.badge || "Fleet Solution"}
           solutionData={selectedSolutionData || undefined}
         />

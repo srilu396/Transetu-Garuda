@@ -1,19 +1,54 @@
 "use client";
 
 import React from "react";
-import Navbar from "@/components/Layout/Navbar";
-import Footer from "@/components/Layout/Footer";
+import Navbar from "../../components/Layout/Navbar";
+import Footer from "../../components/Layout/Footer";
 import { SolutionData } from "./data/gpsData";
-import { CheckCircle, ArrowLeft, Satellite } from "lucide-react";
+import { 
+  CheckCircle, 
+  ArrowLeft, 
+  Satellite,
+  Camera,
+  Bell,
+  Shield,
+  Truck,
+  MapPin,
+  BarChart3,
+  Zap,
+  Fuel,
+  Layers,
+  Thermometer,
+  Lock,
+  ShieldCheck,
+  Search
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+// Icon mapping to handle dynamic icon rendering from strings
+const IconMap: Record<string, React.ElementType> = {
+  Satellite,
+  Camera,
+  Bell,
+  Shield,
+  Truck,
+  MapPin,
+  BarChart3,
+  Zap,
+  Fuel,
+  Layers,
+  Thermometer,
+  Lock,
+  ShieldCheck,
+  Search
+};
 
 interface GPSDetailWrapperProps {
   data: SolutionData;
   showNavbarFooter?: boolean;
   onBack?: () => void;
   category?: string;
-  icon?: React.ElementType;
+  icon?: string; // Changed from React.ElementType to string
 }
 
 export default function GPSTrackingDetails({
@@ -21,9 +56,10 @@ export default function GPSTrackingDetails({
   showNavbarFooter = true,
   onBack,
   category = "Fleet Solution",
-  icon: Icon = Satellite,
+  icon = "Satellite",
 }: GPSDetailWrapperProps) {
   const router = useRouter();
+  const HeaderIcon = IconMap[icon] || Satellite;
 
   const handleBack = () => {
     if (onBack) {
@@ -55,7 +91,7 @@ export default function GPSTrackingDetails({
           <div className="mb-12">
             <div className="flex flex-col md:flex-row md:items-center gap-6 mb-6">
               <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                <Icon size={48} className="text-white drop-shadow-md" />
+                <HeaderIcon size={48} className="text-white drop-shadow-md" />
               </div>
               <div>
                 <span className="text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
@@ -95,6 +131,7 @@ export default function GPSTrackingDetails({
           {/* Benefits Cards (Mimicking Stats) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {data.benefits.slice(0, 3).map((benefit, index) => {
+              const BenefitIcon = IconMap[benefit.icon] || Shield;
               return (
                 <div
                   key={index}
@@ -102,7 +139,7 @@ export default function GPSTrackingDetails({
                 >
                   <div className="flex justify-start mb-6">
                     <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shadow-inner">
-                      {React.createElement(benefit.icon, { size: 24 })}
+                      <BenefitIcon size={24} />
                     </div>
                   </div>
                   <div className="text-xl font-bold text-slate-900 mb-3">
@@ -126,24 +163,27 @@ export default function GPSTrackingDetails({
                   Key Features
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {data.features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col gap-3 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                        {React.createElement(feature.icon, { size: 20 })}
+                  {data.features.map((feature, index) => {
+                    const FeatureIcon = IconMap[feature.icon] || Zap;
+                    return (
+                      <div
+                        key={index}
+                        className="flex flex-col gap-3 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                          <FeatureIcon size={20} />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-lg mb-1">
+                            {feature.title}
+                          </h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed">
+                            {feature.description}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-bold text-lg mb-1">
-                          {feature.title}
-                        </h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
 

@@ -1,21 +1,22 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { gpsSolutions } from "@/sections/gps/data/gpsData";
-import { fastagSolutions } from "@/sections/fastag/data/fastagData";
-import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
+import { gpsSolutions } from "../../../../sections/gps/data/gpsData";
+import { fastagSolutions } from "../../../../sections/fastag/data/fastagData";
+import GPSTrackingDetails from "../../../../sections/gps/GPSTrackingDetails";
 
 const solutions = { ...gpsSolutions, ...fastagSolutions };
 
 
 export async function generateMetadata(
-  { params }: { params: Promise<{ solution: string }> }, // Fix for Next.js 15 route params
+  { params }: { params: Promise<{ solution: string }> },
 ): Promise<Metadata> {
   const { solution: solutionSlug } = await params;
   const solution = solutions[solutionSlug];
 
-  if (!solution) {
+  if (!solution || !solution.seoMeta) {
     return {
-      title: "Solution Not Found | Garuda",
+      title: "Solution Not Found | Garuda OM",
+      description: "The requested solution could not be found.",
     };
   }
 

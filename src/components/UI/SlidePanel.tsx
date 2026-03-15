@@ -24,7 +24,7 @@ interface SlidePanelProps {
   title: string;
   description: string;
   features: string[];
-  icon: LucideIcon | React.ReactNode;
+  icon: LucideIcon | React.ElementType | React.ReactNode;
   category?: string;
   layoutType?: "split" | "grid";
   solutionData?: SolutionData;
@@ -122,7 +122,7 @@ export default function SlidePanel({
   };
 
   const renderIcon = (
-    IconInput: LucideIcon | React.ReactNode,
+    IconInput: LucideIcon | React.ElementType | React.ReactNode,
     size: number = 28,
   ) => {
     if (!IconInput) return <Box size={size} />;

@@ -91,7 +91,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-4 mt-4 pt-2">
                 <a
-                  href="#"
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <svg
@@ -110,7 +112,9 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <svg
@@ -138,7 +142,9 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <svg
@@ -159,7 +165,9 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <svg
@@ -178,89 +186,100 @@ export default function Footer() {
                     <path d="M10 15l5-3-5-3v6z"></path>
                   </svg>
                 </a>
+                <a
+                  href="https://wa.me/919849252434"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-message-circle"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.31 8.31 0 0 1 3.8.9L22 4l-2.1 4.7Z"></path>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">Our Industries</h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#about"
-                >
-                  About Us
+                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                  Logistics & Transport
                 </a>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#solutions"
-                >
-                  Solutions
+                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                  Mining Operations
                 </a>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#products"
-                >
-                  Products
+                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                  School Fleet Safety
                 </a>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#fastag-management"
-                >
-                  FASTag
+                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                  Oil & Gas Operations
                 </a>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#industries"
-                >
-                  Industries
+                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                  Ready Mix Concrete
                 </a>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#features"
-                >
-                  Why Us
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#videos"
-                >
-                  Videos
+                <a className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium" href="/#industries">
+                  Healthcare Logistics
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Support</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">Support</h3>
             <ul className="space-y-3">
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/#contact"
                 >
                   Contact Us
                 </a>
               </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/#contact"
+                >
+                  Request Demo
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+                  href="/#contact"
+                >
+                  Technical Support
+                </a>
+              </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Important Solutions</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900 font-black uppercase tracking-tight">Important Solutions</h3>
             <ul className="space-y-3">
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/solutions/gps-tracking-solutions"
                 >
                   Fleet GPS Tracking
@@ -268,7 +287,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/solutions/fuel-level-sensors"
                 >
                   Fuel Monitoring
@@ -276,7 +295,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/solutions/dash-cam-system"
                 >
                   Dash Cam System
@@ -284,7 +303,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/#fastag-management"
                 >
                   FASTag Management
@@ -292,7 +311,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/solutions/ais-140-tracker"
                 >
                   AIS 140 Compliance
@@ -300,26 +319,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
                   href="/solutions/temperature-monitor"
                 >
                   Temperature Monitoring
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/solutions/padlock-gps"
-                >
-                  GPS Smart Padlock
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/solutions/video-telematics"
-                >
-                  Video Telematics
                 </a>
               </li>
             </ul>
