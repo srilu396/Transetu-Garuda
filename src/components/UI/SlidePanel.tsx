@@ -11,10 +11,10 @@ import {
   Box,
   ChevronRight,
 } from "lucide-react";
-import { SolutionData } from "@/content/solutions";
-import { IndustryData } from "@/content/industries";
-import GPSDetailWrapper from "../GPSTrackingSolutions/GPSDetailWrapper";
-import IndustryDetailWrapper from "../Industries/IndustryDetailWrapper";
+import { SolutionData } from "@/sections/gps/data/gpsData";
+import { IndustryData } from "@/sections/industries/data/industriesData";
+import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
+import IndustryDetails from "@/sections/industries/IndustryDetails";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 
@@ -165,7 +165,7 @@ export default function SlidePanel({
             <div className="flex-grow overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
               {solutionData ? (
                 <div className="flex flex-col">
-                  <GPSDetailWrapper
+                  <GPSTrackingDetails
                     data={solutionData}
                     showNavbarFooter={false}
                   />
@@ -173,7 +173,7 @@ export default function SlidePanel({
                 </div>
               ) : industryData ? (
                 <div className="flex flex-col">
-                  <IndustryDetailWrapper
+                  <IndustryDetails
                     industry={industryData}
                     showNavbarFooter={false}
                   />

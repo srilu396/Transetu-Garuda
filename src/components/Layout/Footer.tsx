@@ -285,7 +285,7 @@ export default function Footer() {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/solutions/fastag-management"
+                  href="/#fastag-management"
                 >
                   FASTag Management
                 </a>

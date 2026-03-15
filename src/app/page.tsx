@@ -1,15 +1,15 @@
-import SolutionsOverviewSection from "@/components/Solutions/SolutionsOverviewSection";
+import FastagSection from "@/sections/fastag/FastagSection";
 import Navbar from "@/components/Layout/Navbar";
-import HeroSection from "@/components/Hero/Hero";
-import ProductsSection from "@/components/Solutions/GPSTrackingSolutionsGrid";
-import FeaturesSection from "@/components/PowerfulFeatures/PowerfulFeatures";
-import IndustriesSection from "@/components/Industries/IndustriesSection";
-import AboutSection from "@/components/About/AboutSection";
-import VideosSection from "@/components/Videos/Videos";
-import ClientsSection from "@/components/Clients/ClientsSection";
-import ContactSection from "@/components/Contact/ContactSection";
+import HeroSection from "@/sections/hero/HeroSection";
+import GPSTrackingSection from "@/sections/gps/GPSTrackingSection";
+import FeaturesSection from "@/sections/features/FeaturesSection";
+import IndustriesSection from "@/sections/industries/IndustriesSection";
+import AboutSection from "@/sections/about/AboutSection";
+import VideosSection from "@/sections/videos/VideosSection";
+import ClientsSection from "@/sections/clients/ClientsSection";
+import ContactSection from "@/sections/contact/ContactSection";
 import Footer from "@/components/Layout/Footer";
-import FASTagManagement from "@/components/FASTag/FASTagManagementSection";
+import FastagDetails from "@/sections/fastag/FastagDetails";
 
 export default function Home() {
   return (
@@ -17,9 +17,9 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <SolutionsOverviewSection />
-        <ProductsSection />
-        <FASTagManagement />
+        <FastagSection />
+        <GPSTrackingSection />
+        <FastagDetails />
         <FeaturesSection />
         <IndustriesSection />
         <AboutSection />
