@@ -69,6 +69,13 @@ export default function GPSTrackingDetails({
     }
   };
 
+  // Function to handle navigation to homepage contact section
+  const handleContactNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Navigate to homepage with contact hash
+    window.location.href = "/#contact";
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {showNavbarFooter && <Navbar />}
@@ -272,7 +279,7 @@ export default function GPSTrackingDetails({
             </div>
           </div>
 
-          {/* Contact CTA - Moved further down with more spacing */}
+          {/* Contact CTA - Fixed navigation to go to homepage first then contact */}
           <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
@@ -285,18 +292,20 @@ export default function GPSTrackingDetails({
               tracking hardware and intuitive software platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <Link
+              <a
                 href="/#contact"
-                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl"
+                onClick={handleContactNavigation}
+                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl cursor-pointer inline-block"
               >
                 Contact Sales
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/#contact"
-                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center justify-center"
+                onClick={handleContactNavigation}
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center justify-center cursor-pointer inline-block"
               >
                 Request a Demo
-              </Link>
+              </a>
             </div>
           </div>
         </div>

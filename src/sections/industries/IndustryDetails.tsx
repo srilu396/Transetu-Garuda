@@ -28,6 +28,18 @@ export default function IndustryDetails({
     }
   };
 
+  // Function to navigate to industries section then to contact
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // First navigate to homepage with industries hash
+    window.location.href = "/#industries";
+    
+    // After a brief delay, redirect to contact section
+    setTimeout(() => {
+      window.location.href = "/#contact";
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {showNavbarFooter && <Navbar />}
@@ -156,7 +168,7 @@ export default function IndustryDetails({
             </div>
           </div>
 
-          {/* Contact CTA - Added top margin for spacing */}
+          {/* Contact CTA - Updated with two-step navigation */}
           <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
@@ -168,12 +180,20 @@ export default function IndustryDetails({
               Contact our experts today for a tailored demonstration of our GPS tracking and management platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <Link href="/contact" className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl">
+              <a
+                href="/#industries"
+                onClick={handleNavigation}
+                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl cursor-pointer inline-block"
+              >
                 Get Started Now
-              </Link>
-              <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all">
+              </a>
+              <a
+                href="/#industries"
+                onClick={handleNavigation}
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all cursor-pointer inline-block"
+              >
                 Request Demo
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -138,31 +138,76 @@ export default function GPSVisual() {
 
         {/* Central Hub Icon - Sharper glow & primary colors */}
         <motion.div
-          className="relative z-10 p-7 bg-primary text-primary-foreground rounded-full shadow-[0_0_50px_rgba(var(--primary-rgb),0.6)] border-2 border-white/30"
+          className="relative z-10 p-4 bg-white rounded-full shadow-[0_0_50px_rgba(var(--primary-rgb),0.4)] border-2 border-primary/20"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
+            width="44"
+            height="44"
+            viewBox="0 0 100 100"
             fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M13 7 9 3 5 7l4 4" />
-            <path d="m17 11 4 4-4 4-4-4" />
-            <path d="m4.5 15.5 2 2" />
-            <path d="m8.5 11.5 2 2" />
-            <path d="m13 15h2" />
-            <path d="M13 19h2" />
-            <path d="M9 15h2" />
-            <path d="M9 19h2" />
-            <path d="M12 12l-3 3" />
+            <defs>
+              <linearGradient id="satGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0EA5E9" />
+                <stop offset="100%" stopColor="#2563EB" />
+              </linearGradient>
+            </defs>
+            
+            {/* Satellite Solar Panels */}
+            <g transform="rotate(-45, 50, 50)">
+              {/* Top Panel */}
+              <rect x="35" y="10" width="30" height="15" rx="2" fill="url(#satGradient)" />
+              <line x1="45" y1="10" x2="45" y2="25" stroke="white" strokeWidth="0.5" opacity="0.3" />
+              <line x1="55" y1="10" x2="55" y2="25" stroke="white" strokeWidth="0.5" opacity="0.3" />
+              <line x1="35" y1="17.5" x2="65" y2="17.5" stroke="white" strokeWidth="0.5" opacity="0.3" />
+              
+              {/* Bottom Panel */}
+              <rect x="35" y="75" width="30" height="15" rx="2" fill="url(#satGradient)" />
+              <line x1="45" y1="75" x2="45" y2="90" stroke="white" strokeWidth="0.5" opacity="0.3" />
+              <line x1="55" y1="75" x2="55" y2="90" stroke="white" strokeWidth="0.5" opacity="0.3" />
+              <line x1="35" y1="82.5" x2="65" y2="82.5" stroke="white" strokeWidth="0.5" opacity="0.3" />
+              
+              {/* Connection Body */}
+              <rect x="47" y="25" width="6" height="50" fill="url(#satGradient)" />
+            </g>
+
+            {/* Orbiting Ring */}
+            <ellipse 
+              cx="50" cy="50" rx="40" ry="15" 
+              stroke="url(#satGradient)" 
+              strokeWidth="4" 
+              fill="none" 
+              transform="rotate(-20, 50, 50)"
+            />
+
+            {/* Globe */}
+            <circle cx="50" cy="50" r="22" fill="url(#satGradient)" />
+            
+            {/* Globe Landmasses (Stylized) */}
+            <path 
+              d="M40 35C42 38 48 35 52 40C56 45 52 50 60 55C68 60 65 65 60 68" 
+              stroke="white" 
+              strokeWidth="1.5" 
+              strokeLinecap="round" 
+              opacity="0.6" 
+            />
+            <path 
+              d="M35 50C38 52 42 48 45 55C48 62 45 65 50 68" 
+              stroke="white" 
+              strokeWidth="1" 
+              strokeLinecap="round" 
+              opacity="0.4" 
+            />
+
+            {/* Central Glow/Star Detail */}
+            <path 
+              d="M50 40L52 48L60 50L52 52L50 60L48 52L40 50L48 48Z" 
+              fill="white" 
+            />
           </svg>
         </motion.div>
 

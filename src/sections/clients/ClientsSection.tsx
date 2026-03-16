@@ -30,7 +30,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -39,6 +39,45 @@ const itemVariants = {
       type: "spring" as const,
       stiffness: 100,
       damping: 12,
+    },
+  },
+  hover: {
+    y: -12,
+    scale: 1.02,
+    transition: {
+      type: "spring" as const,
+      stiffness: 400,
+      damping: 17,
+    },
+  },
+  tap: {
+    scale: 0.98,
+    transition: {
+      type: "spring" as const,
+      stiffness: 400,
+      damping: 17,
+    },
+  },
+};
+
+const cardBorderVariants = {
+  hover: {
+    borderColor: "rgba(249, 115, 22, 0.4)",
+    boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
+    transition: {
+      duration: 0.3,
+      ease: "easeOut" as const,
+    },
+  },
+};
+
+const iconVariants = {
+  hover: {
+    rotate: [0, -5, 5, -5, 0],
+    scale: 1.1,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut" as const,
     },
   },
 };
@@ -50,6 +89,7 @@ export default function ClientsSection() {
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
       
       <div className="max-w-7xl mx-auto container-padding relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -79,11 +119,12 @@ export default function ClientsSection() {
           </motion.p>
         </div>
 
+        {/* Client Cards Grid with Enhanced Animations */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {clients.map((client, index) => {
@@ -91,19 +132,39 @@ export default function ClientsSection() {
             return (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                whileHover={{ 
-                  y: -8,
-                  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-                  borderColor: "rgba(var(--primary-rgb), 0.3)"
-                }}
-                className="bg-white border border-slate-200 rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-all duration-300 shadow-sm group"
+                variants={cardVariants}
+                whileHover="hover"
+                whileTap="tap"
+                custom={index}
+                className="group relative bg-white border-2 border-slate-200/60 rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
               >
-                <div className="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors duration-300">
-                  <Icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <h3 className="font-bold text-slate-900 mb-1">{client.name}</h3>
-                <p className="text-xs font-semibold text-primary/70 uppercase tracking-widest">{client.industry}</p>
+                {/* Border overlay with hover animation */}
+                <motion.div 
+                  variants={cardBorderVariants}
+                  className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{
+                    border: "2px solid transparent",
+                  }}
+                />
+                
+                {/* Icon with animation */}
+                <motion.div 
+                  variants={iconVariants}
+                  whileHover="hover"
+                  className="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors duration-300 relative z-10"
+                >
+                  <Icon className="w-8 h-8 text-primary" />
+                </motion.div>
+                
+                {/* Client Name */}
+                <h3 className="font-bold text-slate-900 mb-1 relative z-10 group-hover:text-primary transition-colors duration-300">
+                  {client.name}
+                </h3>
+                
+                {/* Industry */}
+                <p className="text-xs font-semibold text-primary/70 uppercase tracking-widest relative z-10">
+                  {client.industry}
+                </p>
               </motion.div>
             );
           })}

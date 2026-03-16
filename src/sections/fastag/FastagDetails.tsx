@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const fastagOptions = [
   {
@@ -49,6 +50,13 @@ const fastagOptions = [
 ];
 
 export default function FastagDetails() {
+  const router = useRouter();
+
+  // Function to handle navigation to contact section
+  const handleContactNavigation = () => {
+    router.push("/#contact");
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -269,6 +277,7 @@ export default function FastagDetails() {
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
+                    onClick={handleContactNavigation}
                     className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
                   >
                     {option.buttonText}

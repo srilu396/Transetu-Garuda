@@ -154,6 +154,11 @@ export default function GPSTrackingSection() {
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
   
+  // Function to handle navigation to contact section
+  const handleContactNavigation = () => {
+    router.push("/#contact");
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -413,7 +418,7 @@ export default function GPSTrackingSection() {
           solutionData={selectedSolutionData || undefined}
         />
 
-        {/* Custom Solution Callout - Updated to match reference style */}
+        {/* Custom Solution Callout - Updated with proper navigation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -438,10 +443,10 @@ export default function GPSTrackingSection() {
               <motion.button
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
+                  boxShadow: "0 15px 30px -5px rgba(249, 115, 22, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/#contact")}
+                onClick={handleContactNavigation}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
               >
                 Consult Our Experts
@@ -449,7 +454,7 @@ export default function GPSTrackingSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/#contact")}
+                onClick={handleContactNavigation}
                 className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
               >
                 Request Customization
