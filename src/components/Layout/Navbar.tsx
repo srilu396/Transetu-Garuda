@@ -35,12 +35,6 @@ export default function Navbar() {
               <a className="nav-link text-sm font-medium" href="/#why-us">
                 Why Us
               </a>
-              <a className="nav-link text-sm font-medium" href="/events">
-                Events
-              </a>
-              <a className="nav-link text-sm font-medium" href="/blog">
-                Blog
-              </a>
               <a className="nav-link text-sm font-medium" href="/#contact">
                 Contact
               </a>
