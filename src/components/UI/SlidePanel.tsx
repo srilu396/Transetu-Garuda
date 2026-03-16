@@ -11,10 +11,10 @@ import {
   Box,
   ChevronRight,
 } from "lucide-react";
-import { SolutionData } from "@/content/solutions";
-import { IndustryData } from "@/content/industries";
-import GPSDetailWrapper from "../GPSTrackingSolutions/GPSDetailWrapper";
-import IndustryDetailWrapper from "../Industries/IndustryDetailWrapper";
+import { SolutionData } from "@/sections/gps/data/gpsData";
+import { IndustryData } from "@/sections/industries/data/industriesData";
+import GPSDetailWrapper from "@/sections/gps/GPSTrackingDetails";
+import IndustryDetailWrapper from "@/sections/industries/IndustryDetails";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 

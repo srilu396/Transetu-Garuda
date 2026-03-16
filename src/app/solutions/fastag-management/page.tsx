@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
-import FASTagSolutionsGrid from "@/components/FASTag/FASTagSolutionsGrid";
+import FASTagSolutionsGrid from "@/sections/fastag/FASTagSolutionsGrid";
 
 export const metadata = {
   title: "FASTag Management Solutions | Garuda OM",

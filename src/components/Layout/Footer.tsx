@@ -224,7 +224,7 @@ export default function Footer() {
               <li>
                 <a
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#contact"
+                  href="#contact"
                 >
                   Help Center
                 </a>
