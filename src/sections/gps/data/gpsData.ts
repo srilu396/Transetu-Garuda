@@ -1,4 +1,3 @@
-import { fastag } from "./fastag";
 import { dashCamSystem } from "./dash-cam-system";
 import { gpsTrackingSolutions } from "./gps-tracking-solutions";
 import { iotForMining } from "./iot-for-mining";
@@ -8,11 +7,7 @@ import { temperatureMonitor } from "./temperature-monitor";
 import { padlockGps } from "./padlock-gps";
 import { photogrammetryServices } from "./photogrammetry-services";
 import { ais140Tracker } from "./ais-140-tracker";
-import { fastagRecharge } from "./fastag-recharge";
-import { fastagHistory } from "./fastag-history";
-import { fastagFleet } from "./fastag-fleet";
-import { fastagBalance } from "./fastag-balance";
-import { fastagReports } from "./fastag-reports";
+
 
 export type Feature = {
   title: string;
@@ -48,7 +43,6 @@ export interface SolutionData {
 }
 
 export const solutions: Record<string, SolutionData> = {
-  fastag,
   "dash-cam-system": dashCamSystem,
   "gps-tracking-solutions": gpsTrackingSolutions,
   "iot-for-mining": iotForMining,
@@ -58,9 +52,4 @@ export const solutions: Record<string, SolutionData> = {
   "padlock-gps": padlockGps,
   "photogrammetry-services": photogrammetryServices,
   "ais-140-tracker": ais140Tracker,
-  "fastag-recharge": fastagRecharge,
-  "fastag-history": fastagHistory,
-  "fastag-fleet": fastagFleet,
-  "fastag-balance": fastagBalance,
-  "fastag-reports": fastagReports,
 };

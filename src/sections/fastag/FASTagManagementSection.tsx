@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const fastagOptions = [
   {
@@ -49,6 +50,14 @@ const fastagOptions = [
 ];
 
 export default function FASTagManagement() {
+  const router = useRouter();
+
+  // Function to handle navigation to contact section
+  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/#contact");
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -89,8 +98,8 @@ export default function FASTagManagement() {
 
   const cardBorderVariants = {
     hover: {
-      borderColor: "rgba(249, 115, 22, 0.4)",
-      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
+      borderColor: "rgba(236, 57, 176, 0.4)", // Changed to #ec39b0
+      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(236, 57, 176, 0.1)", // Changed to #ec39b0
       transition: {
         duration: 0.3,
         ease: "easeOut" as const,
@@ -112,7 +121,7 @@ export default function FASTagManagement() {
   const badgeVariants = {
     hover: {
       scale: 1.05,
-      backgroundColor: "rgba(249, 115, 22, 0.15)",
+      backgroundColor: "rgba(236, 57, 176, 0.15)", // Changed to #ec39b0
       transition: {
         duration: 0.2,
       },
@@ -132,7 +141,7 @@ export default function FASTagManagement() {
   const buttonVariants = {
     hover: {
       scale: 1.05,
-      boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.3)",
+      boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.3)", // Kept original button shadow color
       transition: {
         type: "spring" as const,
         stiffness: 400,
@@ -269,7 +278,9 @@ export default function FASTagManagement() {
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
+                    onClick={handleContactNavigation}
+                    type="button"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-primary text-white text-sm font-bold transition-all duration-300 shadow-md cursor-pointer"
                   >
                     {option.buttonText}
                     <motion.svg

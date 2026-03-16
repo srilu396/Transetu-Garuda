@@ -5,6 +5,7 @@ import FeaturesSection from "@/sections/features/PowerfulFeatures";
 import IndustriesSection from "@/sections/industries/IndustriesSection";
 import AboutSection from "@/sections/about/AboutSection";
 import VideosSection from "@/sections/videos/Videos";
+import FastagSection from "@/sections/fastag/FastagSection";
 import Footer from "@/components/Layout/Footer";
 import FASTagManagement from "@/sections/fastag/FASTagManagementSection";
 import ContactSection from "@/sections/contact/ContactSection";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <FastagSection />
         <ProductsSection />
         <FASTagManagement />
         <FeaturesSection />

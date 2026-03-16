@@ -93,23 +93,6 @@ export default function AboutSection() {
     },
   };
 
-  // Card hover animation - subtle and professional
-  const cardHover = {
-    rest: {
-      y: 0,
-      boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-    },
-    hover: {
-      y: -4,
-      boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 25,
-      },
-    },
-  };
-
   // Icon hover animation - simple scale
   const iconHover = {
     rest: { scale: 1 },
@@ -218,7 +201,7 @@ export default function AboutSection() {
           </p>
         </motion.div>
 
-        {/* Stats Bar */}
+        {/* Stats Bar - Cards WITHOUT movement, only icon hover */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -234,12 +217,9 @@ export default function AboutSection() {
           ].map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                variants={cardHover}
-                initial="rest"
-                whileHover="hover"
-                className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"
+                className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100 transition-shadow hover:shadow-xl"
               >
                 <motion.div 
                   initial="rest"
@@ -251,7 +231,7 @@ export default function AboutSection() {
                 </motion.div>
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
-              </motion.div>
+              </div>
             );
           })}
         </motion.div>
@@ -406,12 +386,9 @@ export default function AboutSection() {
               className="grid grid-cols-2 gap-3 mb-6"
             >
               {expertiseAreas.slice(0, 2).map((item, idx) => (
-                <motion.div 
+                <div 
                   key={idx} 
-                  variants={cardHover}
-                  initial="rest"
-                  whileHover="hover"
-                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200 group"
+                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200 group hover:border-primary/30 hover:bg-primary/5 transition-all"
                 >
                   <motion.div
                     initial="rest"
@@ -422,7 +399,7 @@ export default function AboutSection() {
                     <item.icon className={`w-4 h-4 ${item.color} group-hover:text-white transition-colors`} />
                   </motion.div>
                   <span className="text-xs font-semibold text-gray-700">{item.label}</span>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
 
@@ -430,7 +407,7 @@ export default function AboutSection() {
               onClick={() => setShowMore(!showMore)}
               initial="rest"
               whileHover="hover"
-              variants={cardHover}
+              variants={iconHover}
               className="w-full flex items-center justify-center gap-2 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl text-primary font-medium transition-colors border border-primary/20"
             >
               <span>{showMore ? "Show Less" : "Read More About Us"}</span>
@@ -462,11 +439,8 @@ export default function AboutSection() {
               >
                 {/* Vision & Mission */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <motion.div 
-                    variants={cardHover}
-                    initial="rest"
-                    whileHover="hover"
-                    className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20"
+                  <div 
+                    className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20 hover:shadow-lg transition-all"
                   >
                     <motion.div 
                       initial="rest"
@@ -480,12 +454,9 @@ export default function AboutSection() {
                     <p className="text-sm text-gray-600 leading-relaxed">
                       To build a reliable and technology-driven logistics and freight forwarding business that connects global markets efficiently while ensuring transparency, safety, and customer satisfaction.
                     </p>
-                  </motion.div>
-                  <motion.div 
-                    variants={cardHover}
-                    initial="rest"
-                    whileHover="hover"
-                    className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20"
+                  </div>
+                  <div 
+                    className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20 hover:shadow-lg transition-all"
                   >
                     <motion.div 
                       initial="rest"
@@ -499,7 +470,7 @@ export default function AboutSection() {
                     <p className="text-sm text-gray-600 leading-relaxed">
                       To provide innovative logistics and transportation solutions by integrating modern tracking technologies, efficient supply chain management, and strong customer support to deliver goods safely and on time across domestic and international markets.
                     </p>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Achievements */}
@@ -514,12 +485,9 @@ export default function AboutSection() {
                       "Successfully handled freight forwarding operations including LCL and FCL import/export shipments",
                       "Built high-performing sales teams and achieved strong market growth during tenure at Paytm and BlackBuck",
                     ].map((item, idx) => (
-                      <motion.div 
+                      <div 
                         key={idx} 
-                        variants={cardHover}
-                        initial="rest"
-                        whileHover="hover"
-                        className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200"
+                        className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-primary/30 hover:bg-primary/5 transition-all"
                       >
                         <motion.div
                           initial="rest"
@@ -529,7 +497,7 @@ export default function AboutSection() {
                           <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                         </motion.div>
                         <span className="text-sm text-gray-600">{item}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -539,12 +507,9 @@ export default function AboutSection() {
                   <h5 className="font-bold mb-4">Core Expertise</h5>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {expertiseAreas.map((item, idx) => (
-                      <motion.div 
+                      <div 
                         key={idx} 
-                        variants={cardHover}
-                        initial="rest"
-                        whileHover="hover"
-                        className="p-4 bg-gray-50 rounded-xl border border-gray-200 group"
+                        className="p-4 bg-gray-50 rounded-xl border border-gray-200 group hover:border-primary/30 hover:shadow-md transition-all"
                       >
                         <motion.div 
                           initial="rest"
@@ -556,7 +521,7 @@ export default function AboutSection() {
                         </motion.div>
                         <p className="font-semibold text-sm mb-1 text-gray-800">{item.label}</p>
                         <p className="text-xs text-gray-600">{item.description}</p>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -583,9 +548,9 @@ export default function AboutSection() {
               return (
                 <Wrapper
                   key={idx}
-                  variants={cardHover}
                   initial="rest"
                   whileHover="hover"
+                  variants={iconHover}
                   className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-primary/30 hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col items-center justify-center min-h-[120px] min-w-[160px] px-6 py-5"
                   {...wrapperProps}
                 >

@@ -2,8 +2,17 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+  const router = useRouter();
+
+  // Function to handle navigation to contact section
+  const handleGetStarted = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/#contact");
+  };
+
   return (
     <section
       id="hero"
@@ -59,10 +68,12 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{
                   scale: 1.04,
-                  boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
+                  boxShadow: "0 15px 30px -5px rgba(249, 115, 22, 0.5)",
                 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-10 w-full sm:w-auto group shadow-2xl"
+                onClick={handleGetStarted}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-10 w-full sm:w-auto group shadow-2xl cursor-pointer"
               >
                 Get Started
                 <svg

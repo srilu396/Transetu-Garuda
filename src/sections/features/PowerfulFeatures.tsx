@@ -120,8 +120,8 @@ export default function FeaturesSection() {
 
   const cardShadowVariants = {
     hover: {
-      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.35), 0 0 0 1px rgba(249, 115, 22, 0.15)",
-      borderColor: "rgba(249, 115, 22, 0.2)",
+      boxShadow: `0 25px 50px -12px rgba(236, 57, 176, 0.35), 0 0 0 1px rgba(236, 57, 176, 0.15)`,
+      borderColor: "rgba(236, 57, 176, 0.2)",
       transition: {
         duration: 0.2,
         ease: "easeOut" as const,
@@ -131,7 +131,7 @@ export default function FeaturesSection() {
 
   const cardBorderVariants = {
     hover: {
-      borderColor: "rgba(249, 115, 22, 0.4)",
+      borderColor: "rgba(236, 57, 176, 0.4)",
       transition: {
         duration: 0.3,
         ease: "easeOut" as const,
@@ -227,26 +227,24 @@ export default function FeaturesSection() {
           </div>
 
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Navigation Arrows - Fixed (no hover animation) */}
-            <motion.button
+            {/* Navigation Arrows - Fixed (no hover animation, no movement) */}
+            <button
               onClick={() => scroll('left')}
               disabled={isAnimating}
-              whileTap={{ scale: 0.95 }}
               className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -left-4 sm:-left-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary text-white"
               aria-label="Previous slide"
             >
               <ChevronLeft className="h-6 w-6" />
-            </motion.button>
+            </button>
 
-            <motion.button
+            <button
               onClick={() => scroll('right')}
               disabled={isAnimating}
-              whileTap={{ scale: 0.95 }}
               className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -right-4 sm:-right-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary text-white"
               aria-label="Next slide"
             >
               <ChevronRight className="h-6 w-6" />
-            </motion.button>
+            </button>
 
             {/* Horizontal scrolling container - no scrollbar */}
             <div

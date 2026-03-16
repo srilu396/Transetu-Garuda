@@ -14,6 +14,8 @@ import {
   Shield,
 } from "lucide-react";
 import { solutions as solutionsData, SolutionData } from "@/sections/gps/data/gpsData";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const products = [
   {
@@ -29,6 +31,7 @@ const products = [
     ],
     link: "/solutions/dash-cam-system",
     slug: "dash-cam-system",
+    image: "/images/products/dash-cam.jpg", // Add your image path
   },
   {
     title: "Fleet GPS Tracker",
@@ -43,6 +46,7 @@ const products = [
     ],
     link: "/solutions/gps-tracking-solutions",
     slug: "gps-tracking-solutions",
+    image: "/images/products/fleet-tracker.jpg", // Add your image path
   },
   {
     title: "Mining Equipment Tracking",
@@ -57,6 +61,7 @@ const products = [
     ],
     link: "/solutions/iot-for-mining",
     slug: "iot-for-mining",
+    image: "/images/products/mining.jpg", // Add your image path
   },
   {
     title: "Fuel Monitoring System",
@@ -71,6 +76,7 @@ const products = [
     ],
     link: "/solutions/fuel-level-sensors",
     slug: "fuel-level-sensors",
+    image: "/images/products/fuel-monitor.jpg", // Add your image path
   },
   {
     title: "Video Telematics",
@@ -85,6 +91,7 @@ const products = [
     ],
     link: "/solutions/video-telematics",
     slug: "video-telematics",
+    image: "/images/products/video-telematics.jpg", // Add your image path
   },
   {
     title: "Temperature Monitoring",
@@ -99,6 +106,7 @@ const products = [
     ],
     link: "/solutions/temperature-monitor",
     slug: "temperature-monitor",
+    image: "/images/products/temperature.jpg", // Add your image path
   },
   {
     title: "GPS Smart Padlock",
@@ -109,6 +117,7 @@ const products = [
     features: ["Remote lock control", "GPS location tracking", "Tamper alerts"],
     link: "/solutions/padlock-gps",
     slug: "padlock-gps",
+    image: "/images/products/padlock.jpg", // Add your image path
   },
   {
     title: "Photogrammetry Services",
@@ -119,6 +128,7 @@ const products = [
     features: ["Survey data collection", "Precision mapping", "3D modeling"],
     link: "/solutions/photogrammetry-services",
     slug: "photogrammetry-services",
+    image: "/images/products/photogrammetry.jpg", // Add your image path
   },
   {
     title: "AIS 140 GPS Tracker",
@@ -133,13 +143,21 @@ const products = [
     ],
     link: "/solutions/ais-140-tracker",
     slug: "ais-140-tracker",
+    image: "/images/products/ais140.jpg", // Add your image path
   },
 ];
 
 export default function ProductsSection() {
+  const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
   
+  // Function to handle navigation to contact section
+  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/#contact");
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -182,8 +200,8 @@ export default function ProductsSection() {
 
   const cardBorderVariants = {
     hover: {
-      borderColor: "rgba(249, 115, 22, 0.4)",
-      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
+      borderColor: "rgba(236, 57, 176, 0.6)", // Increased opacity for more visibility
+      boxShadow: "0 0 0 3px rgba(236, 57, 176, 0.3), 0 30px 60px -15px rgba(236, 57, 176, 0.4)", // Full border glow
       transition: {
         duration: 0.3,
         ease: "easeOut" as const
@@ -205,7 +223,7 @@ export default function ProductsSection() {
   const badgeVariants = {
     hover: {
       scale: 1.05,
-      backgroundColor: "rgba(249, 115, 22, 0.15)",
+      backgroundColor: "rgba(236, 57, 176, 0.15)",
       transition: {
         duration: 0.2
       }
@@ -296,90 +314,116 @@ export default function ProductsSection() {
               whileTap="tap"
               viewport={{ once: true }}
               custom={index}
-              className="group relative flex flex-col h-full bg-white border-2 border-slate-200/60 rounded-2xl p-6 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+              className="group relative flex flex-col h-full bg-white border-2 border-slate-200/60 rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
             >
               <motion.div 
                 variants={cardBorderVariants}
-                className="absolute inset-0 rounded-2xl pointer-events-none"
+                className="absolute inset-0 rounded-2xl pointer-events-none z-10"
                 style={{
                   border: "2px solid transparent",
                 }}
               />
               
-              <div className="flex items-start justify-between mb-6">
+              {/* Image Section - Fixed to not move */}
+              <div className="relative w-full h-48 overflow-hidden bg-slate-100 shrink-0">
+                {product.image ? (
+                  <div className="w-full h-full">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
+                    {(() => {
+                      const Icon = product.icon;
+                      return <Icon className="w-16 h-16 text-primary/30" />;
+                    })()}
+                  </div>
+                )}
+                
+                {/* Icon Overlay - Animates independently */}
                 <motion.div 
                   variants={iconVariants}
-                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-primary text-white"
+                  className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg text-primary"
                 >
                   {(() => {
                     const Icon = product.icon;
-                    return <Icon className="w-6 h-6" />;
+                    return <Icon className="w-5 h-5" />;
                   })()}
                 </motion.div>
+
+                {/* Badge - Animates independently */}
                 <motion.div 
                   variants={badgeVariants}
-                  className="px-3 py-1.5 rounded-full bg-slate-100/80 text-primary font-bold text-[10px] uppercase tracking-wide border border-slate-200"
+                  className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-primary font-bold text-[10px] uppercase tracking-wide border border-slate-200 shadow-lg"
                 >
                   {product.badge}
                 </motion.div>
               </div>
 
-              <h3 className="text-xl font-bold mb-3 text-slate-900">
-                {product.title}
-              </h3>
-              <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6 flex-grow">
-                {product.description}
-              </p>
+              {/* Content Section */}
+              <div className="flex flex-col flex-grow p-6">
+                <h3 className="text-xl font-bold mb-3 text-slate-900">
+                  {product.title}
+                </h3>
+                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6 flex-grow">
+                  {product.description}
+                </p>
 
-              <div className="space-y-3 mb-8">
-                {product.features.map((feature, fIndex) => (
-                  <motion.div
-                    key={fIndex}
-                    custom={fIndex}
-                    variants={featureItemVariants}
-                    className="flex items-center text-sm text-slate-600 font-medium"
-                  >
-                    <div className="w-2 h-2 bg-primary rounded-full mr-2"></div>
-                    {feature}
-                  </motion.div>
-                ))}
-              </div>
+                <div className="space-y-3 mb-8">
+                  {product.features.map((feature, fIndex) => (
+                    <motion.div
+                      key={fIndex}
+                      custom={fIndex}
+                      variants={featureItemVariants}
+                      className="flex items-center text-sm text-slate-600 font-medium"
+                    >
+                      <div className="w-2 h-2 bg-primary rounded-full mr-2"></div>
+                      {feature}
+                    </motion.div>
+                  ))}
+                </div>
 
-              <div className="mt-auto">
-                <motion.button
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  onClick={() => {
-                    setSelectedProduct(product);
-                    if (product.slug && solutionsData[product.slug]) {
-                      setSelectedSolutionData(solutionsData[product.slug]);
-                    } else {
-                      setSelectedSolutionData(null);
-                    }
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
-                >
-                  Learn More
-                  <motion.svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-arrow-right"
-                    animate={{ x: 0 }}
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
+                <div className="mt-auto">
+                  <motion.button
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() => {
+                      setSelectedProduct(product);
+                      if (product.slug && solutionsData[product.slug]) {
+                        setSelectedSolutionData(solutionsData[product.slug]);
+                      } else {
+                        setSelectedSolutionData(null);
+                      }
+                    }}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
                   >
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </motion.svg>
-                </motion.button>
+                    Learn More
+                    <motion.svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right"
+                      animate={{ x: 0 }}
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
+                    >
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </motion.svg>
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -399,7 +443,7 @@ export default function ProductsSection() {
           solutionData={selectedSolutionData || undefined}
         />
 
-        {/* Custom Solution Callout - Updated to match reference style */}
+        {/* Custom Solution Callout - Updated with navigation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -424,17 +468,21 @@ export default function ProductsSection() {
               <motion.button
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
+                  boxShadow: "0 15px 30px -5px rgba(249, 115, 22, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm cursor-pointer"
               >
                 Consult Our Experts
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
               >
                 Request Customization
               </motion.button>

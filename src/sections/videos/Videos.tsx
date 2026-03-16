@@ -1,72 +1,102 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Play, Fuel, Gauge, Video } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function VideosSection() {
+  const router = useRouter();
+
+  // Function to handle navigation to contact section
+  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/#contact");
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (index: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        mass: 1
-      }
-    },
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1] as const,
+        delay: index * 0.1,
+      },
+    }),
     hover: {
-      y: -12,
+      y: -8,
       scale: 1.02,
-      boxShadow: "0 30px 60px -15px rgba(0,119,182,0.25)",
-      borderColor: "rgba(0,119,182,0.2)",
+      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+      borderColor: "rgba(236, 57, 176, 0.3)", // Changed to #ec39b0
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 20
       }
     }
   };
 
+  const cardBorderVariants = {
+    hover: {
+      borderColor: "rgba(236, 57, 176, 0.4)", // Changed to #ec39b0
+      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(236, 57, 176, 0.1)", // Changed to #ec39b0
+      transition: {
+        duration: 0.3,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   const thumbnailVariants = {
     hover: {
-      scale: 1.08,
+      scale: 1.05,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.4,
+        ease: "easeOut" as const
       }
     }
   };
 
   const playButtonVariants = {
     hover: {
-      scale: 1.15,
+      scale: 1.1,
       backgroundColor: "rgba(255,255,255,1)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 15
       }
     }
   };
 
+  const iconVariants = {
+    hover: {
+      scale: 1.1,
+      rotate: [0, -3, 3, -3, 0],
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut" as const,
+      },
+    },
+  };
+
   const videos = [
     {
       title: "Fuel Monitoring",
       description:
-        "Fuel monitoring system mostly provides valuable insights into fuel usage, drainage, and refilling. Fleet managers can easily access real-time data on fuel filling & drainage, along with other relevant information.",
+        "Fuel monitoring system provides valuable insights into fuel usage, drainage, and refilling. Fleet managers can easily access real-time data on fuel filling & drainage.",
       videoUrl: "https://youtu.be/4g7YCB2ywXc",
       thumbnail: "https://uffizio.com/wp-content/uploads/sites/2/2025/12/fuel-mgmt-video.webp",
       icon: Fuel,
@@ -76,17 +106,17 @@ export default function VideosSection() {
     {
       title: "Tire Management",
       description:
-        "Surely, access both real-time and historical tire pressure data for your entire fleet. Additionally, you can set up alerts for extremely low tire pressures, helping you steer clear of unsafe driving conditions.",
+        "Access both real-time and historical tire pressure data for your entire fleet. Set up alerts for extremely low tire pressures to avoid unsafe driving conditions.",
       videoUrl: "https://youtu.be/4g7YCB2ywXc",
       thumbnail: "https://uffizio.com/wp-content/uploads/sites/2/2025/12/tire-mgmt-video.webp",
       icon: Gauge,
-      iconBg: "bg-gradient-to-br from-primary/15 to-accent/15",
-      iconColor: "text-primary",
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-600",
     },
     {
       title: "Video Telematics",
       description:
-        "Video telematics certainly goes beyond the capabilities of GPS tracking systems. Moreover, with our video monitoring solutions, you can experience the added benefits that set it apart from basic tracking.",
+        "Video telematics goes beyond GPS tracking systems. With our video monitoring solutions, you can experience added benefits that set it apart from basic tracking.",
       videoUrl: "https://youtu.be/n9XE6P7nWI0",
       thumbnail: "https://uffizio.com/wp-content/uploads/sites/2/2025/12/video-telematics-video.webp",
       icon: Video,
@@ -96,129 +126,144 @@ export default function VideosSection() {
   ];
 
   return (
-    <section id="videos" className="py-24 bg-[#fffbf3] relative overflow-hidden" aria-label="Demo Videos">
-      {/* Enhanced Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute top-20 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -mr-48"
-        />
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          className="absolute bottom-20 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -ml-48"
-        />
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ duration: 2 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"
-        />
+    <section
+      id="videos"
+      className="relative py-24 overflow-hidden"
+      style={{
+        backgroundColor: "#fff9ec",
+        backgroundImage:
+          "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,249,236,1) 45%, rgba(255,244,220,1) 100%), radial-gradient(900px 380px at 22% 18%, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0) 60%), radial-gradient(900px 380px at 78% 22%, rgba(236,72,153,0.08) 0%, rgba(236,72,153,0) 62%)",
+      }}
+      aria-label="Demo Videos"
+    >
+      {/* Soft lighting elements */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-[58%] h-[420px] w-[980px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/50 blur-3xl" />
+        <div className="absolute left-[18%] top-[65%] h-[340px] w-[340px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-[14%] top-[62%] h-[320px] w-[320px] rounded-full bg-accent/10 blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
-        <div className="text-center mb-16">
+        {/* Section Header */}
+        <div className="text-center mb-16 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
+          >
+            Watch Demos
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl lg:text-5xl font-black mb-6 tracking-tight text-slate-900"
+            className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900"
           >
-            WHY CHOOSE OUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">GPS FLEET MANAGEMENT SYSTEM?</span>
+            Watch <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Platform Demo</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
+            className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed"
           >
             With our advanced fleet vehicle tracking systems you have complete control over your fleet and their activities.
           </motion.p>
         </div>
 
+        {/* Video Cards Grid - Properly arranged */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {videos.map((video, index) => {
             const IconComponent = video.icon;
             return (
               <motion.div
                 key={index}
+                custom={index}
                 variants={cardVariants}
                 whileHover="hover"
-                className="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden group flex flex-col h-full"
+                className="group relative bg-white rounded-2xl border-2 border-slate-200/60 overflow-hidden flex flex-col h-full shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
               >
-                {/* Icon at the top of the card */}
-                <div className="p-8 pb-0">
+                <motion.div
+                  variants={cardBorderVariants}
+                  className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{
+                    border: "2px solid transparent",
+                  }}
+                />
+
+                {/* Icon */}
+                <div className="p-6 pb-0">
                   <motion.div 
-                    className={`w-16 h-16 ${video.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                    whileHover={{ rotate: [0, -5, 5, -5, 0] }}
-                    transition={{ duration: 0.5 }}
+                    variants={iconVariants}
+                    whileHover="hover"
+                    className={`w-14 h-14 ${video.iconBg} rounded-xl flex items-center justify-center`}
                   >
-                    <IconComponent className={`w-8 h-8 ${video.iconColor}`} />
+                    <IconComponent className={`w-7 h-7 ${video.iconColor}`} />
                   </motion.div>
                 </div>
 
-                {/* Thumbnail with Enhanced Play Button Overlay */}
-                <motion.a 
-                  href={video.videoUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="relative aspect-video block overflow-hidden cursor-pointer mx-8"
-                  whileHover="hover"
-                >
-                  <motion.img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    variants={thumbnailVariants}
-                    className="w-full h-full object-cover rounded-xl"
-                  />
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-center justify-center rounded-xl"
-                    initial={{ opacity: 0.8 }}
-                    whileHover={{ opacity: 1 }}
+                {/* Thumbnail */}
+                <div className="px-6 pt-4">
+                  <motion.a 
+                    href={video.videoUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="relative aspect-video block overflow-hidden rounded-xl cursor-pointer"
+                    whileHover="hover"
                   >
+                    <motion.img
+                      src={video.thumbnail}
+                      alt={video.title}
+                      variants={thumbnailVariants}
+                      className="w-full h-full object-cover"
+                    />
                     <motion.div 
-                      variants={playButtonVariants}
-                      className="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl"
+                      className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex items-center justify-center rounded-xl"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
                     >
-                      <Play className="w-5 h-5 text-primary ml-1" fill="currentColor" />
+                      <motion.div 
+                        variants={playButtonVariants}
+                        className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl"
+                      >
+                        <Play className="w-5 h-5 text-primary ml-1" fill="currentColor" />
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                </motion.a>
+                  </motion.a>
+                </div>
 
-                {/* Card Content */}
-                <div className="p-8 flex flex-col flex-grow">
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
                   <motion.h3 
-                    className="text-2xl font-black mb-4 text-slate-900 leading-tight"
-                    whileHover={{ x: 5 }}
+                    className="text-xl font-bold mb-3 text-slate-900"
+                    whileHover={{ x: 3 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     {video.title}
                   </motion.h3>
-                  <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-4">
                     {video.description}
                   </p>
                   
                   {/* Explore Now link */}
-                  <div className="mt-auto">
+                  <div className="mt-auto pt-2">
                     <motion.a
                       href={video.videoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-primary font-bold text-sm tracking-wide group/link"
-                      whileHover={{ x: 5 }}
+                      className="inline-flex items-center text-primary font-semibold text-sm group/link"
+                      whileHover={{ x: 3 }}
                     >
-                      Explore now
+                      Watch Video
                       <motion.svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -229,7 +274,7 @@ export default function VideosSection() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="ml-2 group-hover/link:translate-x-1 transition-transform"
+                        className="ml-1.5 group-hover/link:translate-x-1 transition-transform"
                       >
                         <path d="M5 12h14"></path>
                         <path d="m12 5 7 7-7 7"></path>
@@ -242,7 +287,7 @@ export default function VideosSection() {
           })}
         </motion.div>
 
-        {/* Redesigned CTA Section - Matching Reference Style */}
+        {/* CTA Section - Updated with navigation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -265,17 +310,21 @@ export default function VideosSection() {
               <motion.button
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(var(--primary-rgb), 0.5)",
+                  boxShadow: "0 15px 30px -5px rgba(249, 115, 22, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm cursor-pointer"
               >
                 Schedule Live Demo
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
               >
                 Talk to Sales
               </motion.button>
