@@ -22,7 +22,6 @@ import {
   ShieldCheck,
   Search
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 // Icon mapping to handle dynamic icon rendering from strings

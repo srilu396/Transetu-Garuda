@@ -3,7 +3,6 @@ import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import { IndustryData } from "./data/industriesData";
 import { CheckCircle, ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface IndustryDetailWrapperProps {
