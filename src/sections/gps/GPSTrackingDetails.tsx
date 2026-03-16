@@ -21,9 +21,10 @@ export default function GPSDetailWrapper({
   showNavbarFooter = true,
   onBack,
   category = "Fleet Solution",
-  icon: Icon = Satellite,
+  icon: PropIcon,
 }: GPSDetailWrapperProps) {
   const router = useRouter();
+  const Icon = PropIcon || data.icon || Satellite;
 
   const handleBack = () => {
     if (onBack) {
@@ -91,6 +92,48 @@ export default function GPSDetailWrapper({
               </div>
             </div>
           </div>
+
+          {/* Detailed Description Sections */}
+          {data.detailedDescription && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-2xl font-bold text-primary mb-3">
+                    What is {data.title}?
+                  </h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {data.detailedDescription.what}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-primary mb-3">
+                    How it Works
+                  </h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {data.detailedDescription.how}
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-2xl font-bold text-primary mb-3">
+                    Who is it for?
+                  </h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {data.detailedDescription.who}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-primary mb-3">
+                    Why choose this solution?
+                  </h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {data.detailedDescription.why}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Benefits Cards (Mimicking Stats) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -231,6 +274,18 @@ export default function GPSDetailWrapper({
               </div>
             </div>
           </div>
+
+          {/* Secondary Image Section */}
+          {data.secondaryImageUrl && (
+            <div className="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden mb-24 shadow-2xl border border-border/50">
+              <img
+                src={data.secondaryImageUrl}
+                alt={`${data.title} technology`}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            </div>
+          )}
 
           {/* Contact CTA - Moved further down with more spacing */}
           <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">

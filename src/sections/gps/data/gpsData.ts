@@ -8,7 +8,6 @@ import { padlockGps } from "./padlock-gps";
 import { photogrammetryServices } from "./photogrammetry-services";
 import { ais140Tracker } from "./ais-140-tracker";
 
-
 export type Feature = {
   title: string;
   description: string;
@@ -29,8 +28,15 @@ export type Benefit = {
 export interface SolutionData {
   title: string;
   tagline: string;
+  icon?: React.ElementType;
   bgColor: string;
   overview: string;
+  detailedDescription?: {
+    what: string;
+    how: string;
+    who: string;
+    why: string;
+  };
   features: Feature[];
   useCases: UseCase[];
   benefits: Benefit[];
@@ -40,6 +46,7 @@ export interface SolutionData {
     description: string;
   };
   imageUrl?: string;
+  secondaryImageUrl?: string;
 }
 
 export const solutions: Record<string, SolutionData> = {
