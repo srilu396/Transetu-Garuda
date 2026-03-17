@@ -326,7 +326,7 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-white hover:text-white/80 transition-colors text-sm font-medium"
-                  href="/#fastag-management"
+                  href="/industries/fastag-fleet-management"
                 >
                   FASTag Management
                 </Link>
@@ -334,7 +334,7 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-white hover:text-white/80 transition-colors text-sm font-medium"
-                  href="/solutions/ais-140-tracker"
+                  href="/industries/ais-140-compliance"
                 >
                   AIS 140 Compliance
                 </Link>
