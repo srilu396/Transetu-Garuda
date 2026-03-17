@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   Target,
   Eye,
@@ -9,6 +10,8 @@ import {
   GraduationCap,
   Truck,
   Users,
+  Globe,
+  Package,
   Clock,
   CheckCircle,
   Phone,
@@ -30,14 +33,14 @@ export default function AboutSection() {
   // Animation Variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1] as const
-      }
-    }
+        ease: [0.25, 0.1, 0.25, 1] as const,
+      },
+    },
   };
 
   const staggerContainer = {
@@ -51,43 +54,31 @@ export default function AboutSection() {
     },
   };
 
-  const scaleIn = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { 
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
 
   const slideInLeft = {
     hidden: { opacity: 0, x: -50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { 
+      transition: {
         type: "spring" as const,
         stiffness: 80,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   const slideInRight = {
     hidden: { opacity: 0, x: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
-      transition: { 
+      transition: {
         type: "spring" as const,
         stiffness: 80,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
 
   const floatAnimation = {
@@ -97,39 +88,22 @@ export default function AboutSection() {
       transition: {
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut" as const
-      }
-    }
-  };
-
-  // Card hover animation - subtle and professional
-  const cardHover = {
-    rest: { 
-      y: 0,
-      boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+        ease: "easeInOut" as const,
+      },
     },
-    hover: { 
-      y: -4,
-      boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 25
-      }
-    }
   };
 
   // Icon hover animation - simple scale
   const iconHover = {
     rest: { scale: 1 },
-    hover: { 
+    hover: {
       scale: 1.1,
       transition: {
         type: "spring" as const,
         stiffness: 500,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const expertiseAreas = [
@@ -163,7 +137,15 @@ export default function AboutSection() {
     },
   ];
 
-
+  const clientLogos = [
+    { name: "ONGC", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/ongc.png", website: "https://www.ongcindia.com/" },
+    { name: "Maha Cement", icon: <Package className="w-5 h-5" />, logo: "/images/clients/maha-cement.png", website: "https://www.mahacement.com/" },
+    { name: "Maersk", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/maersk.png", website: "https://www.maersk.com/" },
+    { name: "TS Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/telangana-mining.png", website: "https://tgmdc.telangana.gov.in/" },
+    { name: "AP Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-govt.png", website: "https://www.mines.ap.gov.in/miningportal/" },
+    { name: "AP Transportation", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-transport.png", website: "https://www.aptransport.org/" },
+    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/singareni.png", website: "https://scclmines.com/" },
+  ];
 
   return (
     <section id="about" className="py-24 relative overflow-hidden" style={{ backgroundColor: '#f8fafc' }}>
@@ -189,7 +171,7 @@ export default function AboutSection() {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut" as const,
         }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
@@ -203,14 +185,10 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial="rest"
-            whileHover="hover"
-            variants={iconHover}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
-          >
+          {/* Fixed badge - removed hover animation */}
+          <div className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6">
             Why Choose Us
-          </motion.div>
+          </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900">
             About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Garuda OM</span>
           </h2>
@@ -219,7 +197,7 @@ export default function AboutSection() {
           </p>
         </motion.div>
 
-        {/* Stats Bar */}
+        {/* Stats Bar - Cards WITHOUT movement, only icon hover */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -235,12 +213,9 @@ export default function AboutSection() {
           ].map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                variants={scaleIn}
-                initial="rest"
-                whileHover="hover"
-                className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"
+                className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100 transition-shadow hover:shadow-xl"
               >
                 <motion.div 
                   initial="rest"
@@ -252,7 +227,7 @@ export default function AboutSection() {
                 </motion.div>
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
-              </motion.div>
+              </div>
             );
           })}
         </motion.div>
@@ -265,7 +240,6 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            whileHover="hover"
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden group"
           >
             <motion.div
@@ -283,13 +257,19 @@ export default function AboutSection() {
             <div className="relative z-10">
               <div className="flex items-start gap-8 mb-6">
                 {/* Founder Image */}
-                <motion.div 
+                <motion.div
                   initial="rest"
                   whileHover="hover"
                   variants={iconHover}
-                  className="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-4xl font-bold text-white shadow-lg shrink-0 overflow-hidden"
+                  className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-lg shrink-0 overflow-hidden border-2 border-gray-100"
                 >
-                  <span>PS</span>
+                  <Image
+                    src="/images/founder-sudhakar.png"
+                    alt="Polimetla Sudhakar - Founder & Business Strategist"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
                 <div>
                   <motion.h3 
@@ -370,7 +350,6 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            whileHover="hover"
             className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl"
           >
             <motion.div 
@@ -403,23 +382,20 @@ export default function AboutSection() {
               className="grid grid-cols-2 gap-3 mb-6"
             >
               {expertiseAreas.slice(0, 2).map((item, idx) => (
-                <motion.div 
+                <div 
                   key={idx} 
-                  variants={scaleIn}
-                  initial="rest"
-                  whileHover="hover"
-                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200"
+                  className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200 group hover:border-primary/30 hover:bg-primary/5 transition-all"
                 >
                   <motion.div
                     initial="rest"
                     whileHover="hover"
                     variants={iconHover}
-                    className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center`}
+                    className={`w-8 h-8 ${item.bgColor} rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors`}
                   >
-                    <item.icon className={`w-4 h-4 ${item.color}`} />
+                    <item.icon className={`w-4 h-4 ${item.color} group-hover:text-white transition-colors`} />
                   </motion.div>
                   <span className="text-xs font-semibold text-gray-700">{item.label}</span>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
 
@@ -427,7 +403,7 @@ export default function AboutSection() {
               onClick={() => setShowMore(!showMore)}
               initial="rest"
               whileHover="hover"
-              variants={cardHover}
+              variants={iconHover}
               className="w-full flex items-center justify-center gap-2 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl text-primary font-medium transition-colors border border-primary/20"
             >
               <span>{showMore ? "Show Less" : "Read More About Us"}</span>
@@ -448,7 +424,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }}
               className="overflow-hidden mb-12"
             >
               <motion.div 
@@ -459,11 +435,8 @@ export default function AboutSection() {
               >
                 {/* Vision & Mission */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <motion.div 
-                    variants={scaleIn}
-                    initial="rest"
-                    whileHover="hover"
-                    className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20"
+                  <div 
+                    className="p-6 bg-blue-500/5 rounded-2xl border border-blue-500/20 hover:shadow-lg transition-all"
                   >
                     <motion.div 
                       initial="rest"
@@ -477,12 +450,9 @@ export default function AboutSection() {
                     <p className="text-sm text-gray-600 leading-relaxed">
                       To build a reliable and technology-driven logistics and freight forwarding business that connects global markets efficiently while ensuring transparency, safety, and customer satisfaction.
                     </p>
-                  </motion.div>
-                  <motion.div 
-                    variants={scaleIn}
-                    initial="rest"
-                    whileHover="hover"
-                    className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20"
+                  </div>
+                  <div 
+                    className="p-6 bg-green-500/5 rounded-2xl border border-green-500/20 hover:shadow-lg transition-all"
                   >
                     <motion.div 
                       initial="rest"
@@ -496,7 +466,7 @@ export default function AboutSection() {
                     <p className="text-sm text-gray-600 leading-relaxed">
                       To provide innovative logistics and transportation solutions by integrating modern tracking technologies, efficient supply chain management, and strong customer support to deliver goods safely and on time across domestic and international markets.
                     </p>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Achievements */}
@@ -511,12 +481,9 @@ export default function AboutSection() {
                       "Successfully handled freight forwarding operations including LCL and FCL import/export shipments",
                       "Built high-performing sales teams and achieved strong market growth during tenure at Paytm and BlackBuck",
                     ].map((item, idx) => (
-                      <motion.div 
+                      <div 
                         key={idx} 
-                        variants={scaleIn}
-                        initial="rest"
-                        whileHover="hover"
-                        className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200"
+                        className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-primary/30 hover:bg-primary/5 transition-all"
                       >
                         <motion.div
                           initial="rest"
@@ -526,7 +493,7 @@ export default function AboutSection() {
                           <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                         </motion.div>
                         <span className="text-sm text-gray-600">{item}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -536,12 +503,9 @@ export default function AboutSection() {
                   <h5 className="font-bold mb-4">Core Expertise</h5>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {expertiseAreas.map((item, idx) => (
-                      <motion.div 
+                      <div 
                         key={idx} 
-                        variants={scaleIn}
-                        initial="rest"
-                        whileHover="hover"
-                        className="p-4 bg-gray-50 rounded-xl border border-gray-200 group"
+                        className="p-4 bg-gray-50 rounded-xl border border-gray-200 group hover:border-primary/30 hover:shadow-md transition-all"
                       >
                         <motion.div 
                           initial="rest"
@@ -553,7 +517,7 @@ export default function AboutSection() {
                         </motion.div>
                         <p className="font-semibold text-sm mb-1 text-gray-800">{item.label}</p>
                         <p className="text-xs text-gray-600">{item.description}</p>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -562,6 +526,57 @@ export default function AboutSection() {
           )}
         </AnimatePresence>
 
+        {/* Client Organizations */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h3 className="text-2xl font-bold mb-8 text-gray-900">Trusted By Industry Leaders</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {clientLogos.map((client, idx) => {
+              const Wrapper = client.website ? motion.a : motion.div;
+              const wrapperProps = client.website
+                ? { href: client.website, target: "_blank", rel: "noopener noreferrer" }
+                : {};
+              return (
+                <Wrapper
+                  key={idx}
+                  initial="rest"
+                  whileHover="hover"
+                  variants={iconHover}
+                  className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-primary/30 hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col items-center justify-center min-h-[120px] min-w-[160px] px-6 py-5"
+                  {...wrapperProps}
+                >
+                  {client.logo ? (
+                    <div className="relative w-full min-h-[72px] flex items-center justify-center flex-1">
+                      <Image
+                        src={client.logo}
+                        alt={client.name}
+                        width={280}
+                        height={80}
+                        unoptimized
+                        className="object-contain object-center w-full max-w-[200px] h-14 sm:h-16"
+                      />
+                    </div>
+                  ) : (
+                    <motion.div
+                      initial="rest"
+                      whileHover="hover"
+                      variants={iconHover}
+                      className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 mb-1"
+                    >
+                      {client.icon}
+                    </motion.div>
+                  )}
+                  <span className="font-semibold text-gray-800 text-sm text-center mt-2 leading-tight">{client.name}</span>
+                </Wrapper>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

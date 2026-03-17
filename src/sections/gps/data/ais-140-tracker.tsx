@@ -1,11 +1,55 @@
-import React from 'react';
-
-const AIS140Tracker = () => {
-    return (
-        <div>
-            <h1>AIS 140 Tracker</h1>
-        </div>
-    );
+export const ais140Tracker = {
+  title: "AIS 140 Tracker",
+  tagline: "Government-certified safety for commercial vehicles",
+  icon: "Satellite",
+  bgColor: "bg-orange-600",
+  overview: "Our AIS 140 certified trackers meet the highest regulatory standards. Featuring dual-network connectivity and an emergency panic button, it ensures compliance and passenger safety.",
+  features: [
+    {
+      title: "Panic Button (SOS)",
+      description: "Integrated emergency button for immediate driver/passenger assistance.",
+      icon: "Bell"
+    },
+    {
+      title: "Dual SIM Support",
+      description: "Redundant network connectivity for zero-blind-spot tracking.",
+      icon: "Zap"
+    },
+    {
+      title: "Internal Battery",
+      description: "Emergency backup battery to maintain tracking during power cuts.",
+      icon: "Layers"
+    }
+  ],
+  useCases: [
+    {
+      title: "Public Transport",
+      description: "Mandatory compliance for buses and taxis in many regions."
+    },
+    {
+      title: "Hazardous Goods",
+      description: "Enhanced safety monitoring for fuel and chemical tankers."
+    }
+  ],
+  benefits: [
+    {
+      title: "Regulatory Compliance",
+      description: "Obtain fitness certificates with certified hardware.",
+      icon: "ShieldCheck"
+    },
+    {
+      title: "Passenger Safety",
+      description: "Real-time SOS monitoring through government portals.",
+      icon: "MapPin"
+    },
+    {
+      title: "Fleet Reliability",
+      description: "Industrial-grade hardware designed for 24/7 operation.",
+      icon: "BarChart3"
+    }
+  ],
+  seoMeta: {
+    title: "AIS 140 Certified GPS Trackers & SOS Systems",
+    description: "Mandatory government-approved tracking devices with panic buttons for public transport."
+  }
 };
-
-export default AIS140Tracker;

@@ -26,14 +26,8 @@ export default function Navbar() {
               <a className="nav-link text-sm font-medium" href="/#about">
                 About Us
               </a>
-              <a className="nav-link text-sm font-medium" href="/#solutions">
-                Solutions
-              </a>
               <a className="nav-link text-sm font-medium" href="/#products">
                 Products
-              </a>
-              <a className="nav-link text-sm font-medium" href="/#fastag-management">
-                FASTag
               </a>
               <a className="nav-link text-sm font-medium" href="/#industries">
                 Industries
@@ -41,10 +35,7 @@ export default function Navbar() {
               <a className="nav-link text-sm font-medium" href="/#features">
                 Why Us
               </a>
-              <a className="nav-link text-sm font-medium" href="/#videos">
-                Videos
-              </a>
-              <a className="nav-link text-sm font-medium" href="/#contact">
+              <a className="nav-link text-sm font-medium" href="#contact">
                 Contact
               </a>
               <a 

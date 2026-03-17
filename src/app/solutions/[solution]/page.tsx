@@ -1,22 +1,19 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { gpsSolutions } from "../../../sections/gps/data/gpsData";
-import { fastagSolutions } from "../../../sections/fastag/data/fastagData";
-import GPSTrackingDetails from "../../../sections/gps/GPSTrackingDetails";
+import { solutions } from "@/sections/gps/data/gpsData";
+import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
 
-const solutions = { ...gpsSolutions, ...fastagSolutions };
+export async function generateMetadata({
+  params,
+}: {
+  params: { solution: string };
+}): Promise<Metadata> {
+  const { solution: slug } = params;
+  const solution = solutions[slug];
 
-
-export async function generateMetadata(
-  { params }: { params: Promise<{ solution: string }> },
-): Promise<Metadata> {
-  const { solution: solutionSlug } = await params;
-  const solution = solutions[solutionSlug];
-
-  if (!solution || !solution.seoMeta) {
+  if (!solution) {
     return {
-      title: "Solution Not Found | Garuda OM",
-      description: "The requested solution could not be found.",
+      title: "Solution Not Found | Garuda",
     };
   }
 
@@ -26,23 +23,23 @@ export async function generateMetadata(
   };
 }
 
-export default async function SolutionPage({
+export default function SolutionPage({
   params,
 }: {
-  params: Promise<{ solution: string }>; // Fix for Next.js 15 route params
+  params: { solution: string };
 }) {
-  const { solution: solutionSlug } = await params;
-  const solution = solutions[solutionSlug];
+  const { solution: slug } = params;
+  const solution = solutions[slug];
 
   if (!solution) {
     notFound();
   }
 
-  return <GPSTrackingDetails data={solution} />;
+  return <GPSTrackingDetails data={solution} icon={solution.icon as string} />;
 }
 
 export function generateStaticParams() {
-  return Object.keys(solutions).map((solution) => ({
-    solution,
+  return Object.keys(solutions).map((slug) => ({
+    solution: slug,
   }));
 }

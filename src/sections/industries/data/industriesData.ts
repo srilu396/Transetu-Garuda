@@ -1,4 +1,3 @@
-import { LucideIcon } from "lucide-react";
 import { logisticsTransportation } from "./logistics-transportation";
 import { schoolFleetSafety } from "./school-fleet-safety";
 import { miningOperations } from "./mining-operations";
@@ -25,14 +24,14 @@ import { oilAndGasOperations } from "./oil-and-gas-operations";
 export interface IndustryStat {
   label: string;
   value: string;
-  icon: LucideIcon;
+  icon: string;
 }
 
 export interface IndustryData {
   slug: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: string;
   features: string[];
   category: string;
   detailedDescription: string;

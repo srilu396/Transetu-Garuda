@@ -1,11 +1,10 @@
-import { Shield, CheckCircle, Gauge } from "lucide-react";
 import { IndustryData } from "./industriesData";
 
 export const ais140Compliance: IndustryData = {
   slug: "ais-140-compliance",
   title: "AIS 140 Compliance",
   description: "Meet government regulations with AIS 140 certified GPS trackers for commercial vehicles, including emergency panic buttons and vehicle diagnostics.",
-  icon: Shield,
+  icon: "Shield",
   features: [
     "AIS 140 certification",
     "Emergency panic button",
@@ -28,8 +27,8 @@ export const ais140Compliance: IndustryData = {
   ],
   imageUrl: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   stats: [
-    { label: "Compliance Rate", value: "100%", icon: CheckCircle },
-    { label: "Audit Success", value: "100%", icon: Shield },
-    { label: "Diagnostic Accuracy", value: "99%", icon: Gauge },
+    { label: "Compliance Rate", value: "100%", icon: "CheckCircle" },
+    { label: "Audit Success", value: "100%", icon: "Shield" },
+    { label: "Diagnostic Accuracy", value: "99%", icon: "Gauge" },
   ],
 };

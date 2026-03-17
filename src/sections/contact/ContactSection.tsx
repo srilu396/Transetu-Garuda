@@ -136,8 +136,28 @@ export default function ContactSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Left Side - Contact Information */}
+        {/* Section Titles - Aligned horizontally */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-bold text-slate-900"
+          >
+            Contact Information
+          </motion.h3>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-bold text-slate-900"
+          >
+            Send Us a Message
+          </motion.h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Side - Contact Information Cards */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -145,29 +165,26 @@ export default function ContactSection() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-slate-900 mb-8">Contact Information</h3>
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-5 transition-all duration-300 hover:shadow-md group"
-                >
-                  <div className={`w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border ${info.iconBg} transition-colors duration-300`}>
-                    <info.icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 mb-1">{info.title}</h4>
-                    <p className="text-slate-900 font-semibold">{info.value}</p>
-                    {info.subValue && <p className="text-slate-900 font-semibold">{info.subValue}</p>}
-                    {info.description && <p className="text-sm text-slate-500 font-medium">{info.description}</p>}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {contactInfo.map((info, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-5 transition-all duration-300 hover:shadow-md group"
+              >
+                <div className={`w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border ${info.iconBg} transition-colors duration-300`}>
+                  <info.icon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-1">{info.title}</h4>
+                  <p className="text-slate-900 font-semibold">{info.value}</p>
+                  {info.subValue && <p className="text-slate-900 font-semibold">{info.subValue}</p>}
+                  {info.description && <p className="text-sm text-slate-500 font-medium">{info.description}</p>}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
-          {/* Right Side - Contact Form */}
+          {/* Right Side - Contact Form Card */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -175,58 +192,57 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm"
           >
-            <h3 className="text-2xl font-bold text-slate-900 mb-8">Send Us a Message</h3>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label htmlFor="name" className="text-sm font-semibold text-slate-700 ml-1">Full Name *</label>
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label htmlFor="name" className="text-sm font-semibold text-slate-700">Full Name *</label>
                   <input
                     type="text"
                     id="name"
                     required
                     placeholder="John Doe"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label htmlFor="email" className="text-sm font-semibold text-slate-700 ml-1">Email Address</label>
+                <div className="space-y-1">
+                  <label htmlFor="email" className="text-sm font-semibold text-slate-700">Email Address</label>
                   <input
                     type="email"
                     id="email"
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label htmlFor="company" className="text-sm font-semibold text-slate-700 ml-1">Company</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label htmlFor="company" className="text-sm font-semibold text-slate-700">Company</label>
                   <input
                     type="text"
                     id="company"
                     placeholder="Company Name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label htmlFor="phone" className="text-sm font-semibold text-slate-700 ml-1">Phone Number *</label>
+                <div className="space-y-1">
+                  <label htmlFor="phone" className="text-sm font-semibold text-slate-700">Phone Number *</label>
                   <input
                     type="tel"
                     id="phone"
                     required
                     placeholder="+91-0000000000"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label htmlFor="service" className="text-sm font-semibold text-slate-700 ml-1">Select a Service</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label htmlFor="service" className="text-sm font-semibold text-slate-700">Select a Service</label>
                   <select
                     id="service"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%2364748b%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22m19%209-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_1rem_center] bg-no-repeat"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%2364748b%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22m19%209-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_1rem_center] bg-no-repeat text-sm"
                   >
                     <option value="">Select a service</option>
                     <option value="fleet">Fleet Management</option>
@@ -235,25 +251,25 @@ export default function ContactSection() {
                     <option value="other">Other Inquiry</option>
                   </select>
                 </div>
-                <div className="space-y-1.5">
-                  <label htmlFor="location" className="text-sm font-semibold text-slate-700 ml-1">Location *</label>
+                <div className="space-y-1">
+                  <label htmlFor="location" className="text-sm font-semibold text-slate-700">Location *</label>
                   <input
                     type="text"
                     id="location"
                     required
                     placeholder="City, State"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label htmlFor="message" className="text-sm font-semibold text-slate-700 ml-1">Message</label>
+              <div className="space-y-1">
+                <label htmlFor="message" className="text-sm font-semibold text-slate-700">Message</label>
                 <textarea
                   id="message"
-                  rows={4}
+                  rows={3}
                   placeholder="Your message here..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 resize-none"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm resize-none"
                 ></textarea>
               </div>
 
@@ -261,7 +277,7 @@ export default function ContactSection() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-4 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all duration-300"
+                className="w-full py-3.5 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all duration-300 text-sm"
               >
                 <span>Send Message</span>
                 <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />

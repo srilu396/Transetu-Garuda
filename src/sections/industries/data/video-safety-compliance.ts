@@ -1,11 +1,10 @@
-import { Camera, Shield, DollarSign, Users } from "lucide-react";
 import { IndustryData } from "./industriesData";
 
 export const videoSafetyCompliance: IndustryData = {
   slug: "video-safety-compliance",
   title: "Video Safety & Compliance",
   description: "Enhance driver safety with dual-facing dash cams that capture road and cabin activity, providing evidence for incidents and coaching opportunities.",
-  icon: Camera,
+  icon: "Camera",
   features: [
     "Dual-camera recording",
     "Driver fatigue alerts",
@@ -28,8 +27,8 @@ export const videoSafetyCompliance: IndustryData = {
   ],
   imageUrl: "https://images.unsplash.com/photo-1586528116137-7b1c1f5b9c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   stats: [
-    { label: "Accident Reduction", value: "-58%", icon: Shield },
-    { label: "Insurance Savings", value: "-32%", icon: DollarSign },
-    { label: "Driver Acceptance", value: "94%", icon: Users },
+    { label: "Accident Reduction", value: "-58%", icon: "Shield" },
+    { label: "Insurance Savings", value: "-32%", icon: "DollarSign" },
+    { label: "Driver Acceptance", value: "94%", icon: "Users" },
   ],
 };

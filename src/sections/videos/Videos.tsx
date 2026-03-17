@@ -9,7 +9,8 @@ export default function VideosSection() {
   const router = useRouter();
 
   // Function to handle navigation to contact section
-  const handleContactNavigation = () => {
+  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     router.push("/#contact");
   };
 
@@ -38,7 +39,7 @@ export default function VideosSection() {
       y: -8,
       scale: 1.02,
       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-      borderColor: "rgba(249, 115, 22, 0.3)",
+      borderColor: "rgba(236, 57, 176, 0.3)", // Changed to #ec39b0
       transition: {
         type: "spring" as const,
         stiffness: 300,
@@ -49,8 +50,8 @@ export default function VideosSection() {
 
   const cardBorderVariants = {
     hover: {
-      borderColor: "rgba(249, 115, 22, 0.4)",
-      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(249, 115, 22, 0.1)",
+      borderColor: "rgba(236, 57, 176, 0.4)", // Changed to #ec39b0
+      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(236, 57, 176, 0.1)", // Changed to #ec39b0
       transition: {
         duration: 0.3,
         ease: "easeOut" as const,
@@ -286,7 +287,7 @@ export default function VideosSection() {
           })}
         </motion.div>
 
-        {/* CTA Section */}
+        {/* CTA Section - Updated with navigation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -295,8 +296,8 @@ export default function VideosSection() {
           className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
         >
           {/* Background Decorative Gradients */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl -ml-40 -mb-40"></div>
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/15 rounded-full blur-3xl -ml-40 -mb-40"></div>
 
           <div className="relative z-10">
             <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
@@ -313,7 +314,8 @@ export default function VideosSection() {
                 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleContactNavigation}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm"
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm cursor-pointer"
               >
                 Schedule Live Demo
               </motion.button>
@@ -321,7 +323,8 @@ export default function VideosSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleContactNavigation}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm"
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
               >
                 Talk to Sales
               </motion.button>

@@ -1,47 +1,34 @@
-import { Flame, DrillIcon, Fuel, Activity } from "lucide-react";
 import { IndustryData } from "./industriesData";
 
 export const oilAndGasOperations: IndustryData = {
   slug: "oil-and-gas-operations",
   title: "Oil & Gas Operations",
-  description: "Track drilling rigs, pipeline assets, and energy fleet vehicles with rugged GPS devices and fuel monitoring systems designed for remote oil field environments.",
-  icon: Flame,
-  category: "Energy",
-  imageUrl: "/images/industries/oil-gas-operations.jpg",
+  description: "Monitor remote assets, including pipelines, wellheads, and heavy equipment, with ruggedized GPS trackers designed for harsh environments.",
+  icon: "Droplet",
   features: [
-    "Real-time drilling rig GPS tracking",
-    "Pipeline asset monitoring & leak detection",
-    "Fuel consumption tracking for heavy equipment",
-    "Remote location satellite coverage",
-    "Harsh environment certified hardware",
-    "Geofencing for restricted zones",
-    "Engine hours & maintenance alerts",
-    "Tanker fleet management"
+    "Remote asset monitoring",
+    "Pipeline integrity alerts",
+    "Heavy equipment tracking",
+    "Harsh environment trackers",
   ],
-  stats: [
-    { label: "Rigs Tracked", value: "500+", icon: DrillIcon },
-    { label: "Fuel Savings", value: "25%", icon: Fuel },
-    { label: "Pipeline Miles", value: "10,000+", icon: Activity }
-  ],
-  detailedDescription: "The oil and gas industry operates in some of the most challenging environments on earth, from remote desert locations to offshore platforms and arctic conditions. Our specialized GPS tracking solutions are engineered to withstand extreme temperatures, vibration, and harsh conditions while providing reliable real-time data on asset location, utilization, and performance. We help energy companies optimize their operations by tracking everything from drilling rigs and pipeline inspection vehicles to fuel trucks and service fleet. Our integrated fuel monitoring systems provide critical insights into consumption patterns, helping detect theft and inefficiencies that can cost millions annually. With satellite-based communication ensuring coverage even in the most remote locations, our solutions give energy companies complete visibility and control over their valuable assets, improving safety, reducing downtime, and maximizing operational efficiency.",
-  solutions: [
-    "Drilling Rig GPS Tracking",
-    "Pipeline Asset Monitoring",
-    "Fuel Theft Detection System",
-    "Heavy Equipment Telematics",
-    "Tanker Fleet Management",
-    "Remote Location Satellite Tracking",
-    "Well Site Security Monitoring",
-    "Equipment Maintenance Alerts"
-  ],
+  category: "Energy",
+  detailedDescription: "Ensure the safety and efficiency of your oil and gas operations with our ruggedized asset tracking solutions. Monitor remote pipelines for pressure anomalies and leaks, track the location and status of heavy equipment, and receive alerts for unauthorized use or movement. Our trackers are certified for hazardous environments and provide reliable connectivity even in the most remote locations. Optimize your field operations and protect your critical infrastructure with our specialized oil and gas solution.",
   benefits: [
-    "Reduce fuel theft by up to 30% with real-time consumption monitoring",
-    "Minimize downtime with predictive maintenance alerts",
-    "Improve safety with geofencing and restricted zone alerts",
-    "Optimize rig utilization with detailed usage analytics",
-    "Enhance security with tamper-proof asset tracking",
-    "Lower operational costs through efficient route planning",
-    "Ensure compliance with environmental and safety regulations",
-    "Gain complete visibility across remote operations"
-  ]
+    "Prevent pipeline leaks with real-time monitoring",
+    "Optimize heavy equipment utilization",
+    "Improve worker safety in remote locations",
+    "Protect critical infrastructure from theft",
+  ],
+  solutions: [
+    "Ruggedized GPS Asset Trackers",
+    "Pipeline Monitoring Sensors",
+    "Heavy Equipment Management",
+    "Hazardous Environment Solutions",
+  ],
+  imageUrl: "https://images.unsplash.com/photo-1582652613795-a085b1a1a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  stats: [
+    { label: "Uptime", value: "99.9%", icon: "Zap" },
+    { label: "Safety Incidents", value: "-75%", icon: "Shield" },
+    { label: "Efficiency Gain", value: "+35%", icon: "TrendingUp" },
+  ],
 };

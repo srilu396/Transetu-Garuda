@@ -43,6 +43,10 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      backgroundImage: {
+        "gradient-primary":
+          "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)",
+      },
     },
   },
   plugins: [

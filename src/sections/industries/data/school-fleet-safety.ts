@@ -1,11 +1,10 @@
-import { GraduationCap, Users, TrendingUp, Navigation } from "lucide-react";
 import { IndustryData } from "./industriesData";
 
 export const schoolFleetSafety: IndustryData = {
   slug: "school-fleet-safety",
   title: "School Fleet Safety",
   description: "Protect students with comprehensive school bus monitoring, driver behavior analysis, and instant parent notifications through GPS-enabled safety systems.",
-  icon: GraduationCap,
+  icon: "GraduationCap",
   features: [
     "Student boarding alerts",
     "Driver safety monitoring",
@@ -28,8 +27,8 @@ export const schoolFleetSafety: IndustryData = {
   ],
   imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   stats: [
-    { label: "Student Safety", value: "100% visibility", icon: Users },
-    { label: "Parent Satisfaction", value: "95%+", icon: TrendingUp },
-    { label: "Route Adherence", value: "99.9%", icon: Navigation },
+    { label: "Student Safety", value: "100% visibility", icon: "Users" },
+    { label: "Parent Satisfaction", value: "95%+", icon: "TrendingUp" },
+    { label: "Route Adherence", value: "99.9%", icon: "Navigation" },
   ],
 };

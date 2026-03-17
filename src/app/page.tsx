@@ -1,15 +1,14 @@
-import FastagSection from "@/sections/fastag/FastagSection";
 import Navbar from "@/components/Layout/Navbar";
-import HeroSection from "@/sections/hero/HeroSection";
-import GPSTrackingSection from "@/sections/gps/GPSTrackingSection";
-import FeaturesSection from "@/sections/features/FeaturesSection";
+import HeroSection from "@/sections/hero/Hero";
+import ProductsSection from "@/sections/gps/GPSTrackingSolutionsGrid";
+import FeaturesSection from "@/sections/features/PowerfulFeatures";
 import IndustriesSection from "@/sections/industries/IndustriesSection";
 import AboutSection from "@/sections/about/AboutSection";
-import VideosSection from "@/sections/videos/VideosSection";
-import ClientsSection from "@/sections/clients/ClientsSection";
-import ContactSection from "@/sections/contact/ContactSection";
+import VideosSection from "@/sections/videos/Videos";
+import FastagSection from "@/sections/fastag/FastagSection";
 import Footer from "@/components/Layout/Footer";
-import FastagDetails from "@/sections/fastag/FastagDetails";
+import FASTagManagement from "@/sections/fastag/FASTagManagementSection";
+import ContactSection from "@/sections/contact/ContactSection";
 
 export default function Home() {
   return (
@@ -18,13 +17,12 @@ export default function Home() {
       <main>
         <HeroSection />
         <FastagSection />
-        <GPSTrackingSection />
-        <FastagDetails />
+        <ProductsSection />
+        <FASTagManagement />
         <FeaturesSection />
         <IndustriesSection />
         <AboutSection />
         <VideosSection />
-        <ClientsSection />
         <ContactSection />
       </main>
       <Footer />

@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import { SolutionData } from "@/sections/gps/data/gpsData";
 import { IndustryData } from "@/sections/industries/data/industriesData";
-import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
-import IndustryDetails from "@/sections/industries/IndustryDetails";
+import GPSDetailWrapper from "@/sections/gps/GPSTrackingDetails";
+import IndustryDetailWrapper from "@/sections/industries/IndustryDetails";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 
@@ -24,7 +24,7 @@ interface SlidePanelProps {
   title: string;
   description: string;
   features: string[];
-  icon: LucideIcon | React.ElementType | React.ReactNode;
+  icon: LucideIcon | React.ReactNode;
   category?: string;
   layoutType?: "split" | "grid";
   solutionData?: SolutionData;
@@ -85,7 +85,7 @@ export default function SlidePanel({
       x: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
+        type: "spring",
         damping: 35,
         stiffness: 300,
         mass: 1,
@@ -96,7 +96,7 @@ export default function SlidePanel({
       opacity: 0.5,
       transition: {
         duration: 0.4,
-        ease: "easeInOut" as const,
+        ease: "easeInOut",
       },
     },
   };
@@ -117,12 +117,12 @@ export default function SlidePanel({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" as const },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   const renderIcon = (
-    IconInput: LucideIcon | React.ElementType | React.ReactNode,
+    IconInput: LucideIcon | React.ReactNode,
     size: number = 28,
   ) => {
     if (!IconInput) return <Box size={size} />;
@@ -155,7 +155,7 @@ export default function SlidePanel({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative h-full w-full bg-[#fef2cc] shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
+            className="relative h-full w-full bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
           >
             {/* Unified Top Header - Navigation only */}
             <div className="relative z-[200]">
@@ -165,7 +165,7 @@ export default function SlidePanel({
             <div className="flex-grow overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
               {solutionData ? (
                 <div className="flex flex-col">
-                  <GPSTrackingDetails
+                  <GPSDetailWrapper
                     data={solutionData}
                     showNavbarFooter={false}
                   />
@@ -173,7 +173,7 @@ export default function SlidePanel({
                 </div>
               ) : industryData ? (
                 <div className="flex flex-col">
-                  <IndustryDetails
+                  <IndustryDetailWrapper
                     industry={industryData}
                     showNavbarFooter={false}
                   />

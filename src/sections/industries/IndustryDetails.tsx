@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import { IndustryData } from "./data/industriesData";
 import { CheckCircle, ArrowLeft } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface IndustryDetailWrapperProps {
@@ -17,7 +19,6 @@ export default function IndustryDetails({
   onBack,
 }: IndustryDetailWrapperProps) {
   const router = useRouter();
-  const Icon = industry.icon;
 
   const handleBack = () => {
     if (onBack) {
@@ -58,7 +59,10 @@ export default function IndustryDetails({
           <div className="mb-12">
             <div className="flex flex-col md:flex-row md:items-center gap-6 mb-6">
               <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center shrink-0">
-                <Icon size={48} className="text-white" />
+                {(() => {
+                  const IndustryIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[industry.icon] || LucideIcons.Building;
+                  return <IndustryIcon size={48} className="text-white" />;
+                })()}
               </div>
               <div>
                 <span className="text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
@@ -87,7 +91,7 @@ export default function IndustryDetails({
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {industry.stats?.map((stat, index) => {
-              const StatIcon = stat.icon;
+              const StatIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[stat.icon] || LucideIcons.CheckCircle;
               return (
                 <div key={index} className="card-glass p-8 text-center hover:border-primary/30 transition-all duration-300">
                   <div className="flex justify-center mb-4">

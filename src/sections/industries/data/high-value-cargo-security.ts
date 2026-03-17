@@ -1,11 +1,10 @@
-import { Shield, ShieldAlert, CheckCircle, DollarSign } from "lucide-react";
 import { IndustryData } from "./industriesData";
 
 export const highValueCargoSecurity: IndustryData = {
   slug: "high-value-cargo-security",
   title: "High-Value Cargo Security",
   description: "Protect valuable shipments with smart padlock GPS trackers that provide tamper alerts, real-time location, and chain of custody verification.",
-  icon: Shield,
+  icon: "Shield",
   features: [
     "Smart padlock security",
     "Tamper detection alerts",
@@ -28,8 +27,8 @@ export const highValueCargoSecurity: IndustryData = {
   ],
   imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   stats: [
-    { label: "Theft Reduction", value: "-94%", icon: ShieldAlert },
-    { label: "Recovery Rate", value: "99%", icon: CheckCircle },
-    { label: "Insurance Savings", value: "-35%", icon: DollarSign },
+    { label: "Theft Reduction", value: "-94%", icon: "ShieldAlert" },
+    { label: "Recovery Rate", value: "99%", icon: "CheckCircle" },
+    { label: "Insurance Savings", value: "-35%", icon: "DollarSign" },
   ],
 };
