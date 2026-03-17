@@ -2,6 +2,7 @@ import React from "react";
 import { industries } from "@/sections/industries/data/industriesData";
 import IndustryDetails from "@/sections/industries/IndustryDetails";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -29,6 +30,11 @@ export default function IndustryDetailPage({
   params: { industry: string };
 }) {
   const { industry: slug } = params;
+  const industry = industries.find((i) => i.slug === slug);
 
-  return <IndustryDetails slug={slug} />;
+  if (!industry) {
+    notFound();
+  }
+
+  return <IndustryDetails industry={industry} />;
 }

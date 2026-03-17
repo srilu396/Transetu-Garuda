@@ -1,60 +1,64 @@
 "use client";
 
 import React from "react";
-import Navbar from "@/components/Layout/Navbar";
-import Footer from "@/components/Layout/Footer";
-import { SolutionData, solutions } from "@/sections/gps/data/gpsData";
-import { CheckCircle, ArrowLeft, Satellite, Search } from "lucide-react";
-import Link from "next/link";
+import Navbar from "../../components/Layout/Navbar";
+import Footer from "../../components/Layout/Footer";
+import { SolutionData } from "./data/gpsData";
+import { 
+  CheckCircle, 
+  ArrowLeft, 
+  Satellite,
+  Camera,
+  Bell,
+  Shield,
+  Truck,
+  MapPin,
+  BarChart3,
+  Zap,
+  Fuel,
+  Layers,
+  Thermometer,
+  Lock,
+  ShieldCheck,
+  Search
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 
+// Icon mapping to handle dynamic icon rendering from strings
+const IconMap: Record<string, React.ElementType> = {
+  Satellite,
+  Camera,
+  Bell,
+  Shield,
+  Truck,
+  MapPin,
+  BarChart3,
+  Zap,
+  Fuel,
+  Layers,
+  Thermometer,
+  Lock,
+  ShieldCheck,
+  Search
+};
+
 interface GPSDetailWrapperProps {
-  slug?: string;
-  data?: SolutionData;
+  data: SolutionData;
   showNavbarFooter?: boolean;
   onBack?: () => void;
   category?: string;
-  icon?: React.ElementType;
+  icon?: string; // Changed from React.ElementType to string
 }
 
-export default function GPSDetailWrapper({
-  slug,
-  data: propData,
+export default function GPSTrackingDetails({
+  data,
   showNavbarFooter = true,
   onBack,
   category = "Fleet Solution",
-  icon: PropIcon,
+  icon = "Satellite",
 }: GPSDetailWrapperProps) {
   const router = useRouter();
-
-  // Find data if slug is provided, otherwise use propData
-  const data = propData || (slug ? solutions[slug] : undefined);
-
-  if (!data) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <div className="text-center max-w-md">
-          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Search size={40} className="text-slate-400" />
-          </div>
-          <h1 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">
-            Solution Not Found
-          </h1>
-          <p className="text-slate-600 mb-8 font-medium">
-            The solution details you're looking for aren't available at the moment.
-          </p>
-          <button
-            onClick={() => router.push("/#products")}
-            className="bg-primary text-white px-8 py-3 rounded-full font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-          >
-            Explore Solutions
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const Icon = PropIcon || data.icon || Satellite;
+  const HeaderIcon = IconMap[icon] || Satellite;
 
   const handleBack = () => {
     if (onBack) {
@@ -62,6 +66,13 @@ export default function GPSDetailWrapper({
     } else {
       router.back();
     }
+  };
+
+  // Function to handle navigation to homepage contact section
+  const handleContactNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Navigate to homepage with contact hash
+    window.location.href = "/#contact";
   };
 
   return (
@@ -86,10 +97,10 @@ export default function GPSDetailWrapper({
           <div className="mb-12">
             <div className="flex flex-col md:flex-row md:items-center gap-6 mb-6">
               <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                <Icon size={48} className="text-white drop-shadow-md" />
+                <HeaderIcon size={48} className="text-white drop-shadow-md" />
               </div>
               <div>
-                <span className="text-sm font-medium text-primary bg-gradient-to-r from-primary/10 to-accent/10 px-4 py-2 rounded-full inline-block mb-3">
+                <span className="text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
                   {category}
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-bold">{data.title}</h1>
@@ -113,69 +124,28 @@ export default function GPSDetailWrapper({
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
               <div className="max-w-3xl">
-                <h3 className="text-2xl md:text-3xl font-bold text-black mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-md">
                   Overview
                 </h3>
-                <p className="text-black font-medium text-lg leading-relaxed line-clamp-3 md:line-clamp-none">
+                <p className="text-white/90 font-medium text-lg leading-relaxed drop-shadow-sm line-clamp-3 md:line-clamp-none">
                   {data.overview}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Detailed Description Sections */}
-          {data.detailedDescription && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">
-                    What is {data.title}?
-                  </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {data.detailedDescription.what}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">
-                    How it Works
-                  </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {data.detailedDescription.how}
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">
-                    Who is it for?
-                  </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {data.detailedDescription.who}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">
-                    Why choose this solution?
-                  </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {data.detailedDescription.why}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Benefits Cards (Mimicking Stats) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {data.benefits.slice(0, 3).map((benefit, index) => {
+              const BenefitIcon = IconMap[benefit.icon] || Shield;
               return (
                 <div
                   key={index}
                   className="card-glass p-8 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary/10"
                 >
                   <div className="flex justify-start mb-6">
-                    <div className="w-14 h-14 bg-gradient-to-br from-primary/15 to-accent/15 rounded-2xl flex items-center justify-center text-primary shadow-inner">
-                      {benefit.icon}
+                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shadow-inner">
+                      <BenefitIcon size={24} />
                     </div>
                   </div>
                   <div className="text-xl font-bold text-slate-900 mb-3">
@@ -199,24 +169,27 @@ export default function GPSDetailWrapper({
                   Key Features
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {data.features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col gap-3 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center shrink-0 group-hover:bg-gradient-primary group-hover:text-white transition-colors">
-                        {feature.icon}
+                  {data.features.map((feature, index) => {
+                    const FeatureIcon = IconMap[feature.icon] || Zap;
+                    return (
+                      <div
+                        key={index}
+                        className="flex flex-col gap-3 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                          <FeatureIcon size={20} />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-lg mb-1">
+                            {feature.title}
+                          </h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed">
+                            {feature.description}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-bold text-lg mb-1">
-                          {feature.title}
-                        </h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
 
@@ -232,7 +205,7 @@ export default function GPSDetailWrapper({
                       key={index}
                       className="flex items-start gap-4 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/15 to-accent/15 text-primary flex items-center justify-center shrink-0 font-bold text-sm mt-1">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 font-bold text-sm mt-1">
                         {index + 1}
                       </div>
                       <div>
@@ -305,17 +278,35 @@ export default function GPSDetailWrapper({
             </div>
           </div>
 
-          {/* Secondary Image Section */}
-          {data.secondaryImageUrl && (
-            <div className="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden mb-24 shadow-2xl border border-border/50">
-              <img
-                src={data.secondaryImageUrl}
-                alt={`${data.title} technology`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          {/* Contact CTA - Fixed navigation to go to homepage first then contact */}
+          <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
+
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 relative z-10">
+              Ready to deploy {data.title}?
+            </h2>
+            <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto relative z-10">
+              Transform your fleet operations with our industry-leading GPS
+              tracking hardware and intuitive software platform.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+              <a
+                href="/#contact"
+                onClick={handleContactNavigation}
+                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl cursor-pointer inline-block"
+              >
+                Contact Sales
+              </a>
+              <a
+                href="/#contact"
+                onClick={handleContactNavigation}
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center justify-center cursor-pointer inline-block"
+              >
+                Request a Demo
+              </a>
             </div>
-          )}
+          </div>
         </div>
       </main>
 
