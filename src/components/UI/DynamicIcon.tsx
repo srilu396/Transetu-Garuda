@@ -1,13 +1,12 @@
 import React from 'react';
 import * as Icons from 'lucide-react';
 
-interface DynamicIconProps {
+interface DynamicIconProps extends Icons.LucideProps {
   name: string;
-  [key: string]: any;
 }
 
 const DynamicIcon: React.FC<DynamicIconProps> = ({ name, ...props }) => {
-  const Icon = (Icons as any)[name];
+  const Icon = (Icons as unknown as Record<string, React.ElementType>)[name];
 
   if (!Icon) {
     return null;

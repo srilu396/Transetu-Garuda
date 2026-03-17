@@ -1,4 +1,3 @@
-import { LucideIcon } from "lucide-react";
 import { logisticsTransportation } from "./logistics-transportation";
 import { schoolFleetSafety } from "./school-fleet-safety";
 import { miningOperations } from "./mining-operations";

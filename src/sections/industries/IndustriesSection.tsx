@@ -81,10 +81,6 @@ export default function IndustriesSection() {
     },
   };
 
-  const handleIndustryClick = (industry: IndustryData) => {
-    router.push(`/industries/${industry.slug}`);
-  };
-
   // Function to handle navigation to contact section
   const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -182,7 +178,7 @@ export default function IndustriesSection() {
                         }}
                       >
                         {(() => {
-                          const IndustryIcon = (LucideIcons as any)[industry.icon] || LucideIcons.Building;
+                          const IndustryIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[industry.icon] || LucideIcons.Building;
                           return <IndustryIcon className="w-5 h-5" />;
                         })()}
                       </motion.div>

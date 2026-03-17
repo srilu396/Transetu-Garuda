@@ -60,7 +60,7 @@ export default function IndustryDetails({
             <div className="flex flex-col md:flex-row md:items-center gap-6 mb-6">
               <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center shrink-0">
                 {(() => {
-                  const IndustryIcon = (LucideIcons as any)[industry.icon] || LucideIcons.Building;
+                  const IndustryIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[industry.icon] || LucideIcons.Building;
                   return <IndustryIcon size={48} className="text-white" />;
                 })()}
               </div>
@@ -91,7 +91,7 @@ export default function IndustryDetails({
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {industry.stats?.map((stat, index) => {
-              const StatIcon = (LucideIcons as any)[stat.icon] || LucideIcons.CheckCircle;
+              const StatIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[stat.icon] || LucideIcons.CheckCircle;
               return (
                 <div key={index} className="card-glass p-8 text-center hover:border-primary/30 transition-all duration-300">
                   <div className="flex justify-center mb-4">
