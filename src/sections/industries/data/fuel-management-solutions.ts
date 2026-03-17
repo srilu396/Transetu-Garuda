@@ -1,11 +1,10 @@
-import { Fuel, DollarSign, Shield, TrendingUp } from "lucide-react";
 import { IndustryData } from "./industriesData";
 
 export const fuelManagementSolutions: IndustryData = {
   slug: "fuel-management-solutions",
   title: "Fuel Management Solutions",
   description: "Monitor fuel consumption, detect theft, and optimize fuel efficiency with our advanced fuel management solutions for any fleet size.",
-  icon: Fuel,
+  icon: "Fuel",
   features: [
     "Real-time fuel monitoring",
     "Fuel theft detection alerts",
@@ -28,8 +27,8 @@ export const fuelManagementSolutions: IndustryData = {
   ],
   imageUrl: "https://images.unsplash.com/photo-1582652613795-a085b1a1a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   stats: [
-    { label: "Fuel Savings", value: "-30%", icon: DollarSign },
-    { label: "Theft Prevention", value: "99%", icon: Shield },
-    { label: "Efficiency Gain", value: "+20%", icon: TrendingUp },
+    { label: "Fuel Savings", value: "-30%", icon: "DollarSign" },
+    { label: "Theft Prevention", value: "99%", icon: "Shield" },
+    { label: "Efficiency Gain", value: "+20%", icon: "TrendingUp" },
   ],
 };

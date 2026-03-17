@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   industries,
-  IndustryData,
 } from "@/sections/industries/data/industriesData";
 import * as LucideIcons from "lucide-react";
 

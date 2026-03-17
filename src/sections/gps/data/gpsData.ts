@@ -11,7 +11,7 @@ import { ais140Tracker } from "./ais-140-tracker";
 export type Feature = {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: string;
 };
 
 export type UseCase = {
@@ -22,13 +22,13 @@ export type UseCase = {
 export type Benefit = {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: string;
 };
 
 export interface SolutionData {
   title: string;
   tagline: string;
-  icon?: React.ElementType;
+  icon?: string;
   bgColor: string;
   overview: string;
   detailedDescription?: {
