@@ -1,30 +1,38 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary/50 border-t border-border/50">
+    <footer
+      className="border-t border-white/20"
+      style={{ backgroundColor: "#6467f2" }}
+    >
       <div className="max-w-7xl mx-auto container-padding py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="relative w-12 h-10 flex items-center justify-center">
-                <img
-                  src="/assets/logos/logo.png"
-                  alt="Garuda OM logo"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <div className="text-2xl font-black tracking-wider text-gradient leading-none">
-                  Garuda OM
+              <Link href="/" className="flex items-center space-x-3">
+                <div className="relative w-12 h-10 flex items-center justify-center">
+                  <img
+                    src="/assets/logos/logo.png"
+                    alt="Garuda OM logo"
+                    className="w-full h-full object-contain brightness-0 invert"
+                  />
                 </div>
-                <span className="text-sm font-bold text-primary mt-1 italic">
-                  GPS Tracking & FASTag Solutions
-                </span>
-              </div>
+                <div className="flex flex-col">
+                  <div className="text-2xl font-black tracking-wider text-white leading-none">
+                    Garuda OM
+                  </div>
+                  <span className="text-sm font-bold text-white mt-1 italic">
+                    Integrated GPS & FASTag Solutions
+                  </span>
+                </div>
+              </Link>
             </div>
-            <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
-              Track, monitor, and manage your fleet with real-time GPS, fuel sensors, dash cams, and FASTag integration — everything you need on one powerful platform for complete operational control.
+            <p className="text-white mb-6 leading-relaxed text-sm">
+              Track, monitor, and manage your fleet with real-time GPS, fuel
+              sensors, dash cams, and FASTag integration — everything you need
+              on one powerful platform for complete operational control.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -38,13 +46,13 @@ export default function Footer() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide lucide-phone w-4 h-4 text-primary"
+                  className="lucide lucide-phone w-4 h-4 text-white"
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
                 <a
                   href="tel:+919849252434"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm text-white hover:text-white/80 transition-colors"
                 >
                   +91-9849252434 / 9866479962
                 </a>
@@ -60,12 +68,12 @@ export default function Footer() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide lucide-mail w-4 h-4 text-primary"
+                  className="lucide lucide-mail w-4 h-4 text-white"
                 >
                   <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </svg>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-sm text-white">
                   info@garudatechnology.com
                 </span>
               </div>
@@ -80,19 +88,19 @@ export default function Footer() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide lucide-map-pin w-4 h-4 text-primary"
+                  className="lucide lucide-map-pin w-4 h-4 text-white"
                 >
                   <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span className="text-sm text-muted-foreground">
-                  Hyderabad, India
-                </span>
+                <span className="text-sm text-white">Hyderabad, India</span>
               </div>
               <div className="flex items-center gap-4 mt-4 pt-2">
                 <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -110,8 +118,10 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -138,8 +148,10 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -159,8 +171,10 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -178,72 +192,166 @@ export default function Footer() {
                     <path d="M10 15l5-3-5-3v6z"></path>
                   </svg>
                 </a>
+                <a
+                  href="https://wa.me/919849252434"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-white/80 transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-message-circle"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.31 8.31 0 0 1 3.8.9L22 4l-2.1 4.7Z"></path>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white font-black uppercase tracking-tight">
+              Our Industries
+            </h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#about"
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/industries/logistics-transportation"
                 >
-                  About Us
-                </a>
+                  Logistics & Transport
+                </Link>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/#industries"
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/industries/mining-operations"
                 >
-                  Industries
-                </a>
+                  Mining Operations
+                </Link>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/blog"
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/industries/school-fleet-safety"
                 >
-                  Blog
-                </a>
+                  School Fleet Safety
+                </Link>
               </li>
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  href="/events"
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/industries/oil-gas-operations"
                 >
-                  Events
-                </a>
+                  Oil & Gas Operations
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/industries/ready-mix-concrete"
+                >
+                  Ready Mix Concrete
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/industries/pharmaceutical-logistics"
+                >
+                  Healthcare Logistics
+                </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Support</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white font-black uppercase tracking-tight">
+              Support
+            </h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
                   href="/#contact"
                 >
-                  Help Center
-                </a>
+                  Contact Us
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://gpsreports.in/api_document/api/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/#contact"
                 >
-                  API Reference
-                </a>
+                  Request Demo
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white font-black uppercase tracking-tight">
+              Important Solutions
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/solutions/gps-tracking-solutions"
+                >
+                  Fleet GPS Tracking
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/solutions/fuel-level-sensors"
+                >
+                  Fuel Monitoring
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/solutions/dash-cam-system"
+                >
+                  Dash Cam System
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/#fastag-management"
+                >
+                  FASTag Management
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/solutions/ais-140-tracker"
+                >
+                  AIS 140 Compliance
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
+                  href="/solutions/temperature-monitor"
+                >
+                  Temperature Monitoring
+                </Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-border/50">
-          <div className="text-sm text-muted-foreground">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/20">
+          <div className="text-sm text-white">
             © 2026 Garuda OM. All rights reserved.
           </div>
         </div>

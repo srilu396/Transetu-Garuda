@@ -11,10 +11,10 @@ import {
   Box,
   ChevronRight,
 } from "lucide-react";
-import { SolutionData } from "@/content/solutions";
-import { IndustryData } from "@/content/industries";
-import GPSDetailWrapper from "../GPSTrackingSolutions/GPSDetailWrapper";
-import IndustryDetailWrapper from "../Industries/IndustryDetailWrapper";
+import { SolutionData } from "@/sections/gps/data/gpsData";
+import { IndustryData } from "@/sections/industries/data/industriesData";
+import GPSDetailWrapper from "@/sections/gps/GPSTrackingDetails";
+import IndustryDetailWrapper from "@/sections/industries/IndustryDetails";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 
@@ -155,7 +155,7 @@ export default function SlidePanel({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative h-full w-full bg-[#fef2cc] shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
+            className="relative h-full w-full bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
           >
             {/* Unified Top Header - Navigation only */}
             <div className="relative z-[200]">

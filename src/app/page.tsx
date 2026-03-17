@@ -1,13 +1,14 @@
-import SolutionsOverviewSection from "@/components/Solutions/SolutionsOverviewSection";
 import Navbar from "@/components/Layout/Navbar";
-import HeroSection from "@/components/Hero/Hero";
-import ProductsSection from "@/components/Solutions/GPSTrackingSolutionsGrid";
-import FeaturesSection from "@/components/PowerfulFeatures/PowerfulFeatures";
-import IndustriesSection from "@/components/Industries/IndustriesSection";
-import AboutSection from "@/components/About/AboutSection";
-import VideosSection from "@/components/Videos/Videos";
+import HeroSection from "@/sections/hero/Hero";
+import ProductsSection from "@/sections/gps/GPSTrackingSolutionsGrid";
+import FeaturesSection from "@/sections/features/PowerfulFeatures";
+import IndustriesSection from "@/sections/industries/IndustriesSection";
+import AboutSection from "@/sections/about/AboutSection";
+import VideosSection from "@/sections/videos/Videos";
+import FastagSection from "@/sections/fastag/FastagSection";
 import Footer from "@/components/Layout/Footer";
-import FASTagManagement from "@/components/FASTag/FASTagManagementSection";
+import FASTagManagement from "@/sections/fastag/FASTagManagementSection";
+import ContactSection from "@/sections/contact/ContactSection";
 
 export default function Home() {
   return (
@@ -15,13 +16,14 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <SolutionsOverviewSection />
+        <FastagSection />
         <ProductsSection />
         <FASTagManagement />
         <FeaturesSection />
         <IndustriesSection />
         <AboutSection />
         <VideosSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>

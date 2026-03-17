@@ -1,0 +1,105 @@
+﻿
+> next-app@0.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.14
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+node.exe : Failed to compile.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          : Not 
+   Specified: (Failed to compile  
+  .:String) [], RemoteException
+    + FullyQualifiedErrorId : Nat 
+   iveCommandError
+ 
+
+./src/sections/videos/Videos.tsx:1
+56:17
+Type error: Type '{ hidden: { 
+opacity: number; y: number; }; 
+visible: { opacity: number; y: 
+number; transition: { type: 
+string; stiffness: number; 
+damping: number; mass: number; }; 
+}; hover: { y: number; scale: 
+number; boxShadow: string; 
+borderColor: string; transition: 
+{ ...; }; }; }' is not assignable 
+to type 'Variants'.
+  Property 'visible' is 
+incompatible with index signature.
+    Type '{ opacity: number; y: 
+number; transition: { type: 
+string; stiffness: number; 
+damping: number; mass: number; }; 
+}' is not assignable to type 
+'Variant'.
+      Type '{ opacity: number; y: 
+number; transition: { type: 
+string; stiffness: number; 
+damping: number; mass: number; }; 
+}' is not assignable to type 
+'TargetAndTransition'.
+        Type '{ opacity: number; 
+y: number; transition: { type: 
+string; stiffness: number; 
+damping: number; mass: number; }; 
+}' is not assignable to type '{ 
+transition?: Transition<any> | 
+undefined; transitionEnd?: 
+ResolvedValues$1 | undefined; }'.
+          Types of property 
+'transition' are incompatible.
+            Type '{ type: string; 
+stiffness: number; damping: 
+number; mass: number; }' is not 
+assignable to type 
+'Transition<any> | undefined'.
+              Type '{ type: 
+string; stiffness: number; 
+damping: number; mass: number; }' 
+is not assignable to type 'Transit
+ionWithValueOverrides<any>'.
+                Type '{ type: 
+string; stiffness: number; 
+damping: number; mass: number; }' 
+is not assignable to type 
+'ValueAnimationTransition<any>'.
+                  Types of 
+property 'type' are incompatible.
+                    Type 'string' 
+is not assignable to type 
+'AnimationGeneratorType | 
+undefined'.
+
+[0m [90m 154 |[39m             
+  [33m<[39m[33mmotion[39m[33m
+.[39mdiv[0m
+[0m [90m 155 |[39m             
+    key[33m=[39m{index}[0m
+[0m[31m[1m>[22m[39m[90m 156 
+|[39m                 variants[3
+3m=[39m{cardVariants}[0m
+[0m [90m     |[39m             
+    [31m[1m^[22m[39m[0m
+[0m [90m 157 |[39m             
+    whileHover[33m=[39m[32m"hov
+er"[39m[0m
+[0m [90m 158 |[39m             
+    className[33m=[39m[32m"bg-w
+hite rounded-3xl border 
+border-slate-200 shadow-lg 
+overflow-hidden group flex 
+flex-col h-full"[39m[0m
+[0m [90m 159 |[39m             
+  [33m>[39m[0m

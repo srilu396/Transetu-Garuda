@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import SocialContactBar from "@/components/Layout/SocialContactBar";
+import FloatingSocialBar from "@/components/FloatingSocialBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <SocialContactBar />
+        <FloatingSocialBar />
       </body>
     </html>
   );
