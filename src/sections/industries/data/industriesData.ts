@@ -1,4 +1,4 @@
-import { 
+import {
   LucideIcon,
   Truck,
   GraduationCap,
@@ -36,7 +36,7 @@ import {
   Globe,
   Flame,
   Activity,
-  Drill as DrillIcon
+  Drill as DrillIcon,
 } from "lucide-react";
 
 export interface IndustryStat {
@@ -63,29 +63,32 @@ export const industries: IndustryData[] = [
   {
     slug: "logistics-transportation",
     title: "Logistics & Transportation",
-    description: "Streamline your fleet operations with real-time vehicle tracking, route optimization, and FASTag integration for seamless toll management across national highways.",
+    description:
+      "Optimize your logistics and fleet operations with real-time GPS tracking and automated FASTag management for maximum efficiency.",
     icon: Truck,
     features: [
       "Real-time fleet visibility",
-      "FASTag toll management",
+      "Automated FASTag toll management",
       "Route efficiency optimization",
       "Delivery proof & ETA tracking",
     ],
     category: "Transportation",
-    detailedDescription: "Transform your logistics operations with our comprehensive GPS tracking and FASTag management platform. Our solution provides end-to-end visibility across your entire fleet, enabling real-time decision-making that reduces operational costs and improves delivery performance. With integrated FASTag management, you can automate toll payments across hundreds of vehicles, eliminating manual reconciliation and ensuring uninterrupted journeys. Advanced route optimization algorithms analyze traffic patterns and historical data to suggest the most efficient paths, reducing fuel consumption and improving on-time delivery rates.",
+    detailedDescription:
+      "Our advanced GPS tracking and automated FASTag management solutions empower logistics companies to optimize their entire fleet. By providing real-time visibility and automated tolling, we help businesses reduce operational delays and ensure timely deliveries for enhanced customer satisfaction.",
     benefits: [
-      "Reduce fuel costs by up to 25% through optimized routing",
-      "Eliminate toll payment delays with automated FASTag recharges",
-      "Improve customer satisfaction with accurate ETAs",
-      "Prevent unauthorized vehicle usage with geofence alerts",
+      "Reduce fuel costs with optimized routing",
+      "Eliminate toll delays with automated recharges",
+      "Improve customer trust with accurate real-time ETAs",
+      "Prevent unauthorized vehicle usage with geofencing",
     ],
     solutions: [
-      "Fleet GPS Trackers with real-time monitoring",
-      "FASTag Fleet Management Dashboard",
-      "Route Optimization Engine",
-      "Driver Behavior Analytics",
+      "Fleet GPS Trackers",
+      "FASTag Dashboard",
+      "Route Optimizer",
+      "Behavior Analytics",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116311-ada1f4b5c9e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1586528116311-ada1f4b5c9e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Fleet Size", value: "1 to 1000+", icon: Truck },
       { label: "Fuel Savings", value: "up to 25%", icon: TrendingUp },
@@ -95,29 +98,32 @@ export const industries: IndustryData[] = [
   {
     slug: "school-fleet-safety",
     title: "School Fleet Safety",
-    description: "Protect students with comprehensive school bus monitoring, driver behavior analysis, and instant parent notifications through GPS-enabled safety systems.",
+    description:
+      "Ensure the highest level of student safety with real-time bus tracking, driver behavior monitoring, and instant parent alerts.",
     icon: GraduationCap,
     features: [
-      "Student boarding alerts",
-      "Driver safety monitoring",
-      "Route adherence tracking",
-      "Parent communication portal",
+      "Student boarding/deboarding alerts",
+      "Driver safety & speed monitoring",
+      "Real-time route adherence tracking",
+      "Parent communication mobile app",
     ],
     category: "Education",
-    detailedDescription: "Ensure the safest possible transportation for students with our comprehensive school bus tracking and safety platform. Our system provides real-time visibility into every school bus in your fleet, with instant notifications to parents when children board or exit the vehicle. Driver behavior monitoring helps identify and correct unsafe driving patterns, while geofencing ensures buses stay on approved routes. The parent communication portal provides peace of mind with live bus tracking and estimated arrival times at designated stops.",
+    detailedDescription:
+      "Student safety is our top priority, and our GPS solutions provide schools and parents with real-time bus tracking and instant alerts. By monitoring driver behavior and route adherence, we ensure every journey is safe, predictable, and transparent for everyone involved.",
     benefits: [
-      "Real-time parent notifications for boarding and drop-off",
-      "Reduce idling time and fuel consumption",
-      "Ensure route compliance with geofence alerts",
-      "Improve driver accountability with behavior monitoring",
+      "Real-time parent notifications for arrivals",
+      "Enhanced student safety with behavior tracking",
+      "Reduced fuel waste from engine idling",
+      "Improved school-parent transparency and trust",
     ],
     solutions: [
-      "School Bus GPS Trackers",
-      "Parent Mobile App",
-      "Driver Safety Dashboard",
-      "Route Compliance System",
+      "School Bus Trackers",
+      "Parent Safety App",
+      "Driver Dashboard",
+      "Route Compliance",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Student Safety", value: "100% visibility", icon: Users },
       { label: "Parent Satisfaction", value: "95%+", icon: TrendingUp },
@@ -127,29 +133,32 @@ export const industries: IndustryData[] = [
   {
     slug: "mining-operations",
     title: "Mining Operations",
-    description: "Monitor heavy earthmoving equipment in remote mining locations with rugged GPS trackers designed to withstand dust, vibration, and extreme temperatures.",
+    description:
+      "Maximize mining productivity with ruggedized GPS tracking and utilization analytics built for the harshest industrial environments.",
     icon: Pickaxe,
     features: [
-      "Heavy equipment tracking",
-      "Geofence security alerts",
-      "Maintenance scheduling",
-      "Operator utilization reports",
+      "Heavy equipment location tracking",
+      "Geofence security for blast zones",
+      "Automated maintenance scheduling",
+      "Operator & machinery utilization reports",
     ],
     category: "Industrial",
-    detailedDescription: "Maximize productivity and security in your mining operations with our rugged GPS tracking solutions built for extreme environments. Our devices withstand dust, vibration, and temperature extremes while providing precise location data for all heavy equipment. Prevent theft with geofence alerts that notify you immediately when equipment leaves designated areas. Maintenance scheduling based on actual usage hours helps prevent costly breakdowns and extends equipment life. Detailed utilization reports show you exactly how each piece of equipment is being used, enabling better resource allocation.",
+    detailedDescription:
+      "Ruggedized GPS tracking solutions built for the harshest industrial environments help mining operations maximize productivity. Our platform monitors heavy machinery location and utilization in real-time to help businesses optimize resources and reduce operational downtime.",
     benefits: [
-      "Reduce equipment theft with instant geofence alerts",
-      "Extend machinery life with preventive maintenance",
-      "Optimize equipment utilization across shifts",
-      "Improve safety with operator monitoring",
+      "Theft prevention with instant geofence alerts",
+      "Usage-based maintenance to extend machinery life",
+      "Increased productivity with utilization data",
+      "Enhanced site safety for restricted zones",
     ],
     solutions: [
-      "Rugged GPS Trackers for Mining",
-      "Equipment Utilization Dashboard",
+      "Rugged Mining Trackers",
+      "Utilization Dashboard",
       "Maintenance Alert System",
-      "Geofence Security Platform",
+      "Geofence Platform",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1584968173922-4e13d6b3a0a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1584968173922-4e13d6b3a0a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Equipment Uptime", value: "+35%", icon: Gauge },
       { label: "Theft Prevention", value: "99%", icon: Shield },
@@ -159,29 +168,32 @@ export const industries: IndustryData[] = [
   {
     slug: "ready-mix-concrete",
     title: "Ready Mix Concrete",
-    description: "Ensure timely concrete delivery with mixer drum rotation monitoring, slump management, and precise ETA updates for construction site coordination.",
+    description:
+      "Optimize concrete delivery timelines with specialized mixer drum sensors, real-time tracking, and site arrival coordination.",
     icon: Factory,
     features: [
-      "Drum rotation monitoring",
-      "Delivery time optimization",
-      "Site arrival alerts",
-      "Batch quality tracking",
+      "Mixer drum rotation monitoring",
+      "Concrete delivery time optimization",
+      "Automated site arrival notifications",
+      "Batch quality & temperature tracking",
     ],
     category: "Construction",
-    detailedDescription: "Revolutionize your concrete delivery operations with specialized GPS tracking designed for ready-mix fleets. Our system monitors drum rotation to ensure concrete quality during transit, preventing material waste from delayed deliveries. Real-time tracking provides accurate ETAs to construction sites, enabling better workforce coordination and reducing wait times. Temperature monitoring alerts you to conditions that could affect concrete setting times, while automated delivery confirmation streamlines billing and reconciliation.",
+    detailedDescription:
+      "Optimize concrete delivery timelines with specialized mixer drum sensors and real-time tracking for better site coordination. Our solutions ensure concrete quality by monitoring transit times and providing precise arrival notifications for construction crews.",
     benefits: [
-      "Prevent concrete waste with drum rotation monitoring",
-      "Improve site coordination with accurate ETAs",
-      "Reduce fuel consumption with optimized routing",
+      "Prevent material waste with drum monitoring",
+      "Improve construction site coordination",
+      "Reduce fuel costs with optimized dispatch",
       "Eliminate billing disputes with delivery proof",
     ],
     solutions: [
-      "Mixer Truck GPS Trackers",
+      "Mixer Truck Trackers",
       "Drum Rotation Sensors",
-      "Delivery Management Platform",
+      "Delivery Management",
       "Customer ETA Portal",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581094794327-6e3f1f4b9a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1581094794327-6e3f1f4b9a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Material Waste", value: "-42%", icon: Package },
       { label: "On-Time Delivery", value: "98%", icon: Clock },
@@ -191,31 +203,38 @@ export const industries: IndustryData[] = [
   {
     slug: "pharmaceutical-logistics",
     title: "Pharmaceutical Logistics",
-    description: "Maintain cold chain integrity for medicine shipments with temperature sensors, real-time alerts, and compliance documentation for regulatory requirements.",
+    description:
+      "Protect sensitive medical shipments with high-precision cold chain monitoring and automated compliance documentation.",
     icon: Pill,
     features: [
-      "Cold chain monitoring",
-      "Temperature breach alerts",
-      "GDP compliance reports",
-      "Shipment chain of custody",
+      "Real-time cold chain monitoring",
+      "Instant temperature breach alerts",
+      "Automated GDP compliance reporting",
+      "End-to-end shipment chain of custody",
     ],
     category: "Healthcare",
-    detailedDescription: "Protect sensitive pharmaceutical shipments with our advanced cold chain monitoring solution. Continuous temperature tracking ensures medications remain within required ranges throughout transit, with immediate alerts if conditions deviate. Comprehensive audit trails satisfy regulatory requirements for GDP and FDA compliance, while chain of custody tracking provides complete visibility from warehouse to delivery. Our platform integrates with existing ERP systems to streamline documentation and reduce administrative burden.",
+    detailedDescription:
+      "Protect sensitive medical shipments with high-precision cold chain monitoring and automated compliance reporting. Our platform provides real-time temperature alerts and end-to-end visibility to guarantee product integrity throughout the pharmaceutical supply chain.",
     benefits: [
-      "Ensure regulatory compliance with automated reports",
-      "Prevent spoilage with instant temperature alerts",
-      "Maintain chain of custody documentation",
-      "Reduce insurance claims with proof of compliance",
+      "Ensure regulatory compliance with automated logs",
+      "Prevent cargo spoilage with real-time climate alerts",
+      "Maintain a secure and audited chain of custody",
+      "Reduce insurance costs with proof of compliance",
     ],
     solutions: [
-      "Temperature Sensors & Data Loggers",
+      "Wireless Temperature Sensors",
       "Cold Chain Compliance Platform",
-      "Real-time Alert System",
+      "Real-time Alert Engine",
       "Audit Trail Generator",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
-      { label: "Temperature Compliance", value: "99.9%", icon: ThermometerSnowflake },
+      {
+        label: "Temperature Compliance",
+        value: "99.9%",
+        icon: ThermometerSnowflake,
+      },
       { label: "Spoilage Reduction", value: "-76%", icon: Package },
       { label: "Audit Pass Rate", value: "100%", icon: CheckCircle },
     ],
@@ -223,7 +242,8 @@ export const industries: IndustryData[] = [
   {
     slug: "asset-telematics",
     title: "Asset Telematics",
-    description: "Track high-value equipment, generators, and construction assets with IoT-enabled GPS devices that provide utilization analytics and theft prevention.",
+    description:
+      "Track high-value equipment, generators, and construction assets with IoT-enabled GPS devices that provide utilization analytics and theft prevention.",
     icon: Radio,
     features: [
       "Asset utilization tracking",
@@ -232,9 +252,10 @@ export const industries: IndustryData[] = [
       "Predictive maintenance",
     ],
     category: "Telematics",
-    detailedDescription: "Gain complete visibility into your valuable assets with our IoT-enabled telematics platform. Whether tracking construction equipment, generators, or industrial machinery, our solution provides real-time location and status updates. Utilization analytics reveal underused assets, enabling better capital allocation and rental decisions. Predictive maintenance alerts prevent unexpected breakdowns by monitoring engine hours and operating conditions. In case of theft, our recovery assistance network helps authorities locate and recover stolen assets quickly.",
+    detailedDescription:
+      "Secure and manage your high-value assets with IoT-enabled GPS devices that provide real-time location and utilization analytics. Our predictive maintenance alerts help prevent unexpected breakdowns and optimize resource allocation for construction and industrial equipment.",
     benefits: [
-      "Maximize asset utilization with usage analytics",
+      "Maximize asset utilization with analytics",
       "Prevent theft with instant movement alerts",
       "Reduce downtime with predictive maintenance",
       "Optimize rental fleet with demand forecasting",
@@ -245,7 +266,8 @@ export const industries: IndustryData[] = [
       "Maintenance Prediction Engine",
       "Theft Recovery Network",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Asset Utilization", value: "+32%", icon: BarChart3 },
       { label: "Recovery Rate", value: "97%", icon: Shield },
@@ -255,7 +277,8 @@ export const industries: IndustryData[] = [
   {
     slug: "personal-vehicle-security",
     title: "Personal Vehicle Security",
-    description: "Safeguard personal vehicles with discreet GPS trackers, geofence alerts, and smartphone monitoring for family safety and theft prevention.",
+    description:
+      "Safeguard personal vehicles with discreet GPS trackers, geofence alerts, and smartphone monitoring for family safety and theft prevention.",
     icon: Car,
     features: [
       "Real-time vehicle location",
@@ -264,7 +287,8 @@ export const industries: IndustryData[] = [
       "Emergency SOS alerts",
     ],
     category: "Personal",
-    detailedDescription: "Protect what matters most with our personal vehicle security solutions. Discreet GPS trackers provide real-time location monitoring through your smartphone, with instant alerts if your vehicle enters or leaves designated areas. Driving behavior reports help parents monitor teen drivers and promote safer habits. In emergencies, the SOS button sends immediate alerts with your location to pre-selected contacts. Whether protecting your daily driver, RV, or classic car collection, our solution provides peace of mind 24/7.",
+    detailedDescription:
+      "Protect your personal vehicles and loved ones with discreet GPS tracking, geofence alerts, and 24/7 smartphone monitoring. Our solution provides peace of mind with real-time location updates and emergency SOS features designed for maximum family safety.",
     benefits: [
       "Instant theft alerts with GPS tracking",
       "Monitor teen drivers with behavior reports",
@@ -277,7 +301,8 @@ export const industries: IndustryData[] = [
       "Geofence Alert System",
       "Emergency SOS Service",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Theft Recovery", value: "98%", icon: Shield },
       { label: "User Satisfaction", value: "4.8/5", icon: Users },
@@ -287,7 +312,8 @@ export const industries: IndustryData[] = [
   {
     slug: "municipal-fleet-management",
     title: "Municipal Fleet Management",
-    description: "Optimize city service vehicles including waste collection, road maintenance, and public transportation with centralized GPS monitoring.",
+    description:
+      "Optimize city service vehicles including waste collection, road maintenance, and public transportation with centralized GPS monitoring.",
     icon: Building,
     features: [
       "Service route optimization",
@@ -296,7 +322,8 @@ export const industries: IndustryData[] = [
       "Public works compliance",
     ],
     category: "Government",
-    detailedDescription: "Transform municipal fleet operations with our comprehensive tracking solution designed for government agencies. Monitor waste collection, snow removal, road maintenance, and public transportation vehicles from a single dashboard. Route optimization reduces fuel consumption and ensures complete coverage of service areas. Real-time tracking enables better response to citizen requests and emergency situations. Detailed reports demonstrate compliance with service level agreements and provide data for budget planning and resource allocation.",
+    detailedDescription:
+      "Enhance municipal efficiency by monitoring waste collection, road maintenance, and public transport vehicles from a single dashboard. Our route optimization tools help city departments reduce fuel consumption, improve response times, and provide better services to citizens.",
     benefits: [
       "Reduce fleet operating costs by 20-30%",
       "Improve citizen satisfaction with reliable services",
@@ -309,7 +336,8 @@ export const industries: IndustryData[] = [
       "Fuel Management Dashboard",
       "Public Works Reporting",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1573497491765-dccce02f29df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1573497491765-dccce02f29df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Fuel Savings", value: "-28%", icon: Fuel },
       { label: "Service Efficiency", value: "+35%", icon: TrendingUp },
@@ -319,7 +347,8 @@ export const industries: IndustryData[] = [
   {
     slug: "high-value-cargo-security",
     title: "High-Value Cargo Security",
-    description: "Protect valuable shipments with smart padlock GPS trackers that provide tamper alerts, real-time location, and chain of custody verification.",
+    description:
+      "Protect valuable shipments with smart padlock GPS trackers that provide tamper alerts, real-time location, and chain of custody verification.",
     icon: Shield,
     features: [
       "Smart padlock security",
@@ -328,7 +357,8 @@ export const industries: IndustryData[] = [
       "Cargo handover verification",
     ],
     category: "Security",
-    detailedDescription: "Secure your most valuable shipments with our intelligent cargo security system. Smart padlock GPS trackers provide both physical security and real-time tracking, with immediate alerts if tampering is detected. Container integrity monitoring ensures cargo remains sealed throughout transit, while electronic handover verification creates an indisputable chain of custody. Whether shipping electronics, pharmaceuticals, or luxury goods, our solution provides the protection high-value cargo demands.",
+    detailedDescription:
+      "Secure your high-value shipments with smart padlock GPS trackers that provide instant tamper alerts and verifiable chain of custody. Our solutions ensure container integrity and real-time visibility for electronics, pharmaceuticals, and luxury goods throughout transit.",
     benefits: [
       "Prevent cargo theft with tamper-proof locks",
       "Verify chain of custody at every handover",
@@ -341,7 +371,8 @@ export const industries: IndustryData[] = [
       "Chain of Custody Platform",
       "Theft Prevention Alerts",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Theft Reduction", value: "-94%", icon: ShieldAlert },
       { label: "Recovery Rate", value: "99%", icon: CheckCircle },
@@ -351,7 +382,8 @@ export const industries: IndustryData[] = [
   {
     slug: "food-beverage-distribution",
     title: "Food & Beverage Distribution",
-    description: "Maintain food safety standards with temperature-controlled GPS tracking for perishable goods, ensuring cold chain compliance from warehouse to delivery.",
+    description:
+      "Maintain food safety standards with temperature-controlled GPS tracking for perishable goods, ensuring cold chain compliance from warehouse to delivery.",
     icon: Coffee,
     features: [
       "Cold chain monitoring",
@@ -360,10 +392,11 @@ export const industries: IndustryData[] = [
       "HACCP compliance",
     ],
     category: "Food & Beverage",
-    detailedDescription: "Deliver fresh, safe food products with our temperature-controlled tracking solution designed for the food and beverage industry. Continuous monitoring ensures perishable goods remain within safe temperature ranges throughout the supply chain, with automated alerts for any deviations. HACCP compliance is simplified with detailed temperature logs and audit-ready reports. From farm to fork, our solution helps maintain product quality, reduce waste, and protect your brand reputation.",
+    detailedDescription:
+      "Ensure food safety and quality standards with temperature-controlled GPS tracking for all perishable shipments. Our cold chain solutions provide real-time monitoring from warehouse to final delivery, protecting your brand reputation and reducing inventory waste.",
     benefits: [
       "Ensure food safety with continuous monitoring",
-      "Reduce spoilage with instant temperature alerts",
+      "Reduce spoilage with temperature alerts",
       "Simplify HACCP compliance documentation",
       "Protect brand reputation with quality assurance",
     ],
@@ -373,7 +406,8 @@ export const industries: IndustryData[] = [
       "Delivery Freshness Monitoring",
       "HACCP Reporting Tools",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116137-7b1c1f5b9c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Spoilage Reduction", value: "-67%", icon: Package },
       { label: "Compliance Rate", value: "100%", icon: CheckCircle },
@@ -383,7 +417,8 @@ export const industries: IndustryData[] = [
   {
     slug: "marine-port-operations",
     title: "Marine & Port Operations",
-    description: "Track containers, cargo handling equipment, and vessels in port environments with marine-grade GPS devices resistant to saltwater and harsh conditions.",
+    description:
+      "Track containers, cargo handling equipment, and vessels in port environments with marine-grade GPS devices resistant to saltwater and harsh conditions.",
     icon: Ship,
     features: [
       "Container tracking",
@@ -392,10 +427,11 @@ export const industries: IndustryData[] = [
       "Yard management",
     ],
     category: "Maritime",
-    detailedDescription: "Optimize port and marine operations with our rugged tracking solutions built for challenging maritime environments. Monitor container locations across your yard, track cargo handling equipment utilization, and receive accurate vessel ETAs for better planning. Our marine-grade devices resist saltwater corrosion and maintain reliable connectivity even in areas with limited cellular coverage. Streamline port operations, reduce demurrage charges, and improve throughput with complete visibility of all assets.",
+    detailedDescription:
+      "Optimize port operations and maritime logistics with rugged, saltwater-resistant GPS devices that track containers and vessels in real-time. Our solution provides the visibility needed to reduce demurrage charges, improve equipment utilization, and streamline yard management.",
     benefits: [
       "Reduce container search time by 70%",
-      "Optimize equipment utilization across shifts",
+      "Optimize equipment utilization",
       "Eliminate demurrage with proactive planning",
       "Improve port throughput with real-time data",
     ],
@@ -405,7 +441,8 @@ export const industries: IndustryData[] = [
       "Port Equipment Monitoring",
       "Vessel ETA Platform",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116137-7b1c1f5b9c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1542708993627-76e152656b73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Container Search", value: "-70% time", icon: Compass },
       { label: "Equipment Utilization", value: "+45%", icon: Gauge },
@@ -415,7 +452,8 @@ export const industries: IndustryData[] = [
   {
     slug: "warehouse-inventory",
     title: "Warehouse & Inventory",
-    description: "Monitor forklifts, pallet jacks, and inventory movement within warehouse facilities to optimize material handling and prevent asset loss.",
+    description:
+      "Monitor forklifts, pallet jacks, and inventory movement within warehouse facilities to optimize material handling and prevent asset loss.",
     icon: Warehouse,
     features: [
       "Forklift tracking",
@@ -424,7 +462,8 @@ export const industries: IndustryData[] = [
       "Warehouse efficiency",
     ],
     category: "Logistics",
-    detailedDescription: "Transform your warehouse operations with indoor tracking technology that provides real-time visibility of material handling equipment and inventory. Monitor forklift utilization to identify bottlenecks and optimize fleet size. Track pallet and inventory movement to streamline putaway and picking processes. Prevent asset loss with geofence alerts that notify you when equipment leaves designated areas. Our solution integrates with your WMS to provide a complete picture of warehouse operations.",
+    detailedDescription:
+      "Gain complete visibility into your warehouse operations by monitoring the movement of forklifts, pallet jacks, and inventory in real-time. Our indoor tracking technology helps optimize material handling workflows, prevent asset loss, and improve overall facility productivity.",
     benefits: [
       "Increase forklift utilization by 30%",
       "Reduce equipment fleet size by 20%",
@@ -437,7 +476,8 @@ export const industries: IndustryData[] = [
       "Inventory Movement Analytics",
       "Warehouse Heat Mapping",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Equipment Utilization", value: "+30%", icon: Gauge },
       { label: "Asset Loss", value: "-95%", icon: Shield },
@@ -447,7 +487,8 @@ export const industries: IndustryData[] = [
   {
     slug: "cold-chain-logistics",
     title: "Cold Chain Logistics",
-    description: "Protect temperature-sensitive shipments with real-time temperature monitoring, automated alerts, and compliance reporting for perishable goods.",
+    description:
+      "Protect temperature-sensitive shipments with real-time temperature monitoring, automated alerts, and compliance reporting for perishable goods.",
     icon: Thermometer,
     features: [
       "Temperature tracking",
@@ -456,7 +497,8 @@ export const industries: IndustryData[] = [
       "Compliance documentation",
     ],
     category: "Temperature Controlled",
-    detailedDescription: "Maintain cold chain integrity from pickup to delivery with our comprehensive temperature monitoring solution. Continuous tracking ensures perishable goods remain within specified temperature ranges, with immediate alerts for any deviations that could compromise quality. Automated compliance reports satisfy regulatory requirements and provide proof of proper handling for insurance purposes. Whether shipping food, pharmaceuticals, or other temperature-sensitive items, our solution protects your products and your reputation.",
+    detailedDescription:
+      "Maintain strict temperature control for sensitive shipments with our integrated GPS and climate monitoring platform. We provide real-time alerts and automated compliance reporting to ensure that perishable goods remain within specified ranges throughout the entire journey.",
     benefits: [
       "Prevent spoilage with instant temperature alerts",
       "Ensure regulatory compliance with audit trails",
@@ -469,7 +511,8 @@ export const industries: IndustryData[] = [
       "Compliance Report Generator",
       "Cold Chain Analytics",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581094794327-6e3f1f4b9a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1590244439192-6ca885336494?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Spoilage Reduction", value: "-84%", icon: Package },
       { label: "Regulatory Compliance", value: "100%", icon: CheckCircle },
@@ -479,7 +522,8 @@ export const industries: IndustryData[] = [
   {
     slug: "video-safety-compliance",
     title: "Video Safety & Compliance",
-    description: "Enhance driver safety with dual-facing dash cams that capture road and cabin activity, providing evidence for incidents and coaching opportunities.",
+    description:
+      "Enhance driver safety with dual-facing dash cams that capture road and cabin activity, providing evidence for incidents and coaching opportunities.",
     icon: Camera,
     features: [
       "Dual-camera recording",
@@ -488,12 +532,13 @@ export const industries: IndustryData[] = [
       "Cloud video storage",
     ],
     category: "Safety",
-    detailedDescription: "Improve driver safety and fleet compliance with our AI-powered video telematics solution. Dual-facing cameras capture both the road ahead and driver behavior, providing complete visibility into every trip. AI algorithms detect fatigue, distraction, and other risky behaviors in real-time, enabling immediate coaching interventions. In the event of an incident, cloud-stored video provides irrefutable evidence for insurance claims and legal defense. Transform your safety culture with data-driven insights from every journey.",
+    detailedDescription:
+      "Improve fleet safety and driver accountability with AI-powered dual-facing dash cams that capture both road and cabin activity. Our solution provides cloud-stored video evidence for incidents and real-time fatigue alerts, helping reduce accident rates and insurance premiums.",
     benefits: [
       "Reduce accident rates by 50%+",
       "Exonerate drivers with video evidence",
-      "Improve insurance premiums with proven safety",
-      "Coach drivers based on actual behavior",
+      "Improve insurance premiums with safety data",
+      "Coach drivers based on real behavior",
     ],
     solutions: [
       "AI-Powered Dash Cams",
@@ -501,7 +546,8 @@ export const industries: IndustryData[] = [
       "Incident Video Review",
       "Real-time Coaching Alerts",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116137-7b1c1f5b9c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1514464128413-202802fb9711?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Accident Reduction", value: "-58%", icon: Shield },
       { label: "Insurance Savings", value: "-32%", icon: DollarSign },
@@ -511,7 +557,8 @@ export const industries: IndustryData[] = [
   {
     slug: "fuel-management-solutions",
     title: "Fuel Management Solutions",
-    description: "Detect fuel theft and optimize consumption with precision fuel sensors integrated with GPS tracking for complete fuel lifecycle management.",
+    description:
+      "Detect fuel theft and optimize consumption with precision fuel sensors integrated with GPS tracking for complete fuel lifecycle management.",
     icon: Fuel,
     features: [
       "Fuel level monitoring",
@@ -520,12 +567,13 @@ export const industries: IndustryData[] = [
       "Fuel efficiency reports",
     ],
     category: "Fuel Management",
-    detailedDescription: "Take control of your fuel costs with our comprehensive fuel management system. Precision fuel sensors integrated with GPS tracking provide real-time visibility into fuel levels, consumption patterns, and refueling events. Instant alerts notify you of sudden drops that indicate theft or leaks, enabling immediate investigation. Detailed reports compare fuel efficiency across drivers and vehicles, identifying opportunities for improvement. With fuel typically representing 30-40% of fleet operating costs, our solution delivers rapid ROI.",
+    detailedDescription:
+      "Take full control of your fuel expenses with high-precision sensors that detect theft and monitor consumption in real-time. Our analytics dashboard helps identify inefficient driving habits and optimize refueling strategies to significantly reduce operational costs.",
     benefits: [
       "Eliminate fuel theft with instant alerts",
       "Reduce fuel consumption by 15-25%",
       "Identify inefficient drivers and vehicles",
-      "Optimize refueling strategies",
+      "Optimize fleet refueling strategies",
     ],
     solutions: [
       "Fuel Level Sensors",
@@ -533,7 +581,8 @@ export const industries: IndustryData[] = [
       "Consumption Analytics",
       "Refueling Management",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581094794327-6e3f1f4b9a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Theft Elimination", value: "99%", icon: Shield },
       { label: "Fuel Savings", value: "-22%", icon: Fuel },
@@ -543,7 +592,8 @@ export const industries: IndustryData[] = [
   {
     slug: "survey-mapping-services",
     title: "Survey & Mapping Services",
-    description: "Capture high-precision geographic data with photogrammetry and GPS mapping services for land surveys, construction planning, and infrastructure projects.",
+    description:
+      "Capture high-precision geographic data with photogrammetry and GPS mapping services for land surveys, construction planning, and infrastructure projects.",
     icon: Map,
     features: [
       "Precision mapping",
@@ -552,12 +602,13 @@ export const industries: IndustryData[] = [
       "Geospatial analysis",
     ],
     category: "Mapping",
-    detailedDescription: "Access high-precision geographic data with our professional survey and mapping services. Using advanced GPS technology and photogrammetry, we capture detailed spatial information for land surveys, construction planning, and infrastructure projects. Our 3D modeling capabilities provide visual context for project planning and stakeholder presentations. Whether you need topographic surveys, boundary determination, or volume calculations for earthworks, our geospatial solutions deliver the accuracy your projects demand.",
+    detailedDescription:
+      "Capture high-precision geographic data using advanced drone photogrammetry and GPS survey tools. Our services provide accurate 3D models and geospatial analysis for construction planning, land surveys, and infrastructure development, saving significant time and field costs.",
     benefits: [
-      "Reduce survey time by 60% with drone mapping",
+      "Reduce survey time by 60% with drones",
       "Improve project planning with 3D models",
       "Eliminate costly field rework",
-      "Access precise data for engineering design",
+      "Access precise data for design",
     ],
     solutions: [
       "Drone Photogrammetry",
@@ -565,7 +616,8 @@ export const industries: IndustryData[] = [
       "3D Modeling Services",
       "Geospatial Analysis",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1504150559433-c4aae69a8acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Survey Time", value: "-60%", icon: Clock },
       { label: "Data Accuracy", value: "cm-level", icon: Compass },
@@ -575,7 +627,8 @@ export const industries: IndustryData[] = [
   {
     slug: "fastag-fleet-management",
     title: "FASTag Fleet Management",
-    description: "Centralize toll payments across your entire fleet with automated FASTag recharges, transaction history, and expense reporting for simplified accounting.",
+    description:
+      "Centralize toll payments across your entire fleet with automated FASTag recharges, transaction history, and expense reporting for simplified accounting.",
     icon: CreditCard,
     features: [
       "Auto FASTag recharge",
@@ -584,9 +637,10 @@ export const industries: IndustryData[] = [
       "Fleet toll expense reports",
     ],
     category: "Toll Management",
-    detailedDescription: "Simplify toll management for your entire fleet with our integrated FASTag platform. Automated recharges ensure tags never run out of balance, preventing delays and fines at toll plazas. Comprehensive transaction history provides visibility into toll expenses across vehicles, routes, and time periods. Balance monitoring alerts notify you before funds run low, enabling proactive management. Detailed expense reports streamline accounting and provide data for route optimization and client billing.",
+    detailedDescription:
+      "Simplify toll management for your entire fleet with centralized FASTag recharges and automated expense reporting. Our platform eliminates manual toll payments, prevents delays at toll plazas, and provides clear financial visibility for better accounting and budgeting.",
     benefits: [
-      "Eliminate toll payment delays with auto-recharge",
+      "Eliminate toll delays with auto-recharge",
       "Reduce administrative work by 90%",
       "Track toll expenses by vehicle and route",
       "Prevent fines with balance monitoring",
@@ -597,7 +651,8 @@ export const industries: IndustryData[] = [
       "Toll Transaction Analytics",
       "Expense Reporting Tools",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1591768793355-74d7c513c317?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Admin Time", value: "-90%", icon: Clock },
       { label: "Payment Delays", value: "eliminated", icon: CheckCircle },
@@ -607,7 +662,8 @@ export const industries: IndustryData[] = [
   {
     slug: "container-intermodal-transport",
     title: "Container & Intermodal Transport",
-    description: "Track shipping containers across road, rail, and sea with rugged GPS devices that provide visibility throughout the intermodal transportation chain.",
+    description:
+      "Track shipping containers across road, rail, and sea with rugged GPS devices that provide visibility throughout the intermodal transportation chain.",
     icon: Container,
     features: [
       "Container location tracking",
@@ -616,11 +672,12 @@ export const industries: IndustryData[] = [
       "Chain of custody",
     ],
     category: "Container Logistics",
-    detailedDescription: "Gain complete visibility of container movements across road, rail, and sea with our intermodal tracking solution. Rugged GPS devices withstand the rigors of global shipping while providing precise location updates throughout the journey. Tamper detection alerts you to unauthorized access attempts, protecting valuable cargo. Chain of custody documentation creates an indisputable record of every handoff, reducing disputes and improving security. From port to destination, know exactly where your containers are at all times.",
+    detailedDescription:
+      "Track shipping containers seamlessly across road, rail, and sea with ruggedized GPS devices designed for long-haul intermodal transport. Our platform provides real-time location updates and tamper detection to protect valuable cargo throughout the global supply chain.",
     benefits: [
       "Reduce container loss with real-time tracking",
       "Prevent cargo theft with tamper alerts",
-      "Optimize container utilization across modes",
+      "Optimize container utilization",
       "Eliminate demurrage with proactive planning",
     ],
     solutions: [
@@ -629,7 +686,8 @@ export const industries: IndustryData[] = [
       "Tamper Detection System",
       "Chain of Custody Records",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116137-7b1c1f5b9c4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494412574743-019475b77673?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Container Visibility", value: "100%", icon: Globe },
       { label: "Theft Prevention", value: "-96%", icon: Shield },
@@ -639,7 +697,8 @@ export const industries: IndustryData[] = [
   {
     slug: "agriculture-farming",
     title: "Agriculture & Farming",
-    description: "Monitor farm equipment, tractors, and harvesters to optimize field operations, reduce fuel costs, and track agricultural asset utilization.",
+    description:
+      "Monitor farm equipment, tractors, and harvesters to optimize field operations, reduce fuel costs, and track agricultural asset utilization.",
     icon: Tractor,
     features: [
       "Farm equipment tracking",
@@ -648,10 +707,11 @@ export const industries: IndustryData[] = [
       "Maintenance alerts",
     ],
     category: "Agriculture",
-    detailedDescription: "Maximize agricultural productivity with our farm equipment tracking solution. Monitor tractors, harvesters, and other implements in real-time to optimize field operations and reduce idle time. Fuel consumption tracking identifies inefficient practices and helps control costs. Maintenance alerts based on actual usage hours prevent breakdowns during critical planting and harvest windows. Detailed reports show equipment utilization across fields, enabling better planning and resource allocation for seasonal operations.",
+    detailedDescription:
+      "Maximize agricultural productivity by monitoring the location and usage of tractors, harvesters, and other farm equipment. Our GPS solutions help optimize field operations, reduce fuel waste, and provide maintenance alerts to ensure your machinery is ready for critical harvest windows.",
     benefits: [
       "Increase equipment utilization by 25%",
-      "Reduce fuel costs with efficiency monitoring",
+      "Reduce fuel costs with efficiency tracking",
       "Prevent downtime with maintenance alerts",
       "Optimize field operations with route tracking",
     ],
@@ -661,7 +721,8 @@ export const industries: IndustryData[] = [
       "Fuel Efficiency System",
       "Equipment Maintenance Alerts",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581094794327-6e3f1f4b9a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Equipment Utilization", value: "+25%", icon: Gauge },
       { label: "Fuel Savings", value: "-18%", icon: Fuel },
@@ -671,7 +732,8 @@ export const industries: IndustryData[] = [
   {
     slug: "emergency-services",
     title: "Emergency Services",
-    description: "Coordinate ambulance, fire, and police response vehicles with real-time GPS tracking to reduce emergency response times and improve public safety.",
+    description:
+      "Coordinate ambulance, fire, and police response vehicles with real-time GPS tracking to reduce emergency response times and improve public safety.",
     icon: Ambulance,
     features: [
       "Emergency vehicle tracking",
@@ -680,7 +742,8 @@ export const industries: IndustryData[] = [
       "Resource dispatch",
     ],
     category: "Emergency Services",
-    detailedDescription: "Enhance emergency response capabilities with our specialized tracking solution for first responders. Real-time vehicle locations enable dispatchers to send the closest available unit to every incident, reducing response times when every second counts. Incident coordination features help multiple units work together effectively at the scene. Historical data analysis identifies patterns and opportunities for resource optimization. From ambulance services to fire departments and law enforcement, our solution helps protect communities.",
+    detailedDescription:
+      "Reduce critical response times and improve public safety by coordinating emergency vehicles through a centralized GPS tracking platform. Our real-time dispatch tools help identify the closest available units and optimize routes to ensure rapid assistance when every second counts.",
     benefits: [
       "Reduce emergency response times by 30%",
       "Improve resource allocation across incidents",
@@ -693,7 +756,8 @@ export const industries: IndustryData[] = [
       "Incident Management System",
       "Response Time Analytics",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1587572236558-a3751c6d42c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Response Time", value: "-32%", icon: Clock },
       { label: "Coverage Area", value: "+45%", icon: Globe },
@@ -703,7 +767,8 @@ export const industries: IndustryData[] = [
   {
     slug: "ais-140-compliance",
     title: "AIS 140 Compliance",
-    description: "Meet government regulations with AIS 140 certified GPS trackers for commercial vehicles, including emergency panic buttons and vehicle diagnostics.",
+    description:
+      "Meet government regulations with AIS 140 certified GPS trackers for commercial vehicles, including emergency panic buttons and vehicle diagnostics.",
     icon: Shield,
     features: [
       "AIS 140 certification",
@@ -712,7 +777,8 @@ export const industries: IndustryData[] = [
       "Regulatory compliance",
     ],
     category: "Compliance",
-    detailedDescription: "Ensure full compliance with AIS 140 regulations using our certified GPS tracking solution for commercial vehicles. Our devices meet all government requirements including emergency panic buttons, vehicle diagnostics, and data reporting standards. Automated compliance reports simplify regulatory submissions and provide proof of adherence. Vehicle diagnostics monitor critical systems and alert you to issues before they cause breakdowns. With AIS 140 compliance built-in, you can focus on operations while we handle regulatory requirements.",
+    detailedDescription:
+      "Ensure your fleet meets all government safety standards with AIS 140 certified GPS trackers. Our solution includes mandatory emergency panic buttons and real-time vehicle diagnostics, making regulatory compliance simple while enhancing passenger and driver safety.",
     benefits: [
       "Meet all AIS 140 requirements effortlessly",
       "Automate compliance reporting",
@@ -725,7 +791,8 @@ export const industries: IndustryData[] = [
       "Vehicle Diagnostics System",
       "Compliance Report Generator",
     ],
-    imageUrl: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1558444479-c84750339fd0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     stats: [
       { label: "Compliance Rate", value: "100%", icon: CheckCircle },
       { label: "Audit Success", value: "100%", icon: Shield },
@@ -739,16 +806,13 @@ export const industries: IndustryData[] = [
       "Track drilling rigs, pipeline assets, and energy fleet vehicles with rugged GPS devices and fuel monitoring systems designed for remote oil field environments.",
     icon: Flame,
     category: "Energy",
-    imageUrl: "/images/industries/oil-gas-operations.jpg", // Make sure to add this image
+    imageUrl:
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     features: [
       "Real-time drilling rig GPS tracking",
       "Pipeline asset monitoring & leak detection",
       "Fuel consumption tracking for heavy equipment",
       "Remote location satellite coverage",
-      "Harsh environment certified hardware",
-      "Geofencing for restricted zones",
-      "Engine hours & maintenance alerts",
-      "Tanker fleet management",
     ],
     stats: [
       { label: "Rigs Tracked", value: "500+", icon: DrillIcon },
@@ -756,7 +820,13 @@ export const industries: IndustryData[] = [
       { label: "Pipeline Miles", value: "10,000+", icon: Activity },
     ],
     detailedDescription:
-      "The oil and gas industry operates in some of the most challenging environments on earth, from remote desert locations to offshore platforms and arctic conditions. Our specialized GPS tracking solutions are engineered to withstand extreme temperatures, vibration, and harsh conditions while providing reliable real-time data on asset location, utilization, and performance. We help energy companies optimize their operations by tracking everything from drilling rigs and pipeline inspection vehicles to fuel trucks and service fleet. Our integrated fuel monitoring systems provide critical insights into consumption patterns, helping detect theft and inefficiencies that can cost millions annually. With satellite-based communication ensuring coverage even in the most remote locations, our solutions give energy companies complete visibility and control over their valuable assets, improving safety, reducing downtime, and maximizing operational efficiency.",
+      "Manage complex oil and gas operations with ruggedized GPS tracking for drilling rigs, pipeline assets, and tanker fleets. Our satellite-based monitoring ensures complete visibility in remote environments, helping prevent fuel theft and ensuring the safety of personnel and equipment.",
+    benefits: [
+      "Reduce fuel theft with consumption monitoring",
+      "Minimize downtime with predictive maintenance",
+      "Improve safety with geofencing and zone alerts",
+      "Optimize rig utilization with usage analytics",
+    ],
     solutions: [
       "Drilling Rig GPS Tracking",
       "Pipeline Asset Monitoring",
@@ -767,15 +837,5 @@ export const industries: IndustryData[] = [
       "Well Site Security Monitoring",
       "Equipment Maintenance Alerts",
     ],
-    benefits: [
-      "Reduce fuel theft by up to 30% with real-time consumption monitoring",
-      "Minimize downtime with predictive maintenance alerts",
-      "Improve safety with geofencing and restricted zone alerts",
-      "Optimize rig utilization with detailed usage analytics",
-      "Enhance security with tamper-proof asset tracking",
-      "Lower operational costs through efficient route planning",
-      "Ensure compliance with environmental and safety regulations",
-      "Gain complete visibility across remote operations",
-    ],
-  }
+  },
 ];

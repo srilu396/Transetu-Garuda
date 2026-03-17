@@ -3,13 +3,14 @@
 import React from "react";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
-import { SolutionData } from "@/sections/gps/data/gpsData";
-import { CheckCircle, ArrowLeft, Satellite } from "lucide-react";
+import { SolutionData, solutions } from "@/sections/gps/data/gpsData";
+import { CheckCircle, ArrowLeft, Satellite, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface GPSDetailWrapperProps {
-  data: SolutionData;
+  slug?: string;
+  data?: SolutionData;
   showNavbarFooter?: boolean;
   onBack?: () => void;
   category?: string;
@@ -17,13 +18,42 @@ interface GPSDetailWrapperProps {
 }
 
 export default function GPSDetailWrapper({
-  data,
+  slug,
+  data: propData,
   showNavbarFooter = true,
   onBack,
   category = "Fleet Solution",
   icon: PropIcon,
 }: GPSDetailWrapperProps) {
   const router = useRouter();
+
+  // Find data if slug is provided, otherwise use propData
+  const data = propData || (slug ? solutions[slug] : undefined);
+
+  if (!data) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <div className="text-center max-w-md">
+          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Search size={40} className="text-slate-400" />
+          </div>
+          <h1 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+            Solution Not Found
+          </h1>
+          <p className="text-slate-600 mb-8 font-medium">
+            The solution details you're looking for aren't available at the moment.
+          </p>
+          <button
+            onClick={() => router.push("/#products")}
+            className="bg-primary text-white px-8 py-3 rounded-full font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+          >
+            Explore Solutions
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const Icon = PropIcon || data.icon || Satellite;
 
   const handleBack = () => {
@@ -83,10 +113,10 @@ export default function GPSDetailWrapper({
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
               <div className="max-w-3xl">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-md">
+                <h3 className="text-2xl md:text-3xl font-bold text-black mb-4">
                   Overview
                 </h3>
-                <p className="text-white/90 font-medium text-lg leading-relaxed drop-shadow-sm line-clamp-3 md:line-clamp-none">
+                <p className="text-black font-medium text-lg leading-relaxed line-clamp-3 md:line-clamp-none">
                   {data.overview}
                 </p>
               </div>
@@ -286,31 +316,6 @@ export default function GPSDetailWrapper({
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
           )}
-
-          {/* Contact CTA - Moved further down with more spacing */}
-          <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
-
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 relative z-10">
-              Ready to deploy {data.title}?
-            </h2>
-            <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto relative z-10">
-              Transform your fleet operations with our industry-leading GPS
-              tracking hardware and intuitive software platform.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <Link
-                href="/contact"
-                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl"
-              >
-                Contact Sales
-              </Link>
-              <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all">
-                Request a Demo
-              </button>
-            </div>
-          </div>
         </div>
       </main>
 

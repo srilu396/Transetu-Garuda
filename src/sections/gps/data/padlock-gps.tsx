@@ -126,7 +126,5 @@ export const padlockGps: SolutionData = {
     description:
       "Advanced electronic padlocks with built-in GPS and tamper alerts for securing containers, trailers, and remote infrastructure.",
   },
-  imageUrl: "/images/products/padlock.jpg",
-  secondaryImageUrl:
-    "https://images.unsplash.com/photo-1558317374-067fb5f30001?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
+  imageUrl: "/images/products/padlock.jpg"
 };

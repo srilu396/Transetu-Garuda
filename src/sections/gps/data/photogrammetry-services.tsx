@@ -125,7 +125,5 @@ export const photogrammetryServices: SolutionData = {
     description:
       "Professional aerial surveying and photogrammetry services for accurate topographical data, volumetric analysis, and 3D modeling.",
   },
-  imageUrl: "/images/products/photogrammetry.jpg",
-  secondaryImageUrl:
-    "https://images.unsplash.com/photo-1508614589041-895b88991e3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
+  imageUrl: "/images/products/photogrammetry.jpg"
 };

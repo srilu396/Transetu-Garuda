@@ -108,6 +108,5 @@ export const dashCamSystem: SolutionData = {
     description:
       "Advanced dual-facing dash cams with live streaming, AI driver alerts, and secure cloud storage for professional fleet management.",
   },
-  imageUrl: "/images/products/dash-cam.jpg",
-  secondaryImageUrl: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+  imageUrl: "/images/products/dash-cam.jpg"
 };

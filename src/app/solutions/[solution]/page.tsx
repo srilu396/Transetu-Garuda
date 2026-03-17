@@ -4,9 +4,9 @@ import { solutions } from "@/sections/gps/data/gpsData";
 import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
 
 export async function generateMetadata(
-  { params }: { params: Promise<{ solution: string }> }, // Fix for Next.js 15 route params
+  { params }: { params: { solution: string } }, 
 ): Promise<Metadata> {
-  const { solution: slug } = await params;
+  const { solution: slug } = params;
   const solution = solutions[slug];
 
   if (!solution) {
@@ -21,19 +21,14 @@ export async function generateMetadata(
   };
 }
 
-export default async function SolutionPage({
+export default function SolutionPage({
   params,
 }: {
-  params: Promise<{ solution: string }>; // Fix for Next.js 15 route params
+  params: { solution: string }; 
 }) {
-  const { solution: slug } = await params;
-  const solution = solutions[slug];
+  const { solution: slug } = params;
 
-  if (!solution) {
-    notFound();
-  }
-
-  return <GPSTrackingDetails data={solution} />;
+  return <GPSTrackingDetails slug={slug} />;
 }
 
 export function generateStaticParams() {

@@ -125,7 +125,6 @@ export const ais140Tracker: SolutionData = {
     description:
       "Government-approved, ARAI/ICAT certified AIS 140 compliant GPS tracking devices with SOS panic buttons for public and commercial transport.",
   },
-  imageUrl: "/images/products/ais140.jpg",
-  secondaryImageUrl:
-    "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
+  imageUrl: "/images/products/ais140.jpg"
+ 
 };

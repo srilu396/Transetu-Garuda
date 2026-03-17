@@ -185,14 +185,10 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial="rest"
-            whileHover="hover"
-            variants={iconHover}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
-          >
+          {/* Fixed badge - removed hover animation */}
+          <div className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6">
             Why Choose Us
-          </motion.div>
+          </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900">
             About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Garuda OM</span>
           </h2>

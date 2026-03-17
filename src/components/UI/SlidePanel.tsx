@@ -155,7 +155,7 @@ export default function SlidePanel({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative h-full w-full bg-[#fef2cc] shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
+            className="relative h-full w-full bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] flex flex-col"
           >
             {/* Unified Top Header - Navigation only */}
             <div className="relative z-[200]">

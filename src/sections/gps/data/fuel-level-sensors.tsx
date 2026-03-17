@@ -109,6 +109,5 @@ export const fuelLevelSensors: SolutionData = {
     description:
       "Advanced fuel sensors integrated with GPS tracking to monitor consumption, detect theft, and reduce fuel costs with 99% accuracy.",
   },
-  imageUrl: "/images/products/fuel-monitor.jpg",
-  secondaryImageUrl: "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+  imageUrl: "/images/products/fuel-monitor.jpg"
 };

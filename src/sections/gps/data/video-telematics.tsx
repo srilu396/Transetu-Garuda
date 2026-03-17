@@ -108,6 +108,5 @@ export const videoTelematics: SolutionData = {
     description:
       "Advanced video telematics combining GPS data with AI-powered video analysis for total fleet visibility, safety, and liability protection.",
   },
-  imageUrl: "/images/products/video-telematics.jpg",
-  secondaryImageUrl: "https://images.unsplash.com/photo-1557426423-038a7d427425?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+  imageUrl: "/images/products/video-telematics.jpg"
 };

@@ -108,6 +108,5 @@ export const temperatureMonitor: SolutionData = {
     description:
       "Advanced real-time temperature and humidity tracking for refrigerated transport, ensuring cargo integrity and regulatory compliance.",
   },
-  imageUrl: "/images/products/temperature.jpg",
-  secondaryImageUrl: "https://images.unsplash.com/photo-1580913182749-51b4b1198d59?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+  imageUrl: "/images/products/temperature.jpg"
 };

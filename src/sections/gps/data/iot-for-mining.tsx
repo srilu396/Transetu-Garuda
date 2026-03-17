@@ -109,6 +109,5 @@ export const iotForMining: SolutionData = {
     description:
       "Rugged GPS and satellite tracking devices designed for heavy machinery in challenging mining and construction environments.",
   },
-  imageUrl: "/images/products/mining.jpg",
-  secondaryImageUrl: "https://images.unsplash.com/photo-1578351508211-1ca87895bc63?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+  imageUrl: "/images/products/mining.jpg"
 };
