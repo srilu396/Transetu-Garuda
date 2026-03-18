@@ -1,14 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef } from "react"; // Added useRef
 import { motion } from "framer-motion";
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  Send
-} from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 
 const contactInfo = [
   {
@@ -45,9 +39,7 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
@@ -56,11 +48,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 12,
-    },
+    transition: { type: "spring", stiffness: 100, damping: 12 },
   },
 };
 
@@ -68,18 +56,78 @@ const floatAnimation = {
   initial: { y: 0 },
   animate: {
     y: [-10, 10, -10],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut" as const
-    }
+    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
   }
 };
 
 export default function ContactSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Reset states
+    setIsSubmitting(true);
+    setShowSuccess(false);
+    setShowError(false);
+    
+    // Get form data
+    const formData = {
+      name: (e.currentTarget.elements.namedItem('name') as HTMLInputElement).value,
+      email: (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value,
+      company: (e.currentTarget.elements.namedItem('company') as HTMLInputElement).value,
+      phone: (e.currentTarget.elements.namedItem('phone') as HTMLInputElement).value,
+      service: (e.currentTarget.elements.namedItem('service') as HTMLSelectElement).value,
+      location: (e.currentTarget.elements.namedItem('location') as HTMLInputElement).value,
+      message: (e.currentTarget.elements.namedItem('message') as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // SUCCESS - Email was sent
+        setShowSuccess(true);
+        
+        // THIS IS THE FIX - Reset the form to clear all fields
+        if (formRef.current) {
+          formRef.current.reset();
+        }
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => setShowSuccess(false), 5000);
+      } else {
+        // ERROR from server
+        setShowError(true);
+        setErrorMessage(data.message || 'Something went wrong. Please try again.');
+        
+        // Hide error after 5 seconds
+        setTimeout(() => setShowError(false), 5000);
+      }
+    } catch (error) {
+      // NETWORK ERROR - silently fail (no message shown)
+      console.log('Network error occurred but not showing to user');
+      // Do nothing - no error message shown to user
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden" style={{ backgroundColor: '#f8fafc' }}>
-      {/* Animated Background Elements - Reference from AboutSection */}
+      {/* Animated Background Elements */}
       <motion.div
         variants={floatAnimation}
         initial="initial"
@@ -90,19 +138,11 @@ export default function ContactSection() {
         variants={floatAnimation}
         initial="initial"
         animate="animate"
-        custom={1}
         className="absolute bottom-20 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -ml-48 -mb-48"
       />
       <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.2, 0.1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
       
@@ -136,7 +176,7 @@ export default function ContactSection() {
           </motion.p>
         </div>
 
-        {/* Section Titles - Aligned horizontally */}
+        {/* Section Titles */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
@@ -192,13 +232,15 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm"
           >
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            {/* Added ref to the form */}
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label htmlFor="name" className="text-sm font-semibold text-slate-700">Full Name *</label>
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     placeholder="John Doe"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
@@ -209,6 +251,7 @@ export default function ContactSection() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="john@example.com"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
@@ -221,6 +264,7 @@ export default function ContactSection() {
                   <input
                     type="text"
                     id="company"
+                    name="company"
                     placeholder="Company Name"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
                   />
@@ -230,6 +274,7 @@ export default function ContactSection() {
                   <input
                     type="tel"
                     id="phone"
+                    name="phone"
                     required
                     placeholder="+91-0000000000"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
@@ -242,6 +287,7 @@ export default function ContactSection() {
                   <label htmlFor="service" className="text-sm font-semibold text-slate-700">Select a Service</label>
                   <select
                     id="service"
+                    name="service"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%2364748b%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22m19%209-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_1rem_center] bg-no-repeat text-sm"
                   >
                     <option value="">Select a service</option>
@@ -256,6 +302,7 @@ export default function ContactSection() {
                   <input
                     type="text"
                     id="location"
+                    name="location"
                     required
                     placeholder="City, State"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm"
@@ -267,20 +314,56 @@ export default function ContactSection() {
                 <label htmlFor="message" className="text-sm font-semibold text-slate-700">Message</label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={3}
                   placeholder="Your message here..."
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm resize-none"
                 ></textarea>
               </div>
 
+              {/* Success Message */}
+              {showSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl text-sm bg-green-50 text-green-700 border border-green-200"
+                >
+                  Thank you! Your message has been sent successfully.
+                </motion.div>
+              )}
+
+              {/* Error Message - Only shows for server errors, NOT for network errors */}
+              {showError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl text-sm bg-red-50 text-red-700 border border-red-200"
+                >
+                  {errorMessage}
+                </motion.div>
+              )}
+
+              {/* Submit Button */}
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-3.5 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all duration-300 text-sm"
+                disabled={isSubmitting}
+                className={`w-full py-3.5 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all duration-300 text-sm ${
+                  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
-                <span>Send Message</span>
-                <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                {isSubmitting ? (
+                  <>
+                    <span>Sending...</span>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  </>
+                )}
               </motion.button>
             </form>
           </motion.div>
