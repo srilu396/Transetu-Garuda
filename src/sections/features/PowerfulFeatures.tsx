@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   MapPin,
@@ -79,11 +79,42 @@ const features = [
 // How many cards visible at once (used to calculate dot count)
 const CARDS_PER_VIEW = 3;
 const TOTAL_DOTS = features.length - CARDS_PER_VIEW + 1; // 7 dot positions
+const AUTO_SCROLL_INTERVAL = 6000; // 6 seconds — enough time to read each card
 
 export default function FeaturesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const autoScrollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // ── Auto-scroll: starts on mount, pauses on hover, resumes on leave ──────
+  const startAutoScroll = useCallback(() => {
+    if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+    autoScrollTimer.current = setInterval(() => {
+      setActiveIndex((prev) => {
+        const next = prev >= TOTAL_DOTS - 1 ? 0 : prev + 1;
+        // scrollToIndex needs the ref — call it via a small helper below
+        if (scrollRef.current) {
+          const SNAP = 340 + 24;
+          const maxScroll = Math.max(0, scrollRef.current.scrollWidth - scrollRef.current.clientWidth);
+          scrollRef.current.scrollTo({
+            left: Math.min(next * SNAP, maxScroll),
+            behavior: "smooth",
+          });
+        }
+        return next;
+      });
+    }, AUTO_SCROLL_INTERVAL);
+  }, []);
+
+  const stopAutoScroll = useCallback(() => {
+    if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+  }, []);
+
+  useEffect(() => {
+    startAutoScroll();
+    return () => stopAutoScroll();
+  }, [startAutoScroll, stopAutoScroll]);
 
   const CARD_WIDTH = 340;
   const GAP = 24;
@@ -108,6 +139,7 @@ export default function FeaturesSection() {
   const scroll = (direction: "left" | "right") => {
     if (isAnimating) return;
     setIsAnimating(true);
+    startAutoScroll(); // reset timer on manual interaction
 
     const next =
       direction === "left"
@@ -223,7 +255,11 @@ export default function FeaturesSection() {
           </div>
 
           {/* ── Carousel wrapper ── */}
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+            onMouseEnter={stopAutoScroll}
+            onMouseLeave={startAutoScroll}
+          >
             {/* Left arrow */}
             <button
               onClick={() => scroll("left")}
@@ -334,7 +370,10 @@ export default function FeaturesSection() {
               {Array.from({ length: TOTAL_DOTS }).map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => scrollToIndex(i)}
+                  onClick={() => {
+                    startAutoScroll(); // reset timer on manual dot click
+                    scrollToIndex(i);
+                  }}
                   aria-label={`Go to slide ${i + 1}`}
                   className="transition-all duration-300 rounded-full focus:outline-none"
                   style={{
