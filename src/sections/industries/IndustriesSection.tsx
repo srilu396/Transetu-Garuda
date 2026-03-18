@@ -230,28 +230,42 @@ export default function IndustriesSection() {
               needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleContactNavigation}
-                type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm cursor-pointer"
-              >
-                Consult Our Experts
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleContactNavigation}
-                type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-[#ec39b0] hover:text-[#ec39b0] font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
-              >
-                Request Customization
-              </motion.button>
-            </div>
+  <motion.button
+    whileHover={{
+      scale: 1.05,
+      boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
+    }}
+    whileTap={{ scale: 0.95 }}
+    onClick={handleContactNavigation}
+    type="button"
+    className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
+    style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+  >
+    Consult Our Experts
+  </motion.button>
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={handleContactNavigation}
+    type="button"
+    className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+    style={{
+      border: "2px solid rgba(126,96,244,0.4)",
+      color: "#7E60F4",
+    }}
+    onMouseEnter={(e) => {
+      (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
+      (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
+    }}
+    onMouseLeave={(e) => {
+      (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
+      (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
+    }}
+  >
+    Request Customization
+  </motion.button>
+</div>
+            
           </div>
         </motion.div>
       </div>

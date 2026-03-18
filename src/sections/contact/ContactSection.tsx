@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send, ChevronDown } from "lucide-react";
 
 const contactInfo = [
@@ -43,12 +43,12 @@ const services = [
   { value: "other",   label: "Custom Solution" },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1, y: 0,
@@ -56,7 +56,7 @@ const itemVariants = {
   },
 };
 
-const floatAnimation = {
+const floatAnimation: Variants = {
   initial: { y: 0 },
   animate: {
     y: [-10, 10, -10],
