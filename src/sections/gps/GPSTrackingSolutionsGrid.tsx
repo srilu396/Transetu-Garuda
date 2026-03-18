@@ -31,7 +31,7 @@ const products = [
     ],
     link: "/solutions/dash-cam-system",
     slug: "dash-cam-system",
-    image: "/images/products/dash-cam.jpg", // Add your image path
+    image: "/images/products/dash-cam.jpg",
   },
   {
     title: "Fleet GPS Tracker",
@@ -46,7 +46,7 @@ const products = [
     ],
     link: "/solutions/gps-tracking-solutions",
     slug: "gps-tracking-solutions",
-    image: "/images/products/fleet-tracker.jpg", // Add your image path
+    image: "/images/products/fleet-tracker.jpg",
   },
   {
     title: "Mining Equipment Tracking",
@@ -61,7 +61,7 @@ const products = [
     ],
     link: "/solutions/iot-for-mining",
     slug: "iot-for-mining",
-    image: "/images/products/mining.jpg", // Add your image path
+    image: "/images/products/mining.jpg",
   },
   {
     title: "Fuel Monitoring System",
@@ -76,7 +76,7 @@ const products = [
     ],
     link: "/solutions/fuel-level-sensors",
     slug: "fuel-level-sensors",
-    image: "/images/products/fuel-monitor.jpg", // Add your image path
+    image: "/images/products/fuel-monitor.jpg",
   },
   {
     title: "Video Telematics",
@@ -91,7 +91,7 @@ const products = [
     ],
     link: "/solutions/video-telematics",
     slug: "video-telematics",
-    image: "/images/products/video-telematics.jpg", // Add your image path
+    image: "/images/products/video-telematics.jpg",
   },
   {
     title: "Temperature Monitoring",
@@ -106,7 +106,7 @@ const products = [
     ],
     link: "/solutions/temperature-monitor",
     slug: "temperature-monitor",
-    image: "/images/products/temperature.jpg", // Add your image path
+    image: "/images/products/temperature.jpg",
   },
   {
     title: "GPS Smart Padlock",
@@ -117,7 +117,7 @@ const products = [
     features: ["Remote lock control", "GPS location tracking", "Tamper alerts"],
     link: "/solutions/padlock-gps",
     slug: "padlock-gps",
-    image: "/images/products/padlock.jpg", // Add your image path
+    image: "/images/products/padlock.jpg",
   },
   {
     title: "Photogrammetry Services",
@@ -128,7 +128,7 @@ const products = [
     features: ["Survey data collection", "Precision mapping", "3D modeling"],
     link: "/solutions/photogrammetry-services",
     slug: "photogrammetry-services",
-    image: "/images/products/photogrammetry.jpg", // Add your image path
+    image: "/images/products/photogrammetry.jpg",
   },
   {
     title: "AIS 140 GPS Tracker",
@@ -143,7 +143,7 @@ const products = [
     ],
     link: "/solutions/ais-140-tracker",
     slug: "ais-140-tracker",
-    image: "/images/products/ais140.jpg", // Add your image path
+    image: "/images/products/ais140.jpg",
   },
 ];
 
@@ -151,8 +151,7 @@ export default function ProductsSection() {
   const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
-  
-  // Function to handle navigation to contact section
+
   const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     router.push("/#contact");
@@ -162,9 +161,7 @@ export default function ProductsSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
@@ -173,104 +170,101 @@ export default function ProductsSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 12
-      }
+      transition: { type: "spring" as const, stiffness: 100, damping: 12 },
     },
     hover: {
       y: -12,
       scale: 1.02,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 17
-      }
+      transition: { type: "spring" as const, stiffness: 400, damping: 17 },
     },
     tap: {
       scale: 0.98,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 17
-      }
-    }
+      transition: { type: "spring" as const, stiffness: 400, damping: 17 },
+    },
   };
 
+  // ── CHANGED: hover glow now uses brand pink #ec39b0 → purple #7E60F4 ──
   const cardBorderVariants = {
     hover: {
-      borderColor: "rgba(236, 57, 176, 0.6)", // Increased opacity for more visibility
-      boxShadow: "0 0 0 3px rgba(236, 57, 176, 0.3), 0 30px 60px -15px rgba(236, 57, 176, 0.4)", // Full border glow
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const
-      }
-    }
+      borderColor: "rgba(126, 96, 244, 0.7)",
+      boxShadow:
+        "0 0 0 3px rgba(126, 96, 244, 0.25), 0 30px 60px -15px rgba(236, 57, 176, 0.35)",
+      transition: { duration: 0.3, ease: "easeOut" as const },
+    },
   };
 
   const iconVariants = {
     hover: {
       rotate: [0, -5, 5, -5, 0],
       scale: 1.1,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut" as const
-      }
-    }
+      transition: { duration: 0.5, ease: "easeInOut" as const },
+    },
   };
 
+  // ── CHANGED: badge hover uses purple tint ──
   const badgeVariants = {
     hover: {
       scale: 1.05,
-      backgroundColor: "rgba(236, 57, 176, 0.15)",
-      transition: {
-        duration: 0.2
-      }
-    }
+      backgroundColor: "rgba(126, 96, 244, 0.15)",
+      transition: { duration: 0.2 },
+    },
   };
 
   const featureItemVariants = {
     hover: (index: number) => ({
       x: 5,
-      transition: {
-        delay: index * 0.05,
-        duration: 0.2
-      }
-    })
+      transition: { delay: index * 0.05, duration: 0.2 },
+    }),
   };
 
   const buttonVariants = {
     hover: {
       scale: 1.05,
-      boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.3)",
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 17
-      }
+      // ── CHANGED: button shadow uses brand pink ──
+      boxShadow: "0 20px 25px -5px rgba(236, 57, 176, 0.4)",
+      transition: { type: "spring" as const, stiffness: 400, damping: 17 },
     },
-    tap: {
-      scale: 0.95
-    }
+    tap: { scale: 0.95 },
   };
 
   return (
+    // ── CHANGED: section background from #fef2cb (yellow) to clean off-white ──
     <section
       id="products"
-      className="py-24 bg-[#fef2cb] text-slate-900 overflow-hidden"
+      className="py-24 text-slate-900 overflow-hidden relative"
+      style={{ backgroundColor: "#f8f6ff" }}
     >
-      <div className="max-w-7xl mx-auto container-padding">
+      {/* ── CHANGED: decorative background blobs using brand colors ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-40"
+          style={{ background: "radial-gradient(circle, rgba(236,57,176,0.12) 0%, transparent 70%)" }}
+        />
+        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-40"
+          style={{ background: "radial-gradient(circle, rgba(126,96,244,0.12) 0%, transparent 70%)" }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
+          style={{ background: "radial-gradient(circle, rgba(236,57,176,0.08) 0%, rgba(126,96,244,0.08) 100%)" }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto container-padding relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
+            // ── CHANGED: badge background uses purple tint ──
+            className="inline-flex items-center px-4 py-1.5 border rounded-full text-xs font-bold uppercase tracking-wider mb-6"
+            style={{
+              background: "linear-gradient(to right, rgba(236,57,176,0.1), rgba(126,96,244,0.1))",
+              borderColor: "rgba(126,96,244,0.3)",
+              color: "#7E60F4",
+            }}
           >
             Our GPS Solutions
           </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -283,16 +277,17 @@ export default function ProductsSection() {
               Tracking Solutions
             </span>
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed"
+            className="text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
           >
-            Built for Mining, Logistics, Transportation & More
-            Rugged GPS tracking devices, accurate fuel level sensors, and HD
-            dash cams designed for harsh environments and 24/7 operations.
+            Built for Mining, Logistics, Transportation & More. Rugged GPS
+            tracking devices, accurate fuel level sensors, and HD dash cams
+            designed for harsh environments and 24/7 operations.
           </motion.p>
         </div>
 
@@ -314,18 +309,24 @@ export default function ProductsSection() {
               whileTap="tap"
               viewport={{ once: true }}
               custom={index}
-              className="group relative flex flex-col h-full bg-white border-2 border-slate-200/60 rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+              // ── CHANGED: card background white, border uses subtle purple tint ──
+              className="group relative flex flex-col h-full bg-white rounded-2xl overflow-hidden transition-all duration-300"
+              style={{
+                border: "2px solid rgba(126, 96, 244, 0.15)",
+                boxShadow: "0 4px 24px rgba(126, 96, 244, 0.07)",
+              }}
             >
-              <motion.div 
+              <motion.div
                 variants={cardBorderVariants}
                 className="absolute inset-0 rounded-2xl pointer-events-none z-10"
-                style={{
-                  border: "2px solid transparent",
-                }}
+                style={{ border: "2px solid transparent" }}
               />
-              
-              {/* Image Section - Fixed to not move */}
-              <div className="relative w-full h-48 overflow-hidden bg-slate-100 shrink-0">
+
+              {/* Image Section */}
+              <div className="relative w-full h-48 overflow-hidden shrink-0"
+                // ── CHANGED: image placeholder bg uses brand gradient ──
+                style={{ background: "linear-gradient(135deg, rgba(236,57,176,0.08), rgba(126,96,244,0.12))" }}
+              >
                 {product.image ? (
                   <div className="w-full h-full">
                     <Image
@@ -337,18 +338,20 @@ export default function ProductsSection() {
                     />
                   </div>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
+                  <div className="w-full h-full flex items-center justify-center">
                     {(() => {
                       const Icon = product.icon;
-                      return <Icon className="w-16 h-16 text-primary/30" />;
+                      return <Icon className="w-16 h-16 opacity-20" style={{ color: "#7E60F4" }} />;
                     })()}
                   </div>
                 )}
-                
-                {/* Icon Overlay - Animates independently */}
-                <motion.div 
+
+                {/* Icon Overlay */}
+                <motion.div
                   variants={iconVariants}
-                  className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg text-primary"
+                  className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg"
+                  // ── CHANGED: icon color uses brand purple ──
+                  style={{ color: "#7E60F4" }}
                 >
                   {(() => {
                     const Icon = product.icon;
@@ -356,10 +359,15 @@ export default function ProductsSection() {
                   })()}
                 </motion.div>
 
-                {/* Badge - Animates independently */}
-                <motion.div 
+                {/* Badge */}
+                <motion.div
                   variants={badgeVariants}
-                  className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-primary font-bold text-[10px] uppercase tracking-wide border border-slate-200 shadow-lg"
+                  className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm font-bold text-[10px] uppercase tracking-wide shadow-lg"
+                  // ── CHANGED: badge text uses brand pink ──
+                  style={{
+                    color: "#ec39b0",
+                    border: "1px solid rgba(236,57,176,0.2)",
+                  }}
                 >
                   {product.badge}
                 </motion.div>
@@ -370,7 +378,7 @@ export default function ProductsSection() {
                 <h3 className="text-xl font-bold mb-3 text-slate-900">
                   {product.title}
                 </h3>
-                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-6 flex-grow">
+                <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
                   {product.description}
                 </p>
 
@@ -382,7 +390,13 @@ export default function ProductsSection() {
                       variants={featureItemVariants}
                       className="flex items-center text-sm text-slate-600 font-medium"
                     >
-                      <div className="w-2 h-2 bg-primary rounded-full mr-2"></div>
+                      {/* ── CHANGED: feature dot uses pink→purple gradient ── */}
+                      <div
+                        className="w-2 h-2 rounded-full mr-2 shrink-0"
+                        style={{
+                          background: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                        }}
+                      />
                       {feature}
                     </motion.div>
                   ))}
@@ -401,7 +415,11 @@ export default function ProductsSection() {
                         setSelectedSolutionData(null);
                       }
                     }}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary text-white text-sm font-bold transition-all duration-300 shadow-md"
+                    // ── CHANGED: button uses pink→purple gradient ──
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full text-white text-sm font-bold transition-all duration-300 shadow-md"
+                    style={{
+                      background: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                    }}
                   >
                     Learn More
                     <motion.svg
@@ -414,7 +432,6 @@ export default function ProductsSection() {
                       strokeWidth="3"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
                       animate={{ x: 0 }}
                       whileHover={{ x: 5 }}
                       transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
@@ -443,37 +460,54 @@ export default function ProductsSection() {
           solutionData={selectedSolutionData || undefined}
         />
 
-        {/* Custom Solution Callout - Updated with navigation */}
+        {/* Custom Solution Callout */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
+          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 overflow-hidden"
+          style={{
+            border: "1.5px solid rgba(126, 96, 244, 0.2)",
+            boxShadow: "0 10px 40px rgba(126, 96, 244, 0.08)",
+          }}
         >
           {/* Background Decorative Gradients */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl -ml-40 -mb-40"></div>
+          <div
+            className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -mr-40 -mt-40"
+            style={{ background: "rgba(236,57,176,0.08)" }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl -ml-40 -mb-40"
+            style={{ background: "rgba(126,96,244,0.08)" }}
+          />
 
           <div className="relative z-10">
             <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
-              Need a <span className="text-primary">Custom Solution?</span>
+              Need a{" "}
+              <span
+                className="bg-clip-text text-transparent"
+                style={{ backgroundImage: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+              >
+                Custom Solution?
+              </span>
             </h3>
-            <p className="text-lg text-slate-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-500 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
               Our engineering team specializes in architecting bespoke GPS
-              tracking ecosystems tailored to your specific industrial
-              workflows. Let's discuss your unique operational needs.
+              tracking ecosystems tailored to your specific industrial workflows.
+              Let's discuss your unique operational needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
               <motion.button
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(249, 115, 22, 0.5)",
+                  boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
                 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleContactNavigation}
                 type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white font-bold h-12 px-8 transition-all shadow-xl shadow-primary/30 w-full sm:w-auto text-sm cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
+                style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
               >
                 Consult Our Experts
               </motion.button>
@@ -482,7 +516,19 @@ export default function ProductsSection() {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleContactNavigation}
                 type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-300 text-slate-800 hover:border-primary hover:text-primary font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+                style={{
+                  border: "2px solid rgba(126,96,244,0.4)",
+                  color: "#7E60F4",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
+                }}
               >
                 Request Customization
               </motion.button>

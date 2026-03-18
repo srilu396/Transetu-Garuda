@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   MapPin,
@@ -76,17 +76,60 @@ const features = [
   },
 ];
 
+// How many cards visible at once (used to calculate dot count)
+const CARDS_PER_VIEW = 3;
+const TOTAL_DOTS = features.length - CARDS_PER_VIEW + 1; // 7 dot positions
+
 export default function FeaturesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // Animation variants (unchanged)
+  const CARD_WIDTH = 340;
+  const GAP = 24;
+  const SCROLL_SNAP_ITEM = CARD_WIDTH + GAP;
+
+  // ── Scroll to a specific card index ──────────────────────────────────────
+  const scrollToIndex = useCallback(
+    (index: number, animated = true) => {
+      if (!scrollRef.current) return;
+      const container = scrollRef.current;
+      const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+      const clampedIndex = Math.max(0, Math.min(index, TOTAL_DOTS - 1));
+      const newScroll = Math.min(clampedIndex * SCROLL_SNAP_ITEM, maxScroll);
+
+      container.scrollTo({ left: newScroll, behavior: animated ? "smooth" : "auto" });
+      setActiveIndex(clampedIndex);
+    },
+    [SCROLL_SNAP_ITEM]
+  );
+
+  // ── Arrow navigation ──────────────────────────────────────────────────────
+  const scroll = (direction: "left" | "right") => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+
+    const next =
+      direction === "left"
+        ? Math.max(0, activeIndex - 1)
+        : Math.min(TOTAL_DOTS - 1, activeIndex + 1);
+
+    scrollToIndex(next);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  // ── Update active dot when user manually scrolls ──────────────────────────
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const scrollLeft = scrollRef.current.scrollLeft;
+    const index = Math.round(scrollLeft / SCROLL_SNAP_ITEM);
+    setActiveIndex(Math.min(index, TOTAL_DOTS - 1));
+  };
+
+  // ── Animation variants (unchanged from original) ──────────────────────────
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
   const cardVariants = {
@@ -94,27 +137,15 @@ export default function FeaturesSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 12,
-      },
+      transition: { type: "spring" as const, stiffness: 100, damping: 12 },
     },
     hover: {
       y: -12,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 17,
-      },
+      transition: { type: "spring" as const, stiffness: 400, damping: 17 },
     },
     tap: {
       scale: 0.98,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 17,
-      },
+      transition: { type: "spring" as const, stiffness: 400, damping: 17 },
     },
   };
 
@@ -122,20 +153,14 @@ export default function FeaturesSection() {
     hover: {
       boxShadow: `0 25px 50px -12px rgba(236, 57, 176, 0.35), 0 0 0 1px rgba(236, 57, 176, 0.15)`,
       borderColor: "rgba(236, 57, 176, 0.2)",
-      transition: {
-        duration: 0.2,
-        ease: "easeOut" as const,
-      },
+      transition: { duration: 0.2, ease: "easeOut" as const },
     },
   };
 
   const cardBorderVariants = {
     hover: {
       borderColor: "rgba(236, 57, 176, 0.4)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const,
-      },
+      transition: { duration: 0.3, ease: "easeOut" as const },
     },
   };
 
@@ -143,56 +168,27 @@ export default function FeaturesSection() {
     hover: {
       rotate: [0, -5, 5, -5, 0],
       scale: 1.1,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut" as const,
-      },
+      transition: { duration: 0.5, ease: "easeInOut" as const },
     },
   };
 
-  // Card width + gap for scroll-snap (matches flex gap-6 and card width)
-  const CARD_WIDTH = 340;
-  const GAP = 24;
-  const SCROLL_SNAP_ITEM = CARD_WIDTH + GAP;
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (!scrollRef.current || isAnimating) return;
-
-    setIsAnimating(true);
-
-    const container = scrollRef.current;
-    const currentScroll = container.scrollLeft;
-    const itemWidth = SCROLL_SNAP_ITEM;
-    const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
-
-    let newScrollPosition: number;
-
-    if (direction === 'left') {
-      newScrollPosition = Math.max(0, currentScroll - itemWidth);
-    } else {
-      newScrollPosition = Math.min(maxScroll, currentScroll + itemWidth);
-    }
-
-    container.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth',
-    });
-
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
   return (
-    <section id="features" aria-label="Key Features" className="relative" style={{ backgroundColor: '#fffcf8' }}>
-      {/* Decorative background elements to enhance the "showing through" effect */}
+    <section
+      id="features"
+      aria-label="Key Features"
+      className="relative"
+      style={{ backgroundColor: "#fffcf8" }}
+    >
+      {/* Decorative background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-100/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-100/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/10 rounded-full blur-3xl" />
       </div>
 
       <section className="py-20 overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
+          {/* ── Section header ── */}
           <div className="text-center mb-16">
-            {/* Innovation & Technology Badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -226,10 +222,11 @@ export default function FeaturesSection() {
             </motion.p>
           </div>
 
+          {/* ── Carousel wrapper ── */}
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Navigation Arrows - Fixed (no hover animation, no movement) */}
+            {/* Left arrow */}
             <button
-              onClick={() => scroll('left')}
+              onClick={() => scroll("left")}
               disabled={isAnimating}
               className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -left-4 sm:-left-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary text-white"
               aria-label="Previous slide"
@@ -237,8 +234,9 @@ export default function FeaturesSection() {
               <ChevronLeft className="h-6 w-6" />
             </button>
 
+            {/* Right arrow */}
             <button
-              onClick={() => scroll('right')}
+              onClick={() => scroll("right")}
               disabled={isAnimating}
               className="absolute z-50 rounded-full transition-all duration-300 top-1/2 -translate-y-1/2 -right-4 sm:-right-12 h-12 w-12 border border-gray-200 flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-primary text-white"
               aria-label="Next slide"
@@ -246,23 +244,24 @@ export default function FeaturesSection() {
               <ChevronRight className="h-6 w-6" />
             </button>
 
-            {/* Horizontal scrolling container - no scrollbar */}
+            {/* ── Scrollable cards row ── */}
             <div
               ref={scrollRef}
+              onScroll={handleScroll}
               className="features-scroll overflow-x-auto overflow-y-hidden py-12"
               style={{
-                WebkitOverflowScrolling: 'touch',
-                scrollBehavior: 'smooth',
-                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: "touch",
+                scrollBehavior: "smooth",
+                scrollSnapType: "x mandatory",
               }}
             >
               <style>{`
                 .features-scroll {
-                  scrollbar-width: none !important;  /* Firefox */
-                  -ms-overflow-style: none !important;  /* IE and Edge */
+                  scrollbar-width: none !important;
+                  -ms-overflow-style: none !important;
                 }
                 .features-scroll::-webkit-scrollbar {
-                  display: none !important;  /* Chrome, Safari, Opera */
+                  display: none !important;
                   width: 0 !important;
                   height: 0 !important;
                   background: transparent !important;
@@ -275,7 +274,7 @@ export default function FeaturesSection() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 className="flex gap-6"
-                style={{ width: 'max-content' }}
+                style={{ width: "max-content" }}
               >
                 {features.map((feature, index) => (
                   <div
@@ -296,22 +295,15 @@ export default function FeaturesSection() {
                         transition: "box-shadow 0.3s ease, transform 0.3s ease",
                       }}
                     >
-                      {/* Shadow overlay that becomes more prominent on hover */}
                       <motion.div
                         variants={cardShadowVariants}
                         className="absolute inset-0 rounded-2xl pointer-events-none"
-                        style={{
-                          boxShadow: "0 10px 30px -15px rgba(0,0,0,0.15)",
-                        }}
+                        style={{ boxShadow: "0 10px 30px -15px rgba(0,0,0,0.15)" }}
                       />
-
-                      {/* Border overlay */}
                       <motion.div
                         variants={cardBorderVariants}
                         className="absolute inset-0 rounded-2xl pointer-events-none"
-                        style={{
-                          border: "2px solid transparent",
-                        }}
+                        style={{ border: "2px solid transparent" }}
                       />
 
                       <div className="mb-4 flex justify-center relative z-10">
@@ -322,7 +314,7 @@ export default function FeaturesSection() {
                           {feature.icon}
                         </motion.div>
                       </div>
-                      
+
                       <div className="text-center flex-1 relative z-10">
                         <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
                           {feature.title}
@@ -335,6 +327,26 @@ export default function FeaturesSection() {
                   </div>
                 ))}
               </motion.div>
+            </div>
+
+            {/* ── Dot indicators ── */}
+            <div className="flex justify-center items-center gap-2 mt-4">
+              {Array.from({ length: TOTAL_DOTS }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollToIndex(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className="transition-all duration-300 rounded-full focus:outline-none"
+                  style={{
+                    width: activeIndex === i ? "28px" : "10px",
+                    height: "10px",
+                    background:
+                      activeIndex === i
+                        ? "linear-gradient(to right, #ec39b0, #7E60F4)"
+                        : "linear-gradient(to right, rgba(236, 57, 176, 0.3), rgba(126, 96, 244, 0.3))",
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
