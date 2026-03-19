@@ -62,7 +62,7 @@ export default function Navbar() {
 
             {/* Logo - Fixed vertical alignment */}
 <Link href="/" className="flex items-center">
-  <div className="relative w-20 h-16 overflow-hidden flex items-center justify-center mr-[-16px]">
+  <div className="relative w-20 h-20 overflow-hidden flex items-center justify-center mr-[-12px]">
     <Image
       src="/assets/logos/logo.png"
       alt="Garuda OM logo"
@@ -72,8 +72,8 @@ export default function Navbar() {
       priority
     />
   </div>
-  <div className="flex flex-col items-center translate-y-[-4px]">
-    <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
+  <div className="flex flex-col items-center justify-center text-center">
+    <span className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
       Garuda OM
     </span>
     <span className="text-[10px] sm:text-xs font-medium text-gray-500 italic leading-tight">
