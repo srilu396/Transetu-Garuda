@@ -10,11 +10,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto container-padding py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
-              <Link href="/" className="flex items-center space-x-3">
+            <div className="flex items-center mb-6">
+              <Link href="/" className="flex items-center">
                 <div className="relative w-28 h-20 flex items-center justify-center">
                   <img
-                    src="/assets/logos/logo.png"
+                    src="/assets/logos/footer.png"
                     alt="Garuda OM logo"
                     className="w-full h-full object-contain brightness-0 invert"
                   />

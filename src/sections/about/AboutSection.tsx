@@ -257,20 +257,16 @@ export default function AboutSection() {
             <div className="relative z-10">
               <div className="flex items-start gap-8 mb-6">
                 {/* Founder Image */}
-                <motion.div
-                  initial="rest"
-                  whileHover="hover"
-                  variants={iconHover}
-                  className="w-32 h-36 rounded-2xl flex items-center justify-center shadow-lg shrink-0 overflow-hidden border-2 border-gray-100"
-                >
-                  <Image
-                    src="/images/founder.png"
-                    alt="Polimetla Sudhakar - Founder & Business Strategist"
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover object-top scale-90"
-                  />
-                </motion.div>
+<div className="w-32 h-36 rounded-2xl flex items-center justify-center shadow-lg shrink-0 overflow-hidden border-2 border-gray-100 bg-gray-50 p-1">
+  <Image
+    src="/images/founder.png"
+    alt="Polimetla Sudhakar - Founder & Business Strategist"
+    width={128}
+    height={128}
+    className="w-full h-full object-contain"
+    priority
+  />
+</div>
                 <div>
                   <motion.h3 
                     variants={fadeInUp}

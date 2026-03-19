@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown, MapPin, Monitor, CreditCard, X, Menu } from "lucide-react";
 
 const productLinks = [
@@ -57,24 +58,29 @@ export default function Navbar() {
       {/* ── Main navbar ── */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-lg border-b border-border/50 z-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-14">
+          <div className="flex items-center justify-between h-16">
 
-            {/* Logo */}
-            <div className="flex items-center space-x-3 cursor-pointer">
-              <div className="relative w-14 h-11 overflow-hidden flex items-center justify-center">
-                <Image
-                  src="/assets/logos/logo.png"
-                  alt="Garuda OM logo"
-                  fill
-                  sizes="40px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <span className="text-lg sm:text-xl font-extrabold tracking-tight text-gradient leading-none">
-                Garuda OM
-              </span>
-            </div>
+            {/* Logo - Fixed vertical alignment */}
+<Link href="/" className="flex items-center">
+  <div className="relative w-20 h-16 overflow-hidden flex items-center justify-center mr-[-16px]">
+    <Image
+      src="/assets/logos/logo.png"
+      alt="Garuda OM logo"
+      fill
+      sizes="80px"
+      className="object-contain"
+      priority
+    />
+  </div>
+  <div className="flex flex-col items-center translate-y-[-4px]">
+    <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
+      Garuda OM
+    </span>
+    <span className="text-[10px] sm:text-xs font-medium text-gray-500 italic leading-tight">
+      Integrated GPS & FASTag Solutions
+    </span>
+  </div>
+</Link>
 
             {/* ── Desktop nav links — unchanged, lg+ only ── */}
             <div className="hidden lg:flex items-center space-x-8">
@@ -167,22 +173,27 @@ export default function Navbar() {
         }}
         className="lg:hidden bg-background shadow-2xl flex flex-col"
       >
-        {/* Drawer header */}
+        {/* Drawer header - Increased logo size */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
-          <div className="flex items-center space-x-2">
-            <div className="relative w-8 h-7 overflow-hidden flex items-center justify-center">
+          <Link href="/" onClick={closeMobileMenu} className="flex items-center">
+            <div className="relative w-12 h-11 overflow-hidden flex items-center justify-center">
               <Image
                 src="/assets/logos/logo.png"
                 alt="Garuda OM logo"
                 fill
-                sizes="32px"
+                sizes="48px"
                 className="object-contain"
               />
             </div>
-            <span className="text-base font-extrabold tracking-tight text-gradient leading-none">
-              Garuda OM
-            </span>
-          </div>
+            <div className="flex flex-col ml-1">
+              <span className="text-lg font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
+                Garuda OM
+              </span>
+              <span className="text-[9px] font-medium text-gray-500 italic leading-none">
+                Integrated GPS & FASTag Solutions
+              </span>
+            </div>
+          </Link>
           <button
             onClick={closeMobileMenu}
             className="flex items-center justify-center w-8 h-8 text-foreground hover:text-primary transition-colors rounded-md"
@@ -268,7 +279,7 @@ export default function Navbar() {
       {/* ── Breadcrumb bar ── */}
       <nav
         aria-label="Breadcrumb Navigation"
-        className="bg-background/80 backdrop-blur-sm border-b border-border/50 py-1.5 sticky top-14 z-40"
+        className="bg-background/80 backdrop-blur-sm border-b border-border/50 py-1.5 sticky top-16 z-40"
       >
         <div className="container mx-auto px-4">
           <ol className="flex items-center space-x-2 text-sm">
