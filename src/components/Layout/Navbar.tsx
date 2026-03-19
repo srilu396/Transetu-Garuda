@@ -11,14 +11,14 @@ const productLinks = [
     icon: <MapPin className="w-4 h-4 text-primary" />,
   },
   {
-    label: "Monitoring",
-    href: "/#videos",
-    icon: <Monitor className="w-4 h-4 text-primary" />,
-  },
-  {
     label: "FastTag",
     href: "/#fastag-management",
     icon: <CreditCard className="w-4 h-4 text-primary" />,
+  },
+  {
+    label: "Monitoring",
+    href: "/#videos",
+    icon: <Monitor className="w-4 h-4 text-primary" />,
   },
 ];
 

@@ -183,7 +183,6 @@ export default function ProductsSection() {
     },
   };
 
-  // ── CHANGED: hover glow now uses brand pink #ec39b0 → purple #7E60F4 ──
   const cardBorderVariants = {
     hover: {
       borderColor: "rgba(126, 96, 244, 0.7)",
@@ -201,7 +200,6 @@ export default function ProductsSection() {
     },
   };
 
-  // ── CHANGED: badge hover uses purple tint ──
   const badgeVariants = {
     hover: {
       scale: 1.05,
@@ -220,7 +218,6 @@ export default function ProductsSection() {
   const buttonVariants = {
     hover: {
       scale: 1.05,
-      // ── CHANGED: button shadow uses brand pink ──
       boxShadow: "0 20px 25px -5px rgba(236, 57, 176, 0.4)",
       transition: { type: "spring" as const, stiffness: 400, damping: 17 },
     },
@@ -228,13 +225,12 @@ export default function ProductsSection() {
   };
 
   return (
-    // ── CHANGED: section background from #fef2cb (yellow) to clean off-white ──
     <section
       id="products"
       className="py-24 text-slate-900 overflow-hidden relative"
       style={{ backgroundColor: "#f8f6ff" }}
     >
-      {/* ── CHANGED: decorative background blobs using brand colors ── */}
+      {/* Decorative background blobs using brand colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-40"
           style={{ background: "radial-gradient(circle, rgba(236,57,176,0.12) 0%, transparent 70%)" }}
@@ -248,19 +244,13 @@ export default function ProductsSection() {
       </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+        {/* Section Header - UPDATED to match FASTagManagement reference style */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            // ── CHANGED: badge background uses purple tint ──
-            className="inline-flex items-center px-4 py-1.5 border rounded-full text-xs font-bold uppercase tracking-wider mb-6"
-            style={{
-              background: "linear-gradient(to right, rgba(236,57,176,0.1), rgba(126,96,244,0.1))",
-              borderColor: "rgba(126,96,244,0.3)",
-              color: "#7E60F4",
-            }}
+            className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
             Our GPS Solutions
           </motion.div>
@@ -283,7 +273,7 @@ export default function ProductsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed"
+            className="text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed"
           >
             Built for Mining, Logistics, Transportation & More. Rugged GPS
             tracking devices, accurate fuel level sensors, and HD dash cams
@@ -309,7 +299,6 @@ export default function ProductsSection() {
               whileTap="tap"
               viewport={{ once: true }}
               custom={index}
-              // ── CHANGED: card background white, border uses subtle purple tint ──
               className="group relative flex flex-col h-full bg-white rounded-2xl overflow-hidden transition-all duration-300"
               style={{
                 border: "2px solid rgba(126, 96, 244, 0.15)",
@@ -324,7 +313,6 @@ export default function ProductsSection() {
 
               {/* Image Section */}
               <div className="relative w-full h-48 overflow-hidden shrink-0"
-                // ── CHANGED: image placeholder bg uses brand gradient ──
                 style={{ background: "linear-gradient(135deg, rgba(236,57,176,0.08), rgba(126,96,244,0.12))" }}
               >
                 {product.image ? (
@@ -350,7 +338,6 @@ export default function ProductsSection() {
                 <motion.div
                   variants={iconVariants}
                   className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg"
-                  // ── CHANGED: icon color uses brand purple ──
                   style={{ color: "#7E60F4" }}
                 >
                   {(() => {
@@ -363,7 +350,6 @@ export default function ProductsSection() {
                 <motion.div
                   variants={badgeVariants}
                   className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm font-bold text-[10px] uppercase tracking-wide shadow-lg"
-                  // ── CHANGED: badge text uses brand pink ──
                   style={{
                     color: "#ec39b0",
                     border: "1px solid rgba(236,57,176,0.2)",
@@ -390,7 +376,6 @@ export default function ProductsSection() {
                       variants={featureItemVariants}
                       className="flex items-center text-sm text-slate-600 font-medium"
                     >
-                      {/* ── CHANGED: feature dot uses pink→purple gradient ── */}
                       <div
                         className="w-2 h-2 rounded-full mr-2 shrink-0"
                         style={{
@@ -415,7 +400,6 @@ export default function ProductsSection() {
                         setSelectedSolutionData(null);
                       }
                     }}
-                    // ── CHANGED: button uses pink→purple gradient ──
                     className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full text-white text-sm font-bold transition-all duration-300 shadow-md"
                     style={{
                       background: "linear-gradient(to right, #ec39b0, #7E60F4)",
