@@ -79,7 +79,7 @@ const features = [
 // How many cards visible at once (used to calculate dot count)
 const CARDS_PER_VIEW = 3;
 const TOTAL_DOTS = features.length - CARDS_PER_VIEW + 1; // 7 dot positions
-const AUTO_SCROLL_INTERVAL = 6000; // 6 seconds — enough time to read each card
+const AUTO_SCROLL_INTERVAL = 3000; // 3 seconds — enough time to read each card
 
 export default function FeaturesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);

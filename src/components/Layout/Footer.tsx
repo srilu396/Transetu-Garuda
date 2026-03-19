@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <Link href="/" className="flex items-center space-x-3">
-                <div className="relative w-12 h-10 flex items-center justify-center">
+                <div className="relative w-28 h-20 flex items-center justify-center">
                   <img
                     src="/assets/logos/logo.png"
                     alt="Garuda OM logo"
@@ -51,10 +51,10 @@ export default function Footer() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
                 <a
-                  href="tel:+919849252434"
+                  href="tel:+917780274792"
                   className="text-sm text-white hover:text-white/80 transition-colors"
                 >
-                  +91-9849252434 / 9866479962
+                  +91 7780274792
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export default function Footer() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </svg>
                 <span className="text-sm text-white">
-                  info@garudatechnology.com
+                  omimportandexport1994@gmail.com
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -96,12 +96,8 @@ export default function Footer() {
                 <span className="text-sm text-white">Hyderabad, India</span>
               </div>
               <div className="flex items-center gap-4 mt-4 pt-2">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-white/80 transition-colors"
-                >
+                {/* Facebook - No action */}
+                <span className="text-white cursor-default">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -116,13 +112,10 @@ export default function Footer() {
                   >
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                   </svg>
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-white/80 transition-colors"
-                >
+                </span>
+                
+                {/* Instagram - No action */}
+                <span className="text-white cursor-default">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -146,13 +139,10 @@ export default function Footer() {
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                   </svg>
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-white/80 transition-colors"
-                >
+                </span>
+                
+                {/* LinkedIn - No action */}
+                <span className="text-white cursor-default">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -169,13 +159,10 @@ export default function Footer() {
                     <rect width="4" height="12" x="2" y="9"></rect>
                     <circle cx="4" cy="4" r="2"></circle>
                   </svg>
-                </a>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-white/80 transition-colors"
-                >
+                </span>
+                
+                {/* YouTube - No action */}
+                <span className="text-white cursor-default">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -191,7 +178,9 @@ export default function Footer() {
                     <path d="M2.5 7.17C2.5 5.96 3.49 4.97 4.71 4.92c4.86-.2 9.72-.2 14.58 0 1.22.05 2.21 1.04 2.21 2.25v9.66c0 1.21-.99 2.2-2.21 2.25-4.86.2-9.72.2-14.58 0-1.22-.05-2.21-1.04-2.21-2.25V7.17Z"></path>
                     <path d="M10 15l5-3-5-3v6z"></path>
                   </svg>
-                </a>
+                </span>
+                
+                {/* WhatsApp - Keeps the functionality */}
                 <a
                   href="https://wa.me/919849252434"
                   target="_blank"

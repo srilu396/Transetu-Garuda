@@ -61,7 +61,7 @@ export default function Navbar() {
 
             {/* Logo */}
             <div className="flex items-center space-x-3 cursor-pointer">
-              <div className="relative w-10 h-8 overflow-hidden flex items-center justify-center">
+              <div className="relative w-14 h-11 overflow-hidden flex items-center justify-center">
                 <Image
                   src="/assets/logos/logo.png"
                   alt="Garuda OM logo"

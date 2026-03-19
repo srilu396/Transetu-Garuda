@@ -8,20 +8,21 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    value: "+91-9849252434 / 9866479962",
+    value: "+91 77802 74792",
     description: "Call us directly",
     iconBg: "bg-blue-50 text-blue-600 border-blue-100",
   },
   {
     icon: Mail,
     title: "Email",
-    value: "info@transglobalgeomatics.com",
+    value: "omimportandexport1994@gmail.com",
     description: "Send us an email",
     iconBg: "bg-indigo-50 text-indigo-600 border-indigo-100",
   },
   {
     icon: MapPin,
     title: "Office",
+
     value: "409, SVSS Nivas, Czech Colony, Sanath Nagar",
     subValue: "Hyderabad – 500018, India",
     iconBg: "bg-cyan-50 text-cyan-600 border-cyan-100",
@@ -29,7 +30,7 @@ const contactInfo = [
   {
     icon: Clock,
     title: "Support",
-    value: "+91-9515131500",
+    value: " +91 77802 74792",
     description: "Monday – Saturday, 10:00 AM – 6:00 PM",
     iconBg: "bg-emerald-50 text-emerald-600 border-emerald-100",
   },

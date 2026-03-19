@@ -16,7 +16,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 sm:pt-0 sm:pb-0"
     >
       <div className="absolute inset-0 z-0">
         <video
@@ -36,7 +36,7 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 w-full max-w-4xl mx-auto container-padding px-4 sm:px-6">
-        <div className="flex flex-col items-center justify-center text-center">
+        <div className="flex flex-col items-center justify-center text-center mt-0 sm:mt-0">
           <motion.div
             className="w-full max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
@@ -57,12 +57,14 @@ export default function HeroSection() {
               <span>Garuda OM - </span>
               <br />
               <span className="text-white font-semibold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
-                GPS Tracking <span className="font-medium">& FASTag Solutions</span>
+                GPS Tracking{" "}
+                <span className="font-medium">& FASTag Solutions</span>
               </span>
             </h1>
             <p className="text-lg text-white font-bold mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-lg">
-              Track, monitor, and manage your fleet with real-time GPS, fuel sensors, dash cams, and FASTag integration,
-              — everything you need on one powerful platform for complete operational control.
+              Track, monitor, and manage your fleet with real-time GPS, fuel
+              sensors, dash cams, and FASTag integration, — everything you need
+              on one powerful platform for complete operational control.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <motion.button
@@ -93,7 +95,7 @@ export default function HeroSection() {
                 </svg>
               </motion.button>
               <motion.a
-                href="https://drive.google.com/file/d/1Ll8JurCrSrr9OETh-j0FBb2bF0O1K9X5/view?usp=drive_link"
+                href="/assets/videos/homepage-video.mp4"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{

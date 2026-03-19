@@ -9,9 +9,10 @@ import {
   Linkedin,
 } from "lucide-react";
 
-const PHONE = "+919849252434";
-const EMAIL = "info@garudatechnology.com";
+const PHONE = "+917780274792";
+const EMAIL = "omimportandexport1994@gmail.com";
 const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, "")}`;
+const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${EMAIL}`;
 
 function WhatsAppIcon({
   className,
@@ -36,6 +37,7 @@ const buttons = [
     href: WHATSAPP_URL,
     icon: WhatsAppIcon,
     bgColor: "#25D366",
+    isActionable: true,
     external: true,
   },
   {
@@ -43,39 +45,50 @@ const buttons = [
     href: "#",
     icon: Facebook,
     bgColor: "#1877F2",
-    external: true,
+    isActionable: false,
+    external: false,
   },
   {
     label: "Instagram",
     href: "#",
     icon: Instagram,
     bgColor: "linear-gradient(135deg, #F58529, #DD2A7B, #8134AF)",
-    external: true,
+    isActionable: false,
+    external: false,
   },
   {
     label: "LinkedIn",
     href: "#",
     icon: Linkedin,
     bgColor: "#0A66C2",
-    external: true,
+    isActionable: false,
+    external: false,
   },
   {
     label: "Email",
-    href: `mailto:${EMAIL}`,
+    href: GMAIL_URL,
     icon: Mail,
     bgColor: "#E53935",
-    external: false,
+    isActionable: true,
+    external: true,
   },
   {
     label: "Phone",
     href: `tel:${PHONE}`,
     icon: Phone,
     bgColor: "#43A047",
+    isActionable: true,
     external: false,
   },
 ];
 
 export default function SocialContactBar() {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof buttons[0]) => {
+    if (!item.isActionable) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <aside
       className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 p-2"
@@ -88,9 +101,10 @@ export default function SocialContactBar() {
           <div key={item.label} className="flex justify-end">
             <a
               href={item.href}
-              target={item.external ? "_blank" : undefined}
-              rel={item.external ? "noopener noreferrer" : undefined}
-              className="relative group block w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform shrink-0"
+              target={item.isActionable && item.external ? "_blank" : undefined}
+              rel={item.isActionable && item.external ? "noopener noreferrer" : undefined}
+              onClick={(e) => handleClick(e, item)}
+              className="relative group block w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-transform shrink-0 cursor-pointer"
               style={{
                 backgroundColor: isGradient ? undefined : item.bgColor,
                 background: isGradient ? item.bgColor : undefined,
