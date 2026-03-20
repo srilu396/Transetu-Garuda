@@ -6,27 +6,27 @@ export default function Footer() {
   const companyDocs = [
     {
       name: "Year 1 Experience Letter",
-      path: "/docs/experience-letter-year1.pdf" // Update this path later
+      path: "/docs/experience-letter-year1.pdf" 
     },
     {
       name: "Year 2 Experience Letter",
-      path: "/docs/experience-letter-year2.pdf" // Update this path later
+      path: "/docs/experience-letter-year2.pdf" 
     },
     {
       name: "Year 3 Experience Letter",
-      path: "/docs/experience-letter-year3.pdf" // Update this path later
+      path: "/docs/experience-letter-year3.pdf" 
     },
     {
       name: "IEC Certificate",
-      path: "/docs/iec-certificate.pdf" // Update this path later
+      path: "/docs/iec-certificate.pdf" 
     },
     {
       name: "ODLC Document",
-      path: "/docs/odlc-document.pdf" // Update this path later
+      path: "/docs/odlc-document.pdf" 
     },
     {
       name: "Udyam Registration Certificate",
-      path: "/docs/udyam-registration.pdf" // Update this path later
+      path: "/docs/udyam-registration.pdf" 
     }
   ];
 

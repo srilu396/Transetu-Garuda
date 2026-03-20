@@ -25,7 +25,7 @@ export const logisticsTransportation: IndustryData = {
     "Driver Safety & Behavior Analytics",
     "Fuel Management & Theft Prevention",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1586528116347-497a7a5b6b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Logistics & Transportation.jpg",
   stats: [
     { label: "Efficiency Gain", value: "+25%", icon: "TrendingUp" },
     { label: "Fuel Savings", value: "-15%", icon: "Fuel" },

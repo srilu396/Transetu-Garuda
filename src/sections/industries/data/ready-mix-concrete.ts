@@ -25,7 +25,7 @@ export const readyMixConcrete: IndustryData = {
     "Automated Dispatch Platform",
     "Job Site Geofencing",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1529939803454-2564997a854b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Ready-Mix Concrete.jpg",
   stats: [
     { label: "On-Time Delivery", value: "+25%", icon: "Clock" },
     { label: "Fuel Efficiency", value: "+15%", icon: "Fuel" },
