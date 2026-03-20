@@ -58,9 +58,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-16">
 
-            {/* Logo - reduced from w-20 h-20 to w-16 h-14 */}
+            {/* Logo + Title — logo flush against text, text left-aligned and raised */}
             <Link href="/" className="flex items-center">
-              <div className="relative w-16 h-14 overflow-hidden flex items-center justify-center mr-[-12px]">
+              <div className="relative w-16 h-14 flex-shrink-0 flex items-center justify-center mr-[-12px]">
                 <Image
                   src="/assets/logos/logo.png"
                   alt="Garuda OM logo"
@@ -70,12 +70,11 @@ export default function Navbar() {
                   priority
                 />
               </div>
-              <div className="flex flex-col items-center justify-center text-center">
-                {/* Reduced from text-2xl sm:text-3xl to text-xl sm:text-2xl */}
+              <div className="flex flex-col items-start -mt-1">
                 <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
                   Garuda OM
                 </span>
-                <span className="text-[10px] sm:text-xs font-medium text-gray-500 italic leading-tight">
+                <span className="text-[10px] sm:text-xs font-medium text-gray-500 leading-tight mt-0.5">
                   Integrated GPS & FASTag Solutions
                 </span>
               </div>
@@ -173,7 +172,7 @@ export default function Navbar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
           <Link href="/" onClick={closeMobileMenu} className="flex items-center">
-            <div className="relative w-12 h-11 overflow-hidden flex items-center justify-center">
+            <div className="relative w-12 h-11 flex-shrink-0 flex items-center justify-center">
               <Image
                 src="/assets/logos/logo.png"
                 alt="Garuda OM logo"
@@ -182,12 +181,11 @@ export default function Navbar() {
                 className="object-contain"
               />
             </div>
-            <div className="flex flex-col ml-1">
-              {/* Reduced from text-lg to text-base */}
+            <div className="flex flex-col items-start ml-1 -mt-0.5">
               <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
                 Garuda OM
               </span>
-              <span className="text-[9px] font-medium text-gray-500 italic leading-none">
+              <span className="text-[9px] font-medium text-gray-500 leading-none mt-0.5">
                 Integrated GPS & FASTag Solutions
               </span>
             </div>
