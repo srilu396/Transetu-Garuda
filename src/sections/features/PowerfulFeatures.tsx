@@ -302,6 +302,49 @@ export default function FeaturesSection() {
                   height: 0 !important;
                   background: transparent !important;
                 }
+                
+                /* Mobile-specific styles - only apply below 640px */
+                @media (max-width: 640px) {
+                  .features-scroll {
+                    padding-top: 2rem;
+                    padding-bottom: 2rem;
+                  }
+                  .mobile-card {
+                    width: 260px !important;
+                  }
+                  .mobile-card-padding {
+                    padding: 1rem !important;
+                  }
+                  .mobile-icon-container {
+                    padding: 0.75rem !important;
+                    margin-bottom: 0.75rem !important;
+                  }
+                  .mobile-icon {
+                    transform: scale(0.9);
+                  }
+                  .mobile-title {
+                    font-size: 1rem !important;
+                    margin-bottom: 0.375rem !important;
+                  }
+                  .mobile-description {
+                    font-size: 0.75rem !important;
+                    line-height: 1.4 !important;
+                  }
+                  .mobile-gap {
+                    gap: 1rem !important;
+                  }
+                  .mobile-dot-gap {
+                    gap: 0.375rem !important;
+                  }
+                  .mobile-dot-active {
+                    width: 24px !important;
+                    height: 8px !important;
+                  }
+                  .mobile-dot-inactive {
+                    width: 8px !important;
+                    height: 8px !important;
+                  }
+                }
               `}</style>
 
               <motion.div
@@ -309,13 +352,13 @@ export default function FeaturesSection() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
-                className="flex gap-6"
+                className="flex gap-6 mobile-gap"
                 style={{ width: "max-content" }}
               >
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px] snap-center"
+                    className="flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px] snap-center mobile-card"
                   >
                     <motion.div
                       variants={cardVariants}
@@ -324,7 +367,7 @@ export default function FeaturesSection() {
                       whileHover="hover"
                       whileTap="tap"
                       viewport={{ once: true }}
-                      className="group relative flex flex-col h-full bg-white rounded-2xl w-full p-6 border border-gray-200/60 hover:z-50"
+                      className="group relative flex flex-col h-full bg-white rounded-2xl w-full p-6 mobile-card-padding border border-gray-200/60 hover:z-50"
                       style={{
                         transformOrigin: "center center",
                         willChange: "transform",
@@ -342,20 +385,20 @@ export default function FeaturesSection() {
                         style={{ border: "2px solid transparent" }}
                       />
 
-                      <div className="mb-4 flex justify-center relative z-10">
+                      <div className="mb-4 flex justify-center relative z-10 mobile-icon-container">
                         <motion.div
                           variants={iconVariants}
-                          className={`p-4 rounded-xl ${feature.color} group-hover:scale-110 transition-all duration-500`}
+                          className={`p-4 rounded-xl ${feature.color} group-hover:scale-110 transition-all duration-500 mobile-icon`}
                         >
                           {feature.icon}
                         </motion.div>
                       </div>
 
                       <div className="text-center flex-1 relative z-10">
-                        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors mobile-title">
                           {feature.title}
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed text-sm">
+                        <p className="text-muted-foreground leading-relaxed text-sm mobile-description">
                           {feature.description}
                         </p>
                       </div>
@@ -366,7 +409,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* ── Dot indicators ── */}
-            <div className="flex justify-center items-center gap-2 mt-4">
+            <div className="flex justify-center items-center gap-2 mobile-dot-gap mt-4">
               {Array.from({ length: TOTAL_DOTS }).map((_, i) => (
                 <button
                   key={i}
@@ -375,7 +418,7 @@ export default function FeaturesSection() {
                     scrollToIndex(i);
                   }}
                   aria-label={`Go to slide ${i + 1}`}
-                  className="transition-all duration-300 rounded-full focus:outline-none"
+                  className="transition-all duration-300 rounded-full focus:outline-none mobile-dot"
                   style={{
                     width: activeIndex === i ? "28px" : "10px",
                     height: "10px",
