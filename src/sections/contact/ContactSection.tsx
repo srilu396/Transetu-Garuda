@@ -22,16 +22,20 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Office",
-
-    value: "409, SVSS Nivas, Czech Colony, Sanath Nagar",
-    subValue: "Hyderabad – 500018, India",
+    // First address
+    address1: "12-1-8, Vijawada, Benz Circle, Parameta",
+    address1Sub: "Andhra Pradesh – 520010, India",
+    // Second address with line space
+    address2: "Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road",
+    address2Sub1: "Off Outer Ring Road, Kadubeesanahalli, Bengaluru",
+    address2Sub2: "Karnataka – 560103, India",
     iconBg: "bg-cyan-50 text-cyan-600 border-cyan-100",
   },
   {
     icon: Clock,
     title: "Support",
-    value: " +91 77802 74792",
-    description: "Monday – Saturday, 10:00 AM – 6:00 PM",
+    value: "+91 77802 74792",
+    description: "Sudhakar - 10:00 AM – 5:00 PM (Monday – Saturday)",
     iconBg: "bg-emerald-50 text-emerald-600 border-emerald-100",
   },
 ];
@@ -160,39 +164,92 @@ export default function ContactSection() {
           </motion.p>
         </div>
 
-        {/* Column titles */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
-          <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="text-2xl font-bold text-slate-900">Contact Information</motion.h3>
-          <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="text-2xl font-bold text-slate-900">Send Us a Message</motion.h3>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          {/* Left — Contact info cards (unchanged) */}
-          <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-6">
-            {contactInfo.map((info, index) => (
-              <motion.div key={index} variants={itemVariants}
-                className="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-5 transition-all duration-300 hover:shadow-md group">
-                <div className={`w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border ${info.iconBg}`}>
-                  <info.icon className="w-6 h-6" />
+          {/* Left — Contact Information Card with title inside */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }} 
+            whileInView={{ opacity: 1, x: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.6 }}
+            className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm"
+          >
+            <h3 className="text-2xl font-bold text-slate-900 mb-8">Contact Information</h3>
+            
+            <div className="space-y-8">
+              {/* Phone Section */}
+              <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                className="flex items-start gap-5 transition-all duration-300 group">
+                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-blue-50 text-blue-600 border-blue-100">
+                  <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-1">{info.title}</h4>
-                  <p className="text-slate-900 font-semibold">{info.value}</p>
-                  {info.subValue    && <p className="text-slate-900 font-semibold">{info.subValue}</p>}
-                  {info.description && <p className="text-sm text-slate-500 font-medium">{info.description}</p>}
+                  <h4 className="font-bold text-slate-900 mb-1">Phone</h4>
+                  <p className="text-slate-900 font-semibold">+91 77802 74792</p>
+                  <p className="text-sm text-slate-500 font-medium mt-2">Call us directly</p>
                 </div>
               </motion.div>
-            ))}
+
+              {/* Email Section */}
+              <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                className="flex items-start gap-5 transition-all duration-300 group">
+                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-indigo-50 text-indigo-600 border-indigo-100">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-1">Email</h4>
+                  <p className="text-slate-900 font-semibold">omimportandexport1994@gmail.com</p>
+                  <p className="text-sm text-slate-500 font-medium mt-2">Send us an email</p>
+                </div>
+              </motion.div>
+
+              {/* Office Section */}
+              <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                className="flex items-start gap-5 transition-all duration-300 group">
+                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-cyan-50 text-cyan-600 border-cyan-100">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-1">Office</h4>
+                  {/* First address */}
+                  <p className="text-slate-900 font-semibold">12-1-8, Vijawada, Benz Circle, Parameta</p>
+                  <p className="text-slate-900 font-semibold">Andhra Pradesh – 520010, India</p>
+                  
+                  {/* Line space and second address */}
+                  <div className="mt-4 space-y-0.5">
+                    <p className="text-slate-900 font-semibold">Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road</p>
+                    <p className="text-slate-900 font-semibold">Off Outer Ring Road, Kadubeesanahalli, Bengaluru</p>
+                    <p className="text-slate-900 font-semibold">Karnataka – 560103, India</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Support Section */}
+              <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                className="flex items-start gap-5 transition-all duration-300 group">
+                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-emerald-50 text-emerald-600 border-emerald-100">
+                  <Clock className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-1">Support</h4>
+                  <p className="text-slate-900 font-semibold">+91 77802 74792</p>
+                  <p className="text-sm text-slate-500 font-medium mt-2">Satish - 10:00 AM – 5:00 PM (Monday – Saturday)</p>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
 
-          {/* Right — Contact form */}
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-            className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm">
+          {/* Right — Send Us a Message Card with title inside */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }} 
+            whileInView={{ opacity: 1, x: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.6 }}
+            className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm"
+          >
+            <h3 className="text-2xl font-bold text-slate-900 mb-8">Send Us a Message</h3>
+            
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-
               {/* Row 1 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
@@ -223,12 +280,10 @@ export default function ContactSection() {
 
               {/* Row 3 — Service dropdown + Location */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                 {/* ── Custom "Select a Service" dropdown ── */}
                 <div className="space-y-1">
                   <label className="text-sm font-semibold text-slate-700">Select a Service</label>
                   <div className="relative" ref={serviceRef}>
-
                     {/* Trigger */}
                     <button
                       type="button"
@@ -243,7 +298,7 @@ export default function ContactSection() {
                       />
                     </button>
 
-                    {/* Options panel — always in DOM, shown via opacity/pointer-events */}
+                    {/* Options panel */}
                     <div
                       style={{
                         position: "absolute",
@@ -289,7 +344,7 @@ export default function ContactSection() {
                       ))}
                     </div>
 
-                    {/* Hidden input so form submission includes the value */}
+                    {/* Hidden input */}
                     <input type="hidden" name="service" value={selectedService?.value || ""} />
                   </div>
                 </div>
@@ -334,7 +389,6 @@ export default function ContactSection() {
                   <><span>Send Message</span><Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" /></>
                 )}
               </motion.button>
-
             </form>
           </motion.div>
         </div>
