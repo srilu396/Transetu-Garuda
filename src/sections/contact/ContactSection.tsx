@@ -4,41 +4,7 @@ import React, { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send, ChevronDown } from "lucide-react";
 
-const contactInfo = [
-  {
-    icon: Phone,
-    title: "Phone",
-    value: "+91 77802 74792",
-    description: "Call us directly",
-    iconBg: "bg-blue-50 text-blue-600 border-blue-100",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    value: "omimportandexport1994@gmail.com",
-    description: "Send us an email",
-    iconBg: "bg-indigo-50 text-indigo-600 border-indigo-100",
-  },
-  {
-    icon: MapPin,
-    title: "Office",
-    // First address
-    address1: "12-1-8, Vijawada, Benz Circle, Parameta",
-    address1Sub: "Andhra Pradesh – 520010, India",
-    // Second address with line space
-    address2: "Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road",
-    address2Sub1: "Off Outer Ring Road, Kadubeesanahalli, Bengaluru",
-    address2Sub2: "Karnataka – 560103, India",
-    iconBg: "bg-cyan-50 text-cyan-600 border-cyan-100",
-  },
-  {
-    icon: Clock,
-    title: "Support",
-    value: "+91 77802 74792",
-    description: "Sudhakar - 10:00 AM – 5:00 PM (Monday – Saturday)",
-    iconBg: "bg-emerald-50 text-emerald-600 border-emerald-100",
-  },
-];
+
 
 // ── All 4 service options ─────────────────────────────────────────────────
 const services = [
@@ -48,10 +14,7 @@ const services = [
   { value: "other",   label: "Custom Solution" },
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-};
+
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
