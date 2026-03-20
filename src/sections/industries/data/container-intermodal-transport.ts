@@ -25,7 +25,7 @@ export const containerIntermodalTransport: IndustryData = {
     "Predictive ETA & Delay Alerts",
     "Logistics Analytics & Reporting",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1582652613795-a085b1a1a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Container & Intermodal Transport.jpg ",
   stats: [
     { label: "Visibility", value: "100%", icon: "Eye" },
     { label: "On-Time Delivery", value: "+20%", icon: "Clock" },

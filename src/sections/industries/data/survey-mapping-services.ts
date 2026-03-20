@@ -25,7 +25,7 @@ export const surveyMappingServices: IndustryData = {
     "3D Site Modeling",
     "Environmental Assessment Tools",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1526778548025-13a634d13045?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Survey & Mapping.jpg ",
   stats: [
     { label: "Survey Accuracy", value: "<2cm", icon: "Target" },
     { label: "Time Savings", value: "-80%", icon: "Clock" },

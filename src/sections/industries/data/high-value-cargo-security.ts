@@ -25,7 +25,7 @@ export const highValueCargoSecurity: IndustryData = {
     "Chain of Custody Platform",
     "Theft Prevention Alerts",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/High-Value Cargo Security.jpg ",
   stats: [
     { label: "Theft Reduction", value: "-94%", icon: "ShieldAlert" },
     { label: "Recovery Rate", value: "99%", icon: "CheckCircle" },

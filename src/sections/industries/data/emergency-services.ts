@@ -25,7 +25,7 @@ export const emergencyServices: IndustryData = {
     "Integrated Communication Platform",
     "Real-time Traffic & Routing",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1582652613795-a085b1a1a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Emergency Services.jpg ",
   stats: [
     { label: "Response Time", value: "-30%", icon: "Clock" },
     { label: "Situational Awareness", value: "+90%", icon: "Eye" },

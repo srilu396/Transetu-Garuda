@@ -25,7 +25,7 @@ export const warehouseInventory: IndustryData = {
     "Inventory Movement Analytics",
     "Warehouse Heat Mapping",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1586528116493-ce25d2e5f4b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Warehouse & Inventory.jpg ",
   stats: [
     { label: "Equipment Utilization", value: "+30%", icon: "Gauge" },
     { label: "Asset Loss", value: "-95%", icon: "Shield" },

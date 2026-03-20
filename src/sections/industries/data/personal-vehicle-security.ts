@@ -25,7 +25,7 @@ export const personalVehicleSecurity: IndustryData = {
     "Remote Engine Immobilization",
     "Geofence Security Zones",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1553557316-4a68b45b0e4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Personal Vehicle Security.jpg ",
   stats: [
     { label: "Theft Recovery", value: "99%", icon: "Shield" },
     { label: "Insurance Discount", value: "-25%", icon: "DollarSign" },

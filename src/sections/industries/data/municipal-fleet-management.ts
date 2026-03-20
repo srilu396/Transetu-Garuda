@@ -25,7 +25,7 @@ export const municipalFleetManagement: IndustryData = {
     "Waste Management Solutions",
     "Public-Facing Service Maps",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1582652613795-a085b1a1a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Municipal Fleet Management.jpg ",
   stats: [
     { label: "Efficiency Gain", value: "+30%", icon: "TrendingUp" },
     { label: "Fuel Savings", value: "-20%", icon: "Fuel" },
