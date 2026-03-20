@@ -4,8 +4,6 @@ import React, { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send, ChevronDown } from "lucide-react";
 
-
-
 // ── All 4 service options ─────────────────────────────────────────────────
 const services = [
   { value: "gps",     label: "GPS Tracking" },
@@ -13,8 +11,6 @@ const services = [
   { value: "fleet",   label: "GPS with Video Surveillance" },
   { value: "other",   label: "Custom Solution" },
 ];
-
-
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -110,7 +106,7 @@ export default function ContactSection() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
 
-      <div className="max-w-7xl mx-auto container-padding relative z-10">
+      <div className="max-w-7xl mx-auto container-padding relative z-10 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -118,16 +114,16 @@ export default function ContactSection() {
             Get In Touch
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-            className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900">
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900">
             Get In <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Touch</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed">
+            className="text-base sm:text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed px-4">
             Ready to transform your tracking capabilities? Contact our experts today for a personalized consultation.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
 
           {/* Left — Contact Information Card with title inside */}
           <motion.div 
@@ -135,68 +131,70 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.6 }}
-            className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm"
+            className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm"
           >
-            <h3 className="text-2xl font-bold text-slate-900 mb-8">Contact Information</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 sm:mb-8">Contact Information</h3>
             
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* Phone Section */}
               <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className="flex items-start gap-5 transition-all duration-300 group">
-                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-blue-50 text-blue-600 border-blue-100">
-                  <Phone className="w-6 h-6" />
+                className="flex items-start gap-4 sm:gap-5 transition-all duration-300 group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-blue-50 text-blue-600 border-blue-100">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Phone</h4>
-                  <p className="text-slate-900 font-semibold">+91 77802 74792</p>
-                  <p className="text-sm text-slate-500 font-medium mt-2">Call us directly</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Phone</h4>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">+91 77802 74792</p>
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2">Call us directly</p>
                 </div>
               </motion.div>
 
-              {/* Email Section */}
+              {/* Email Section - Fixed for mobile */}
               <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className="flex items-start gap-5 transition-all duration-300 group">
-                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-indigo-50 text-indigo-600 border-indigo-100">
-                  <Mail className="w-6 h-6" />
+                className="flex items-start gap-4 sm:gap-5 transition-all duration-300 group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-indigo-50 text-indigo-600 border-indigo-100">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Email</h4>
-                  <p className="text-slate-900 font-semibold">omimportandexport1994@gmail.com</p>
-                  <p className="text-sm text-slate-500 font-medium mt-2">Send us an email</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Email</h4>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-all sm:break-words overflow-wrap-anywhere">
+                    omimportandexport1994@gmail.com
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2">Send us an email</p>
                 </div>
               </motion.div>
 
               {/* Office Section */}
               <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className="flex items-start gap-5 transition-all duration-300 group">
-                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-cyan-50 text-cyan-600 border-cyan-100">
-                  <MapPin className="w-6 h-6" />
+                className="flex items-start gap-4 sm:gap-5 transition-all duration-300 group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-cyan-50 text-cyan-600 border-cyan-100">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Office</h4>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Office</h4>
                   {/* First address */}
-                  <p className="text-slate-900 font-semibold">12-1-8, Vijawada, Benz Circle, Parameta</p>
-                  <p className="text-slate-900 font-semibold">Andhra Pradesh – 520010, India</p>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">12-1-8, Vijawada, Benz Circle, Parameta</p>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Andhra Pradesh – 520010, India</p>
                   
                   {/* Line space and second address */}
-                  <div className="mt-4 space-y-0.5">
-                    <p className="text-slate-900 font-semibold">Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road</p>
-                    <p className="text-slate-900 font-semibold">Off Outer Ring Road, Kadubeesanahalli, Bengaluru</p>
-                    <p className="text-slate-900 font-semibold">Karnataka – 560103, India</p>
+                  <div className="mt-3 sm:mt-4 space-y-0.5">
+                    <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road</p>
+                    <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Off Outer Ring Road, Kadubeesanahalli, Bengaluru</p>
+                    <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Karnataka – 560103, India</p>
                   </div>
                 </div>
               </motion.div>
 
               {/* Support Section */}
               <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}
-                className="flex items-start gap-5 transition-all duration-300 group">
-                <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-emerald-50 text-emerald-600 border-emerald-100">
-                  <Clock className="w-6 h-6" />
+                className="flex items-start gap-4 sm:gap-5 transition-all duration-300 group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl flex items-center justify-center border bg-emerald-50 text-emerald-600 border-emerald-100">
+                  <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Support</h4>
-                  <p className="text-slate-900 font-semibold">+91 77802 74792</p>
-                  <p className="text-sm text-slate-500 font-medium mt-2">Satish - 10:00 AM – 5:00 PM (Monday – Saturday)</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Support</h4>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">+91 77802 74792</p>
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2 break-words">Satish - 10:00 AM – 5:00 PM (Monday – Saturday)</p>
                 </div>
               </motion.div>
             </div>
@@ -208,9 +206,9 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.6 }}
-            className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-10 shadow-sm"
+            className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm"
           >
-            <h3 className="text-2xl font-bold text-slate-900 mb-8">Send Us a Message</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 sm:mb-8">Send Us a Message</h3>
             
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               {/* Row 1 */}
