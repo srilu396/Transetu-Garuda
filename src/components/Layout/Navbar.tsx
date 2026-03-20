@@ -29,7 +29,6 @@ export default function Navbar() {
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close desktop dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -40,7 +39,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -60,29 +58,30 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-16">
 
-            {/* Logo - Fixed vertical alignment */}
-<Link href="/" className="flex items-center">
-  <div className="relative w-20 h-20 overflow-hidden flex items-center justify-center mr-[-12px]">
-    <Image
-      src="/assets/logos/logo.png"
-      alt="Garuda OM logo"
-      fill
-      sizes="80px"
-      className="object-contain"
-      priority
-    />
-  </div>
-  <div className="flex flex-col items-center justify-center text-center">
-    <span className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
-      Garuda OM
-    </span>
-    <span className="text-[10px] sm:text-xs font-medium text-gray-500 italic leading-tight">
-      Integrated GPS & FASTag Solutions
-    </span>
-  </div>
-</Link>
+            {/* Logo - reduced from w-20 h-20 to w-16 h-14 */}
+            <Link href="/" className="flex items-center">
+              <div className="relative w-16 h-14 overflow-hidden flex items-center justify-center mr-[-12px]">
+                <Image
+                  src="/assets/logos/logo.png"
+                  alt="Garuda OM logo"
+                  fill
+                  sizes="64px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="flex flex-col items-center justify-center text-center">
+                {/* Reduced from text-2xl sm:text-3xl to text-xl sm:text-2xl */}
+                <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
+                  Garuda OM
+                </span>
+                <span className="text-[10px] sm:text-xs font-medium text-gray-500 italic leading-tight">
+                  Integrated GPS & FASTag Solutions
+                </span>
+              </div>
+            </Link>
 
-            {/* ── Desktop nav links — unchanged, lg+ only ── */}
+            {/* ── Desktop nav links ── */}
             <div className="hidden lg:flex items-center space-x-8">
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -127,7 +126,7 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* ── Hamburger button — mobile/tablet only ── */}
+            {/* ── Hamburger button ── */}
             <button
               onClick={openMobileMenu}
               className="lg:hidden flex items-center justify-center w-10 h-10 text-foreground hover:text-primary transition-colors rounded-md"
@@ -141,9 +140,8 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── MOBILE DRAWER — always in DOM, shown/hidden via translate ──────── */}
+      {/* ── MOBILE DRAWER ── */}
 
-      {/* Dark backdrop — pointer-events controlled so it only blocks when open */}
       <div
         onClick={closeMobileMenu}
         aria-hidden="true"
@@ -159,7 +157,6 @@ export default function Navbar() {
         className="lg:hidden"
       />
 
-      {/* Drawer panel */}
       <div
         style={{
           position: "fixed",
@@ -173,7 +170,7 @@ export default function Navbar() {
         }}
         className="lg:hidden bg-background shadow-2xl flex flex-col"
       >
-        {/* Drawer header - Increased logo size */}
+        {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
           <Link href="/" onClick={closeMobileMenu} className="flex items-center">
             <div className="relative w-12 h-11 overflow-hidden flex items-center justify-center">
@@ -186,7 +183,8 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col ml-1">
-              <span className="text-lg font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
+              {/* Reduced from text-lg to text-base */}
+              <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
                 Garuda OM
               </span>
               <span className="text-[9px] font-medium text-gray-500 italic leading-none">
@@ -206,8 +204,6 @@ export default function Navbar() {
 
         {/* Drawer links */}
         <nav className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
-
-          {/* Products accordion */}
           <div>
             <button
               type="button"
@@ -222,7 +218,6 @@ export default function Navbar() {
               />
             </button>
 
-            {/* Sub-links: GPS Tracking, Monitoring, FastTag */}
             <div
               style={{
                 maxHeight: mobileProductsOpen ? "200px" : "0px",

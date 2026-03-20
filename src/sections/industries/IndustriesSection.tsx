@@ -166,14 +166,15 @@ export default function IndustriesSection() {
                     <div className="flex items-center gap-3 mb-3 relative z-10">
                       <motion.div
                         variants={iconVariants}
-                        className="w-10 h-10 bg-gradient-to-br from-primary/15 to-accent/15 rounded-lg flex items-center justify-center text-primary transition-all duration-300"
+                        className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
                         style={{
-                          boxShadow: "0 0 0 0 rgba(236, 57, 176, 0)"
+                          background: "linear-gradient(135deg, #ec39b0, #7E60F4)",
+                          color: "white",
+                          boxShadow: "0 4px 10px rgba(236, 57, 176, 0.3)"
                         }}
                         whileHover={{
-                          background: "linear-gradient(135deg, #ec39b0, #ec39b0)",
-                          color: "white",
-                          boxShadow: "0 0 20px rgba(236, 57, 176, 0.5)",
+                          background: "linear-gradient(135deg, #7E60F4, #ec39b0)",
+                          boxShadow: "0 8px 20px rgba(236, 57, 176, 0.5)",
                         }}
                       >
                         {(() => {
@@ -230,41 +231,41 @@ export default function IndustriesSection() {
               needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-  <motion.button
-    whileHover={{
-      scale: 1.05,
-      boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
-    }}
-    whileTap={{ scale: 0.95 }}
-    onClick={handleContactNavigation}
-    type="button"
-    className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
-    style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
-  >
-    Consult Our Experts
-  </motion.button>
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={handleContactNavigation}
-    type="button"
-    className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
-    style={{
-      border: "2px solid rgba(126,96,244,0.4)",
-      color: "#7E60F4",
-    }}
-    onMouseEnter={(e) => {
-      (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
-      (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
-    }}
-    onMouseLeave={(e) => {
-      (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
-      (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
-    }}
-  >
-    Request Customization
-  </motion.button>
-</div>
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
+                style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+              >
+                Consult Our Experts
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+                style={{
+                  border: "2px solid rgba(126,96,244,0.4)",
+                  color: "#7E60F4",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
+                }}
+              >
+                Request Customization
+              </motion.button>
+            </div>
             
           </div>
         </motion.div>

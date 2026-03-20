@@ -95,7 +95,7 @@ export default function HeroSection() {
                 </svg>
               </motion.button>
               <motion.a
-                href="/assets/videos/homepage-video.mp4"
+                href="https://www.youtube.com/watch?v=woa5AMUFb18"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{

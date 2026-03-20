@@ -117,7 +117,7 @@ export default function VideosSection() {
       title: "Video Telematics",
       description:
         "Video telematics goes beyond GPS tracking systems. With our video monitoring solutions, you can experience added benefits that set it apart from basic tracking.",
-      videoUrl: "https://youtu.be/n9XE6P7nWI0",
+      videoUrl: "https://www.youtube.com/watch?v=woa5AMUFb18",
       thumbnail: "https://uffizio.com/wp-content/uploads/sites/2/2025/12/video-telematics-video.webp",
       icon: Video,
       iconBg: "bg-purple-100",
