@@ -1,18 +1,125 @@
 "use client";
 
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { motion, Variants } from "framer-motion";
 import { Play, Fuel, Gauge, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
+
+// Memoized Video Card for better performance
+const VideoCard = memo(({ video, index, variants }: { video: any, index: number, variants: any }) => {
+  const IconComponent = video.icon;
+  
+  return (
+    <motion.div
+      key={index}
+      custom={index}
+      variants={variants.card}
+      whileHover="hover"
+      className="group relative bg-white rounded-2xl border-2 border-slate-200/60 overflow-hidden flex flex-col h-full shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+    >
+      <motion.div
+        variants={variants.cardBorder}
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{ border: "2px solid transparent" }}
+      />
+
+      {/* Icon */}
+      <div className="p-6 pb-0">
+        <motion.div 
+          variants={variants.icon}
+          whileHover="hover"
+          className={`w-14 h-14 ${video.iconBg} rounded-xl flex items-center justify-center`}
+        >
+          <IconComponent className={`w-7 h-7 ${video.iconColor}`} />
+        </motion.div>
+      </div>
+
+      {/* Thumbnail */}
+      <div className="px-6 pt-4">
+        <motion.a 
+          href={video.videoUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="relative aspect-video block overflow-hidden rounded-xl cursor-pointer"
+          whileHover="hover"
+        >
+          <motion.img
+            src={video.thumbnail}
+            alt={video.title}
+            variants={variants.thumbnail}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex items-center justify-center rounded-xl"
+            initial={{ opacity: 0.8 }}
+            whileHover={{ opacity: 1 }}
+          >
+            <motion.div 
+              variants={variants.playButton}
+              className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl"
+            >
+              <Play className="w-5 h-5 text-primary ml-1" fill="currentColor" />
+            </motion.div>
+          </motion.div>
+        </motion.a>
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col flex-grow">
+        <motion.h3 
+          className="text-xl font-bold mb-3 text-slate-900"
+          whileHover={{ x: 3 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          {video.title}
+        </motion.h3>
+        <p className="text-slate-600 text-sm leading-relaxed mb-4">
+          {video.description}
+        </p>
+        
+        {/* Explore Now link */}
+        <div className="mt-auto pt-2">
+          <motion.a
+            href={video.videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-primary font-semibold text-sm group/link"
+            whileHover={{ x: 3 }}
+          >
+            Watch Video
+            <motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="ml-1.5 group-hover/link:translate-x-1 transition-transform"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </motion.svg>
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
+
+VideoCard.displayName = "VideoCard";
 
 export default function VideosSection() {
   const router = useRouter();
 
   // Function to handle navigation to contact section
-  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleContactNavigation = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     router.push("/#contact");
-  };
+  }, [router]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -24,72 +131,70 @@ export default function VideosSection() {
     },
   };
 
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
-        delay: index * 0.1,
-      },
-    }),
-    hover: {
-      y: -8,
-      scale: 1.02,
-      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-      borderColor: "rgba(236, 57, 176, 0.3)", // Changed to #ec39b0
-      transition: {
-        type: "spring" as const,
-        stiffness: 300,
-        damping: 20
+  const variants = {
+    card: {
+      hidden: { opacity: 0, y: 30 },
+      visible: (index: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.6,
+          ease: [0.22, 1, 0.36, 1] as const,
+          delay: index * 0.1,
+        },
+      }),
+      hover: {
+        y: -8,
+        scale: 1.02,
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+        borderColor: "rgba(236, 57, 176, 0.3)",
+        transition: {
+          type: "spring" as const,
+          stiffness: 300,
+          damping: 20
+        }
       }
-    }
-  };
-
-  const cardBorderVariants = {
-    hover: {
-      borderColor: "rgba(236, 57, 176, 0.4)", // Changed to #ec39b0
-      boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(236, 57, 176, 0.1)", // Changed to #ec39b0
-      transition: {
-        duration: 0.3,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
-  const thumbnailVariants = {
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut" as const
-      }
-    }
-  };
-
-  const playButtonVariants = {
-    hover: {
-      scale: 1.1,
-      backgroundColor: "rgba(255,255,255,1)",
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 15
-      }
-    }
-  };
-
-  const iconVariants = {
-    hover: {
-      scale: 1.1,
-      rotate: [0, -3, 3, -3, 0],
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut" as const,
+    } as Variants,
+    cardBorder: {
+      hover: {
+        borderColor: "rgba(236, 57, 176, 0.4)",
+        boxShadow: "0 30px 60px -15px rgba(0,0,0,0.45), 0 0 0 2px rgba(236, 57, 176, 0.1)",
+        transition: {
+          duration: 0.3,
+          ease: "easeOut" as const,
+        },
       },
     },
+    thumbnail: {
+      hover: {
+        scale: 1.05,
+        transition: {
+          duration: 0.4,
+          ease: "easeOut" as const
+        }
+      }
+    },
+    playButton: {
+      hover: {
+        scale: 1.1,
+        backgroundColor: "rgba(255,255,255,1)",
+        transition: {
+          type: "spring" as const,
+          stiffness: 400,
+          damping: 15
+        }
+      }
+    },
+    icon: {
+      hover: {
+        scale: 1.1,
+        rotate: [0, -3, 3, -3, 0],
+        transition: {
+          duration: 0.4,
+          ease: "easeInOut" as const,
+        },
+      },
+    }
   };
 
   const videos = [
@@ -136,7 +241,6 @@ export default function VideosSection() {
       }}
       aria-label="Demo Videos"
     >
-      {/* Soft lighting elements */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-[58%] h-[420px] w-[980px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/50 blur-3xl" />
         <div className="absolute left-[18%] top-[65%] h-[340px] w-[340px] rounded-full bg-primary/10 blur-3xl" />
@@ -144,7 +248,6 @@ export default function VideosSection() {
       </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
-        {/* Section Header */}
         <div className="text-center mb-16 px-4">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -174,7 +277,6 @@ export default function VideosSection() {
           </motion.p>
         </div>
 
-        {/* Video Cards Grid - Properly arranged */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -182,112 +284,11 @@ export default function VideosSection() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
-          {videos.map((video, index) => {
-            const IconComponent = video.icon;
-            return (
-              <motion.div
-                key={index}
-                custom={index}
-                variants={cardVariants}
-                whileHover="hover"
-                className="group relative bg-white rounded-2xl border-2 border-slate-200/60 overflow-hidden flex flex-col h-full shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-              >
-                <motion.div
-                  variants={cardBorderVariants}
-                  className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{
-                    border: "2px solid transparent",
-                  }}
-                />
-
-                {/* Icon */}
-                <div className="p-6 pb-0">
-                  <motion.div 
-                    variants={iconVariants}
-                    whileHover="hover"
-                    className={`w-14 h-14 ${video.iconBg} rounded-xl flex items-center justify-center`}
-                  >
-                    <IconComponent className={`w-7 h-7 ${video.iconColor}`} />
-                  </motion.div>
-                </div>
-
-                {/* Thumbnail */}
-                <div className="px-6 pt-4">
-                  <motion.a 
-                    href={video.videoUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="relative aspect-video block overflow-hidden rounded-xl cursor-pointer"
-                    whileHover="hover"
-                  >
-                    <motion.img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      variants={thumbnailVariants}
-                      className="w-full h-full object-cover"
-                    />
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent flex items-center justify-center rounded-xl"
-                      initial={{ opacity: 0.8 }}
-                      whileHover={{ opacity: 1 }}
-                    >
-                      <motion.div 
-                        variants={playButtonVariants}
-                        className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl"
-                      >
-                        <Play className="w-5 h-5 text-primary ml-1" fill="currentColor" />
-                      </motion.div>
-                    </motion.div>
-                  </motion.a>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <motion.h3 
-                    className="text-xl font-bold mb-3 text-slate-900"
-                    whileHover={{ x: 3 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {video.title}
-                  </motion.h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                    {video.description}
-                  </p>
-                  
-                  {/* Explore Now link */}
-                  <div className="mt-auto pt-2">
-                    <motion.a
-                      href={video.videoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-primary font-semibold text-sm group/link"
-                      whileHover={{ x: 3 }}
-                    >
-                      Watch Video
-                      <motion.svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="ml-1.5 group-hover/link:translate-x-1 transition-transform"
-                      >
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </motion.svg>
-                    </motion.a>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {videos.map((video, index) => (
+            <VideoCard key={index} video={video} index={index} variants={variants} />
+          ))}
         </motion.div>
 
-        {/* CTA Section - Updated with navigation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -295,7 +296,6 @@ export default function VideosSection() {
           transition={{ duration: 0.6 }}
           className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
         >
-          {/* Background Decorative Gradients */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/15 rounded-full blur-3xl -ml-40 -mb-40"></div>
 
@@ -307,41 +307,33 @@ export default function VideosSection() {
               Our product specialists are ready to walk you through our GPS tracking solutions in real-time. Let's schedule a personalized demonstration tailored to your specific fleet management needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-  <motion.button
-    whileHover={{
-      scale: 1.05,
-      boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
-    }}
-    whileTap={{ scale: 0.95 }}
-    onClick={handleContactNavigation}
-    type="button"
-    className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
-    style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
-  >
-    Schedule Live Demo
-  </motion.button>
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={handleContactNavigation}
-    type="button"
-    className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
-    style={{
-      border: "2px solid rgba(126,96,244,0.4)",
-      color: "#7E60F4",
-    }}
-    onMouseEnter={(e) => {
-      (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
-      (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
-    }}
-    onMouseLeave={(e) => {
-      (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
-      (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
-    }}
-  >
-    Talk to Sales
-  </motion.button>
-</div>
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
+                style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+              >
+                Schedule Live Demo
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+                style={{
+                  border: "2px solid rgba(126,96,244,0.4)",
+                  color: "#7E60F4",
+                }}
+              >
+                Talk to Sales
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -1,25 +1,12 @@
 "use client";
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {
-  industries,
-} from "@/sections/industries/data/industriesData";
-import * as LucideIcons from "lucide-react";
+import { industries, IndustryData } from "@/sections/industries/data/industriesData";
+import { IconRegistry } from "@/components/Icons/IconRegistry";
 
-export default function IndustriesSection() {
-  const router = useRouter();
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
+// Memoized Industry Card for better performance
+const IndustryCard = memo(({ industry, index }: { industry: IndustryData, index: number }) => {
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -29,6 +16,7 @@ export default function IndustriesSection() {
         type: "spring" as const,
         stiffness: 100,
         damping: 12,
+        delay: index * 0.05, // Stagger effect
       },
     },
     hover: {
@@ -80,10 +68,72 @@ export default function IndustriesSection() {
     },
   };
 
-  // Function to handle navigation to contact section
-  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    router.push("/#contact");
+  const IndustryIcon = IconRegistry[industry.icon] || IconRegistry.Building;
+
+  return (
+    <Link href={`/industries/${industry.slug}`} passHref prefetch={false}>
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hover"
+        whileTap="tap"
+        viewport={{ once: true }}
+        className="group relative h-full cursor-pointer"
+      >
+        <div className="h-full flex flex-col bg-white border-2 border-slate-200/60 rounded-xl p-5 transition-all duration-300 relative">
+          <motion.div
+            variants={cardBorderVariants}
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{ border: "2px solid transparent" }}
+          />
+
+          <div className="flex items-center gap-3 mb-3 relative z-10">
+            <motion.div
+              variants={iconVariants}
+              className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
+              style={{
+                background: "linear-gradient(135deg, #ec39b0, #7E60F4)",
+                color: "white",
+                boxShadow: "0 4px 10px rgba(236, 57, 176, 0.3)"
+              }}
+            >
+              <IndustryIcon className="w-5 h-5" />
+            </motion.div>
+            <h3 className="text-base font-bold group-hover:text-[#ec39b0] transition-colors text-slate-900 line-clamp-1">
+              {industry.title}
+            </h3>
+          </div>
+
+          <p className="text-slate-600 text-xs leading-relaxed mb-3 line-clamp-2 relative z-10">
+            {industry.description}
+          </p>
+
+          <motion.div
+            variants={badgeVariants}
+            className="mt-auto relative z-10 w-fit"
+          >
+            <span className="inline-block rounded-md border border-primary/25 bg-gradient-to-r from-primary/10 to-accent/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider group-hover:border-[#ec39b0]/25 group-hover:from-[#ec39b0]/10 group-hover:to-[#ec39b0]/10 transition-all duration-300">
+              {industry.category}
+            </span>
+          </motion.div>
+        </div>
+      </motion.div>
+    </Link>
+  );
+});
+
+IndustryCard.displayName = "IndustryCard";
+
+export default function IndustriesSection() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
   };
 
   return (
@@ -91,12 +141,10 @@ export default function IndustriesSection() {
       id="industries"
       className="py-24 bg-[#fef2cb] text-slate-900 relative overflow-hidden"
     >
-      {/* Background Decor */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto container-padding">
-        {/* Section Header */}
         <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -131,7 +179,6 @@ export default function IndustriesSection() {
           </motion.p>
         </div>
 
-        {/* Industry Grid - Compact Cards with Animations */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -139,76 +186,11 @@ export default function IndustriesSection() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr"
         >
-          {industries.map((industry, index) => {
-            return (
-              <Link key={index} href={`/industries/${industry.slug}`} passHref>
-                <motion.div
-                  variants={cardVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  whileHover="hover"
-                  whileTap="tap"
-                  viewport={{ once: true }}
-                  custom={index}
-                  className="group relative h-full cursor-pointer"
-                >
-                  <div className="h-full flex flex-col bg-white border-2 border-slate-200/60 rounded-xl p-5 transition-all duration-300 relative">
-                    {/* Border overlay with hover animation */}
-                    <motion.div
-                      variants={cardBorderVariants}
-                      className="absolute inset-0 rounded-xl pointer-events-none"
-                      style={{
-                        border: "2px solid transparent",
-                      }}
-                    />
-
-                    {/* Icon & Title Row */}
-                    <div className="flex items-center gap-3 mb-3 relative z-10">
-                      <motion.div
-                        variants={iconVariants}
-                        className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
-                        style={{
-                          background: "linear-gradient(135deg, #ec39b0, #7E60F4)",
-                          color: "white",
-                          boxShadow: "0 4px 10px rgba(236, 57, 176, 0.3)"
-                        }}
-                        whileHover={{
-                          background: "linear-gradient(135deg, #7E60F4, #ec39b0)",
-                          boxShadow: "0 8px 20px rgba(236, 57, 176, 0.5)",
-                        }}
-                      >
-                        {(() => {
-                          const IndustryIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[industry.icon] || LucideIcons.Building;
-                          return <IndustryIcon className="w-5 h-5" />;
-                        })()}
-                      </motion.div>
-                      <h3 className="text-base font-bold group-hover:text-[#ec39b0] transition-colors text-slate-900 line-clamp-1">
-                        {industry.title}
-                      </h3>
-                    </div>
-
-                    {/* Short Description */}
-                    <p className="text-slate-600 text-xs leading-relaxed mb-3 line-clamp-2 relative z-10">
-                      {industry.description}
-                    </p>
-
-                    {/* Category badge - part of system, secondary to icon/title */}
-                    <motion.div
-                      variants={badgeVariants}
-                      className="mt-auto relative z-10 w-fit"
-                    >
-                      <span className="inline-block rounded-md border border-primary/25 bg-gradient-to-r from-primary/10 to-accent/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider group-hover:border-[#ec39b0]/25 group-hover:from-[#ec39b0]/10 group-hover:to-[#ec39b0]/10 transition-all duration-300">
-                        {industry.category}
-                      </span>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </Link>
-            );
-          })}
+          {industries.map((industry, index) => (
+            <IndustryCard key={industry.slug} industry={industry} index={index} />
+          ))}
         </motion.div>
 
-        {/* Custom Solution Callout - Updated with navigation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -216,7 +198,6 @@ export default function IndustriesSection() {
           transition={{ duration: 0.6 }}
           className="mt-16 relative text-center bg-white rounded-2xl p-8 lg:p-12 border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden"
         >
-          {/* Background Decorative Gradients */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/15 rounded-full blur-3xl -ml-40 -mb-40"></div>
 
@@ -231,42 +212,35 @@ export default function IndustriesSection() {
               needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleContactNavigation}
-                type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
-                style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
-              >
-                Consult Our Experts
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleContactNavigation}
-                type="button"
-                className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
-                style={{
-                  border: "2px solid rgba(126,96,244,0.4)",
-                  color: "#7E60F4",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
-                  (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
-                  (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
-                }}
-              >
-                Request Customization
-              </motion.button>
+              <Link href="/#contact" passHref>
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  type="button"
+                  className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
+                  style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+                >
+                  Consult Our Experts
+                </motion.button>
+              </Link>
+              <Link href="/#contact" passHref>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="button"
+                  className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+                  style={{
+                    border: "2px solid rgba(126,96,244,0.4)",
+                    color: "#7E60F4",
+                  }}
+                >
+                  Request Customization
+                </motion.button>
+              </Link>
             </div>
-            
           </div>
         </motion.div>
       </div>

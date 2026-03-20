@@ -8,7 +8,7 @@ export default function HeroSection() {
   const router = useRouter();
 
   // Function to handle navigation to contact section
-  const handleGetStarted = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleGetStarted = React.useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const element = document.getElementById("contact");
     if (element) {
@@ -18,7 +18,7 @@ export default function HeroSection() {
     } else {
       router.push("/#contact");
     }
-  };
+  }, [router]);
 
   return (
     <section

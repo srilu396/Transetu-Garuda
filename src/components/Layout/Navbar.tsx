@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, MapPin, Monitor, CreditCard, X, Menu } from "lucide-react";
@@ -23,7 +23,7 @@ const productLinks = [
   },
 ];
 
-export default function Navbar() {
+const Navbar = memo(function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
@@ -44,12 +44,14 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileMenuOpen]);
 
-  const openMobileMenu = () => setMobileMenuOpen(true);
+  const openMobileMenu = useCallback(() => setMobileMenuOpen(true), []);
 
-  const closeMobileMenu = () => {
+  const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
     setMobileProductsOpen(false);
-  };
+  }, []);
+  
+  const toggleDropdown = useCallback(() => setDropdownOpen((prev) => !prev), []);
 
   return (
     <header>
@@ -58,8 +60,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-16">
 
-            {/* Logo + Title — logo flush against text, text left-aligned and raised */}
-            <Link href="/" className="flex items-center">
+            {/* Logo + Title */}
+            <Link href="/" className="flex items-center" prefetch={false}>
               <div className="relative w-16 h-14 flex-shrink-0 flex items-center justify-center mr-[-12px]">
                 <Image
                   src="/assets/logos/logo.png"
@@ -84,7 +86,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center space-x-8">
               <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  onClick={toggleDropdown}
                   className="nav-link text-sm font-medium flex items-center gap-1 focus:outline-none"
                   aria-expanded={dropdownOpen}
                   aria-haspopup="true"
@@ -99,32 +101,34 @@ export default function Navbar() {
                 {dropdownOpen && (
                   <div className="absolute top-full left-0 mt-2 w-48 bg-background border border-border/60 rounded-xl shadow-lg py-1 z-50">
                     {productLinks.map((item) => (
-                      <a
+                      <Link
                         key={item.label}
                         href={item.href}
                         onClick={() => setDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-foreground hover:bg-primary/8 hover:text-primary transition-colors"
+                        prefetch={false}
                       >
                         {item.icon}
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
               </div>
 
-              <a className="nav-link text-sm font-medium" href="/#features">Why Us</a>
-              <a className="nav-link text-sm font-medium" href="/#industries">Industries</a>
-              <a className="nav-link text-sm font-medium" href="/#about">About Us</a>
-              <a className="nav-link text-sm font-medium" href="/#contact">
+              <Link className="nav-link text-sm font-medium" href="/#features" prefetch={false}>Why Us</Link>
+              <Link className="nav-link text-sm font-medium" href="/#industries" prefetch={false}>Industries</Link>
+              <Link className="nav-link text-sm font-medium" href="/#about" prefetch={false}>About Us</Link>
+              <Link className="nav-link text-sm font-medium" href="/#contact" prefetch={false}>
                 Contact
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#contact"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-4 py-1.5 btn-hero"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-4 py-1.5 btn-hero"
+                prefetch={false}
               >
                 Get Started
-              </a>
+              </Link>
             </div>
 
             {/* ── Hamburger button ── */}
@@ -173,7 +177,7 @@ export default function Navbar() {
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
-          <Link href="/" onClick={closeMobileMenu} className="flex items-center">
+          <Link href="/" onClick={closeMobileMenu} className="flex items-center" prefetch={false}>
             <div className="relative w-12 h-11 flex-shrink-0 flex items-center justify-center">
               <Image
                 src="/assets/logos/logo.png"
@@ -227,47 +231,49 @@ export default function Navbar() {
             >
               <div className="ml-3 mt-1 space-y-1 border-l-2 border-primary/20 pl-3 pb-1">
                 {productLinks.map((item) => (
-                  <a
+                  <Link
                     key={item.label}
                     href={item.href}
                     onClick={closeMobileMenu}
                     className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                    prefetch={false}
                   >
                     {item.icon}
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          <a href="/#features" onClick={closeMobileMenu}
-            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors">
+          <Link href="/#features" onClick={closeMobileMenu}
+            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             Why Us
-          </a>
-          <a href="/#industries" onClick={closeMobileMenu}
-            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors">
+          </Link>
+          <Link href="/#industries" onClick={closeMobileMenu}
+            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             Industries
-          </a>
-          <a href="/#about" onClick={closeMobileMenu}
-            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors">
+          </Link>
+          <Link href="/#about" onClick={closeMobileMenu}
+            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             About Us
-          </a>
-          <a href="#contact" onClick={closeMobileMenu}
-            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors">
+          </Link>
+          <Link href="#contact" onClick={closeMobileMenu}
+            className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             Contact
-          </a>
+          </Link>
         </nav>
 
         {/* Get Started pinned at bottom */}
         <div className="px-4 py-4 border-t border-border/50">
-          <a
+          <Link
             href="/#contact"
             onClick={closeMobileMenu}
             className="flex items-center justify-center w-full rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 text-sm font-medium transition-colors btn-hero"
+            prefetch={false}
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -295,7 +301,7 @@ export default function Navbar() {
                   strokeLinejoin="round"
                   className="lucide lucide-house w-3 h-3"
                 >
-                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1-1v8"></path>
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
                 Home
@@ -306,4 +312,6 @@ export default function Navbar() {
       </nav>
     </header>
   );
-}
+});
+
+export default Navbar;
