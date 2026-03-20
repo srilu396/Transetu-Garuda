@@ -10,7 +10,14 @@ export default function HeroSection() {
   // Function to handle navigation to contact section
   const handleGetStarted = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    router.push("/#contact");
+    const element = document.getElementById("contact");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      // Update URL without reload
+      window.history.pushState(null, "", "/#contact");
+    } else {
+      router.push("/#contact");
+    }
   };
 
   return (

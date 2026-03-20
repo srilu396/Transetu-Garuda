@@ -116,7 +116,9 @@ export default function Navbar() {
               <a className="nav-link text-sm font-medium" href="/#features">Why Us</a>
               <a className="nav-link text-sm font-medium" href="/#industries">Industries</a>
               <a className="nav-link text-sm font-medium" href="/#about">About Us</a>
-              <a className="nav-link text-sm font-medium" href="#contact">Contact</a>
+              <a className="nav-link text-sm font-medium" href="/#contact">
+                Contact
+              </a>
               <a
                 href="/#contact"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-4 py-1.5 btn-hero"
