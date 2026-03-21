@@ -4,9 +4,28 @@ import React, { memo, useCallback } from "react";
 import { motion, Variants } from "framer-motion";
 import { Play, Fuel, Gauge, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { LucideIcon } from "lucide-react";
+
+interface VideoItem {
+  title: string;
+  description: string;
+  videoUrl: string;
+  thumbnail: string;
+  icon: LucideIcon;
+  iconBg: string;
+  iconColor: string;
+}
+
+interface VideoVariants {
+  card: Variants;
+  cardBorder: Variants;
+  thumbnail: Variants;
+  playButton: Variants;
+  icon: Variants;
+}
 
 // Memoized Video Card for better performance
-const VideoCard = memo(({ video, index, variants }: { video: any, index: number, variants: any }) => {
+const VideoCard = memo(({ video, index, variants }: { video: VideoItem, index: number, variants: VideoVariants }) => {
   const IconComponent = video.icon;
   
   return (
