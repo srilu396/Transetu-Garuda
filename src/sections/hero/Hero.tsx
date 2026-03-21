@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
@@ -13,7 +12,7 @@ export default function HeroSection() {
     const element = document.getElementById("contact");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      // Update URL without reload
+      // Update URL without re6ad
       window.history.pushState(null, "", "/#contact");
     } else {
       router.push("/#contact");
@@ -44,12 +43,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 w-full max-w-4xl mx-auto container-padding px-4 sm:px-6">
         <div className="flex flex-col items-center justify-center text-center mt-0 sm:mt-0">
-          <motion.div
-            className="w-full max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+          <div className="w-full max-w-2xl">
             <div className="flex flex-wrap justify-center gap-3 mb-6">
               <div className="inline-flex items-center px-4 py-2 bg-gradient-primary rounded-lg text-white text-sm font-medium shadow-xl">
                 <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
@@ -74,15 +68,10 @@ export default function HeroSection() {
               on one powerful platform for complete operational control.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <motion.button
-                whileHover={{
-                  scale: 1.04,
-                  boxShadow: "0 15px 30px -5px rgba(249, 115, 22, 0.5)",
-                }}
-                whileTap={{ scale: 0.97 }}
+              <button
                 onClick={handleGetStarted}
                 type="button"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-10 w-full sm:w-auto group shadow-2xl cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-10 w-full sm:w-auto group shadow-2xl cursor-pointer hover:scale-105"
               >
                 Get Started
                 <svg
@@ -100,18 +89,12 @@ export default function HeroSection() {
                   <path d="M5 12h14"></path>
                   <path d="m12 5 7 7-7 7"></path>
                 </svg>
-              </motion.button>
-              <motion.a
+              </button>
+              <a
                 href="https://www.youtube.com/watch?v=woa5AMUFb18"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{
-                  scale: 1.04,
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  borderColor: "white",
-                  boxShadow: "0 15px 30px -5px rgba(255, 255, 255, 0.15)",
-                }}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold border-2 border-white/50 text-white h-14 px-10 transition-all w-full sm:w-auto backdrop-blur-md shadow-xl"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-bold border-2 border-white/50 text-white h-14 px-10 transition-all w-full sm:w-auto backdrop-blur-md shadow-xl hover:scale-105 hover:bg-white/20 hover:border-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +110,7 @@ export default function HeroSection() {
                   <polygon points="6 3 20 12 6 21 6 3"></polygon>
                 </svg>
                 Watch Demo
-              </motion.a>
+              </a>
             </div>
 
             {/* Feature Highlights - High Contrast Tag style */}
@@ -149,7 +132,7 @@ export default function HeroSection() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

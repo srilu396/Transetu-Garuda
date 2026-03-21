@@ -2,7 +2,10 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import SlidePanel from "@/components/UI/SlidePanel";
+import dynamic from "next/dynamic";
+const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
+  ssr: false,
+});
 import {
   Camera,
   Truck,

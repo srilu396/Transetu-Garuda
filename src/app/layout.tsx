@@ -7,10 +7,15 @@ import FloatingSocialBar from "@/components/FloatingSocialBar";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",        // ← ADDED
+  preload: true,          // ← ADDED
 });
+
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
   variable: "--font-roboto-mono",
+  display: "swap",        // ← ADDED
+  preload: true,          // ← ADDED
 });
 
 export const metadata: Metadata = {
@@ -36,32 +41,33 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Your Google Search Console verification code
     google: "P8Zgd-We6M0PdoigMOj10DfQf7jLewSw0siCWolZoJ0",
   },
   openGraph: {
-    title: "Garuda OM – Smart Fleet Tracking Platform",
-    description: "Advanced GPS fleet management and vehicle tracking solutions for businesses.",
-    url: "https://transetu-garuda.vercel.app",
-    siteName: "Garuda OM",
-    images: [
-      {
-        url: "https://transetu-garuda.vercel.app/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Garuda OM - GPS Tracking & FASTag Solutions",
-      },
-    ],
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Garuda OM – Smart Fleet Tracking Platform",
-    description: "Advanced GPS fleet management and vehicle tracking solutions for businesses.",
-    images: ["https://transetu-garuda.vercel.app/og-image.png"],
-    creator: "@garudaom",
-  },
+  title: "Garuda OM – GPS Fleet Tracking & FASTag Solutions in India",
+  description:
+    "Monitor your fleet in real-time with Garuda OM. GPS tracking, FASTag integration, fuel sensors, dash cams and video telematics — built for Indian businesses.",
+  url: "https://transetu-garuda.vercel.app",
+  siteName: "Garuda OM",
+  images: [
+    {
+      url: "https://transetu-garuda.vercel.app/assets/logos/logo.png",
+      width: 1200,
+      height: 630,
+      alt: "Garuda OM - GPS Fleet Tracking Platform",
+    },
+  ],
+  locale: "en_IN",
+  type: "website",
+},
+twitter: {
+  card: "summary_large_image",
+  title: "Garuda OM – GPS Fleet Tracking & FASTag Solutions in India",
+  description:
+    "Monitor your fleet in real-time with Garuda OM. GPS tracking, FASTag integration, fuel sensors, dash cams and video telematics — built for Indian businesses.",
+  images: ["https://transetu-garuda.vercel.app/assets/logos/logo.png"],
+  creator: "@garudaom",
+},
   metadataBase: new URL("https://transetu-garuda.vercel.app"),
   alternates: {
     canonical: "/",

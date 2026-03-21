@@ -562,7 +562,7 @@ export default function AboutSection() {
                         alt={client.name}
                         width={280}
                         height={80}
-                        unoptimized
+                        loading="lazy"
                         className="object-contain object-center w-full max-w-[200px] h-14 sm:h-16"
                       />
                     </div>

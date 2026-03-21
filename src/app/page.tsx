@@ -1,23 +1,51 @@
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Layout/Navbar";
-import HeroSection from "@/sections/hero/Hero";
-import ProductsSection from "@/sections/gps/GPSTrackingSolutionsGrid";
-import FeaturesSection from "@/sections/features/PowerfulFeatures";
-
-// Lazy load heavy sections
-const IndustriesSection = dynamic(() => import("@/sections/industries/IndustriesSection"), {
-  loading: () => <div className="py-24 animate-pulse bg-slate-50" />,
-});
-const VideosSection = dynamic(() => import("@/sections/videos/Videos"), {
-  loading: () => <div className="py-24 animate-pulse bg-slate-50" />,
-});
-const ContactSection = dynamic(() => import("@/sections/contact/ContactSection"), {
-  loading: () => <div className="py-24 animate-pulse bg-slate-50" />,
-});
-const FASTagManagement = dynamic(() => import("@/sections/fastag/FASTagManagementSection"));
-const AboutSection = dynamic(() => import("@/sections/about/AboutSection"));
-const FastagSection = dynamic(() => import("@/sections/fastag/FastagSection"));
 import Footer from "@/components/Layout/Footer";
+import HeroSection from "@/sections/hero/Hero";
+
+const SectionPlaceholder = () => (
+  <div className="py-24 animate-pulse bg-slate-50" />
+);
+
+const FastagSection = dynamic(
+  () => import("@/sections/fastag/FastagSection"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const ProductsSection = dynamic(
+  () => import("@/sections/gps/GPSTrackingSolutionsGrid"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const FASTagManagement = dynamic(
+  () => import("@/sections/fastag/FASTagManagementSection"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const FeaturesSection = dynamic(
+  () => import("@/sections/features/PowerfulFeatures"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const IndustriesSection = dynamic(
+  () => import("@/sections/industries/IndustriesSection"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const AboutSection = dynamic(
+  () => import("@/sections/about/AboutSection"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const VideosSection = dynamic(
+  () => import("@/sections/videos/Videos"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
+
+const ContactSection = dynamic(
+  () => import("@/sections/contact/ContactSection"),
+  { ssr: false, loading: () => <SectionPlaceholder /> }
+);
 
 export default function Home() {
   return (

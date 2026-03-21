@@ -6,6 +6,7 @@ import { IndustryData } from "./data/industriesData";
 import { CheckCircle, ArrowLeft } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image"; 
 
 interface IndustryDetailWrapperProps {
   industry: IndustryData;
@@ -80,11 +81,14 @@ export default function IndustryDetails({
 
           {/* Hero Image */}
           <div className="relative w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-16 shadow-xl">
-            <img
-              src={industry.imageUrl}
-              alt={industry.title}
-              className="w-full h-full object-cover"
-            />
+            <Image
+  src={industry.imageUrl}
+  alt={industry.title}
+  fill
+  className="object-cover"
+  loading="lazy"
+  sizes="(max-width: 768px) 100vw, 1200px"
+/>
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
           </div>
 

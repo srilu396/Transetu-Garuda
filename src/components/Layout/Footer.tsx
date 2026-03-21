@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   // Company documents array - you can update these paths later
@@ -42,11 +43,14 @@ export default function Footer() {
               <Link href="/" className="flex items-center">
                 {/* Reduced logo size and removed extra margin */}
                 <div className="relative w-20 h-21 flex items-center justify-center flex-shrink-0 -mr-2">
-                  <img
-                    src="/assets/logos/image.png"
-                    alt="Garuda OM logo"
-                    className="w-full h-full object-contain brightness-0 invert"
-                  />
+                  <Image
+  src="/assets/logos/image.png"
+  alt="Garuda OM logo"
+  width={80}
+  height={84}
+  className="object-contain brightness-0 invert"
+  loading="lazy"
+/>
                 </div>
                 <div className="flex flex-col">
   <div className="text-4xl font-black tracking-wider text-white leading-none">
