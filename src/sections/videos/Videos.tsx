@@ -308,21 +308,39 @@ export default function VideosSection() {
           ))}
         </motion.div>
 
+        {/* Need a Live Demo? Card - Redesigned to match GPS section style */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 border border-slate-200/80 shadow-[0_10px_40px_rgb(0,0,0,0.08)] overflow-hidden"
+          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 overflow-hidden"
+          style={{
+            border: "1.5px solid rgba(126, 96, 244, 0.2)",
+            boxShadow: "0 10px 40px rgba(126, 96, 244, 0.08)",
+          }}
         >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/15 rounded-full blur-3xl -ml-40 -mb-40"></div>
+          {/* Background Decorative Gradients */}
+          <div
+            className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -mr-40 -mt-40"
+            style={{ background: "rgba(236,57,176,0.08)" }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl -ml-40 -mb-40"
+            style={{ background: "rgba(126,96,244,0.08)" }}
+          />
 
           <div className="relative z-10">
             <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
-              Need a <span className="text-primary">Live Demo?</span>
+              Need a{" "}
+              <span
+                className="bg-clip-text text-transparent"
+                style={{ backgroundImage: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+              >
+                Live Demo?
+              </span>
             </h3>
-            <p className="text-lg text-slate-600 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-500 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
               Our product specialists are ready to walk you through our GPS tracking solutions in real-time. Let's schedule a personalized demonstration tailored to your specific fleet management needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -348,6 +366,14 @@ export default function VideosSection() {
                 style={{
                   border: "2px solid rgba(126,96,244,0.4)",
                   color: "#7E60F4",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
                 }}
               >
                 Talk to Sales

@@ -262,14 +262,6 @@ export default function Footer() {
                   AIS 140 Compliance
                 </Link>
               </li>
-              <li>
-                <Link
-                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
-                  href="/solutions/temperature-monitor"
-                >
-                  Temperature Monitoring
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
