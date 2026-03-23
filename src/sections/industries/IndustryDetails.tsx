@@ -6,7 +6,7 @@ import { IndustryData } from "./data/industriesData";
 import { CheckCircle, ArrowLeft } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { useRouter } from "next/navigation";
-import Image from "next/image"; 
+
 
 interface IndustryDetailWrapperProps {
   industry: IndustryData;
@@ -30,29 +30,23 @@ export default function IndustryDetails({
   };
 
   // Function to handle navigation to contact section
-  const handleContactNavigation = () => {
-    // Navigate to homepage
+  const navigateToContact = () => {
+    // First navigate to homepage
     router.push('/');
     
     // Use setTimeout to ensure the page has loaded before scrolling
     setTimeout(() => {
-      const contactElement = document.getElementById('contact');
-      if (contactElement) {
-        contactElement.scrollIntoView({ behavior: 'smooth' });
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
       } else {
-        // If contact element not found immediately, wait a bit longer and try again
-        const checkForContact = setInterval(() => {
-          const contactElementRetry = document.getElementById('contact');
-          if (contactElementRetry) {
-            contactElementRetry.scrollIntoView({ behavior: 'smooth' });
-            clearInterval(checkForContact);
-          }
-        }, 100);
-        
-        // Stop checking after 3 seconds
-        setTimeout(() => clearInterval(checkForContact), 3000);
+        // If contact section not found, try to find it by class or alternative selector
+        const contactElement = document.querySelector('[id="contact"], .contact-section, #contact-section');
+        if (contactElement) {
+          contactElement.scrollIntoView({ behavior: 'smooth' });
+        }
       }
-    }, 100);
+    }, 500); // Increased delay to ensure page fully loads
   };
 
   return (
@@ -95,14 +89,12 @@ export default function IndustryDetails({
 
           {/* Hero Image */}
           <div className="relative w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-16 shadow-xl">
-            <Image
+            <img
               src={industry.imageUrl}
               alt={industry.title}
-              fill
-              className="object-cover"
-              loading="lazy"
-              sizes="(max-width: 768px) 100vw, 1200px"
+              className="w-full h-full object-cover"
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
           </div>
 
@@ -189,7 +181,7 @@ export default function IndustryDetails({
             </div>
           </div>
 
-          {/* Contact CTA - Updated with proper contact navigation */}
+          {/* Contact CTA */}
           <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
@@ -202,14 +194,14 @@ export default function IndustryDetails({
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <button
-                onClick={handleContactNavigation}
-                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl cursor-pointer inline-block"
+                onClick={navigateToContact}
+                className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl cursor-pointer"
               >
                 Get Started Now
               </button>
               <button
-                onClick={handleContactNavigation}
-                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all cursor-pointer inline-block"
+                onClick={navigateToContact}
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all cursor-pointer"
               >
                 Request Demo
               </button>

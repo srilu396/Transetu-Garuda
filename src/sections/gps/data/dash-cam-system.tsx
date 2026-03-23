@@ -3,7 +3,7 @@ export const dashCamSystem = {
   tagline: "Advanced Video Intelligence for Modern Fleets",
   icon: "Camera",
   bgColor: "bg-blue-600",
-  overview: "Empower your fleet with real-time video monitoring and AI-driven insights. Our Dash Cam System provides comprehensive road and cabin coverage, ensuring safety and accountability for every journey.",
+  overview: "Empower your fleet with real-time video monitoring and AI-driven insights. Our Dash Cam System provides comprehensive road and cabin coverage, ensuring safety and accountability for every journey. High-definition recording perfectly captures critical events, reducing liability and accelerating insurance claims. It also empowers managers to proactively coach drivers and foster a culture of road safety.",
   features: [
     {
       title: "Dual-Lens Recording",

@@ -4,7 +4,7 @@ import React from "react";
 import Navbar from "../../components/Layout/Navbar";
 import Footer from "../../components/Layout/Footer";
 import { SolutionData } from "./data/gpsData";
-import Image from "next/image";
+
 import { 
   CheckCircle, 
   ArrowLeft, 
@@ -112,30 +112,41 @@ export default function GPSTrackingDetails({
             </p>
           </div>
 
-          {/* Hero Image */}
-          <div className="relative w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-16 shadow-xl">
-            <Image
-  src={
-    data.imageUrl ||
-    "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-  }
-  alt={data.title}
-  fill
-  className="object-cover"
-  loading="lazy"
-  sizes="(max-width: 768px) 100vw, 1200px"
-/>
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-              <div className="max-w-3xl">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-md">
-                  Overview
-                </h3>
-                <p className="text-white/90 font-medium text-lg leading-relaxed drop-shadow-sm line-clamp-3 md:line-clamp-none">
-                  {data.overview}
-                </p>
-              </div>
-            </div>
+          {/* Hero Image / Video */}
+<div className="w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
+  {data.title === "Video Telematics" ? (
+    <div className="relative w-full aspect-video">
+      <iframe
+        className="absolute top-0 left-0 w-full h-full"
+        src="https://www.youtube.com/embed/woa5AMUFb18"
+        title="Video Telematics"
+        frameBorder="0"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
+    </div>
+  ) : (
+    <div className="relative w-full h-[300px] md:h-[450px]">
+      <img
+        src={
+          data.imageUrl ||
+          "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+        }
+        alt={data.title}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  )}
+</div>
+
+          {/* Overview */}
+          <div className="max-w-3xl mb-16">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              Overview
+            </h3>
+            <p className="text-muted-foreground font-medium text-lg leading-relaxed">
+              {data.overview}
+            </p>
           </div>
 
           {/* Benefits Cards (Mimicking Stats) */}

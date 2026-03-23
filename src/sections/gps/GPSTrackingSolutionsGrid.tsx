@@ -398,7 +398,10 @@ export default function ProductsSection() {
                     onClick={() => {
                       setSelectedProduct(product);
                       if (product.slug && solutionsData[product.slug]) {
-                        setSelectedSolutionData(solutionsData[product.slug]);
+                        setSelectedSolutionData({
+                          ...solutionsData[product.slug],
+                          imageUrl: product.image
+                        });
                       } else {
                         setSelectedSolutionData(null);
                       }

@@ -3,7 +3,7 @@ export const photogrammetryServices = {
   tagline: "High-precision 3D mapping from visual data",
   icon: "Layers",
   bgColor: "bg-purple-600",
-  overview: "Convert multiple aerial or ground-based images into accurate 3D models and orthomosaic maps. Perfect for site progress monitoring, volume calculations, and digital twinning.",
+  overview: "Convert multiple aerial or ground-based images into accurate 3D models and orthomosaic maps. Perfect for site progress monitoring, volume calculations, and digital twinning. By rapidly processing complex visual data, we deliver actionable topographical insights for construction and mining. This reduces manual surveying time and guarantees millimeter-level precision for project planning.",
   features: [
     {
       title: "3D Cloud Pointing",

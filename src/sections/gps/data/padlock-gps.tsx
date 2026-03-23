@@ -3,7 +3,7 @@ export const padlockGps = {
   tagline: "Heavy-duty security with advanced tracking",
   icon: "Lock",
   bgColor: "bg-red-700",
-  overview: "Our GPS Padlock combines mechanical toughness with digital intelligence. Secure containers, gates, and warehouses with a lock that alerts you if it's tampered with or moved.",
+  overview: "Our GPS Padlock combines mechanical toughness with digital intelligence. Secure containers, gates, and warehouses with a lock that alerts you if it's tampered with or moved. It features keyless remote access and robust activity logging for complete control over high-value goods. The heavy-duty build deters unauthorized entry while providing end-to-end transit visibility.",
   features: [
     {
       title: "Tamper Detection",

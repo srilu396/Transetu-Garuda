@@ -3,7 +3,7 @@ export const fuelLevelSensors = {
   tagline: "Stop Fuel Theft and Optimize Consumption",
   icon: "Fuel",
   bgColor: "bg-slate-700",
-  overview: "Our high-precision fuel sensors provide real-time data on fuel levels, consumption rates, and refilling activity. Detect fuel theft instantly and optimize your fleet's fuel economy.",
+  overview: "Our high-precision fuel sensors provide real-time data on fuel levels, consumption rates, and refilling activity. Detect fuel theft instantly and optimize your fleet's fuel economy. Designed to endure harsh environments, the sensors deliver pinpoint accuracy to eliminate hidden fuel losses. Comprehensive analytics allow you to track every drop and significantly lower your operational overhead.",
   features: [
     {
       title: "99% Precision",

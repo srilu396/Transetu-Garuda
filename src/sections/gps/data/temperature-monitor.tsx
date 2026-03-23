@@ -3,7 +3,7 @@ export const temperatureMonitor = {
   tagline: "Safeguard your cold chain integrity",
   icon: "Thermometer",
   bgColor: "bg-cyan-600",
-  overview: "Our digital temperature monitoring system ensures that your perishable cargo stays within the required range. Get instant alerts for deviations and maintain a complete audit trail of cold chain history.",
+  overview: "Our digital temperature monitoring system ensures that your perishable cargo stays within the required range. Get instant alerts for deviations and maintain a complete audit trail of cold chain history. It protects high-value pharmaceuticals and fresh produce from spoilage through continuous, high-frequency logging. Compliance is simplified with automated reports, giving you and your clients absolute peace of mind.",
   features: [
     {
       title: "Real-time Logging",
