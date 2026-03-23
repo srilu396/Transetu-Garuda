@@ -194,7 +194,7 @@ export default function ContactSection() {
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Support</h4>
                   <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">+91 77802 74792</p>
-                  <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2 break-words">Satish - 10:00 AM – 5:00 PM (Monday – Saturday)</p>
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2 break-words">Sudhakar - 10:00 AM – 5:00 PM (Monday – Saturday)</p>
                 </div>
               </motion.div>
             </div>
