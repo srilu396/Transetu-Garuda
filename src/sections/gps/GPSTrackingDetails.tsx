@@ -51,6 +51,29 @@ interface GPSDetailWrapperProps {
   icon?: string; // Changed from React.ElementType to string
 }
 
+const VIDEO_MAPPINGS: Record<string, string[]> = {
+  "GPS Tracking Solutions": [
+    "https://www.youtube.com/embed/Iff2oThRRUs",
+    "https://www.youtube.com/embed/_H0fbW01FLM",
+    "https://www.youtube.com/embed/U5oaiuMXGXw",
+    "https://www.youtube.com/embed/-lV-E3oRzlQ"
+  ],
+  "IoT for Mining": ["https://www.youtube.com/embed/Qy3AESmjdgg"],
+  "Fuel Level Sensors": [
+    "https://www.youtube.com/embed/DOqWZnW2Nxw",
+    "https://www.youtube.com/embed/S4pQSVNsXu8"
+  ],
+  "Temperature Monitor": ["https://www.youtube.com/embed/pXiVxK_0hGE"],
+  "Padlock GPS": ["https://www.youtube.com/embed/6o_6WvC9TO8"],
+  "AIS 140 Tracker": [
+    "https://www.youtube.com/embed/nMGBxIOwirc",
+    "https://www.youtube.com/embed/_mWaJLoFy0s"
+  ],
+  "Video Telematics": ["https://www.youtube.com/embed/woa5AMUFb18"],
+  "Geofencing & Location Alerts": ["https://www.youtube.com/embed/0DkuMWMNIVc"],
+  "GPS Tracking Software Platform": ["https://www.youtube.com/embed/_mWaJLoFy0s"]
+};
+
 export default function GPSTrackingDetails({
   data,
   showNavbarFooter = true,
@@ -75,6 +98,8 @@ export default function GPSTrackingDetails({
     // Navigate to homepage with contact hash
     window.location.href = "/#contact";
   };
+
+  const videos = VIDEO_MAPPINGS[data.title];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -112,32 +137,58 @@ export default function GPSTrackingDetails({
             </p>
           </div>
 
-          {/* Hero Image / Video */}
-<div className="w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
-  {data.title === "Video Telematics" ? (
-    <div className="relative w-full aspect-video">
-      <iframe
-        className="absolute top-0 left-0 w-full h-full"
-        src="https://www.youtube.com/embed/woa5AMUFb18"
-        title="Video Telematics"
-        frameBorder="0"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-      ></iframe>
-    </div>
-  ) : (
-    <div className="relative w-full h-[300px] md:h-[450px]">
-      <img
-        src={
-          data.imageUrl ||
-          "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-        }
-        alt={data.title}
-        className="w-full h-full object-cover"
-      />
-    </div>
-  )}
-</div>
+          {/* Hero Image / Video List */}
+          <div className="mb-8">
+            {videos && videos.length > 0 ? (
+              <div className="flex flex-col gap-6">
+                {/* Main Video */}
+                <div className="w-full rounded-2xl overflow-hidden shadow-xl aspect-video relative">
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src={videos[0]}
+                    title={`${data.title} Video 1`}
+                    frameBorder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+
+                {/* Additional Videos Grid */}
+                {videos.length > 1 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {videos.slice(1).map((videoUrl, index) => (
+                      <div
+                        key={index}
+                        className="w-full rounded-2xl overflow-hidden shadow-xl aspect-video relative"
+                      >
+                        <iframe
+                          className="absolute top-0 left-0 w-full h-full"
+                          src={videoUrl}
+                          title={`${data.title} Video ${index + 2}`}
+                          frameBorder="0"
+                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="w-full rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative w-full h-[300px] md:h-[450px]">
+                  <img
+                    src={
+                      data.imageUrl ||
+                      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                    }
+                    alt={data.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Overview */}
           <div className="max-w-3xl mb-16">

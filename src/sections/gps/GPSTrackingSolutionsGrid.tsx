@@ -15,12 +15,26 @@ import {
   Lock,
   MapPin,
   Shield,
+  BarChart3,
+  LucideIcon,
 } from "lucide-react";
 import { solutions as solutionsData, SolutionData } from "@/sections/gps/data/gpsData";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const products = [
+type ProductItem = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  badge: string;
+  features: string[];
+  link: string;
+  slug: string;
+  image?: string;
+  videoUrl?: string;
+};
+
+const products: ProductItem[] = [
   {
     title: "Dash Cam System",
     description:
@@ -147,6 +161,26 @@ const products = [
     link: "/solutions/ais-140-tracker",
     slug: "ais-140-tracker",
     image: "/images/products/ais140.jpg",
+  },
+  {
+    title: "Geofencing & Location Alerts",
+    description: "Create virtual boundaries and receive instant alerts when vehicles or assets enter or exit defined zones.",
+    icon: MapPin,
+    badge: "Geofencing",
+    features: ["Custom Geofences", "Instant Notifications", "Route Adherence"],
+    link: "/solutions/geofencing-alerts",
+    slug: "geofencing-alerts",
+    image: "/images/products/geofencing-location-alerts.png",
+  },
+  {
+    title: "GPS Tracking Software Platform",
+    description: "A centralized platform to monitor, manage, and analyze GPS tracking data with real-time dashboards.",
+    icon: BarChart3,
+    badge: "Software",
+    features: ["Real-Time Dashboards", "Custom Reporting", "Maintenance Scheduling"],
+    link: "/solutions/software-platform",
+    slug: "software-platform",
+    image: "/images/products/gps-tracking-software-platform.png",
   },
 ];
 
@@ -318,7 +352,16 @@ export default function ProductsSection() {
               <div className="relative w-full h-48 overflow-hidden shrink-0"
                 style={{ background: "linear-gradient(135deg, rgba(236,57,176,0.08), rgba(126,96,244,0.12))" }}
               >
-                {product.image ? (
+                {('videoUrl' in product && product.videoUrl) ? (
+                  <iframe
+                    className="w-full h-full object-cover"
+                    src={product.videoUrl}
+                    title={product.title}
+                    frameBorder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                ) : ('image' in product && product.image) ? (
                   <div className="w-full h-full">
                     <Image
                       src={product.image}
