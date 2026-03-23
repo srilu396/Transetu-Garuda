@@ -29,15 +29,29 @@ export default function IndustryDetails({
     }
   };
 
-  // Function to navigate to industries section then to contact
-  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    // First navigate to homepage with industries hash
-    window.location.href = "/#industries";
+  // Function to handle navigation to contact section
+  const handleContactNavigation = () => {
+    // Navigate to homepage
+    router.push('/');
     
-    // After a brief delay, redirect to contact section
+    // Use setTimeout to ensure the page has loaded before scrolling
     setTimeout(() => {
-      window.location.href = "/#contact";
+      const contactElement = document.getElementById('contact');
+      if (contactElement) {
+        contactElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // If contact element not found immediately, wait a bit longer and try again
+        const checkForContact = setInterval(() => {
+          const contactElementRetry = document.getElementById('contact');
+          if (contactElementRetry) {
+            contactElementRetry.scrollIntoView({ behavior: 'smooth' });
+            clearInterval(checkForContact);
+          }
+        }, 100);
+        
+        // Stop checking after 3 seconds
+        setTimeout(() => clearInterval(checkForContact), 3000);
+      }
     }, 100);
   };
 
@@ -82,13 +96,13 @@ export default function IndustryDetails({
           {/* Hero Image */}
           <div className="relative w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-16 shadow-xl">
             <Image
-  src={industry.imageUrl}
-  alt={industry.title}
-  fill
-  className="object-cover"
-  loading="lazy"
-  sizes="(max-width: 768px) 100vw, 1200px"
-/>
+              src={industry.imageUrl}
+              alt={industry.title}
+              fill
+              className="object-cover"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 1200px"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
           </div>
 
@@ -175,7 +189,7 @@ export default function IndustryDetails({
             </div>
           </div>
 
-          {/* Contact CTA - Updated with two-step navigation */}
+          {/* Contact CTA - Updated with proper contact navigation */}
           <div className="rounded-3xl bg-gradient-primary p-12 text-center text-white relative overflow-hidden mt-16">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
@@ -187,20 +201,18 @@ export default function IndustryDetails({
               Contact our experts today for a tailored demonstration of our GPS tracking and management platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <a
-                href="/#industries"
-                onClick={handleNavigation}
+              <button
+                onClick={handleContactNavigation}
                 className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl cursor-pointer inline-block"
               >
                 Get Started Now
-              </a>
-              <a
-                href="/#industries"
-                onClick={handleNavigation}
+              </button>
+              <button
+                onClick={handleContactNavigation}
                 className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all cursor-pointer inline-block"
               >
                 Request Demo
-              </a>
+              </button>
             </div>
           </div>
         </div>

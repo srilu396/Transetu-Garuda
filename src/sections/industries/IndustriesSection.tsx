@@ -136,6 +136,14 @@ export default function IndustriesSection() {
     },
   };
 
+  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id="industries"
@@ -191,55 +199,78 @@ export default function IndustriesSection() {
           ))}
         </motion.div>
 
+        {/* Custom Solution Callout - Updated to match GPS section style */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-16 relative text-center bg-white rounded-2xl p-8 lg:p-12 border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden"
+          className="mt-20 relative text-center bg-white rounded-3xl p-10 lg:p-16 overflow-hidden"
+          style={{
+            border: "1.5px solid rgba(126, 96, 244, 0.2)",
+            boxShadow: "0 10px 40px rgba(126, 96, 244, 0.08)",
+          }}
         >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tl from-primary/10 to-accent/15 rounded-full blur-3xl -ml-40 -mb-40"></div>
+          {/* Background Decorative Gradients */}
+          <div
+            className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -mr-40 -mt-40"
+            style={{ background: "rgba(236,57,176,0.08)" }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl -ml-40 -mb-40"
+            style={{ background: "rgba(126,96,244,0.08)" }}
+          />
 
           <div className="relative z-10">
-            <h3 className="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900 tracking-tight">
+            <h3 className="text-3xl lg:text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">
               Don't see your{" "}
-              <span className="text-primary">industry listed?</span>
+              <span
+                className="bg-clip-text text-transparent"
+                style={{ backgroundImage: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+              >
+                industry listed?
+              </span>
             </h3>
-            <p className="text-base text-slate-600 font-medium mb-6 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-500 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
               Our technology is highly adaptable. Contact us to discuss how we
               can build a custom tracking solution for your specific business
               needs.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/#contact" passHref>
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  type="button"
-                  className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
-                  style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
-                >
-                  Consult Our Experts
-                </motion.button>
-              </Link>
-              <Link href="/#contact" passHref>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="button"
-                  className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
-                  style={{
-                    border: "2px solid rgba(126,96,244,0.4)",
-                    color: "#7E60F4",
-                  }}
-                >
-                  Request Customization
-                </motion.button>
-              </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 15px 30px -5px rgba(236, 57, 176, 0.4)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
+                style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+              >
+                Consult Our Experts
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleContactNavigation}
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-full font-bold h-12 px-8 transition-all w-full sm:w-auto bg-transparent text-sm cursor-pointer"
+                style={{
+                  border: "2px solid rgba(126,96,244,0.4)",
+                  color: "#7E60F4",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#ec39b0";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#ec39b0";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(126,96,244,0.4)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#7E60F4";
+                }}
+              >
+                Request Customization
+              </motion.button>
             </div>
           </div>
         </motion.div>
