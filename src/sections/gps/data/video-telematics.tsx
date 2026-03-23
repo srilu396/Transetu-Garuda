@@ -3,6 +3,7 @@ export const videoTelematics = {
   tagline: "Visual evidence meets data-driven insights",
   icon: "Camera",
   bgColor: "bg-indigo-600",
+  imageUrl: "/images/products/video-telematics.jpg",
   overview: "Our video telematics solution combines high-definition camera footage with vehicle G-sensor data. Identify risky driving behaviors and provide objective evidence for insurance and training. The system instantly flags aggressive driving events to the cloud, giving fleet operators immediate situational awareness. Utilizing this visual context effectively reduces collision rates and promotes responsible driving habits.",
   features: [
     {

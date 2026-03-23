@@ -3,6 +3,7 @@ export const ais140Tracker = {
   tagline: "Government-certified safety for commercial vehicles",
   icon: "Satellite",
   bgColor: "bg-orange-600",
+  imageUrl: "/images/products/ais140.jpg",
   overview: "Our AIS 140 certified trackers meet the highest regulatory standards. Featuring dual-network connectivity and an emergency panic button, it ensures compliance and passenger safety. Built for rugged use in public and commercial transit, these devices offer tamper-proof operations. Real-time data syncing helps fleet managers avert crises and meet strict government mandates seamlessly.",
   features: [
     {

@@ -25,7 +25,7 @@ export const agricultureFarming: IndustryData = {
     "Farm Efficiency Analytics",
     "Integration with Farm Management Software",
   ],
-  imageUrl: "/images/industries/Agriculture & Farming.jpg ",
+  imageUrl: "/images/industries/Agriculture & Farming.jpg",
   stats: [
     { label: "Crop Yield", value: "+15%", icon: "TrendingUp" },
     { label: "Input Costs", value: "-20%", icon: "DollarSign" },

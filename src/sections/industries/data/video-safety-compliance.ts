@@ -25,7 +25,7 @@ export const videoSafetyCompliance: IndustryData = {
     "Incident Video Review",
     "Real-time Coaching Alerts",
   ],
-  imageUrl: "/images/industries/Video Safety & Compliance.jpg ",
+  imageUrl: "/images/industries/Video Safety & Compliance.jpg",
   stats: [
     { label: "Accident Reduction", value: "-58%", icon: "Shield" },
     { label: "Insurance Savings", value: "-32%", icon: "DollarSign" },

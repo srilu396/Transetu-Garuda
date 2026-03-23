@@ -3,6 +3,7 @@ export const iotForMining = {
   tagline: "Precision Infrastructure for the Deep Earth",
   icon: "Zap",
   bgColor: "bg-amber-700",
+  imageUrl: "/images/products/mining.jpg",
   overview: "Transform your mining operations with ruggedized IoT sensors and data analytics. Ensure worker safety and optimize heavy machinery performance in the most challenging environments. Our robust sensors withstand extreme conditions to deliver uninterrupted, mission-critical equipment data. By predicting failures before they happen, you effectively prevent costly downtime and safeguard your workforce.",
   features: [
     {

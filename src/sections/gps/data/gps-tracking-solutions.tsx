@@ -3,6 +3,7 @@ export const gpsTrackingSolutions = {
   tagline: "Total Visibility for Every Vehicle in Your Fleet",
   icon: "MapPin",
   bgColor: "bg-green-600",
+  imageUrl: "/images/products/fleet-tracker.jpg",
   overview: "Our core GPS tracking solution offers precise, real-time location data and advanced routing capabilities. Monitor your entire fleet's performance and ensure on-time deliveries with ease. With detailed historical playback and intelligent geofencing, you can proactively manage driver behavior. Streamlined dashboards bring powerful, actionable insights directly to your management team.",
   features: [
     {

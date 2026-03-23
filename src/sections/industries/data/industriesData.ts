@@ -20,6 +20,7 @@ import { agricultureFarming } from "./agriculture-farming";
 import { emergencyServices } from "./emergency-services";
 import { ais140Compliance } from "./ais-140-compliance";
 import { oilAndGasOperations } from "./oil-and-gas-operations";
+import { employeeTracking } from "./employee-tracking";
 
 export interface IndustryStat {
   label: string;
@@ -64,4 +65,5 @@ export const industries: IndustryData[] = [
   emergencyServices,
   ais140Compliance,
   oilAndGasOperations,
+  employeeTracking,
 ];

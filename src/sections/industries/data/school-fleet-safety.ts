@@ -25,7 +25,7 @@ export const schoolFleetSafety: IndustryData = {
     "Driver Safety Dashboard",
     "Route Compliance System",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/School Bus Safety.jpg",
   stats: [
     { label: "Student Safety", value: "100% visibility", icon: "Users" },
     { label: "Parent Satisfaction", value: "95%+", icon: "TrendingUp" },

@@ -25,7 +25,7 @@ export const pharmaceuticalLogistics: IndustryData = {
     "Real-time Alert System",
     "Audit Trail Generator",
   ],
-  imageUrl: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imageUrl: "/images/industries/Pharmaceutical Logistics.jpg",
   stats: [
     { label: "Temperature Compliance", value: "99.9%", icon: "ThermometerSnowflake" },
     { label: "Spoilage Reduction", value: "-76%", icon: "Package" },

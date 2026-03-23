@@ -25,7 +25,7 @@ export const oilAndGasOperations: IndustryData = {
     "Heavy Equipment Management",
     "Hazardous Environment Solutions",
   ],
-  imageUrl: "/images/industries/Oil & Gas Operations.jpg ",
+  imageUrl: "/images/industries/Oil & Gas Operations.jpg",
   stats: [
     { label: "Uptime", value: "99.9%", icon: "Zap" },
     { label: "Safety Incidents", value: "-75%", icon: "Shield" },

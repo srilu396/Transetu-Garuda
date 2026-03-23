@@ -179,14 +179,6 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-white hover:text-white/80 transition-colors text-sm font-medium"
-                  href="/industries/oil-gas-operations"
-                >
-                  Oil & Gas Operations
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-white hover:text-white/80 transition-colors text-sm font-medium"
                   href="/industries/ready-mix-concrete"
                 >
                   Ready Mix Concrete
@@ -265,7 +257,7 @@ export default function Footer() {
               <li>
                 <Link
                   className="text-white hover:text-white/80 transition-colors text-sm font-medium"
-                  href="/industries/ais-140-compliance"
+                  href="/solutions/ais-140-tracker"
                 >
                   AIS 140 Compliance
                 </Link>
