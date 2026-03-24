@@ -207,7 +207,7 @@ export default function AboutSection() {
         >
           {[
             { value: "2000+", label: "Active Clients", icon: Users },
-            { value: "24+", label: "Years Experience", icon: Clock },
+            { value: "6+", label: "Years Experience", icon: Clock },
             { value: "15K+", label: "Vehicles Tracked", icon: Truck },
             { value: "99.9%", label: "Client Retention", icon: Star },
           ].map((stat, index) => {
