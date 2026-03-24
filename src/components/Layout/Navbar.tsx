@@ -50,7 +50,7 @@ const Navbar = memo(function Navbar() {
     setMobileMenuOpen(false);
     setMobileProductsOpen(false);
   }, []);
-  
+
   const toggleDropdown = useCallback(() => setDropdownOpen((prev) => !prev), []);
 
   return (
@@ -62,7 +62,7 @@ const Navbar = memo(function Navbar() {
 
             {/* Logo + Title */}
             <Link href="/" className="flex items-center" prefetch={false}>
-              <div className="relative w-16 h-14 flex-shrink-0 flex items-center justify-center mr-[-12px]">
+              <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center mr-[-8px]">
                 <Image
                   src="/assets/logos/logo.png"
                   alt="Garuda OM logo"
@@ -72,7 +72,7 @@ const Navbar = memo(function Navbar() {
                   priority
                 />
               </div>
-              <div className="flex flex-col items-start -mt-1">
+              <div className="flex flex-col items-start -mt-3">
                 <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
                   Garuda OM
                 </span>
@@ -178,16 +178,16 @@ const Navbar = memo(function Navbar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
           <Link href="/" onClick={closeMobileMenu} className="flex items-center" prefetch={false}>
-            <div className="relative w-12 h-11 flex-shrink-0 flex items-center justify-center">
-              <Image
+            <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+             <Image
                 src="/assets/logos/logo.png"
                 alt="Garuda OM logo"
                 fill
-                sizes="48px"
+                sizes="64px"
                 className="object-contain"
               />
             </div>
-            <div className="flex flex-col items-start ml-1 -mt-0.5">
+            <div className="flex flex-col items-start ml-1 mt-3">
               <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
                 Garuda OM
               </span>
@@ -301,7 +301,7 @@ const Navbar = memo(function Navbar() {
                   strokeLinejoin="round"
                   className="lucide lucide-house w-3 h-3"
                 >
-                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1-1v8"></path>
+                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
                 Home

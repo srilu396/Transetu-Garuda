@@ -29,6 +29,7 @@ interface SlidePanelProps {
   layoutType?: "split" | "grid";
   solutionData?: SolutionData;
   industryData?: IndustryData;
+  children?: React.ReactNode;
 }
 
 export default function SlidePanel({
@@ -42,6 +43,7 @@ export default function SlidePanel({
   layoutType = "split",
   solutionData,
   industryData,
+  children,
 }: SlidePanelProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -163,7 +165,12 @@ export default function SlidePanel({
             </div>
 
             <div className="flex-grow overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
-              {solutionData ? (
+              {children ? (
+                <div className="flex flex-col min-h-full">
+                  {children}
+                  <Footer />
+                </div>
+              ) : solutionData ? (
                 <div className="flex flex-col">
                   <GPSDetailWrapper
                     data={solutionData}

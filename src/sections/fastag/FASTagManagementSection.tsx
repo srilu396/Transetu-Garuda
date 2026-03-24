@@ -1,21 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Car,
-  Briefcase,
-  ShieldCheck,
-  TrendingUp,
-} from "lucide-react";
-import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import { CreditCard, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
+import FASTagDetails from "./FASTagDetails";
+import { buyFASTagData } from "./data/buyFASTagData";
+import { becomePartnerData } from "./data/becomePartnerData";
+
+const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
+  ssr: false,
+});
 
 const fastagOptions = [
   {
+    id: "customer",
     title: "Buy FASTag for Your Vehicle",
     description:
       "Users can directly purchase FASTag through Garuda OM for personal or business vehicles. The FASTag enables automatic toll payments, reduces waiting time at toll plazas, and allows seamless integration with vehicle tracking systems.",
-    icon: Car,
+    icon: CreditCard,
     iconBg: "bg-[#f8fafc]/30 text-[#7c3a5e] border-[#7c3a5e]/20",
     features: [
       "Easy FASTag purchase and activation",
@@ -30,10 +33,11 @@ const fastagOptions = [
     badgeIcon: ShieldCheck,
   },
   {
+    id: "partner",
     title: "Become a FASTag Business Partner",
     description:
       "Businesses or agents interested in expanding their services can partner with Garuda OM to offer FASTag services to customers. This program allows partners to build a FASTag distribution network and grow their business.",
-    icon: Briefcase,
+    icon: Handshake,
     iconBg: "bg-[#f8fafc]/30 text-[#9d5b7a] border-[#9d5b7a]/20",
     features: [
       "Opportunity to become a FASTag distributor",
@@ -50,13 +54,7 @@ const fastagOptions = [
 ];
 
 export default function FASTagManagement() {
-  const router = useRouter();
-
-  // Function to handle navigation to contact section
-  const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    router.push("/#contact");
-  };
+  const [selectedOption, setSelectedOption] = useState<typeof fastagOptions[0] | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -278,7 +276,10 @@ export default function FASTagManagement() {
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
-                    onClick={handleContactNavigation}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedOption(option);
+                    }}
                     type="button"
                     className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-primary text-white text-sm font-bold transition-all duration-300 shadow-md cursor-pointer"
                   >
@@ -312,6 +313,24 @@ export default function FASTagManagement() {
           })}
         </motion.div>
       </div>
+
+      <SlidePanel
+        isOpen={!!selectedOption}
+        onClose={() => setSelectedOption(null)}
+        title={selectedOption?.title || ""}
+        description={selectedOption?.description || ""}
+        features={selectedOption?.features || []}
+        icon={selectedOption?.icon || CreditCard}
+        category={selectedOption?.badge || "FASTag"}
+      >
+        {selectedOption && (
+          <FASTagDetails 
+            data={selectedOption.id === "customer" ? buyFASTagData : becomePartnerData} 
+            showNavbarFooter={false}
+            onBack={() => setSelectedOption(null)} 
+          />
+        )}
+      </SlidePanel>
     </section>
   );
 }
