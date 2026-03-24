@@ -20,7 +20,7 @@ export const buyFASTagData: FASTagDetailsData = {
     },
     {
       name: "DOC-20250212-WA0007",
-      path: "/Fastags_Doc/DOC-20250212-WA0007.pdf",
+      path: "/Fastags_Doc/doc-20250212-wa0007.pdf",
       description: "Standard operating procedures and guidelines for FASTag usage."
     }
   ]

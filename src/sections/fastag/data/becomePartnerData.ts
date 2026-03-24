@@ -24,7 +24,7 @@ export const becomePartnerData: FASTagDetailsData = {
     },
     {
       name: "Tracker Communication Protocol v1.8",
-      path: "/Fastags_Doc/Tracker Communication Protocol v1.8.pdf",
+      path: "/Fastags_Doc/tracker-communication-protocol-v1.8.pdf",
       description: "Technical specifications for GPS and FASTag integration protocols."
     }
   ]
