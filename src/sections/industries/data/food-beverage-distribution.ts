@@ -25,7 +25,7 @@ export const foodBeverageDistribution: IndustryData = {
     "Food Safety Compliance Reporting",
     "Chain of Custody Tracking",
   ],
-  imageUrl: "/images/industries/Food & Beverage Distribution.jpg",
+  imageUrl: "/images/Industries/Food & Beverage Distribution.jpg",
   stats: [
     { label: "Food Safety", value: "100%", icon: "CheckCircle" },
     { label: "Spoilage Reduction", value: "-95%", icon: "TrendingDown" },

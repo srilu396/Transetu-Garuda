@@ -25,7 +25,7 @@ export const assetTelematics: IndustryData = {
     "Asset Utilization Dashboard",
     "Inventory Management Platform",
   ],
-  imageUrl: "/images/industries/Asset Telematics.jpg",
+  imageUrl: "/images/Industries/Asset Telematics.jpg",
   stats: [
     { label: "Utilization", value: "+40%", icon: "TrendingUp" },
     { label: "Theft Recovery", value: "98%", icon: "Shield" },

@@ -25,7 +25,7 @@ export const employeeTracking: IndustryData = {
     "Automated Attendance & Geofencing",
     "Performance & Productivity Analytics",
   ],
-  imageUrl: "/images/industries/Employee Tracking.jpg",
+  imageUrl: "/images/Industries/Employee Tracking.jpg",
   stats: [
     { label: "Productivity", value: "+25%", icon: "TrendingUp" },
     { label: "Admin Work", value: "-30%", icon: "Clock" },

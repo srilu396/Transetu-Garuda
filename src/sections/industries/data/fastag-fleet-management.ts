@@ -25,7 +25,7 @@ export const fastagFleetManagement: IndustryData = {
     "Toll Expense Analytics",
     "Consolidated Billing & Reporting",
   ],
-  imageUrl: "/images/industries/FASTag Fleet Management.jpg",
+  imageUrl: "/images/Industries/FASTag Fleet Management.jpg",
   stats: [
     { label: "Admin Time Saved", value: "-80%", icon: "Clock" },
     { label: "Toll Savings", value: "-15%", icon: "DollarSign" },

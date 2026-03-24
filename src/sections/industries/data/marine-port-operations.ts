@@ -25,7 +25,7 @@ export const marinePortOperations: IndustryData = {
     "Port Equipment Telematics",
     "Marine-Grade GPS Hardware",
   ],
-  imageUrl: "/images/industries/Marine & Port Operations.jpg",
+  imageUrl: "/images/Industries/Marine & Port Operations.jpg",
   stats: [
     { label: "Turnaround Time", value: "-15%", icon: "Clock" },
     { label: "Container Security", value: "+99%", icon: "Shield" },

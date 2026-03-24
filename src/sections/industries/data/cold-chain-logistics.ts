@@ -25,7 +25,7 @@ export const coldChainLogistics: IndustryData = {
     "Automated HACCP & FSMA Reporting",
     "Secure Cold Chain of Custody",
   ],
-  imageUrl: "/images/industries/Cold Chain Logistics.jpg",
+  imageUrl: "/images/Industries/Cold Chain Logistics.jpg",
   stats: [
     { label: "Compliance", value: "100%", icon: "CheckCircle" },
     { label: "Spoilage", value: "-99%", icon: "TrendingDown" },

@@ -25,7 +25,7 @@ export const ais140Compliance: IndustryData = {
     "Vehicle Diagnostics System",
     "Compliance Report Generator",
   ],
-  imageUrl: "/images/industries/AIS 140 Compliance.jpg",
+  imageUrl: "/images/Industries/AIS 140 Compliance.jpg",
   stats: [
     { label: "Compliance Rate", value: "100%", icon: "CheckCircle" },
     { label: "Audit Success", value: "100%", icon: "Shield" },

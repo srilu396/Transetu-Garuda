@@ -25,7 +25,7 @@ export const fuelManagementSolutions: IndustryData = {
     "Fuel Efficiency Dashboard",
     "Driver Behavior Monitoring",
   ],
-  imageUrl: "/images/industries/Fuel Management Solutions.jpg",
+  imageUrl: "/images/Industries/Fuel Management Solutions.jpg",
   stats: [
     { label: "Fuel Savings", value: "-30%", icon: "DollarSign" },
     { label: "Theft Prevention", value: "99%", icon: "Shield" },

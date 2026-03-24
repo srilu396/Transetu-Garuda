@@ -25,7 +25,7 @@ export const miningOperations: IndustryData = {
     "Worker Safety Devices",
     "Remote Site Connectivity Solutions",
   ],
-  imageUrl: "/images/industries/Mining Operations.jpg",
+  imageUrl: "/images/Industries/Mining Operations.jpg",
   stats: [
     { label: "Uptime", value: "+20%", icon: "Zap" },
     { label: "Safety", value: "-60% Incidents", icon: "Shield" },
