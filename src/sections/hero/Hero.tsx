@@ -114,7 +114,7 @@ export default function HeroSection() {
             </div>
 
             {/* Feature Highlights - High Contrast Tag style */}
-            <div className="flex flex-wrap justify-center gap-3">
+            {/* <div className="flex flex-wrap justify-center gap-3">
               {[
                 "GPS Vehicle Tracking",
                 "Dash Cam Security",
@@ -131,7 +131,7 @@ export default function HeroSection() {
                   </span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

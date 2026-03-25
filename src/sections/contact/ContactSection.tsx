@@ -4,6 +4,54 @@ import React, { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send, ChevronDown } from "lucide-react";
 
+/** Shape matches what an admin API can return — map JSON into this (split multiline address strings into `addressLines` if needed). */
+export type ContactOfficeLocation = {
+  id?: string;
+  title: string;
+  addressLines: string[];
+  /** Phone, pincode note, etc. — rendered like address body (no extra bold). */
+  contact?: string;
+};
+
+/** Static fallback; replace with `useEffect` + `fetch` / SWR / server props when admin API is ready. */
+const OFFICE_LOCATIONS: ContactOfficeLocation[] = [
+  {
+    id: "vijayawada",
+    title: "Vijayawada",
+    addressLines: [
+      "A Bhavani, 56-14-9 Kankadurga residency, 2nd floor, chennupati apparao street, near axis bank, beside first look, patamata, vijayawada – 520010",
+    ],
+    contact: "+91 7981560627",
+  },
+  {
+    id: "hyderabad",
+    title: "Hyderabad",
+    addressLines: [
+      "H.no 1-8-67/Ews – 152",
+      "Apiic colony East kamalanagar",
+      "Opp Srikari Hospital, ECIL x Roads",
+      "Hyderabad – 500076",
+    ],
+    contact: "+91 9490417550",
+  },
+  {
+    id: "bhadrachalam",
+    title: "Bhadrachalam",
+    addressLines: [
+      "1-51/1, Gandhinogar, Palwancha, Kothagudem, Bhadrachalam district, Telangana - 507115",
+    ]
+  },
+  {
+    id: "bengaluru",
+    title: "Bengaluru",
+    addressLines: [
+      "Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road",
+      "Off Outer Ring Road, Kadubeesanahalli, Bengaluru",
+      "Karnataka – 560103",
+    ],
+  },
+];
+
 // ── All 4 service options ─────────────────────────────────────────────────
 const services = [
   { value: "gps",     label: "GPS Tracking" },
@@ -28,7 +76,16 @@ const floatAnimation: Variants = {
   },
 };
 
+const officeCardClass =
+  "rounded-xl border border-slate-100 bg-slate-50/70 p-3 sm:p-3.5 h-full flex flex-col gap-1";
+const officeTitleClass =
+  "text-slate-900 font-semibold text-xs sm:text-sm break-words shrink-0";
+const officeBodyClass =
+  "text-slate-800 text-xs sm:text-sm font-normal leading-snug break-words";
+
 export default function ContactSection() {
+  const officeLocations = OFFICE_LOCATIONS;
+
   const [isSubmitting, setIsSubmitting]   = useState(false);
   const [showSuccess, setShowSuccess]     = useState(false);
   const [showError, setShowError]         = useState(false);
@@ -123,7 +180,7 @@ export default function ContactSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch gap-8 lg:gap-12">
 
           {/* Left — Contact Information Card with title inside */}
           <motion.div 
@@ -131,7 +188,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.6 }}
-            className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm"
+            className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm h-full flex flex-col"
           >
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 sm:mb-8">Contact Information</h3>
             
@@ -171,16 +228,24 @@ export default function ContactSection() {
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Office</h4>
-                  {/* First address */}
-                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">12-1-8, Vijawada, Benz Circle, Parameta</p>
-                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Andhra Pradesh – 520010, India</p>
-                  
-                  {/* Line space and second address */}
-                  <div className="mt-3 sm:mt-4 space-y-0.5">
-                    <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road</p>
-                    <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Off Outer Ring Road, Kadubeesanahalli, Bengaluru</p>
-                    <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">Karnataka – 560103, India</p>
+                  <h4 className="font-bold text-slate-900 mb-2 sm:mb-3 text-sm sm:text-base">Office</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3 items-stretch">
+                    {officeLocations.map((loc, index) => (
+                      <div key={loc.id ?? `office-${index}`} className={officeCardClass}>
+                        <p className={officeTitleClass}>{loc.title}</p>
+                        <div className="space-y-0.5 shrink-0">
+                          {loc.addressLines.map((line, lineIndex) => (
+                            <p key={lineIndex} className={officeBodyClass}>
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+                        <div className="flex-1 min-h-0 min-w-0" aria-hidden />
+                        {loc.contact ? (
+                          <p className={`${officeBodyClass} shrink-0 pt-1.5`}>{loc.contact}</p>
+                        ) : null}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -206,11 +271,11 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }} 
             viewport={{ once: true }} 
             transition={{ duration: 0.6 }}
-            className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm"
+            className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm h-full flex flex-col"
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 sm:mb-8">Send Us a Message</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 sm:mb-8 shrink-0">Send Us a Message</h3>
             
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col flex-1 min-h-0 gap-4 lg:gap-5">
               {/* Row 1 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
@@ -317,17 +382,17 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {/* Message */}
-              <div className="space-y-1">
-                <label htmlFor="message" className="text-sm font-semibold text-slate-700">Message</label>
+              {/* Message — taller on large screens to balance office grid height */}
+              <div className="space-y-1 flex-1 flex flex-col min-h-0">
+                <label htmlFor="message" className="text-sm font-semibold text-slate-700 shrink-0">Message</label>
                 <textarea id="message" name="message" rows={3} placeholder="Your message here..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm resize-none" />
+                  className="w-full min-h-[7.5rem] lg:min-h-[11rem] flex-1 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm resize-y" />
               </div>
 
               {/* Success */}
               {showSuccess && (
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl text-sm bg-green-50 text-green-700 border border-green-200">
+                  className="p-4 rounded-xl text-sm bg-green-50 text-green-700 border border-green-200 shrink-0">
                   Thank you! Your message has been sent successfully.
                 </motion.div>
               )}
@@ -335,7 +400,7 @@ export default function ContactSection() {
               {/* Error */}
               {showError && (
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl text-sm bg-red-50 text-red-700 border border-red-200">
+                  className="p-4 rounded-xl text-sm bg-red-50 text-red-700 border border-red-200 shrink-0">
                   {errorMessage}
                 </motion.div>
               )}
@@ -343,7 +408,7 @@ export default function ContactSection() {
               {/* Submit */}
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 type="submit" disabled={isSubmitting}
-                className={`w-full py-3.5 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all duration-300 text-sm ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}>
+                className={`w-full py-3.5 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all duration-300 text-sm shrink-0 mt-auto ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}>
                 {isSubmitting ? (
                   <><span>Sending...</span><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /></>
                 ) : (

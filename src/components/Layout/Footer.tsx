@@ -6,28 +6,20 @@ export default function Footer() {
   // Company documents array - you can update these paths later
   const companyDocs = [
     {
-      name: "Year 1 Experience Letter",
-      path: "/docs/experience-letter-year1.pdf" 
-    },
-    {
-      name: "Year 2 Experience Letter",
-      path: "/docs/experience-letter-year2.pdf" 
-    },
-    {
-      name: "Year 3 Experience Letter",
-      path: "/docs/experience-letter-year3.pdf" 
+      name: "GST Certificate",
+      path: "/docs/gst-certificate.pdf"
     },
     {
       name: "IEC Certificate",
-      path: "/docs/iec-certificate.pdf" 
+      path: "/docs/iec-certificate.pdf"
     },
     {
-      name: "ODLC Document",
-      path: "/docs/odlc-document.pdf" 
+      name: "M2M Service Provider - IOT",
+      path: "/docs/m2m-service-provider.pdf"
     },
     {
       name: "Udyam Registration Certificate",
-      path: "/docs/udyam-registration.pdf" 
+      path: "/docs/udyam-registration.pdf"
     }
   ];
 
@@ -44,28 +36,28 @@ export default function Footer() {
                 {/* Reduced logo size and removed extra margin */}
                 <div className="relative w-20 h-21 flex items-center justify-center flex-shrink-0 -mr-2">
                   <Image
-  src="/assets/logos/image.png"
-  alt="Garuda OM logo"
-  width={80}
-  height={84}
-  className="object-contain brightness-0 invert"
-  loading="lazy"
-/>
+                    src="/assets/logos/image.png"
+                    alt="Garuda OM logo"
+                    width={80}
+                    height={84}
+                    className="object-contain brightness-0 invert"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="flex flex-col">
-  <div className="text-4xl font-black tracking-wider text-white leading-none">
-    Garuda OM
-  </div>
-  <span className="text-sm font-bold text-white mt-1.5 italic max-w-[200px]">
-    Integrated GPS & FASTag Solutions
-  </span>
-</div>
+                  <div className="text-4xl font-black tracking-wider text-white leading-none">
+                    Garuda OM
+                  </div>
+                  <span className="text-sm font-bold text-white mt-1.5 italic max-w-[200px]">
+                    Integrated GPS & FASTag Solutions
+                  </span>
+                </div>
               </Link>
             </div>
             {/* Brand line - slightly increased font size */}
             <div className="mb-4">
               <p className="text-white/90 text-sm font-medium">
-                A brand of Omimportandexport pvt limited
+                A brand of OM IMPORT & EXPORT
               </p>
             </div>
             {/* Description text - increased from text-xs to text-sm */}
@@ -117,7 +109,7 @@ export default function Footer() {
                   omimportandexport1994@gmail.com
                 </span>
               </div>
-              
+
               {/* Office Addresses Section */}
               <div className="flex items-start gap-3">
                 <svg
@@ -145,7 +137,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          
+
           {/* Our Industries Section */}
           <div className="mt-8 lg:mt-12">
             <h3 className="text-lg font-semibold mb-4 text-white font-black uppercase tracking-tight">
@@ -194,7 +186,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          
+
           {/* Company Docs Section */}
           <div className="mt-8 lg:mt-12">
             <h3 className="text-lg font-semibold mb-4 text-white font-black uppercase tracking-tight">
@@ -215,7 +207,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          
+
           {/* Important Solutions Section */}
           <div className="mt-8 lg:mt-12">
             <h3 className="text-lg font-semibold mb-4 text-white font-black uppercase tracking-tight">

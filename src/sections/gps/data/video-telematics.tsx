@@ -1,5 +1,5 @@
 export const videoTelematics = {
-  title: "Video Telematics",
+  title: "AI Dash Cam",
   tagline: "Visual evidence meets data-driven insights",
   icon: "Camera",
   bgColor: "bg-indigo-600",
@@ -50,7 +50,7 @@ export const videoTelematics = {
     }
   ],
   seoMeta: {
-    title: "Video Telematics & Integrated Camera Systems",
+    title: "AI Dash Cam & Integrated Camera Systems",
     description: "Combine GPS data with high-definition video for a 360-degree view of fleet safety."
   }
 };

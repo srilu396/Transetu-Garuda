@@ -21,7 +21,8 @@ import {
   Thermometer,
   Lock,
   ShieldCheck,
-  Search
+  Search,
+  Package,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -40,7 +41,8 @@ const IconMap: Record<string, React.ElementType> = {
   Thermometer,
   Lock,
   ShieldCheck,
-  Search
+  Search,
+  Package,
 };
 
 interface GPSDetailWrapperProps {
@@ -52,24 +54,14 @@ interface GPSDetailWrapperProps {
 }
 
 const VIDEO_MAPPINGS: Record<string, string[]> = {
-  "GPS Tracking Solutions": [
-    "https://www.youtube.com/embed/Iff2oThRRUs",
-    "https://www.youtube.com/embed/_H0fbW01FLM",
-    "https://www.youtube.com/embed/U5oaiuMXGXw",
-    "https://www.youtube.com/embed/-lV-E3oRzlQ"
-  ],
-  "IoT for Mining": ["https://www.youtube.com/embed/Qy3AESmjdgg"],
-  "Fuel Level Sensors": [
-    "https://www.youtube.com/embed/DOqWZnW2Nxw",
-    "https://www.youtube.com/embed/S4pQSVNsXu8"
-  ],
+  "GPS Tracking Solutions": ["https://www.youtube.com/embed/-lV-E3oRzlQ"],
+  "IoT for Mining": [],
+  "Asset Tracking": ["https://www.youtube.com/embed/Qy3AESmjdgg"],
+  "Fuel Level Sensors": ["https://www.youtube.com/embed/DOqWZnW2Nxw"],
   "Temperature Monitor": ["https://www.youtube.com/embed/pXiVxK_0hGE"],
   "Padlock GPS": ["https://www.youtube.com/embed/6o_6WvC9TO8"],
-  "AIS 140 Tracker": [
-    "https://www.youtube.com/embed/nMGBxIOwirc",
-    "https://www.youtube.com/embed/_mWaJLoFy0s"
-  ],
-  "Video Telematics": ["https://www.youtube.com/embed/woa5AMUFb18"],
+  "AIS 140 Tracker": [],
+  "AI Dash Cam": ["https://www.youtube.com/embed/woa5AMUFb18"],
   "Geofencing & Location Alerts": ["https://www.youtube.com/embed/0DkuMWMNIVc"],
   "GPS Tracking Software Platform": ["https://www.youtube.com/embed/_mWaJLoFy0s"]
 };

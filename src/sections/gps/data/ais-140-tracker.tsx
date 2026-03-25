@@ -24,6 +24,11 @@ export const ais140Tracker = {
   ],
   useCases: [
     {
+      title: "AIS 140 Tracker – VLTD for mining",
+      description:
+        "We supply AIS 140 Tracker – VLTD devices to AP Mining and TS Mining for compliant vehicle location tracking.",
+    },
+    {
       title: "Public Transport",
       description: "Mandatory compliance for buses and taxis in many regions."
     },
