@@ -5,17 +5,16 @@ import Navbar from "../../components/Layout/Navbar";
 import Footer from "../../components/Layout/Footer";
 import { FASTagDetailsData } from "./data/fastagDetailsData";
 import { FileText, Download, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 interface FASTagDetailsProps {
   data: FASTagDetailsData;
   showNavbarFooter?: boolean;
-  onBack?: () => void;
 }
 
 export default function FASTagDetails({
   data,
   showNavbarFooter = true,
-  onBack,
 }: FASTagDetailsProps) {
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
@@ -24,18 +23,16 @@ export default function FASTagDetails({
       <main className={`flex-grow ${showNavbarFooter ? "pt-24" : "pt-8"} pb-20`}>
         <div className="max-w-5xl mx-auto px-6">
           {/* Back Button */}
-          {onBack && (
-            <button
-              onClick={onBack}
-              className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-8 group font-medium"
-            >
-              <ArrowLeft
-                size={20}
-                className="group-hover:-translate-x-1 transition-transform"
-              />
-              <span>Back</span>
-            </button>
-          )}
+          <Link
+            href="/#fastag-management"
+            className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-8 group font-medium w-fit"
+          >
+            <ArrowLeft
+              size={20}
+              className="group-hover:-translate-x-1 transition-transform"
+            />
+            <span>Back to FASTag</span>
+          </Link>
 
           {/* Header Section */}
           <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-slate-200/60 mb-12 relative overflow-hidden">
@@ -69,9 +66,18 @@ export default function FASTagDetails({
                 </div>
               )}
 
-              <p className="text-lg text-slate-600 leading-relaxed max-w-3xl">
+              <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
                 {data.description}
               </p>
+
+              <div>
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-primary text-white font-bold text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+                >
+                  {data.id === "customer" ? "Get FASTag" : "Become a Partner"}
+                </Link>
+              </div>
             </div>
           </div>
 

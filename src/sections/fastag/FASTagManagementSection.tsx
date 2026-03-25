@@ -1,16 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
+import Link from "next/link";
 import { CreditCard, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
-import FASTagDetails from "./FASTagDetails";
-import { buyFASTagData } from "./data/buyFASTagData";
-import { becomePartnerData } from "./data/becomePartnerData";
-
-const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
-  ssr: false,
-});
 
 const fastagOptions = [
   {
@@ -28,6 +21,8 @@ const fastagOptions = [
       "Toll transaction history and reports",
     ],
     buttonText: "Get FASTag",
+    buttonLink: "/#contact",
+    learnMoreLink: "/fastag/customer",
     buttonVariant: "primary" as const,
     badge: "For Vehicle Owners",
     badgeIcon: ShieldCheck,
@@ -47,6 +42,8 @@ const fastagOptions = [
       "Business growth opportunity in the toll management ecosystem",
     ],
     buttonText: "Become a Partner",
+    buttonLink: "/#contact",
+    learnMoreLink: "/fastag/partner",
     buttonVariant: "outline" as const,
     badge: "Business Opportunity",
     badgeIcon: TrendingUp,
@@ -54,7 +51,6 @@ const fastagOptions = [
 ];
 
 export default function FASTagManagement() {
-  const [selectedOption, setSelectedOption] = useState<typeof fastagOptions[0] | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -271,66 +267,62 @@ export default function FASTagManagement() {
                   ))}
                 </div>
 
-                <div className="mt-auto">
-                  <motion.button
+                <div className="mt-auto flex flex-col gap-3">
+                  <motion.div
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setSelectedOption(option);
-                    }}
-                    type="button"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-primary text-white text-sm font-bold transition-all duration-300 shadow-md cursor-pointer"
+                    className="w-full"
                   >
-                    {option.buttonText}
-                    <motion.svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-arrow-right"
-                      animate={{ x: 0 }}
-                      whileHover={{ x: 5 }}
-                      transition={{
-                        type: "spring" as const,
-                        stiffness: 400,
-                        damping: 17,
-                      }}
+                    <Link
+                      href={option.buttonLink}
+                      className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-primary text-white text-sm font-bold transition-all duration-300 shadow-md cursor-pointer"
                     >
-                      <path d="M5 12h14"></path>
-                      <path d="m12 5 7 7-7 7"></path>
-                    </motion.svg>
-                  </motion.button>
+                      {option.buttonText}
+                      <motion.svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-arrow-right"
+                        animate={{ x: 0 }}
+                        whileHover={{ x: 5 }}
+                        transition={{
+                          type: "spring" as const,
+                          stiffness: 400,
+                          damping: 17,
+                        }}
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                      </motion.svg>
+                    </Link>
+                  </motion.div>
+
+                  <motion.div
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    className="w-full"
+                  >
+                    <Link
+                      href={option.learnMoreLink}
+                      className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full border-2 border-primary text-primary bg-transparent text-sm font-bold transition-all duration-300 hover:bg-primary/5 cursor-pointer"
+                    >
+                      Learn More
+                    </Link>
+                  </motion.div>
                 </div>
               </motion.div>
             );
           })}
         </motion.div>
       </div>
-
-      <SlidePanel
-        isOpen={!!selectedOption}
-        onClose={() => setSelectedOption(null)}
-        title={selectedOption?.title || ""}
-        description={selectedOption?.description || ""}
-        features={selectedOption?.features || []}
-        icon={selectedOption?.icon || CreditCard}
-        category={selectedOption?.badge || "FASTag"}
-      >
-        {selectedOption && (
-          <FASTagDetails 
-            data={selectedOption.id === "customer" ? buyFASTagData : becomePartnerData} 
-            showNavbarFooter={false}
-            onBack={() => setSelectedOption(null)} 
-          />
-        )}
-      </SlidePanel>
     </section>
   );
 }
