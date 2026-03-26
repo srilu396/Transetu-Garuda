@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
   CheckCircle2,
@@ -48,15 +49,22 @@ export default function SlidePanel({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Prevent scrolling when panel is open and handle browser history
-  React.useEffect(() => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
       // Push state for deep linking
       const hash = `#${title.toLowerCase().replace(/\s+/g, "-")}`;
       window.history.pushState({ panelOpen: true, id: hash }, "", hash);
     } else {
-      document.body.style.overflow = "unset";
-      // Clean up hash if panel closes via UI, not via back button
+      // Don't just reset blindly on every render where isOpen is false
+      // Only clean up hash if panel closes via UI, not via back button
       if (window.location.hash) {
         window.history.replaceState(
           null,
@@ -69,14 +77,16 @@ export default function SlidePanel({
     const handlePopState = () => {
       if (isOpen) {
         onClose();
-        // Browser already removed the hash on back, so we don't need to replaceState
       }
     };
 
     window.addEventListener("popstate", handlePopState);
 
     return () => {
-      document.body.style.overflow = "unset";
+      if (isOpen) {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+      }
       window.removeEventListener("popstate", handlePopState);
     };
   }, [isOpen, onClose, title]);
@@ -138,7 +148,9 @@ export default function SlidePanel({
     return <Box size={size} />;
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence mode="wait">
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex justify-end overflow-hidden">
@@ -161,10 +173,20 @@ export default function SlidePanel({
           >
             {/* Unified Top Header - Navigation only */}
             <div className="relative z-[200]">
-              <Navbar />
+              <Navbar onNavLinkClick={onClose} />
             </div>
 
-            <div className="flex-grow overflow-y-auto overflow-x-hidden custom-scrollbar bg-white">
+            <style dangerouslySetInnerHTML={{ __html: `
+              .hidden-scrollbar::-webkit-scrollbar {
+                display: none !important;
+              }
+              .hidden-scrollbar {
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+              }
+            `}} />
+
+            <div className="flex-grow overflow-y-auto overflow-x-hidden bg-white hidden-scrollbar">
               {children ? (
                 <div className="flex flex-col min-h-full">
                   {children}
@@ -389,6 +411,7 @@ export default function SlidePanel({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

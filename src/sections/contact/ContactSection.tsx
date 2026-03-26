@@ -50,6 +50,15 @@ const OFFICE_LOCATIONS: ContactOfficeLocation[] = [
       "Karnataka – 560103",
     ],
   },
+  {
+    id: "udupi",
+    title: "Udupi",
+    addressLines: [
+      "Smh manzil",
+      "Behind old masjid, subhash road uchila",
+      "Udupi, 574117",
+    ],
+  },
 ];
 
 // ── All 4 service options ─────────────────────────────────────────────────

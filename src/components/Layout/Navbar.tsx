@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect, memo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, MapPin, CreditCard, X, Menu } from "lucide-react";
+import { ChevronDown, MapPin, CreditCard, X, Menu, House } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 
 const productLinks = [
   {
@@ -18,11 +19,17 @@ const productLinks = [
   }
 ];
 
-const Navbar = memo(function Navbar() {
+interface NavbarProps {
+  onNavLinkClick?: () => void;
+}
+
+const Navbar = memo(function Navbar({ onNavLinkClick }: NavbarProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -35,8 +42,16 @@ const Navbar = memo(function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    }
+    return () => { 
+      if (mobileMenuOpen) {
+        document.body.style.overflow = ""; 
+        document.documentElement.style.overflow = ""; 
+      }
+    };
   }, [mobileMenuOpen]);
 
   const openMobileMenu = useCallback(() => setMobileMenuOpen(true), []);
@@ -44,25 +59,61 @@ const Navbar = memo(function Navbar() {
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
     setMobileProductsOpen(false);
-  }, []);
+    if (onNavLinkClick) onNavLinkClick();
+  }, [onNavLinkClick]);
 
   const toggleDropdown = useCallback(() => setDropdownOpen((prev) => !prev), []);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
+      // If it's an external link or a simple route (not a hash link on the homepage)
+      if (!href.startsWith("/#") && !href.startsWith("#")) {
+        if (onNavLinkClick) onNavLinkClick();
+        return;
+      }
+
+      e.preventDefault();
+      const hash = href.includes("#") ? href.split("#")[1] : "";
+      
+      if (onNavLinkClick) onNavLinkClick();
+
+      if (pathname === "/") {
+        // If on homepage, just scroll
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // If on subpage, navigate to home then scroll
+        router.push(`/#${hash}`);
+        
+        // Secondary attempt to ensure scroll if the page load is slow
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
+    },
+    [pathname, router, onNavLinkClick]
+  );
 
   return (
     <header>
       {/* ── Main navbar ── */}
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-lg border-b border-border/50 z-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
 
             {/* Logo + Title */}
             <Link href="/" className="flex items-center" prefetch={false}>
-              <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center mr-[-8px]">
+              <div className="relative w-24 h-24 flex-shrink-0 flex items-center justify-center mr-[-8px] py-2">
                 <Image
                   src="/assets/logos/logo.png"
                   alt="Garuda OM logo"
                   fill
-                  sizes="64px"
+                  sizes="96px"
                   className="object-contain"
                   priority
                 />
@@ -99,7 +150,10 @@ const Navbar = memo(function Navbar() {
                       <Link
                         key={item.label}
                         href={item.href}
-                        onClick={() => setDropdownOpen(false)}
+                        onClick={(e) => {
+                          setDropdownOpen(false);
+                          handleNavClick(e, item.href);
+                        }}
                         className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-foreground hover:bg-primary/8 hover:text-primary transition-colors"
                         prefetch={false}
                       >
@@ -111,16 +165,43 @@ const Navbar = memo(function Navbar() {
                 )}
               </div>
 
-              <Link className="nav-link text-sm font-medium" href="/#features" prefetch={false}>Why Us</Link>
-              <Link className="nav-link text-sm font-medium" href="/#industries" prefetch={false}>Industries</Link>
-              <Link className="nav-link text-sm font-medium" href="/#about" prefetch={false}>About Us</Link>
-              <Link className="nav-link text-sm font-medium" href="/#contact" prefetch={false}>
+              <Link 
+                className="nav-link text-sm font-medium" 
+                href="/#features" 
+                prefetch={false}
+                onClick={(e) => handleNavClick(e, "/#features")}
+              >
+                Why Us
+              </Link>
+              <Link 
+                className="nav-link text-sm font-medium" 
+                href="/#industries" 
+                prefetch={false}
+                onClick={(e) => handleNavClick(e, "/#industries")}
+              >
+                Industries
+              </Link>
+              <Link 
+                className="nav-link text-sm font-medium" 
+                href="/#about" 
+                prefetch={false}
+                onClick={(e) => handleNavClick(e, "/#about")}
+              >
+                About Us
+              </Link>
+              <Link 
+                className="nav-link text-sm font-medium" 
+                href="/#contact" 
+                prefetch={false}
+                onClick={(e) => handleNavClick(e, "/#contact")}
+              >
                 Contact
               </Link>
               <Link
                 href="/#contact"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-4 py-1.5 btn-hero"
                 prefetch={false}
+                onClick={(e) => handleNavClick(e, "/#contact")}
               >
                 Get Started
               </Link>
@@ -173,12 +254,12 @@ const Navbar = memo(function Navbar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
           <Link href="/" onClick={closeMobileMenu} className="flex items-center" prefetch={false}>
-            <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
-             <Image
+            <div className="relative w-24 h-24 flex-shrink-0 flex items-center justify-center py-2">
+              <Image
                 src="/assets/logos/logo.png"
                 alt="Garuda OM logo"
                 fill
-                sizes="64px"
+                sizes="96px"
                 className="object-contain"
               />
             </div>
@@ -229,7 +310,10 @@ const Navbar = memo(function Navbar() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    onClick={closeMobileMenu}
+                    onClick={(e) => {
+                      closeMobileMenu();
+                      handleNavClick(e, item.href);
+                    }}
                     className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
                     prefetch={false}
                   >
@@ -241,19 +325,19 @@ const Navbar = memo(function Navbar() {
             </div>
           </div>
 
-          <Link href="/#features" onClick={closeMobileMenu}
+          <Link href="/#features" onClick={(e) => { closeMobileMenu(); handleNavClick(e, "/#features"); }}
             className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             Why Us
           </Link>
-          <Link href="/#industries" onClick={closeMobileMenu}
+          <Link href="/#industries" onClick={(e) => { closeMobileMenu(); handleNavClick(e, "/#industries"); }}
             className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             Industries
           </Link>
-          <Link href="/#about" onClick={closeMobileMenu}
+          <Link href="/#about" onClick={(e) => { closeMobileMenu(); handleNavClick(e, "/#about"); }}
             className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             About Us
           </Link>
-          <Link href="#contact" onClick={closeMobileMenu}
+          <Link href="/#contact" onClick={(e) => { closeMobileMenu(); handleNavClick(e, "/#contact"); }}
             className="flex items-center px-3 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors" prefetch={false}>
             Contact
           </Link>
@@ -263,7 +347,7 @@ const Navbar = memo(function Navbar() {
         <div className="px-4 py-4 border-t border-border/50">
           <Link
             href="/#contact"
-            onClick={closeMobileMenu}
+            onClick={(e) => { closeMobileMenu(); handleNavClick(e, "/#contact"); }}
             className="flex items-center justify-center w-full rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 text-sm font-medium transition-colors btn-hero"
             prefetch={false}
           >
@@ -280,27 +364,14 @@ const Navbar = memo(function Navbar() {
         <div className="container mx-auto px-4">
           <ol className="flex items-center space-x-2 text-sm">
             <li className="flex items-center">
-              <button
+              <Link
+                href="/"
                 className="flex items-center gap-1 px-2 py-1 rounded transition-colors text-primary font-medium bg-primary/10"
-                aria-current="page"
+                onClick={(e) => handleNavClick(e, "/")}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-house w-3 h-3"
-                >
-                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                </svg>
+                <House className="w-3 h-3" />
                 Home
-              </button>
+              </Link>
             </li>
           </ol>
         </div>

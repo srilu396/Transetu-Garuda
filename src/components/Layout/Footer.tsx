@@ -34,12 +34,12 @@ export default function Footer() {
             <div className="flex items-center mb-2">
               <Link href="/" className="flex items-center">
                 {/* Reduced logo size and removed extra margin */}
-                <div className="relative w-20 h-21 flex items-center justify-center flex-shrink-0 -mr-2">
+                <div className="relative w-40 h-42 flex items-center justify-center flex-shrink-0 -mr-2">
                   <Image
                     src="/assets/logos/image.png"
                     alt="Garuda OM logo"
-                    width={80}
-                    height={84}
+                    width={160}
+                    height={168}
                     className="object-contain brightness-0 invert"
                     loading="lazy"
                   />
@@ -133,6 +133,9 @@ export default function Footer() {
                   <span className="mt-2">Vaswani Presidio, 83/2, 2nd Floor,</span>
                   <span>Panathur Main Road, Off Outer Ring Road,</span>
                   <span>Kadubeesanahalli, Bengaluru, Karnataka, India, 560103</span>
+                  <span className="mt-2">Smh Manzil,</span>
+                  <span>Behind Old Masjid, Subhash Road Uchila,</span>
+                  <span>Udupi, 574117</span>
                 </div>
               </div>
             </div>
