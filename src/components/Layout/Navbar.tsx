@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, memo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, MapPin, Monitor, CreditCard, X, Menu } from "lucide-react";
+import { ChevronDown, MapPin, CreditCard, X, Menu } from "lucide-react";
 
 const productLinks = [
   {

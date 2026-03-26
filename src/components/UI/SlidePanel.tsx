@@ -175,6 +175,7 @@ export default function SlidePanel({
                   <GPSDetailWrapper
                     data={solutionData}
                     showNavbarFooter={false}
+                    onBack={onClose}
                   />
                   <Footer />
                 </div>
@@ -183,6 +184,7 @@ export default function SlidePanel({
                   <IndustryDetailWrapper
                     industry={industryData}
                     showNavbarFooter={false}
+                    onBack={onClose}
                   />
                   <Footer />
                 </div>

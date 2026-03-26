@@ -87,8 +87,22 @@ export default function GPSTrackingDetails({
   // Function to handle navigation to homepage contact section
   const handleContactNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // Navigate to homepage with contact hash
-    window.location.href = "/#contact";
+    
+    // Close slide if open
+    if (onBack) {
+      onBack();
+    }
+    
+    // Navigate to homepage
+    router.push("/");
+    
+    // Use setTimeout to ensure the page has loaded and the slide has closed before scrolling
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   const videos = VIDEO_MAPPINGS[data.title];

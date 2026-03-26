@@ -9,7 +9,6 @@ const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
 import {
   Camera,
   Truck,
-  Satellite,
   Fuel,
   Thermometer,
   Lock,
@@ -457,10 +456,6 @@ export default function ProductsSection() {
                     whileHover="hover"
                     whileTap="tap"
                     onClick={() => {
-                      if (product.slug === "asset-tracking") {
-                        router.push(product.link);
-                        return;
-                      }
                       setSelectedProduct(product);
                       if (product.slug && solutionsData[product.slug]) {
                         setSelectedSolutionData({
