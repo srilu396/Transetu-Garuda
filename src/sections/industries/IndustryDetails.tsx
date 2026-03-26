@@ -31,6 +31,11 @@ export default function IndustryDetails({
 
   // Function to handle navigation to contact section
   const navigateToContact = () => {
+    // Close slide if open
+    if (onBack) {
+      onBack();
+    }
+
     // First navigate to homepage
     router.push('/');
     

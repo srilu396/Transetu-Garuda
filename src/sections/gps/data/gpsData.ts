@@ -9,6 +9,7 @@ import { photogrammetryServices } from "./photogrammetry-services";
 import { ais140Tracker } from "./ais-140-tracker";
 import { geofencingAlerts } from "./geofencing-alerts";
 import { softwarePlatform } from "./software-platform";
+import { assetTracking } from "./asset-tracking";
 
 export type Feature = {
   title: string;
@@ -63,4 +64,5 @@ export const solutions: Record<string, SolutionData> = {
   "ais-140-tracker": ais140Tracker,
   "geofencing-alerts": geofencingAlerts,
   "software-platform": softwarePlatform,
+  "asset-tracking": assetTracking,
 };

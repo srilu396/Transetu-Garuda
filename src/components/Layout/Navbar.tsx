@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, memo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, MapPin, Monitor, CreditCard, X, Menu } from "lucide-react";
+import { ChevronDown, MapPin, CreditCard, X, Menu } from "lucide-react";
 
 const productLinks = [
   {
@@ -15,12 +15,7 @@ const productLinks = [
     label: "FastTag",
     href: "/#fastag-management",
     icon: <CreditCard className="w-4 h-4 text-primary" />,
-  },
-  {
-    label: "Monitoring",
-    href: "/#videos",
-    icon: <Monitor className="w-4 h-4 text-primary" />,
-  },
+  }
 ];
 
 const Navbar = memo(function Navbar() {

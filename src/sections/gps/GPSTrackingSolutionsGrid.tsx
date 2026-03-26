@@ -9,16 +9,17 @@ const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
 import {
   Camera,
   Truck,
-  Satellite,
   Fuel,
   Thermometer,
   Lock,
   MapPin,
   Shield,
   BarChart3,
+  Package,
   LucideIcon,
 } from "lucide-react";
 import { solutions as solutionsData, SolutionData } from "@/sections/gps/data/gpsData";
+import { assetTracking } from "@/sections/gps/data/asset-tracking";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -35,21 +36,21 @@ type ProductItem = {
 };
 
 const products: ProductItem[] = [
-  {
-    title: "Dash Cam System",
-    description:
-      "Improve driver safety with a smart dash camera that records both road and cabin activity while providing real-time alerts and video monitoring.",
-    icon: Camera,
-    badge: "Video Safety",
-    features: [
-      "Dual camera recording",
-      "Driver safety alerts",
-      "Cloud video access",
-    ],
-    link: "/solutions/dash-cam-system",
-    slug: "dash-cam-system",
-    image: "/images/products/dash-cam.jpg",
-  },
+  // {
+  //   title: "Dash Cam System",
+  //   description:
+  //     "Improve driver safety with a smart dash camera that records both road and cabin activity while providing real-time alerts and video monitoring.",
+  //   icon: Camera,
+  //   badge: "Video Safety",
+  //   features: [
+  //     "Dual camera recording",
+  //     "Driver safety alerts",
+  //     "Cloud video access",
+  //   ],
+  //   link: "/solutions/dash-cam-system",
+  //   slug: "dash-cam-system",
+  //   image: "/images/products/dash-cam.jpg",
+  // },
   {
     title: "Fleet GPS Tracker",
     description:
@@ -66,20 +67,36 @@ const products: ProductItem[] = [
     image: "/images/products/fleet-tracker.jpg",
   },
   {
-    title: "Mining Equipment Tracking",
+    title: "Asset Tracking",
     description:
-      "A rugged GPS tracking solution designed for heavy mining equipment, helping monitor machinery and improve operational visibility in harsh environments.",
-    icon: Satellite,
-    badge: "Mining Solutions",
+      "Track powered and unpowered assets—from construction equipment to shipping containers—with rugged GPS trackers and long-life battery devices.",
+    icon: Package,
+    badge: "Asset Management",
     features: [
-      "Durable GPS devices",
-      "Equipment monitoring",
-      "Geofencing alerts",
+      "Powered & unpowered asset tracking",
+      "Long-life battery trackers",
+      "Asset utilization reporting",
+      "Theft prevention and recovery",
     ],
-    link: "/solutions/iot-for-mining",
-    slug: "iot-for-mining",
-    image: "/images/products/mining.jpg",
+    link: "/solutions/asset-tracking",
+    slug: "asset-tracking",
+    image: assetTracking.imageUrl,
   },
+  // {
+  //   title: "Mining Equipment Tracking",
+  //   description:
+  //     "A rugged GPS tracking solution designed for heavy mining equipment, helping monitor machinery and improve operational visibility in harsh environments.",
+  //   icon: Satellite,
+  //   badge: "Mining Solutions",
+  //   features: [
+  //     "Durable GPS devices",
+  //     "Equipment monitoring",
+  //     "Geofencing alerts",
+  //   ],
+  //   link: "/solutions/iot-for-mining",
+  //   slug: "iot-for-mining",
+  //   image: "/images/products/mining.jpg",
+  // },
   {
     title: "Fuel Monitoring System",
     description:
@@ -96,7 +113,7 @@ const products: ProductItem[] = [
     image: "/images/products/fuel-monitor.jpg",
   },
   {
-    title: "Video Telematics",
+    title: "AI Dash Cam",
     description:
       "Combine GPS tracking with video monitoring to improve security and gain better visibility into vehicle activity and driver behavior.",
     icon: Camera,

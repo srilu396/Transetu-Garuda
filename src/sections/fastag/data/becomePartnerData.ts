@@ -4,6 +4,7 @@ import { FASTagDetailsData } from "./fastagDetailsData";
 export const becomePartnerData: FASTagDetailsData = {
   id: "partner",
   title: "Become a FASTag Business Partner",
+  videoUrl: "https://www.youtube.com/embed/d-ilXg7E0L0",
   description: "Join our network as a certified FASTag Business Partner. Expand your business offerings by providing FASTag issuing and recharge services to customers. Partnering with Garuda OM opens up consistent revenue streams and dedicated technical support. Review the partner documentation below.",
   icon: Handshake,
   documents: [
