@@ -21,7 +21,6 @@ const OFFICE_LOCATIONS: ContactOfficeLocation[] = [
     addressLines: [
       "A Bhavani, 56-14-9 Kankadurga residency, 2nd floor, chennupati apparao street, near axis bank, beside first look, patamata, vijayawada – 520010",
     ],
-    contact: "+91 7981560627",
   },
   {
     id: "hyderabad",
@@ -32,7 +31,6 @@ const OFFICE_LOCATIONS: ContactOfficeLocation[] = [
       "Opp Srikari Hospital, ECIL x Roads",
       "Hyderabad – 500076",
     ],
-    contact: "+91 9490417550",
   },
   {
     id: "bhadrachalam",
@@ -224,7 +222,7 @@ export default function ContactSection() {
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Email</h4>
                   <p className="text-slate-900 font-semibold text-sm sm:text-base break-all sm:break-words overflow-wrap-anywhere">
-                    omimportandexport1994@gmail.com
+                    info@garudaom.online
                   </p>
                   <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2">Send us an email</p>
                 </div>

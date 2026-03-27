@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 const PHONE = "+917780274792";
-const EMAIL = "omimportandexport1994@gmail.com";
+const EMAIL = "info@garudaom.online";
 const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, "")}`;
 const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${EMAIL}`;
 

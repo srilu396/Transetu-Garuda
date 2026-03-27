@@ -318,7 +318,7 @@ export default function AboutSection() {
               >
                 {[
   { icon: Linkedin, href: "", color: "text-blue-600", label: "LinkedIn" },
-  { icon: Mail, href: "https://mail.google.com/mail/?view=cm&to=omimportandexport1994@gmail.com", color: "text-red-500", label: "Email" },
+  { icon: Mail, href: "https://mail.google.com/mail/?view=cm&to=info@garudaom.online", color: "text-red-500", label: "Email" },
   { icon: Phone, href: "https://wa.me/917780274792", color: "text-green-500", label: "WhatsApp" },
 ].map((item, index) => {
   const Icon = item.icon;

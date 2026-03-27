@@ -177,7 +177,7 @@ const products: ProductItem[] = [
     ],
     link: "/solutions/ais-140-tracker",
     slug: "ais-140-tracker",
-    image: "/images/products/ais140.jpg",
+    image: "/images/products/ais140-garuda-om.png",
   },
   {
     title: "Geofencing & Location Alerts",
