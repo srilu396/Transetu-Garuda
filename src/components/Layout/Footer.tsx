@@ -22,6 +22,13 @@ export default function Footer() {
       path: "/docs/udyam-registration.pdf"
     }
   ];
+  const officeAddresses = [
+    "Vijayawada: A Bhavani, 56-14-9 Kankadurga Residency, Patamata, Vijayawada - 520010",
+    "Hyderabad: H.no 1-8-67/Ews - 152, Apiic Colony East Kamalanagar, ECIL X Roads - 500076",
+    "Bhadrachalam: 1-51/1, Gandhinogar, Palwancha, Kothagudem, Telangana - 507115",
+    "Bengaluru: Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road, Kadubeesanahalli - 560103",
+    "Udupi: SMH Manzil, Behind Old Masjid, Subhash Road, Uchila - 574117",
+  ];
 
   return (
     <footer
@@ -127,16 +134,13 @@ export default function Footer() {
                   <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <div className="flex flex-col text-sm text-white">
-                  <span>12-1-8, Vijawada, Benz Circle,</span>
-                  <span>Parameta, Andhra Pradesh, India, 520010</span>
-                  <span className="mt-2">Vaswani Presidio, 83/2, 2nd Floor,</span>
-                  <span>Panathur Main Road, Off Outer Ring Road,</span>
-                  <span>Kadubeesanahalli, Bengaluru, Karnataka, India, 560103</span>
-                  <span className="mt-2">Smh Manzil,</span>
-                  <span>Behind Old Masjid, Subhash Road Uchila,</span>
-                  <span>Udupi, 574117</span>
-                </div>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs leading-relaxed text-white">
+                  {officeAddresses.map((address, index) => (
+                    <li key={index} className="break-words text-white">
+                      {address}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
