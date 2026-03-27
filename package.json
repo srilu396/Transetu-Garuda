@@ -1,12 +1,18 @@
 {
-  "name": "next-app",
+  "name": "transetu-garuda",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
+  "description": "Garuda OM marketing site (Next.js) with contact form email.",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "clsx": "^2.1.1",

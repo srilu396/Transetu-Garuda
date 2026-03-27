@@ -130,6 +130,7 @@ export default function ContactSection() {
       service:  selectedService?.label || '',
       location: (e.currentTarget.elements.namedItem('location') as HTMLInputElement).value,
       message:  (e.currentTarget.elements.namedItem('message')  as HTMLTextAreaElement).value,
+      website:  (e.currentTarget.elements.namedItem('website')  as HTMLInputElement).value,
     };
 
     try {
@@ -292,7 +293,7 @@ export default function ContactSection() {
                 </div>
                 <div className="space-y-1">
                   <label htmlFor="email" className="text-sm font-semibold text-slate-700">Email Address</label>
-                  <input type="email" id="email" name="email" placeholder="john@example.com"
+                  <input type="email" id="email" name="email" required placeholder="john@example.com"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm" />
                 </div>
               </div>
@@ -379,6 +380,16 @@ export default function ContactSection() {
 
                     {/* Hidden input */}
                     <input type="hidden" name="service" value={selectedService?.value || ""} />
+
+                    {/* Honeypot (anti-spam). Real users won't see/fill this. */}
+                    <input
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      className="hidden"
+                    />
                   </div>
                 </div>
 
@@ -392,7 +403,7 @@ export default function ContactSection() {
               {/* Message — taller on large screens to balance office grid height */}
               <div className="space-y-1 flex-1 flex flex-col min-h-0">
                 <label htmlFor="message" className="text-sm font-semibold text-slate-700 shrink-0">Message</label>
-                <textarea id="message" name="message" rows={3} placeholder="Your message here..."
+                <textarea id="message" name="message" required rows={3} placeholder="Your message here..."
                   className="w-full min-h-[7.5rem] lg:min-h-[11rem] flex-1 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 placeholder:text-slate-400 text-sm resize-y" />
               </div>
 

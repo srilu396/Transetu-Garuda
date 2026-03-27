@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingSocialBar from "@/components/FloatingSocialBar";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,6 +18,8 @@ const robotoMono = Roboto_Mono({
   display: "swap",        // ← ADDED
   preload: true,          // ← ADDED
 });
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: {
@@ -47,11 +50,11 @@ export const metadata: Metadata = {
   title: "Garuda OM – GPS Fleet Tracking & FASTag Solutions in India",
   description:
     "Monitor your fleet in real-time with Garuda OM. GPS tracking, FASTag integration, fuel sensors, dash cams and video telematics — built for Indian businesses.",
-  url: "https://transetu-garuda.vercel.app",
+  url: siteUrl,
   siteName: "Garuda OM",
   images: [
     {
-      url: "https://transetu-garuda.vercel.app/assets/logos/logo.png",
+      url: `${siteUrl}/assets/logos/logo.png`,
       width: 1200,
       height: 630,
       alt: "Garuda OM - GPS Fleet Tracking Platform",
@@ -65,10 +68,10 @@ twitter: {
   title: "Garuda OM – GPS Fleet Tracking & FASTag Solutions in India",
   description:
     "Monitor your fleet in real-time with Garuda OM. GPS tracking, FASTag integration, fuel sensors, dash cams and video telematics — built for Indian businesses.",
-  images: ["https://transetu-garuda.vercel.app/assets/logos/logo.png"],
+  images: [`${siteUrl}/assets/logos/logo.png`],
   creator: "@garudaom",
 },
-  metadataBase: new URL("https://transetu-garuda.vercel.app"),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },

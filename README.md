@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Transetu Garuda (Garuda OM)
 
-## Getting Started
+Marketing site for **Garuda OM** built with **Next.js 14** (App Router) and deployed on **Vercel**.
 
-First, run the development server:
+## Requirements
+
+- Node.js (see `.nvmrc`)
+- npm
+
+## Setup
+
+Install deps:
+
+```bash
+npm ci
+```
+
+Create local env file:
+
+```bash
+cp .env.example .env.local
+```
+
+Then edit `.env.local` with real values.
+
+## Run locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build / run production locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+See `.env.example` for the full list.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **EMAIL_USER**: Gmail address used to send/receive contact emails
+- **EMAIL_PASSWORD**: Gmail *App Password* (recommended), not your normal Gmail password
+- **SITE_URL**: Canonical site base URL (e.g. `https://your-domain.com`). Used for metadata, `robots.txt`, and `sitemap.xml`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy (Vercel)
 
-## Deploy on Vercel
+- Create a new Vercel project from this repo
+- Set env vars in Vercel project settings:
+  - `EMAIL_USER`, `EMAIL_PASSWORD`, `SITE_URL`
+- Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Contact form endpoint: `POST /api/contact`
+- This repository is currently **UNLICENSED / proprietary**.
