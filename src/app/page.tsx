@@ -1,5 +1,12 @@
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 import Navbar from "@/components/Layout/Navbar";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Garuda OM - GPS Tracking & FASTag Solutions",
+  },
+};
 import Footer from "@/components/Layout/Footer";
 import HeroSection from "@/sections/hero/Hero";
 

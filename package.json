@@ -1,9 +1,9 @@
 {
-  "name": "transetu-garuda",
+  "name": "garudaom",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Garuda OM marketing site (Next.js) with contact form email.",
+  "description": "Garuda OM - GPS Tracking & FASTag Solutions",
   "engines": {
     "node": ">=18.18.0"
   },

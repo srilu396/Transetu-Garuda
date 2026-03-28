@@ -13,17 +13,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const type = params.id;
   if (type === "customer") {
     return {
-      title: "Buy FASTag Details | Garuda OM",
+      title: "Buy FASTag for Your Vehicle",
       description: "Detailed information about purchasing a FASTag for your vehicle.",
     };
   } else if (type === "partner") {
     return {
-      title: "Become a FASTag Partner | Garuda OM",
+      title: "Become a FASTag Partner",
       description: "Detailed information about partnering with Garuda OM for FASTag services.",
     };
   }
   return {
-    title: "FASTag Details | Garuda OM",
+    title: "FASTag",
   };
 }
 

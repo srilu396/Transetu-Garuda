@@ -13,7 +13,7 @@ export async function generateMetadata({
 
   if (!solution) {
     return {
-      title: "Solution Not Found | Garuda",
+      title: "Solution Not Found",
     };
   }
 

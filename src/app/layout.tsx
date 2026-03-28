@@ -23,8 +23,17 @@ const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: {
-    default: "Garuda OM – Smart Fleet Tracking Platform",
+    default: "Garuda OM - GPS Tracking & FASTag Solutions",
     template: "%s | Garuda OM",
+  },
+  icons: {
+    icon: [
+      { url: "/assets/logos/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/logos/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/assets/logos/favicon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/assets/logos/favicon-180.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/assets/logos/favicon-32.png",
   },
   description:
     "Advanced GPS fleet management, vehicle tracking, FASTag solutions, and video telematics for businesses in India. Real-time monitoring, fuel sensors, and dash cams.",

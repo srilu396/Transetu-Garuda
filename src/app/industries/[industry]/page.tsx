@@ -14,12 +14,12 @@ export async function generateMetadata({
 
   if (!industry) {
     return {
-      title: "Industry Not Found | Garuda",
+      title: "Industry Not Found",
     };
   }
 
   return {
-    title: `${industry.title} | Garuda Industries`,
+    title: industry.title,
     description: industry.description,
   };
 }

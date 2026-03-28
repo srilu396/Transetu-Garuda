@@ -1,4 +1,4 @@
-# Transetu Garuda (Garuda OM)
+# Garuda OM
 
 Marketing site for **Garuda OM** built with **Next.js 14** (App Router) and deployed on **Vercel**.
 
