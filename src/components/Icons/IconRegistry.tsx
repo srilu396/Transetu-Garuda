@@ -74,5 +74,5 @@ export const IconRegistry: Record<string, React.ElementType> = {
   ArrowRight,
   House,
 };
-
 export default IconRegistry;
+

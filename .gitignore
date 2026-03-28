@@ -37,3 +37,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local build / typecheck output (do not commit)
+build_*.txt
+build_*.log
+*_build_output*.txt
+tsc_output.txt
