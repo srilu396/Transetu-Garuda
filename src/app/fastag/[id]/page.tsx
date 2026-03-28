@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import FASTagDetailsClient from "@/sections/fastag/FASTagDetailsClient";
 import { notFound } from "next/navigation";
+import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 
 interface Props {
   params: {
@@ -12,19 +13,24 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const type = params.id;
   if (type === "customer") {
-    return {
-      title: "Buy FASTag for Your Vehicle",
-      description: "Detailed information about purchasing a FASTag for your vehicle.",
-    };
-  } else if (type === "partner") {
-    return {
-      title: "Become a FASTag Partner",
-      description: "Detailed information about partnering with Garuda OM for FASTag services.",
-    };
+    return pageMetadata({
+      title: `Buy FASTag for Your Vehicle — ${SITE_BRAND}`,
+      description:
+        "Buy FASTag for cars, trucks, and fleets through Garuda OM (GarudaOM). Vehicle FASTag issuance, recharge support, and integrated GPS fleet tools for India.",
+      path: "/fastag/customer",
+      keywords: ["FASTag buy", "Garuda OM FASTag", "GarudaOM", "NHAI FASTag"],
+    });
   }
-  return {
-    title: "FASTag",
-  };
+  if (type === "partner") {
+    return pageMetadata({
+      title: `Become a FASTag Partner — ${SITE_BRAND}`,
+      description:
+        "Partner with Garuda OM (GarudaOM) for FASTag distribution and fleet solutions. Grow your business with GPS tracking and toll-tag programs across India.",
+      path: "/fastag/partner",
+      keywords: ["FASTag partner", "Garuda OM partner", "GarudaOM", "FASTag agent"],
+    });
+  }
+  return { title: "FASTag" };
 }
 
 export default function FastagDetailsPage({ params }: Props) {

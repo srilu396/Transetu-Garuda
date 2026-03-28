@@ -3,6 +3,7 @@ import { industries } from "@/sections/industries/data/industriesData";
 import IndustryDetails from "@/sections/industries/IndustryDetails";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -18,10 +19,14 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  const description = `${industry.description} ${SITE_BRAND} (GarudaOM) GPS & telematics for Indian fleets.`;
+
+  return pageMetadata({
     title: industry.title,
-    description: industry.description,
-  };
+    description,
+    path: `/industries/${slug}`,
+    keywords: [industry.title, industry.category, "Garuda OM", "GarudaOM"],
+  });
 }
 
 export default function IndustryDetailPage({

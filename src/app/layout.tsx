@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingSocialBar from "@/components/FloatingSocialBar";
+import RootJsonLd from "@/components/seo/RootJsonLd";
+import { DEFAULT_DESCRIPTION, OG_IMAGE_PATH, SITE_BRAND, keywordList } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const inter = Inter({
@@ -22,9 +24,10 @@ const robotoMono = Roboto_Mono({
 const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
+  applicationName: SITE_BRAND,
   title: {
-    default: "Garuda OM - GPS Tracking & FASTag Solutions",
-    template: "%s | Garuda OM",
+    default: `${SITE_BRAND} — GPS Tracking & FASTag Solutions`,
+    template: `%s | ${SITE_BRAND}`,
   },
   icons: {
     icon: [
@@ -35,12 +38,12 @@ export const metadata: Metadata = {
     apple: [{ url: "/assets/logos/favicon-180.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/assets/logos/favicon-32.png",
   },
-  description:
-    "Advanced GPS fleet management, vehicle tracking, FASTag solutions, and video telematics for businesses in India. Real-time monitoring, fuel sensors, and dash cams.",
-  keywords: "GPS tracking, fleet management, FASTag, vehicle tracking, telematics, fuel monitoring, dash cam, Garuda OM",
-  authors: [{ name: "Garuda OM" }],
-  creator: "Garuda OM",
-  publisher: "Garuda OM",
+  description: DEFAULT_DESCRIPTION,
+  keywords: keywordList(),
+  authors: [{ name: SITE_BRAND, url: getSiteUrl() }],
+  creator: SITE_BRAND,
+  publisher: SITE_BRAND,
+  category: "technology",
   robots: {
     index: true,
     follow: true,
@@ -56,34 +59,29 @@ export const metadata: Metadata = {
     google: "P8Zgd-We6M0PdoigMOj10DfQf7jLewSw0siCWolZoJ0",
   },
   openGraph: {
-  title: "Garuda OM – GPS Fleet Tracking & FASTag Solutions in India",
-  description:
-    "Monitor your fleet in real-time with Garuda OM. GPS tracking, FASTag integration, fuel sensors, dash cams and video telematics — built for Indian businesses.",
-  url: siteUrl,
-  siteName: "Garuda OM",
-  images: [
-    {
-      url: `${siteUrl}/assets/logos/logo.png`,
-      width: 1200,
-      height: 630,
-      alt: "Garuda OM - GPS Fleet Tracking Platform",
-    },
-  ],
-  locale: "en_IN",
-  type: "website",
-},
-twitter: {
-  card: "summary_large_image",
-  title: "Garuda OM – GPS Fleet Tracking & FASTag Solutions in India",
-  description:
-    "Monitor your fleet in real-time with Garuda OM. GPS tracking, FASTag integration, fuel sensors, dash cams and video telematics — built for Indian businesses.",
-  images: [`${siteUrl}/assets/logos/logo.png`],
-  creator: "@garudaom",
-},
-  metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: "/",
+    title: `${SITE_BRAND} — GPS fleet tracking & FASTag in India`,
+    description: DEFAULT_DESCRIPTION,
+    url: siteUrl,
+    siteName: SITE_BRAND,
+    images: [
+      {
+        url: OG_IMAGE_PATH,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_BRAND} — GPS & FASTag platform`,
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_BRAND} — GPS fleet tracking & FASTag in India`,
+    description: DEFAULT_DESCRIPTION,
+    images: [`${siteUrl}${OG_IMAGE_PATH}`],
+    creator: "@garudaom",
+  },
+  metadataBase: new URL(siteUrl),
 };
 
 export const viewport = {
@@ -98,10 +96,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <body
         className={`${inter.variable} ${robotoMono.variable} antialiased`}
       >
+        <RootJsonLd />
         {children}
         <FloatingSocialBar />
       </body>
