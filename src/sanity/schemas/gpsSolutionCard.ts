@@ -43,8 +43,30 @@ export const gpsSolutionCard = defineType({
     defineField({
       name: 'order',
       title: 'Display Order',
-      description: 'Lower number appears first. 1, 2, 3...',
+      description: 'Enter a number (1, 2, 3...) to arrange cards. Lower numbers appear first.',
       type: 'number',
+      validation: Rule => Rule.integer().positive(),
     }),
   ],
+  orderings: [
+    {
+      title: 'Display Order (Low to High)',
+      name: 'displayOrderAsc',
+      by: [{ field: 'order', direction: 'asc' }]
+    },
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'order',
+      media: 'image',
+    },
+    prepare({ title, subtitle, media }) {
+      return {
+        title: title,
+        subtitle: subtitle ? `Order: ${subtitle}` : '⚠️ Set order number',
+        media: media,
+      }
+    },
+  },
 })

@@ -11,7 +11,36 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool(),
+    structureTool({
+      structure: (S) => {
+        return S.list()
+          .title('Content')
+          .items([
+            // GPS Solution Cards with clean ordered view
+            S.listItem()
+              .title('GPS Solution Cards')
+              .schemaType('gpsSolutionCard')
+              .child(
+                S.documentTypeList('gpsSolutionCard')
+                  .title('GPS Solution Cards')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                  .filter('_type == "gpsSolutionCard"')
+                  .canHandleIntent((intentName) => 
+                    intentName === 'create' || intentName === 'edit'
+                  )
+              ),
+            
+            S.divider(),
+            
+            // Other document types
+            S.documentTypeListItem('solutionPage').title('Solution Pages'),
+            S.documentTypeListItem('industryPage').title('Industry Pages'),
+            S.documentTypeListItem('featureCard').title('Why Us Feature Cards'),
+            S.documentTypeListItem('fastagContent').title('FASTag Content'),
+            S.documentTypeListItem('siteSettings').title('Site Settings'),
+          ])
+      },
+    }),
     visionTool(),
   ],
 
