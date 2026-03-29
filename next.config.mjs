@@ -14,11 +14,18 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  transpilePackages: ["sanity", "@portabletext/editor", "next-sanity"],
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/images/**",
       },
     ],
   },
@@ -80,6 +87,14 @@ const nextConfig = {
         permanent: true,
       },
     ];
+  },
+
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "react/compiler-runtime": "react-compiler-runtime",
+    };
+    return config;
   },
 };
 
