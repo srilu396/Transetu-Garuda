@@ -1,3 +1,4 @@
+// sanity.config.ts
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
@@ -16,7 +17,7 @@ export default defineConfig({
         return S.list()
           .title('Content')
           .items([
-            // GPS Solution Cards with clean ordered view
+            // GPS Solution Cards
             S.listItem()
               .title('GPS Solution Cards')
               .schemaType('gpsSolutionCard')
@@ -24,16 +25,21 @@ export default defineConfig({
                 S.documentTypeList('gpsSolutionCard')
                   .title('GPS Solution Cards')
                   .defaultOrdering([{ field: 'order', direction: 'asc' }])
-                  .filter('_type == "gpsSolutionCard"')
-                  .canHandleIntent((intentName) => 
-                    intentName === 'create' || intentName === 'edit'
-                  )
+              ),
+            
+            // GPS Solution Pages - with custom title
+            S.listItem()
+              .title('GPS Solution Pages')  // ← This controls the sidebar text
+              .schemaType('solutionPage')
+              .child(
+                S.documentTypeList('solutionPage')
+                  .title('GPS Solution Pages')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
               ),
             
             S.divider(),
             
             // Other document types
-            S.documentTypeListItem('solutionPage').title('Solution Pages'),
             S.documentTypeListItem('industryPage').title('Industry Pages'),
             S.documentTypeListItem('featureCard').title('Why Us Feature Cards'),
             S.documentTypeListItem('fastagContent').title('FASTag Content'),

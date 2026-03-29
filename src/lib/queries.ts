@@ -16,18 +16,41 @@ export const GPS_CARDS_QUERY = `
 `
 
 
-// ── 2. ALL SOLUTION PAGES ──
+// ── 2. ALL SOLUTION PAGES (with order) ──
 export const ALL_SOLUTIONS_QUERY = `
-  *[_type == "solutionPage"] | order(title asc) {
+  *[_type == "solutionPage"] | order(order asc) {
     _id,
+    iconName,
+    cardTitle,
     title,
     "slug": slug.current,
     badge,
     tagline,
+    "media": media {
+      mediaType,
+      "image": image.asset->url,
+      youtubeUrl
+    },
     overview,
-    keyFeatures,
-    benefits,
-    whyChoose
+    order,
+    "benefits": benefits[] {
+      iconName,
+      title,
+      description
+    },
+    "keyFeatures": keyFeatures[] {
+      iconName,
+      title,
+      description
+    },
+    "useCases": useCases[] {
+      title,
+      description
+    },
+    "whyChoose": whyChoose[] {
+      iconName,
+      description
+    }
   }
 `
 
@@ -36,14 +59,36 @@ export const ALL_SOLUTIONS_QUERY = `
 export const SOLUTION_BY_SLUG_QUERY = `
   *[_type == "solutionPage" && slug.current == $slug][0] {
     _id,
+    iconName,
+    cardTitle,
     title,
     "slug": slug.current,
     badge,
     tagline,
+    "media": media {
+      mediaType,
+      "image": image.asset->url,
+      youtubeUrl
+    },
     overview,
-    keyFeatures,
-    benefits,
-    whyChoose
+    "benefits": benefits[] {
+      iconName,
+      title,
+      description
+    },
+    "keyFeatures": keyFeatures[] {
+      iconName,
+      title,
+      description
+    },
+    "useCases": useCases[] {
+      title,
+      description
+    },
+    "whyChoose": whyChoose[] {
+      iconName,
+      description
+    }
   }
 `
 

@@ -1,6 +1,4 @@
-import { dashCamSystem } from "./dash-cam-system";
 import { gpsTrackingSolutions } from "./gps-tracking-solutions";
-import { iotForMining } from "./iot-for-mining";
 import { fuelLevelSensors } from "./fuel-level-sensors";
 import { videoTelematics } from "./video-telematics";
 import { temperatureMonitor } from "./temperature-monitor";
@@ -53,9 +51,7 @@ export interface SolutionData {
 }
 
 export const solutions: Record<string, SolutionData> = {
-  "dash-cam-system": dashCamSystem,
   "gps-tracking-solutions": gpsTrackingSolutions,
-  "iot-for-mining": iotForMining,
   "fuel-level-sensors": fuelLevelSensors,
   "video-telematics": videoTelematics,
   "temperature-monitor": temperatureMonitor,

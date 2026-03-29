@@ -55,7 +55,6 @@ interface GPSDetailWrapperProps {
 
 const VIDEO_MAPPINGS: Record<string, string[]> = {
   "GPS Tracking Solutions": ["https://www.youtube.com/embed/-lV-E3oRzlQ"],
-  "IoT for Mining": [],
   "Asset Tracking": ["https://www.youtube.com/embed/Qy3AESmjdgg"],
   "Fuel Level Sensors": ["https://www.youtube.com/embed/DOqWZnW2Nxw"],
   "Temperature Monitor": ["https://www.youtube.com/embed/pXiVxK_0hGE"],
