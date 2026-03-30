@@ -43,5 +43,11 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@sanity/ui": "^3.1.14",
+    "next-sanity": {
+      "@sanity/ui": "^3.1.14"
+    }
   }
 }
