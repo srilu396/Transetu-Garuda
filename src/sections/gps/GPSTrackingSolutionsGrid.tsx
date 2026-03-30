@@ -1,27 +1,51 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
   ssr: false,
 });
 import {
-  Camera,
-  Truck,
-  Fuel,
-  Thermometer,
-  Lock,
-  MapPin,
-  Shield,
-  BarChart3,
-  Package,
-  LucideIcon,
+  Camera, Truck, Fuel, Thermometer, Lock, MapPin, Shield,
+  BarChart3, Package, LucideIcon, Satellite, Navigation,
+  Navigation2, Route, Map, Signal, Wifi, Bus, Car, Battery,
+  Zap, Cpu, Video, Monitor, Radio, ShieldCheck, Flag,
+  BarChart2, PieChart, TrendingUp, Activity, Timer, Clock,
+  Settings, Wrench, Bell, AlertCircle, CheckCircle2, Star,
+  Award, Target, ThumbsUp, LifeBuoy, Phone, Smartphone,
+  Building2, Users, Globe, CreditCard, Tag, Layers, Cloud,
+  Database, FileText, Link, Search,
 } from "lucide-react";
-import { solutions as solutionsData, SolutionData } from "@/sections/gps/data/gpsData";
-import { assetTracking } from "@/sections/gps/data/asset-tracking";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { client, urlFor } from "@/lib/sanity";
+import { GPS_CARDS_QUERY } from "@/lib/queries";
+import { solutions as localSolutionsData, SolutionData } from "@/sections/gps/data/gpsData";
+import { assetTracking } from "@/sections/gps/data/asset-tracking";
+
+// ── Complete Icon Map ──────────────────────────────────────────────────────
+const IconMap: Record<string, LucideIcon> = {
+  Camera, Truck, Fuel, Thermometer, Lock, MapPin, Shield,
+  BarChart3, Package, Satellite, Navigation, Navigation2,
+  Route, Map, Signal, Wifi, Bus, Car, Battery, Zap, Cpu,
+  Video, Monitor, Radio, ShieldCheck, Flag, BarChart2,
+  PieChart, TrendingUp, Activity, Timer, Clock, Settings,
+  Wrench, Bell, AlertCircle, CheckCircle2, Star, Award,
+  Target, ThumbsUp, LifeBuoy, Phone, Smartphone, Building2,
+  Users, Globe, CreditCard, Tag, Layers, Cloud, Database,
+  FileText, Link, Search,
+};
+
+// ── Types ──────────────────────────────────────────────────────────────────
+type SanityGPSCard = {
+  _id: string;
+  title: string;
+  description: string;
+  image: any;
+  bulletPoints: string[];
+  slug: string;
+};
 
 type ProductItem = {
   title: string;
@@ -35,22 +59,8 @@ type ProductItem = {
   videoUrl?: string;
 };
 
-const products: ProductItem[] = [
-  // {
-  //   title: "Dash Cam System",
-  //   description:
-  //     "Improve driver safety with a smart dash camera that records both road and cabin activity while providing real-time alerts and video monitoring.",
-  //   icon: Camera,
-  //   badge: "Video Safety",
-  //   features: [
-  //     "Dual camera recording",
-  //     "Driver safety alerts",
-  //     "Cloud video access",
-  //   ],
-  //   link: "/solutions/dash-cam-system",
-  //   slug: "dash-cam-system",
-  //   image: "/images/products/dash-cam.jpg",
-  // },
+// ── Local Products (fallback) ──────────────────────────────────────────────
+const localProducts: ProductItem[] = [
   {
     title: "Fleet GPS Tracker",
     description:
@@ -82,21 +92,6 @@ const products: ProductItem[] = [
     slug: "asset-tracking",
     image: assetTracking.imageUrl,
   },
-  // {
-  //   title: "Mining Equipment Tracking",
-  //   description:
-  //     "A rugged GPS tracking solution designed for heavy mining equipment, helping monitor machinery and improve operational visibility in harsh environments.",
-  //   icon: Satellite,
-  //   badge: "Mining Solutions",
-  //   features: [
-  //     "Durable GPS devices",
-  //     "Equipment monitoring",
-  //     "Geofencing alerts",
-  //   ],
-  //   link: "/solutions/iot-for-mining",
-  //   slug: "iot-for-mining",
-  //   image: "/images/products/mining.jpg",
-  // },
   {
     title: "Fuel Monitoring System",
     description:
@@ -181,7 +176,8 @@ const products: ProductItem[] = [
   },
   {
     title: "Geofencing & Location Alerts",
-    description: "Create virtual boundaries and receive instant alerts when vehicles or assets enter or exit defined zones.",
+    description:
+      "Create virtual boundaries and receive instant alerts when vehicles or assets enter or exit defined zones.",
     icon: MapPin,
     badge: "Geofencing",
     features: ["Custom Geofences", "Instant Notifications", "Route Adherence"],
@@ -191,7 +187,8 @@ const products: ProductItem[] = [
   },
   {
     title: "GPS Tracking Software Platform",
-    description: "A centralized platform to monitor, manage, and analyze GPS tracking data with real-time dashboards.",
+    description:
+      "A centralized platform to monitor, manage, and analyze GPS tracking data with real-time dashboards.",
     icon: BarChart3,
     badge: "Software",
     features: ["Real-Time Dashboards", "Custom Reporting", "Maintenance Scheduling"],
@@ -201,22 +198,158 @@ const products: ProductItem[] = [
   },
 ];
 
+// ── SLUG NORMALIZER ────────────────────────────────────────────────────────
+// Handles slug mismatches between Sanity and localSolutionsData keys.
+// Tries exact match first, then common variations.
+function resolveSlug(slug: string): string | null {
+  if (!slug) return null;
+
+  // 1. Exact match — best case
+  if (localSolutionsData[slug]) return slug;
+
+  // 2. Normalize: lowercase + replace spaces/underscores with hyphens
+  const normalized = slug.toLowerCase().replace(/[\s_]+/g, "-");
+  if (localSolutionsData[normalized]) return normalized;
+
+  // 3. Try stripping trailing slashes
+  const stripped = normalized.replace(/^\/|\/$/g, "");
+  if (localSolutionsData[stripped]) return stripped;
+
+  // 4. Fuzzy: find a key that the slug starts with or contains
+  const keys = Object.keys(localSolutionsData);
+  const fuzzy = keys.find(
+    (key) => key.includes(normalized) || normalized.includes(key)
+  );
+  if (fuzzy) return fuzzy;
+
+  return null;
+}
+
+// ── FALLBACK SOLUTION DATA BUILDER ────────────────────────────────────────
+// Guarantees every card — including new Sanity cards — gets a full
+// SolutionData object so GPSDetailWrapper always renders correctly.
+function buildFallbackSolutionData(product: ProductItem): SolutionData {
+  return {
+    title: product.title,
+    tagline: product.description,
+    bgColor: "from-violet-900 to-indigo-900",
+    overview: product.description,
+    detailedDescription: {
+      what: `${product.title} is an advanced GPS tracking solution designed for modern fleet operations.`,
+      how: `It works by integrating real-time GPS data with intelligent software to give you complete visibility and control.`,
+      who: `Ideal for fleet managers, logistics companies, and businesses that rely on vehicles or assets for daily operations.`,
+      why: `Because operational efficiency, security, and compliance are non-negotiable in today's competitive environment.`,
+    },
+    features: product.features.map((f) => ({
+      title: f,
+      description: `${f} — powered by Garuda OM's enterprise-grade GPS infrastructure for reliable, real-time results.`,
+      icon: "CheckCircle2",
+    })),
+    useCases: [
+      {
+        title: "Fleet Operations",
+        description: `Use ${product.title} to streamline fleet operations, reduce downtime, and improve overall efficiency.`,
+      },
+      {
+        title: "Asset Security",
+        description: `Protect your valuable assets with real-time monitoring and instant alerts from ${product.title}.`,
+      },
+      {
+        title: "Compliance & Reporting",
+        description: `Meet regulatory requirements and generate detailed reports with ease using ${product.title}.`,
+      },
+    ],
+    benefits: [
+      {
+        title: "Real-Time Visibility",
+        description: "Know exactly where your fleet and assets are at all times.",
+        icon: "MapPin",
+      },
+      {
+        title: "Reduced Costs",
+        description: "Cut fuel waste, idle time, and maintenance costs significantly.",
+        icon: "TrendingUp",
+      },
+      {
+        title: "Enhanced Security",
+        description: "Get instant alerts for unauthorized movement or geofence breaches.",
+        icon: "Shield",
+      },
+    ],
+    seoMeta: {
+      title: `${product.title} | Garuda OM GPS Solutions`,
+      description: product.description,
+    },
+    imageUrl: product.image,
+  };
+}
+
+// ── UNIFIED SOLUTION DATA RESOLVER ────────────────────────────────────────
+// Single source of truth for what solutionData gets passed to SlidePanel.
+// Priority: localSolutionsData (rich) → buildFallbackSolutionData (auto-generated)
+// Result: SlidePanel ALWAYS receives valid solutionData — never null.
+function resolveSolutionData(product: ProductItem): SolutionData {
+  const resolvedSlug = resolveSlug(product.slug);
+
+  if (resolvedSlug && localSolutionsData[resolvedSlug]) {
+    // Merge: use rich local data but override imageUrl with card's image
+    return {
+      ...localSolutionsData[resolvedSlug],
+      imageUrl: product.image ?? localSolutionsData[resolvedSlug].imageUrl,
+    };
+  }
+
+  // No local data found — auto-generate consistent fallback
+  return buildFallbackSolutionData(product);
+}
+
+// ── Convert Sanity card → ProductItem ─────────────────────────────────────
+function sanityCardToProduct(card: SanityGPSCard): ProductItem {
+  return {
+    title: card.title,
+    description: card.description ?? "",
+    icon: Truck,
+    badge: "GPS Solution",
+    features: card.bulletPoints ?? [],
+    link: `/solutions/${card.slug}`,
+    slug: card.slug,
+    image: card.image ? urlFor(card.image).width(600).url() : undefined,
+  };
+}
+
+// ── Component ──────────────────────────────────────────────────────────────
 export default function ProductsSection() {
   const router = useRouter();
-  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
+  const [products, setProducts] = useState<ProductItem[]>(localProducts);
+  const [loadingFromSanity, setLoadingFromSanity] = useState(true);
+
+  useEffect(() => {
+    async function fetchCards() {
+      try {
+        const sanityCards: SanityGPSCard[] = await client.fetch(GPS_CARDS_QUERY);
+        if (sanityCards && sanityCards.length > 0) {
+          setProducts(sanityCards.map(sanityCardToProduct));
+        }
+      } catch (error) {
+        console.error("Sanity fetch failed, using local data:", error);
+      } finally {
+        setLoadingFromSanity(false);
+      }
+    }
+    fetchCards();
+  }, []);
 
   const handleContactNavigation = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     router.push("/#contact");
   };
 
+  // ── Animation Variants ─────────────────────────────────────────────────
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
   const cardVariants = {
@@ -284,21 +417,30 @@ export default function ProductsSection() {
       className="py-24 text-slate-900 overflow-hidden relative"
       style={{ backgroundColor: "#f8f6ff" }}
     >
-      {/* Decorative background blobs using brand colors */}
+      {/* Decorative background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-40"
-          style={{ background: "radial-gradient(circle, rgba(236,57,176,0.12) 0%, transparent 70%)" }}
+        <div
+          className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-40"
+          style={{
+            background: "radial-gradient(circle, rgba(236,57,176,0.12) 0%, transparent 70%)",
+          }}
         />
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-40"
-          style={{ background: "radial-gradient(circle, rgba(126,96,244,0.12) 0%, transparent 70%)" }}
+        <div
+          className="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-40"
+          style={{
+            background: "radial-gradient(circle, rgba(126,96,244,0.12) 0%, transparent 70%)",
+          }}
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
-          style={{ background: "radial-gradient(circle, rgba(236,57,176,0.08) 0%, rgba(126,96,244,0.08) 100%)" }}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
+          style={{
+            background: "radial-gradient(circle, rgba(236,57,176,0.08) 0%, rgba(126,96,244,0.08) 100%)",
+          }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto container-padding relative z-10">
-        {/* Section Header - UPDATED to match FASTagManagement reference style */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -343,159 +485,160 @@ export default function ProductsSection() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-32 auto-rows-fr"
         >
-          {products.map((product, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              whileTap="tap"
-              viewport={{ once: true }}
-              custom={index}
-              className="group relative flex flex-col h-full bg-white rounded-2xl overflow-hidden transition-all duration-300"
-              style={{
-                border: "2px solid rgba(126, 96, 244, 0.15)",
-                boxShadow: "0 4px 24px rgba(126, 96, 244, 0.07)",
-              }}
-            >
+          {products.map((product, index) => {
+            const Icon =
+              IconMap[product.icon?.displayName ?? ""] ??
+              product.icon ??
+              Truck;
+
+            return (
               <motion.div
-                variants={cardBorderVariants}
-                className="absolute inset-0 rounded-2xl pointer-events-none z-10"
-                style={{ border: "2px solid transparent" }}
-              />
-
-              {/* Image Section */}
-              <div className="relative w-full h-48 overflow-hidden shrink-0"
-                style={{ background: "linear-gradient(135deg, rgba(236,57,176,0.08), rgba(126,96,244,0.12))" }}
+                key={product.slug || index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                whileTap="tap"
+                viewport={{ once: true }}
+                custom={index}
+                className="group relative flex flex-col h-full bg-white rounded-2xl overflow-hidden transition-all duration-300"
+                style={{
+                  border: "2px solid rgba(126, 96, 244, 0.15)",
+                  boxShadow: "0 4px 24px rgba(126, 96, 244, 0.07)",
+                }}
               >
-                {('videoUrl' in product && product.videoUrl) ? (
-                  <iframe
-                    className="w-full h-full object-cover"
-                    src={product.videoUrl}
-                    title={product.title}
-                    frameBorder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                ) : ('image' in product && product.image) ? (
-                  <div className="w-full h-full">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    {(() => {
-                      const Icon = product.icon;
-                      return <Icon className="w-16 h-16 opacity-20" style={{ color: "#7E60F4" }} />;
-                    })()}
-                  </div>
-                )}
-
-                {/* Icon Overlay */}
                 <motion.div
-                  variants={iconVariants}
-                  className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg"
-                  style={{ color: "#7E60F4" }}
-                >
-                  {(() => {
-                    const Icon = product.icon;
-                    return <Icon className="w-5 h-5" />;
-                  })()}
-                </motion.div>
+                  variants={cardBorderVariants}
+                  className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+                  style={{ border: "2px solid transparent" }}
+                />
 
-                {/* Badge */}
-                <motion.div
-                  variants={badgeVariants}
-                  className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm font-bold text-[10px] uppercase tracking-wide shadow-lg"
+                {/* Image Section */}
+                <div
+                  className="relative w-full h-48 overflow-hidden shrink-0"
                   style={{
-                    color: "#ec39b0",
-                    border: "1px solid rgba(236,57,176,0.2)",
+                    background:
+                      "linear-gradient(135deg, rgba(236,57,176,0.08), rgba(126,96,244,0.12))",
                   }}
                 >
-                  {product.badge}
-                </motion.div>
-              </div>
-
-              {/* Content Section */}
-              <div className="flex flex-col flex-grow p-6">
-                <h3 className="text-xl font-bold mb-3 text-slate-900">
-                  {product.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
-                  {product.description}
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  {product.features.map((feature, fIndex) => (
-                    <motion.div
-                      key={fIndex}
-                      custom={fIndex}
-                      variants={featureItemVariants}
-                      className="flex items-center text-sm text-slate-600 font-medium"
-                    >
-                      <div
-                        className="w-2 h-2 rounded-full mr-2 shrink-0"
-                        style={{
-                          background: "linear-gradient(to right, #ec39b0, #7E60F4)",
-                        }}
+                  {product.image ? (
+                    <div className="w-full h-full">
+                      <Image
+                        src={product.image}
+                        alt={product.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      {feature}
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Icon
+                        className="w-16 h-16 opacity-20"
+                        style={{ color: "#7E60F4" }}
+                      />
+                    </div>
+                  )}
 
-                <div className="mt-auto">
-                  <motion.button
-                    variants={buttonVariants}
-                    whileHover="hover"
-                    whileTap="tap"
-                    onClick={() => {
-                      setSelectedProduct(product);
-                      if (product.slug && solutionsData[product.slug]) {
-                        setSelectedSolutionData({
-                          ...solutionsData[product.slug],
-                          imageUrl: product.image
-                        });
-                      } else {
-                        setSelectedSolutionData(null);
-                      }
-                    }}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full text-white text-sm font-bold transition-all duration-300 shadow-md"
+                  {/* Icon Overlay */}
+                  <motion.div
+                    variants={iconVariants}
+                    className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm shadow-lg"
+                    style={{ color: "#7E60F4" }}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </motion.div>
+
+                  {/* Badge */}
+                  <motion.div
+                    variants={badgeVariants}
+                    className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm font-bold text-[10px] uppercase tracking-wide shadow-lg"
                     style={{
-                      background: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                      color: "#ec39b0",
+                      border: "1px solid rgba(236,57,176,0.2)",
                     }}
                   >
-                    Learn More
-                    <motion.svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      animate={{ x: 0 }}
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
-                    >
-                      <path d="M5 12h14"></path>
-                      <path d="m12 5 7 7-7 7"></path>
-                    </motion.svg>
-                  </motion.button>
+                    {product.badge}
+                  </motion.div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Content Section */}
+                <div className="flex flex-col flex-grow p-6">
+                  <h3 className="text-xl font-bold mb-3 text-slate-900">
+                    {product.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
+                    {product.description}
+                  </p>
+
+                  <div className="space-y-3 mb-8">
+                    {product.features.map((feature, fIndex) => (
+                      <motion.div
+                        key={fIndex}
+                        custom={fIndex}
+                        variants={featureItemVariants}
+                        className="flex items-center text-sm text-slate-600 font-medium"
+                      >
+                        <div
+                          className="w-2 h-2 rounded-full mr-2 shrink-0"
+                          style={{
+                            background: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                          }}
+                        />
+                        {feature}
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto">
+                    <motion.button
+                      variants={buttonVariants}
+                      whileHover="hover"
+                      whileTap="tap"
+                      onClick={() => {
+                        // ── THE KEY FIX ──────────────────────────────────
+                        // resolveSolutionData() always returns valid data.
+                        // SlidePanel will NEVER receive null solutionData.
+                        // This fixes existing broken pages AND future Sanity cards.
+                        setSelectedProduct(product);
+                        setSelectedSolutionData(resolveSolutionData(product));
+                      }}
+                      className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full text-white text-sm font-bold transition-all duration-300 shadow-md"
+                      style={{
+                        background: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                      }}
+                    >
+                      Learn More
+                      <motion.svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        animate={{ x: 0 }}
+                        whileHover={{ x: 5 }}
+                        transition={{
+                          type: "spring" as const,
+                          stiffness: 400,
+                          damping: 17,
+                        }}
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                      </motion.svg>
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
+        {/* SlidePanel — always receives solutionData, never null */}
         <SlidePanel
           isOpen={!!selectedProduct}
           onClose={() => {
@@ -507,7 +650,7 @@ export default function ProductsSection() {
           features={selectedProduct?.features || []}
           icon={selectedProduct?.icon || Truck}
           category={selectedProduct?.badge || "Fleet Solution"}
-          solutionData={selectedSolutionData || undefined}
+          solutionData={selectedSolutionData ?? undefined}
         />
 
         {/* Custom Solution Callout */}
@@ -522,7 +665,6 @@ export default function ProductsSection() {
             boxShadow: "0 10px 40px rgba(126, 96, 244, 0.08)",
           }}
         >
-          {/* Background Decorative Gradients */}
           <div
             className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl -mr-40 -mt-40"
             style={{ background: "rgba(236,57,176,0.08)" }}
@@ -537,15 +679,17 @@ export default function ProductsSection() {
               Need a{" "}
               <span
                 className="bg-clip-text text-transparent"
-                style={{ backgroundImage: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+                style={{
+                  backgroundImage: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                }}
               >
                 Custom Solution?
               </span>
             </h3>
             <p className="text-lg text-slate-500 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
               Our engineering team specializes in architecting bespoke GPS
-              tracking ecosystems tailored to your specific industrial workflows.
-              Let's discuss your unique operational needs.
+              tracking ecosystems tailored to your specific industrial
+              workflows. Let's discuss your unique operational needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
               <motion.button
@@ -557,7 +701,9 @@ export default function ProductsSection() {
                 onClick={handleContactNavigation}
                 type="button"
                 className="inline-flex items-center justify-center gap-2 rounded-full text-white font-bold h-12 px-8 transition-all shadow-lg w-full sm:w-auto text-sm cursor-pointer"
-                style={{ background: "linear-gradient(to right, #ec39b0, #7E60F4)" }}
+                style={{
+                  background: "linear-gradient(to right, #ec39b0, #7E60F4)",
+                }}
               >
                 Consult Our Experts
               </motion.button>
