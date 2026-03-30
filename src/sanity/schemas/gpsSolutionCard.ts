@@ -32,14 +32,20 @@ export const gpsSolutionCard = defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
+
+    // ── REFERENCE TO DETAILED PAGE ─────────────────────────────────────────
+    // Slug lives ONLY in solutionPage. We fetch it via this reference at runtime.
+    // No duplicate slugs — the card just points to the detailed page document.
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      description: 'Must match existing solutions URL e.g. dash-cam-system',
-      type: 'slug',
-      options: { source: 'title' },
-      validation: Rule => Rule.required(),
+      name: 'detailedPage',
+      title: 'Detailed Solution Page',
+      type: 'reference',
+      to: [{ type: 'solutionPage' }],
+      description:
+        "Link this card to its detailed solution page. The \"Learn More\" button will navigate to that page's slug automatically.",
+      validation: Rule => Rule.required().error('Each card must be linked to a solution page.'),
     }),
+
     defineField({
       name: 'order',
       title: 'Display Order',
@@ -48,23 +54,33 @@ export const gpsSolutionCard = defineType({
       validation: Rule => Rule.integer().positive(),
     }),
   ],
+
   orderings: [
     {
       title: 'Display Order (Low to High)',
       name: 'displayOrderAsc',
-      by: [{ field: 'order', direction: 'asc' }]
+      by: [{ field: 'order', direction: 'asc' }],
     },
   ],
+
   preview: {
     select: {
       title: 'title',
       subtitle: 'order',
       media: 'image',
+      linkedPageTitle: 'detailedPage.title',
     },
-    prepare({ title, subtitle, media }) {
+    prepare({ title, subtitle, media, linkedPageTitle }: {
+      title?: string
+      subtitle?: number
+      media?: any
+      linkedPageTitle?: string
+    }) {
       return {
-        title: title,
-        subtitle: subtitle ? `Order: ${subtitle}` : '⚠️ Set order number',
+        title: title ?? 'Untitled Card',
+        subtitle: subtitle
+          ? `Order: ${subtitle} → ${linkedPageTitle ?? '⚠️ Link a solution page'}`
+          : '⚠️ Set order number',
         media: media,
       }
     },

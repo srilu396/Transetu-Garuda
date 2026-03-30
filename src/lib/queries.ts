@@ -4,6 +4,8 @@
 
 
 // ── 1. GPS SOLUTION CARDS (Home page grid) ──
+// Slug is fetched FROM the referenced solutionPage document.
+// No slug stored on the card itself — single source of truth.
 export const GPS_CARDS_QUERY = `
   *[_type == "gpsSolutionCard"] | order(order asc) {
     _id,
@@ -11,17 +13,17 @@ export const GPS_CARDS_QUERY = `
     description,
     image,
     bulletPoints,
-    "slug": slug.current
+    "slug": detailedPage->slug.current
   }
 `
 
 
 // ── 2. ALL SOLUTION PAGES (with order) ──
+
 export const ALL_SOLUTIONS_QUERY = `
   *[_type == "solutionPage"] | order(order asc) {
     _id,
     iconName,
-    cardTitle,
     title,
     "slug": slug.current,
     badge,
@@ -54,13 +56,10 @@ export const ALL_SOLUTIONS_QUERY = `
   }
 `
 
-
-// ── 3. SINGLE SOLUTION PAGE (by slug) ──
 export const SOLUTION_BY_SLUG_QUERY = `
   *[_type == "solutionPage" && slug.current == $slug][0] {
     _id,
     iconName,
-    cardTitle,
     title,
     "slug": slug.current,
     badge,

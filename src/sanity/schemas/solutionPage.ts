@@ -105,16 +105,7 @@ export const solutionPage = defineType({
 
   fields: [
 
-    // ── 1. CARD TITLE (For linking with GPS Solution Card) ─────────────────
-    defineField({
-      name: 'cardTitle',
-      title: 'Card Title',
-      type: 'string',
-      description: 'This should match the GPS Solution Card title exactly for proper linking. Used to generate slug.',
-      validation: (Rule) => Rule.required().error('Card title is required for linking with solution cards.'),
-    }),
-
-    // ── 2. Page Icon ────────────────────────────────────────────────────────
+    // ── 1. Page Icon ────────────────────────────────────────────────────────
     defineField({
       name: 'iconName',
       title: 'Page Icon',
@@ -129,7 +120,7 @@ export const solutionPage = defineType({
       validation: (Rule) => Rule.required().error('Page icon is required.'),
     }),
 
-    // ── 3. Badge Label ──────────────────────────────────────────────────────
+    // ── 2. Badge Label ──────────────────────────────────────────────────────
     defineField({
       name: 'badge',
       title: 'Badge Label',
@@ -138,7 +129,7 @@ export const solutionPage = defineType({
       initialValue: 'Fleet Solution',
     }),
 
-    // ── 4. Page Title (Full title for the solution page) ───────────────────
+    // ── 3. Page Title (Full title for the solution page) ───────────────────
     defineField({
       name: 'title',
       title: 'Page Title',
@@ -147,17 +138,17 @@ export const solutionPage = defineType({
       validation: (Rule) => Rule.required(),
     }),
 
-    // ── 5. Slug (Generated from cardTitle for consistency) ─────────────────
+    // ── 4. Slug (Generated from title) ─────────────────────────────────────
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description: 'Automatically generated from Card Title to match GPS Solution Card slug',
-      options: { source: 'cardTitle' },
+      description: 'Automatically generated from Page Title',
+      options: { source: 'title' },
       validation: (Rule) => Rule.required(),
     }),
 
-    // ── 6. Tagline ──────────────────────────────────────────────────────────
+    // ── 5. Tagline ──────────────────────────────────────────────────────────
     defineField({
       name: 'tagline',
       title: 'Tagline',
@@ -165,7 +156,7 @@ export const solutionPage = defineType({
       description: 'One-line subtitle shown below the page title.',
     }),
 
-    // ── 7. MEDIA FIELD (Image or YouTube Link) ─────────────────────────────
+    // ── 6. MEDIA FIELD (Image or YouTube Link) ─────────────────────────────
     defineField({
       name: 'media',
       title: 'Media (Image or YouTube Video)',
@@ -229,7 +220,7 @@ export const solutionPage = defineType({
       },
     }),
 
-    // ── 8. Overview Text ────────────────────────────────────────────────────
+    // ── 7. Overview Text ────────────────────────────────────────────────────
     defineField({
       name: 'overview',
       title: 'Overview Text',
@@ -238,7 +229,7 @@ export const solutionPage = defineType({
       description: 'Introductory paragraph shown in the Overview section.',
     }),
 
-    // ── 9. BENEFITS SECTION (3 cards after Overview) ────────────────────────
+    // ── 8. BENEFITS SECTION (3 cards after Overview) ────────────────────────
     // UI: Shows NO title, just the 3 cards
     defineField({
       name: 'benefits',
@@ -291,7 +282,7 @@ export const solutionPage = defineType({
       ],
     }),
 
-    // ── 10. Key Features ────────────────────────────────────────────────────
+    // ── 9. Key Features ────────────────────────────────────────────────────
     defineField({
       name: 'keyFeatures',
       title: 'Key Features',
@@ -341,7 +332,7 @@ export const solutionPage = defineType({
       ],
     }),
 
-    // ── 11. USE CASES SECTION (formerly "Benefits & Use Cases") ─────────────
+    // ── 10. USE CASES SECTION (formerly "Benefits & Use Cases") ─────────────
     // UI: Displays as "Benefits & Use Cases" with auto-numbered items (01, 02...)
     defineField({
       name: 'useCases',
@@ -377,7 +368,7 @@ export const solutionPage = defineType({
       ],
     }),
 
-    // ── 12. Why Choose Garuda (with icon dropdown) ──────────────────────────
+    // ── 11. Why Choose Garuda (with icon dropdown) ──────────────────────────
     defineField({
       name: 'whyChoose',
       title: 'Why Choose Garuda?',
@@ -439,7 +430,7 @@ export const solutionPage = defineType({
       ],
     }),
 
-    // ── 13. ORDER FIELD ─────────────────────────────────────────────────────
+    // ── 12. ORDER FIELD ─────────────────────────────────────────────────────
     defineField({
       name: 'order',
       title: 'Display Order',
@@ -462,26 +453,18 @@ export const solutionPage = defineType({
       name: 'titleAsc',
       by: [{ field: 'title', direction: 'asc' }]
     },
-    {
-      title: 'Card Title (A-Z)',
-      name: 'cardTitleAsc',
-      by: [{ field: 'cardTitle', direction: 'asc' }]
-    },
   ],
 
   // ── Studio Document Preview ───────────────────────────────────────────────
   preview: {
     select: { 
-      title: 'cardTitle',
-      subtitle: 'title',
+      title: 'title',
       order: 'order' 
     },
-    prepare({ title, subtitle, order }: { title?: string; subtitle?: string; order?: number }) {
+    prepare({ title, order }: { title?: string; order?: number }) {
       return {
         title: title ?? 'Untitled Solution',
-        subtitle: order 
-          ? `Order: ${order} • Page: ${subtitle ?? 'No page title'}`
-          : `Page: ${subtitle ?? 'GPS Solution Page'}`,
+        subtitle: order ? `Order: ${order}` : 'GPS Solution Page',
       }
     },
   },
