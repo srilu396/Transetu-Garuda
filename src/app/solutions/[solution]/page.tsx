@@ -19,25 +19,61 @@ async function fetchFromSanity(slug: string) {
   }
 }
 
+// ── Types ──────────────────────────────────────────────────────────────────
+interface SanityBenefit {
+  iconName?: string;
+  title?: string;
+  description?: string;
+}
+
+interface SanityFeature {
+  iconName?: string;
+  title?: string;
+  description?: string;
+}
+
+interface SanityUseCase {
+  title?: string;
+  description?: string;
+}
+
+interface SanityMedia {
+  mediaType: 'image' | 'video' | 'youtube';
+  image?: string;
+  youtubeUrl?: string;
+  videoUrl?: string;
+}
+
+interface SanitySolution {
+  title?: string;
+  tagline?: string;
+  iconName?: string;
+  overview?: string;
+  benefits?: SanityBenefit[];
+  keyFeatures?: SanityFeature[];
+  useCases?: SanityUseCase[];
+  media?: SanityMedia;
+}
+
 // ── Convert Sanity shape → GPSTrackingDetails shape ────────────────────────
-function mapSanityData(solution: any) {
+function mapSanityData(solution: SanitySolution) {
   return {
     title:    solution.title    ?? "",
     tagline:  solution.tagline  ?? "",
     icon:     solution.iconName ?? "Satellite",
     bgColor:  "from-blue-500 to-purple-600",
     overview: solution.overview ?? "",
-    benefits: (solution.benefits ?? []).map((b: any) => ({
+    benefits: (solution.benefits ?? []).map((b: SanityBenefit) => ({
       icon: b.iconName ?? "Shield",
       title: b.title ?? "",
       description: b.description ?? "",
     })),
-    features: (solution.keyFeatures ?? []).map((f: any) => ({
+    features: (solution.keyFeatures ?? []).map((f: SanityFeature) => ({
       icon: f.iconName ?? "Zap",
       title: f.title ?? "",
       description: f.description ?? "",
     })),
-    useCases: (solution.useCases ?? []).map((u: any) => ({
+    useCases: (solution.useCases ?? []).map((u: SanityUseCase) => ({
       title: u.title ?? "",
       description: u.description ?? "",
     })),
@@ -129,8 +165,8 @@ export async function generateStaticParams() {
     );
 
     const sanitySlugs = (sanitySolutions ?? [])
-      .filter((s: any) => s.slug)
-      .map((s: any) => ({ solution: s.slug }));
+      .filter((s: { slug?: string }) => s.slug)
+      .map((s: { slug: string }) => ({ solution: s.slug }));
 
     // Merge without duplicates
     const merged = [...localSlugs];

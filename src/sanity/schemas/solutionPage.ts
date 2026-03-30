@@ -197,7 +197,7 @@ export const solutionPage = defineType({
           hidden: ({ parent }) => parent?.mediaType !== 'video',
           validation: (Rule) =>
             Rule.custom((url, context) => {
-              const parent = context.parent as any;
+              const parent = context.parent as { mediaType?: string };
               if (parent?.mediaType === 'video' && !url) {
                 return 'Video URL is required when direct video is selected';
               }
@@ -212,7 +212,7 @@ export const solutionPage = defineType({
           hidden: ({ parent }) => parent?.mediaType !== 'youtube',
           validation: (Rule) =>
             Rule.custom((url, context) => {
-              const parent = context.parent as any;
+              const parent = context.parent as { mediaType?: string };
               if (parent?.mediaType === 'youtube' && !url) {
                 return 'YouTube URL is required when YouTube type is selected';
               }

@@ -41,6 +41,7 @@ export const gpsSolutionCard = defineType({
       title: 'Detailed Solution Page',
       type: 'reference',
       to: [{ type: 'solutionPage' }],
+      weak: true,
       description:
         "Link this card to its detailed solution page. The \"Learn More\" button will navigate to that page's slug automatically.",
       validation: Rule => Rule.required().error('Each card must be linked to a solution page.'),
@@ -73,6 +74,7 @@ export const gpsSolutionCard = defineType({
     prepare({ title, subtitle, media, linkedPageTitle }: {
       title?: string
       subtitle?: number
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       media?: any
       linkedPageTitle?: string
     }) {

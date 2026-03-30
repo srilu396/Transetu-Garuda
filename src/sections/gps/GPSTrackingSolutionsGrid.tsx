@@ -42,11 +42,29 @@ type SanityGPSCard = {
   _id: string;
   title: string;
   description: string;
-  image: any;
+  image: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
   bulletPoints: string[];
   slug: string;
-  detailedMedia?: any;
-  detailedData?: any;
+  detailedMedia?: {
+    mediaType: 'image' | 'video' | 'youtube';
+    image?: string;
+    youtubeUrl?: string;
+    videoUrl?: string;
+  };
+  detailedData?: {
+    title?: string;
+    tagline?: string;
+    overview?: string;
+    benefits?: Array<{ iconName?: string; title?: string; description?: string }>;
+    keyFeatures?: Array<{ iconName?: string; title?: string; description?: string }>;
+    useCases?: Array<{ title?: string; description?: string }>;
+    whyChoose?: Array<{ iconName?: string; description?: string }>;
+  };
 };
 
 type ProductItem = {
@@ -59,8 +77,8 @@ type ProductItem = {
   slug: string;
   image?: string;
   videoUrl?: string;
-  detailedMedia?: any;
-  detailedData?: any;
+  detailedMedia?: SanityGPSCard['detailedMedia'];
+  detailedData?: SanityGPSCard['detailedData'];
 };
 
 // ── Local Products (fallback) ──────────────────────────────────────────────
@@ -313,17 +331,17 @@ function resolveSolutionData(product: ProductItem): SolutionData {
       tagline: product.detailedData.tagline || product.description,
       bgColor: "from-blue-500 to-purple-600",
       overview: product.detailedData.overview || product.description,
-      benefits: (product.detailedData.benefits ?? []).map((b: any) => ({
+      benefits: (product.detailedData.benefits ?? []).map((b) => ({
         icon: b.iconName || "Shield",
         title: b.title || "",
         description: b.description || "",
       })),
-      features: (product.detailedData.keyFeatures ?? []).map((f: any) => ({
+      features: (product.detailedData.keyFeatures ?? []).map((f) => ({
         icon: f.iconName || "Zap",
         title: f.title || "",
         description: f.description || "",
       })),
-      useCases: (product.detailedData.useCases ?? []).map((u: any) => ({
+      useCases: (product.detailedData.useCases ?? []).map((u) => ({
         title: u.title || "",
         description: u.description || "",
       })),
@@ -368,7 +386,7 @@ export default function ProductsSection() {
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
   const [selectedSolutionData, setSelectedSolutionData] = useState<SolutionData | null>(null);
   const [products, setProducts] = useState<ProductItem[]>(localProducts);
-  const [loadingFromSanity, setLoadingFromSanity] = useState(true);
+  const [, setLoadingFromSanity] = useState(true);
 
   useEffect(() => {
     async function fetchCards() {
