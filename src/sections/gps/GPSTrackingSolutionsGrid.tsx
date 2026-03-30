@@ -45,6 +45,8 @@ type SanityGPSCard = {
   image: any;
   bulletPoints: string[];
   slug: string;
+  detailedMedia?: any;
+  detailedData?: any;
 };
 
 type ProductItem = {
@@ -57,6 +59,8 @@ type ProductItem = {
   slug: string;
   image?: string;
   videoUrl?: string;
+  detailedMedia?: any;
+  detailedData?: any;
 };
 
 // ── Local Products (fallback) ──────────────────────────────────────────────
@@ -284,18 +288,57 @@ function buildFallbackSolutionData(product: ProductItem): SolutionData {
   };
 }
 
-// ── UNIFIED SOLUTION DATA RESOLVER ────────────────────────────────────────
-// Single source of truth for what solutionData gets passed to SlidePanel.
-// Priority: localSolutionsData (rich) → buildFallbackSolutionData (auto-generated)
-// Result: SlidePanel ALWAYS receives valid solutionData — never null.
 function resolveSolutionData(product: ProductItem): SolutionData {
-  const resolvedSlug = resolveSlug(product.slug);
+  const resolvedSlug = product.slug ? resolveSlug(product.slug) : null;
 
   if (resolvedSlug && localSolutionsData[resolvedSlug]) {
-    // Merge: use rich local data but override imageUrl with card's image
+    // ── THE SEPARATION FIX ───────────────────────────────────────────
+    // Priority: detailedMedia (from Sanity) → local imageUrl → card's image fallback
     return {
       ...localSolutionsData[resolvedSlug],
-      imageUrl: product.image ?? localSolutionsData[resolvedSlug].imageUrl,
+      media: product.detailedMedia ? {
+        mediaType: product.detailedMedia.mediaType,
+        imageUrl:  product.detailedMedia.image,
+        youtubeUrl: product.detailedMedia.youtubeUrl,
+        videoUrl:  product.detailedMedia.videoUrl,
+      } : undefined,
+      imageUrl: product.detailedMedia?.image || localSolutionsData[resolvedSlug].imageUrl,
+    };
+  }
+
+  // If no local data but we have detailed data from Sanity
+  if (product.detailedData) {
+    return {
+      title: product.detailedData.title || product.title,
+      tagline: product.detailedData.tagline || product.description,
+      bgColor: "from-blue-500 to-purple-600",
+      overview: product.detailedData.overview || product.description,
+      benefits: (product.detailedData.benefits ?? []).map((b: any) => ({
+        icon: b.iconName || "Shield",
+        title: b.title || "",
+        description: b.description || "",
+      })),
+      features: (product.detailedData.keyFeatures ?? []).map((f: any) => ({
+        icon: f.iconName || "Zap",
+        title: f.title || "",
+        description: f.description || "",
+      })),
+      useCases: (product.detailedData.useCases ?? []).map((u: any) => ({
+        title: u.title || "",
+        description: u.description || "",
+      })),
+      steps: [],
+      media: product.detailedMedia ? {
+        mediaType: product.detailedMedia.mediaType,
+        imageUrl:  product.detailedMedia.image,
+        youtubeUrl: product.detailedMedia.youtubeUrl,
+        videoUrl:  product.detailedMedia.videoUrl,
+      } : undefined,
+      imageUrl: product.detailedMedia?.image || product.image,
+      seoMeta: {
+        title: product.detailedData.title || product.title,
+        description: product.detailedData.tagline || product.description,
+      },
     };
   }
 
@@ -314,6 +357,8 @@ function sanityCardToProduct(card: SanityGPSCard): ProductItem {
     link: `/solutions/${card.slug}`,
     slug: card.slug,
     image: card.image ? urlFor(card.image).width(600).url() : undefined,
+    detailedMedia: card.detailedMedia,
+    detailedData: card.detailedData,
   };
 }
 

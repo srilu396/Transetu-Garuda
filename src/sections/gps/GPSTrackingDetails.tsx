@@ -142,11 +142,46 @@ export default function GPSTrackingDetails({
             </p>
           </div>
 
-          {/* Hero Image / Video List */}
+          {/* Hero Image / Video Section */}
           <div className="mb-8">
-            {videos && videos.length > 0 ? (
+            {data.media ? (
+              <div className="w-full rounded-2xl overflow-hidden shadow-xl aspect-video relative bg-muted/20">
+                {data.media.mediaType === "youtube" && data.media.youtubeUrl && (
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src={data.media.youtubeUrl.includes("embed") 
+                      ? data.media.youtubeUrl 
+                      : data.media.youtubeUrl.replace("watch?v=", "embed/").replace("youtu.be/", "youtube.com/embed/")}
+                    title={data.title}
+                    frameBorder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                )}
+
+                {data.media.mediaType === "video" && data.media.videoUrl && (
+                  <video
+                    className="w-full h-full object-cover"
+                    src={data.media.videoUrl}
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                )}
+
+                {data.media.mediaType === "image" && (
+                  <img
+                    src={data.media.imageUrl || data.imageUrl || "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"}
+                    alt={data.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+            ) : videos && videos.length > 0 ? (
               <div className="flex flex-col gap-6">
-                {/* Main Video */}
+                {/* Main Video (Fallback logic) */}
                 <div className="w-full rounded-2xl overflow-hidden shadow-xl aspect-video relative">
                   <iframe
                     className="absolute top-0 left-0 w-full h-full"
@@ -157,7 +192,6 @@ export default function GPSTrackingDetails({
                     allowFullScreen
                   ></iframe>
                 </div>
-
                 {/* Additional Videos Grid */}
                 {videos.length > 1 && (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -180,7 +214,7 @@ export default function GPSTrackingDetails({
                 )}
               </div>
             ) : (
-              <div className="w-full rounded-2xl overflow-hidden shadow-xl">
+              <div className="w-full rounded-2xl overflow-hidden shadow-xl bg-muted/20">
                 <div className="relative w-full h-[300px] md:h-[450px]">
                   <img
                     src={

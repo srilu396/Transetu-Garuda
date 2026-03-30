@@ -48,6 +48,12 @@ export interface SolutionData {
   };
   imageUrl?: string;
   secondaryImageUrl?: string;
+  media?: {
+    mediaType: 'image' | 'video' | 'youtube';
+    imageUrl?:  string;
+    youtubeUrl?: string;
+    videoUrl?:  string;
+  };
 }
 
 export const solutions: Record<string, SolutionData> = {

@@ -13,7 +13,22 @@ export const GPS_CARDS_QUERY = `
     description,
     image,
     bulletPoints,
-    "slug": detailedPage->slug.current
+    "slug": detailedPage->slug.current,
+    "detailedMedia": detailedPage->media {
+      mediaType,
+      "image": image.asset->url,
+      youtubeUrl,
+      videoUrl
+    },
+    "detailedData": detailedPage-> {
+      title,
+      tagline,
+      overview,
+      benefits,
+      keyFeatures,
+      useCases,
+      whyChoose
+    }
   }
 `
 
@@ -31,7 +46,8 @@ export const ALL_SOLUTIONS_QUERY = `
     "media": media {
       mediaType,
       "image": image.asset->url,
-      youtubeUrl
+      youtubeUrl,
+      videoUrl
     },
     overview,
     order,
@@ -67,7 +83,8 @@ export const SOLUTION_BY_SLUG_QUERY = `
     "media": media {
       mediaType,
       "image": image.asset->url,
-      youtubeUrl
+      youtubeUrl,
+      videoUrl
     },
     overview,
     "benefits": benefits[] {

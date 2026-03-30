@@ -159,9 +159,9 @@ export const solutionPage = defineType({
     // ── 6. MEDIA FIELD (Image or YouTube Link) ─────────────────────────────
     defineField({
       name: 'media',
-      title: 'Media (Image or YouTube Video)',
+      title: 'Media (Image, Video, or YouTube)',
       type: 'object',
-      description: 'Add either an image or a YouTube video link to display on the page',
+      description: 'Add an image, a direct video link, or a YouTube video to display on the page',
       options: {
         collapsible: true,
         collapsed: false,
@@ -190,6 +190,21 @@ export const solutionPage = defineType({
           hidden: ({ parent }) => parent?.mediaType !== 'image',
         }),
         defineField({
+          name: 'videoUrl',
+          title: 'Direct Video URL',
+          type: 'url',
+          description: 'Enter a direct link to a video file (e.g., .mp4, .webm)',
+          hidden: ({ parent }) => parent?.mediaType !== 'video',
+          validation: (Rule) =>
+            Rule.custom((url, context) => {
+              const parent = context.parent as any;
+              if (parent?.mediaType === 'video' && !url) {
+                return 'Video URL is required when direct video is selected';
+              }
+              return true;
+            }),
+        }),
+        defineField({
           name: 'youtubeUrl',
           title: 'YouTube Video URL',
           type: 'url',
@@ -199,7 +214,7 @@ export const solutionPage = defineType({
             Rule.custom((url, context) => {
               const parent = context.parent as any;
               if (parent?.mediaType === 'youtube' && !url) {
-                return 'YouTube URL is required when video type is selected';
+                return 'YouTube URL is required when YouTube type is selected';
               }
               if (url && !url.includes('youtube.com') && !url.includes('youtu.be')) {
                 return 'Please enter a valid YouTube URL';
@@ -213,9 +228,10 @@ export const solutionPage = defineType({
           mediaType: 'mediaType',
         },
         prepare({ mediaType }) {
-          return {
-            title: mediaType === 'youtube' ? 'YouTube Video' : 'Image',
-          };
+          let title = 'Image';
+          if (mediaType === 'youtube') title = 'YouTube Video';
+          if (mediaType === 'video') title = 'Direct Video';
+          return { title };
         },
       },
     }),

@@ -42,7 +42,12 @@ function mapSanityData(solution: any) {
       description: u.description ?? "",
     })),
     steps: [],
-    imageUrl: solution.media?.image ?? "",
+    media: solution.media ? {
+      mediaType: solution.media.mediaType,
+      imageUrl:  solution.media.image,
+      youtubeUrl: solution.media.youtubeUrl,
+      videoUrl:  solution.media.videoUrl,
+    } : undefined,
     seoMeta: {
       title: solution.title ?? "",
       description: solution.tagline ?? solution.overview ?? "",
