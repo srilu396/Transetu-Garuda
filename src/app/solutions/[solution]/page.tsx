@@ -3,16 +3,18 @@ import { Metadata } from "next";
 import { solutions } from "@/sections/gps/data/gpsData";
 import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
-import { client } from "@/lib/sanity";
+import { getClient } from "@/lib/sanity";
+import { draftMode } from "next/headers";
 import { SOLUTION_BY_SLUG_QUERY, ALL_SOLUTIONS_QUERY } from "@/lib/queries";
 
 // ── Fetch one solution from Sanity by slug ─────────────────────────────────
-async function fetchFromSanity(slug: string) {
+async function fetchFromSanity(slug: string, isPreview: boolean = false) {
   try {
-    return await client.fetch(
+    const activeClient = getClient(isPreview);
+    return await activeClient.fetch(
       SOLUTION_BY_SLUG_QUERY,
       { slug },
-      { next: { revalidate: 60 } }
+      isPreview ? { next: { revalidate: 0 } } : { next: { revalidate: 60 } }
     );
   } catch {
     return null;
@@ -127,9 +129,10 @@ export default async function SolutionPage({
   params: { solution: string };
 }) {
   const { solution: slug } = params;
+  const { isEnabled: isPreview } = draftMode();
 
   // Try Sanity first
-  const sanity = await fetchFromSanity(slug);
+  const sanity = await fetchFromSanity(slug, isPreview);
   if (sanity) {
     return (
       <GPSTrackingDetails
@@ -158,7 +161,7 @@ export async function generateStaticParams() {
   }));
 
   try {
-    const sanitySolutions = await client.fetch(
+    const sanitySolutions = await getClient(false).fetch(
       ALL_SOLUTIONS_QUERY,
       {},
       { next: { revalidate: 60 } }

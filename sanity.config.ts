@@ -2,6 +2,7 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
+import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './src/sanity/schemas'
 
 export default defineConfig({
@@ -48,6 +49,54 @@ export default defineConfig({
       },
     }),
     visionTool(),
+    presentationTool({
+      previewUrl: {
+        origin: process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000',
+        preview: '/',
+        previewMode: {
+          enable: '/api/preview',
+          disable: '/api/exit-preview',
+        },
+      },
+      resolve: {
+        locations: {
+          'solutionPage': {
+            select: {
+              title: 'title',
+              slug: 'slug.current',
+            },
+            resolve: (doc: any) => {
+              if (!doc.slug) return null
+              return {
+                locations: [
+                  {
+                    title: doc.title || 'Untitled',
+                    href: `/solutions/${doc.slug}`,
+                  },
+                ],
+              }
+            }
+          },
+          'industryPage': {
+            select: {
+              title: 'title',
+              slug: 'slug.current',
+            },
+            resolve: (doc: any) => {
+              if (!doc.slug) return null
+              return {
+                locations: [
+                  {
+                    title: doc.title || 'Untitled',
+                    href: `/industries/${doc.slug}`,
+                  },
+                ],
+              }
+            }
+          },
+        },
+      },
+    }),
   ],
 
   schema: {

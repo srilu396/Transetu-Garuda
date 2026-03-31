@@ -21,6 +21,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { client, urlFor } from "@/lib/sanity";
 import { GPS_CARDS_QUERY } from "@/lib/queries";
+import { fetchSanityQuery } from "@/actions/sanity";
 import { solutions as localSolutionsData, SolutionData } from "@/sections/gps/data/gpsData";
 import { assetTracking } from "@/sections/gps/data/asset-tracking";
 
@@ -391,7 +392,7 @@ export default function ProductsSection() {
   useEffect(() => {
     async function fetchCards() {
       try {
-        const sanityCards: SanityGPSCard[] = await client.fetch(GPS_CARDS_QUERY);
+        const sanityCards: SanityGPSCard[] = await fetchSanityQuery(GPS_CARDS_QUERY);
         if (sanityCards && sanityCards.length > 0) {
           setProducts(sanityCards.map(sanityCardToProduct));
         }

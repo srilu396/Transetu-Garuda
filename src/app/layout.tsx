@@ -4,6 +4,8 @@ import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingSocialBar from "@/components/FloatingSocialBar";
 import RootJsonLd from "@/components/seo/RootJsonLd";
+import { draftMode } from 'next/headers'
+import { VisualEditing } from 'next-sanity'
 import { DEFAULT_DESCRIPTION, OG_IMAGE_PATH, SITE_BRAND, keywordList } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/siteUrl";
 
@@ -103,6 +105,12 @@ export default function RootLayout({
         <RootJsonLd />
         {children}
         <FloatingSocialBar />
+        
+        {draftMode().isEnabled && (
+          <>
+            <VisualEditing />
+          </>
+        )}
       </body>
     </html>
   );
