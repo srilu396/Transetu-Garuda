@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { client, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import { GPS_CARDS_QUERY } from "@/lib/queries";
 import { fetchSanityQuery } from "@/actions/sanity";
 import { solutions as localSolutionsData, SolutionData } from "@/sections/gps/data/gpsData";

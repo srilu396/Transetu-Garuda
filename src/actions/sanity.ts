@@ -5,7 +5,7 @@ import { getClient } from '@/lib/sanity'
 
 // This server action fetches data directly from Sanity.
 // It detects draft mode and uses either the preview client or published client.
-export async function fetchSanityQuery(query: string, params: Record<string, any> = {}) {
+export async function fetchSanityQuery(query: string, params: Record<string, unknown> = {}) {
   // 1. Check if draft mode is ON securely on the server
   const isDraftMode = draftMode().isEnabled
 
