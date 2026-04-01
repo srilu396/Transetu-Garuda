@@ -3,6 +3,8 @@
 import React, { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send, ChevronDown } from "lucide-react";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { SITE_SETTINGS_QUERY } from "@/lib/queries";
 
 /** Shape matches what an admin API can return — map JSON into this (split multiline address strings into `addressLines` if needed). */
 export type ContactOfficeLocation = {
@@ -91,7 +93,38 @@ const officeBodyClass =
   "text-slate-800 text-xs sm:text-sm font-normal leading-snug break-words";
 
 export default function ContactSection() {
-  const officeLocations = OFFICE_LOCATIONS;
+  const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  React.useEffect(() => {
+    async function getSettings() {
+      try {
+        const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+        const data = await fetchSanityQuery(SITE_SETTINGS_QUERY, {}, isIframe);
+        if (data) setSiteSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch Site Settings for Contact Section:", error);
+      }
+    }
+    getSettings();
+  }, []);
+
+  const phone = siteSettings?.phone || "+91 77802 74792";
+  const email = siteSettings?.email || "info@garudaom.online";
+
+  const officeLocations = React.useMemo(() => {
+    if (siteSettings?.addresses && siteSettings.addresses.length > 0) {
+      return siteSettings.addresses.map((addr: string, idx: number) => {
+        const lines = addr.split('\n').filter(Boolean).map(s => s.trim());
+        const title = lines.length > 0 ? lines[0].split(':')[0].trim() : `Office ${idx + 1}`;
+        return {
+          id: `sanity-addr-${idx}`,
+          title: title,
+          addressLines: lines,
+        };
+      });
+    }
+    return OFFICE_LOCATIONS;
+  }, [siteSettings]);
 
   const [isSubmitting, setIsSubmitting]   = useState(false);
   const [showSuccess, setShowSuccess]     = useState(false);
@@ -209,7 +242,7 @@ export default function ContactSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Phone</h4>
-                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">+91 77802 74792</p>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">{phone}</p>
                   <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2">Call us directly</p>
                 </div>
               </motion.div>
@@ -223,7 +256,7 @@ export default function ContactSection() {
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Email</h4>
                   <p className="text-slate-900 font-semibold text-sm sm:text-base break-all sm:break-words overflow-wrap-anywhere">
-                    info@garudaom.online
+                    {email}
                   </p>
                   <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2">Send us an email</p>
                 </div>
@@ -238,11 +271,11 @@ export default function ContactSection() {
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-slate-900 mb-2 sm:mb-3 text-sm sm:text-base">Office</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3 items-stretch">
-                    {officeLocations.map((loc, index) => (
+                    {officeLocations.map((loc: ContactOfficeLocation, index: number) => (
                       <div key={loc.id ?? `office-${index}`} className={officeCardClass}>
                         <p className={officeTitleClass}>{loc.title}</p>
                         <div className="space-y-0.5 shrink-0">
-                          {loc.addressLines.map((line, lineIndex) => (
+                          {loc.addressLines.map((line: string, lineIndex: number) => (
                             <p key={lineIndex} className={officeBodyClass}>
                               {line}
                             </p>
@@ -266,7 +299,7 @@ export default function ContactSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-slate-900 mb-1 text-sm sm:text-base">Support</h4>
-                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">+91 77802 74792</p>
+                  <p className="text-slate-900 font-semibold text-sm sm:text-base break-words">{phone}</p>
                   <p className="text-xs sm:text-sm text-slate-500 font-medium mt-2 break-words">Sudhakar - 10:00 AM – 5:00 PM (Monday – Saturday)</p>
                 </div>
               </motion.div>

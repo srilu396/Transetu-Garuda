@@ -232,7 +232,7 @@ export const fastagBusinessQuery = `
 
 // ── 8. SITE SETTINGS (phone, email, address, social) ──
 export const SITE_SETTINGS_QUERY = `
-  *[_type == "siteSettings" && !(_id in path("drafts.**"))][0] {
+  *[_type == "siteSettings" && (_id == "siteSettings" || _id == "drafts.siteSettings")] | order(_updatedAt desc) [0] {
     _id,
     phone,
     email,
@@ -241,8 +241,10 @@ export const SITE_SETTINGS_QUERY = `
     facebook,
     instagram,
     linkedin,
-    youtubeDemo,
-    companyDocs
+    "companyDocs": companyDocs[]{
+      documentName,
+      "fileUrl": file.asset->url
+    }
   }
 `;
 

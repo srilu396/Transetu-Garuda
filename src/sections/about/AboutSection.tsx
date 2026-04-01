@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { fetchSanityQuery } from "@/actions/sanity";
-import { ABOUT_SECTION_QUERY } from "@/lib/queries";
+import { ABOUT_SECTION_QUERY, SITE_SETTINGS_QUERY } from "@/lib/queries";
 import {
   Target,
   Eye,
@@ -33,14 +33,18 @@ export default function AboutSection() {
   const [showMore, setShowMore] = useState(false);
   const [sanityData, setSanityData] = useState<any>(null);
 
+  const [siteSettings, setSiteSettings] = useState<any>(null);
+
   useEffect(() => {
     async function getAboutData() {
       try {
         const isIframe = typeof window !== 'undefined' && window.self !== window.top;
-        const data = await fetchSanityQuery(ABOUT_SECTION_QUERY, {}, isIframe);
-        if (data) {
-          setSanityData(data);
-        }
+        const [aboutData, settingsData] = await Promise.all([
+          fetchSanityQuery(ABOUT_SECTION_QUERY, {}, isIframe),
+          fetchSanityQuery(SITE_SETTINGS_QUERY, {}, isIframe)
+        ]);
+        if (aboutData) setSanityData(aboutData);
+        if (settingsData) setSiteSettings(settingsData);
       } catch (error) {
         console.error("Failed to fetch About Section from Sanity:", error);
       }
@@ -373,9 +377,9 @@ export default function AboutSection() {
                 className="flex gap-3"
               >
                 {[
-  { icon: Linkedin, href: "", color: "text-blue-600", label: "LinkedIn" },
-  { icon: Mail, href: "https://mail.google.com/mail/?view=cm&to=info@garudaom.online", color: "text-red-500", label: "Email" },
-  { icon: Phone, href: "https://wa.me/917780274792", color: "text-green-500", label: "WhatsApp" },
+  { icon: Linkedin, href: siteSettings?.linkedin || "", color: "text-blue-600", label: "LinkedIn" },
+  { icon: Mail, href: siteSettings?.email ? `https://mail.google.com/mail/?view=cm&to=${siteSettings.email}` : "https://mail.google.com/mail/?view=cm&to=info@garudaom.online", color: "text-red-500", label: "Email" },
+  { icon: Phone, href: siteSettings?.whatsapp?.startsWith('http') ? siteSettings.whatsapp : `https://wa.me/${(siteSettings?.whatsapp || siteSettings?.phone || "917780274792").replace(/\D/g, "")}`, color: "text-green-500", label: "WhatsApp" },
 ].map((item, index) => {
   const Icon = item.icon;
   return (

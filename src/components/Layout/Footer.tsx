@@ -1,10 +1,36 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { SITE_SETTINGS_QUERY } from "@/lib/queries";
 
 export default function Footer() {
-  // Company documents array - you can update these paths later
-  const companyDocs = [
+  const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  useEffect(() => {
+    async function getSettings() {
+      try {
+        const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+        const data = await fetchSanityQuery(SITE_SETTINGS_QUERY, {}, isIframe);
+        if (data) setSiteSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch Site Settings for Footer:", error);
+      }
+    }
+    getSettings();
+  }, []);
+
+  const phone = siteSettings?.phone || "+91 7780274792";
+  const email = siteSettings?.email || "info@garudaom.online";
+
+  const companyDocs = siteSettings?.companyDocs?.length > 0 
+    ? siteSettings.companyDocs.map((doc: any) => ({
+        name: doc.documentName,
+        path: doc.fileUrl
+      }))
+    : [
     {
       name: "GST Certificate",
       path: "/docs/gst-certificate.pdf"
@@ -22,13 +48,16 @@ export default function Footer() {
       path: "/docs/udyam-registration.pdf"
     }
   ];
-  const officeAddresses = [
-    "Vijayawada: A Bhavani, 56-14-9 Kankadurga Residency, Patamata, Vijayawada - 520010",
-    "Hyderabad: H.no 1-8-67/Ews - 152, Apiic Colony East Kamalanagar, ECIL X Roads - 500076",
-    "Bhadrachalam: 1-51/1, Gandhinogar, Palwancha, Kothagudem, Telangana - 507115",
-    "Bengaluru: Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road, Kadubeesanahalli - 560103",
-    "Udupi: SMH Manzil, Behind Old Masjid, Subhash Road, Uchila - 574117",
-  ];
+
+  const officeAddresses = siteSettings?.addresses?.length > 0
+    ? siteSettings.addresses
+    : [
+        "Vijayawada: A Bhavani, 56-14-9 Kankadurga Residency, Patamata, Vijayawada - 520010",
+        "Hyderabad: H.no 1-8-67/Ews - 152, Apiic Colony East Kamalanagar, ECIL X Roads - 500076",
+        "Bhadrachalam: 1-51/1, Gandhinogar, Palwancha, Kothagudem, Telangana - 507115",
+        "Bengaluru: Vaswani Presidio, 83/2, 2nd Floor, Panathur Main Road, Kadubeesanahalli - 560103",
+        "Udupi: SMH Manzil, Behind Old Masjid, Subhash Road, Uchila - 574117",
+      ];
 
   return (
     <footer
@@ -90,10 +119,10 @@ export default function Footer() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
                 <a
-                  href="tel:+917780274792"
+                  href={`tel:${phone}`}
                   className="text-sm text-white hover:text-white/80 transition-colors"
                 >
-                  +91 7780274792
+                  {phone}
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -113,7 +142,7 @@ export default function Footer() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </svg>
                 <span className="text-sm text-white">
-                  info@garudaom.online
+                  {email}
                 </span>
               </div>
 
@@ -135,8 +164,8 @@ export default function Footer() {
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-xs leading-relaxed text-white">
-                  {officeAddresses.map((address, index) => (
-                    <li key={index} className="break-words text-white">
+                  {officeAddresses.map((address: string, index: number) => (
+                    <li key={index} className="break-words text-white whitespace-pre-line">
                       {address}
                     </li>
                   ))}
@@ -200,7 +229,7 @@ export default function Footer() {
               Company Docs
             </h3>
             <ul className="space-y-2">
-              {companyDocs.map((doc, index) => (
+              {companyDocs.map((doc: any, index: number) => (
                 <li key={index}>
                   <a
                     href={doc.path}

@@ -68,7 +68,13 @@ export default defineConfig({
                   ])
               ),
             
-            S.documentTypeListItem('siteSettings').title('Site Settings'),
+            S.listItem()
+              .title('Site Settings')
+              .child(
+                S.document()
+                  .schemaType('siteSettings')
+                  .documentId('siteSettings')
+              ),
             
             S.listItem()
               .title('About Us Section')
@@ -191,6 +197,19 @@ export default defineConfig({
               }
             }
           },
+          'siteSettings': {
+            select: {},
+            resolve: () => {
+              return {
+                locations: [
+                   {
+                     title: 'Site Settings',
+                     href: '/',
+                   },
+                ],
+              }
+            }
+          },
         },
       },
     }),
@@ -203,12 +222,12 @@ export default defineConfig({
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection')
+        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection' && templateItem.templateId !== 'siteSettings')
       }
       return prev
     },
     actions: (prev, { schemaType }) => {
-      if (schemaType === 'fastagPage') {
+      if (schemaType === 'fastagPage' || schemaType === 'siteSettings') {
         return prev.filter(({ action }) => action === 'publish' || action === 'discardChanges' || action === 'restore')
       }
       return prev
