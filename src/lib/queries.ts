@@ -2,12 +2,11 @@
 // GROQ QUERIES FOR GARUDA OM WEBSITE
 // ============================================
 
-
 // ── 1. GPS SOLUTION CARDS (Home page grid) ──
 // Slug is fetched FROM the referenced solutionPage document.
 // No slug stored on the card itself — single source of truth.
 export const GPS_CARDS_QUERY = `
-  *[_type == "gpsSolutionCard"] | order(order asc) {
+  *[_type == "gpsSolutionCard" && !(_id in path("drafts.**"))] | order(order asc) {
     _id,
     title,
     description,
@@ -30,13 +29,12 @@ export const GPS_CARDS_QUERY = `
       whyChoose
     }
   }
-`
-
+`;
 
 // ── 2. ALL SOLUTION PAGES (with order) ──
 
 export const ALL_SOLUTIONS_QUERY = `
-  *[_type == "solutionPage"] | order(order asc) {
+  *[_type == "solutionPage" && !(_id in path("drafts.**"))] | order(order asc) {
     _id,
     iconName,
     title,
@@ -70,10 +68,10 @@ export const ALL_SOLUTIONS_QUERY = `
       description
     }
   }
-`
+`;
 
 export const SOLUTION_BY_SLUG_QUERY = `
-  *[_type == "solutionPage" && slug.current == $slug][0] {
+  *[_type == "solutionPage" && slug.current == $slug && !(_id in path("drafts.**"))][0] {
     _id,
     iconName,
     title,
@@ -106,12 +104,11 @@ export const SOLUTION_BY_SLUG_QUERY = `
       description
     }
   }
-`
-
+`;
 
 // ── 4. ALL INDUSTRY PAGES ──
 export const ALL_INDUSTRIES_QUERY = `
-  *[_type == "industryPage"] | order(title asc) {
+  *[_type == "industryPage" && !(_id in path("drafts.**"))] | order(title asc) {
     _id,
     title,
     "slug": slug.current,
@@ -124,12 +121,11 @@ export const ALL_INDUSTRIES_QUERY = `
     coreFeatures,
     keyBenefits
   }
-`
-
+`;
 
 // ── 5. SINGLE INDUSTRY PAGE (by slug) ──
 export const INDUSTRY_BY_SLUG_QUERY = `
-  *[_type == "industryPage" && slug.current == $slug][0] {
+  *[_type == "industryPage" && slug.current == $slug && !(_id in path("drafts.**"))][0] {
     _id,
     title,
     "slug": slug.current,
@@ -142,50 +138,101 @@ export const INDUSTRY_BY_SLUG_QUERY = `
     coreFeatures,
     keyBenefits
   }
-`
-
+`;
 
 // ── 6. WHY US FEATURE CARDS ──
 export const FEATURE_CARDS_QUERY = `
-  *[_type == "featureCard"] | order(order asc) {
+  *[_type == "featureCard" && !(_id in path("drafts.**"))] | order(order asc) {
     _id,
     title,
     description,
     iconName,
     order
   }
-`
+`;
 
-
-// ── 7. FASTAG CONTENT (customer page) ──
-export const FASTAG_CUSTOMER_QUERY = `
-  *[_type == "fastagContent" && pageType == "customer"][0] {
-    _id,
-    title,
-    tagline,
-    overview,
-    benefits,
-    features
+// ── 7 FASTAG NEW SCHEMA QUERIES ──
+export const fastagIndividualQuery = `
+  *[_type == "fastagPage" && (_id == "fastag-individual" || _id == "drafts.fastag-individual")] | order(_updatedAt desc) [0] {
+    pageTitle,
+    media {
+      mediaType,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height
+            }
+          }
+        },
+        alt,
+        hotspot,
+        crop
+      },
+      videoUrl,
+      youtubeUrl
+    },
+    overviewText,
+    documents[] {
+      documentName,
+      description,
+      file {
+        asset-> {
+          url,
+          originalFilename,
+          extension,
+          size
+        }
+      }
+    }
   }
-`
+`;
 
-
-// ── 8. FASTAG CONTENT (partner page) ──
-export const FASTAG_PARTNER_QUERY = `
-  *[_type == "fastagContent" && pageType == "partner"][0] {
-    _id,
-    title,
-    tagline,
-    overview,
-    benefits,
-    features
+export const fastagBusinessQuery = `
+  *[_type == "fastagPage" && (_id == "fastag-business" || _id == "drafts.fastag-business")] | order(_updatedAt desc) [0] {
+    pageTitle,
+    media {
+      mediaType,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height
+            }
+          }
+        },
+        alt,
+        hotspot,
+        crop
+      },
+      videoUrl,
+      youtubeUrl
+    },
+    overviewText,
+    documents[] {
+      documentName,
+      description,
+      file {
+        asset-> {
+          url,
+          originalFilename,
+          extension,
+          size
+        }
+      }
+    }
   }
-`
+`;
 
-
-// ── 9. SITE SETTINGS (phone, email, address, social) ──
+// ── 8. SITE SETTINGS (phone, email, address, social) ──
 export const SITE_SETTINGS_QUERY = `
-  *[_type == "siteSettings"][0] {
+  *[_type == "siteSettings" && !(_id in path("drafts.**"))][0] {
     _id,
     phone,
     email,
@@ -197,4 +244,4 @@ export const SITE_SETTINGS_QUERY = `
     youtubeDemo,
     companyDocs
   }
-`
+`;

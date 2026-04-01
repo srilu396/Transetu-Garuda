@@ -43,7 +43,31 @@ export default defineConfig({
             // Other document types
             S.documentTypeListItem('industryPage').title('Industry Pages'),
             S.documentTypeListItem('featureCard').title('Why Us Feature Cards'),
-            S.documentTypeListItem('fastagContent').title('FASTag Content'),
+            
+            // FASTag Section Sidebar
+            S.listItem()
+              .title('FASTag Section')
+              .child(
+                S.list()
+                  .title('FASTag Pages')
+                  .items([
+                    S.listItem()
+                      .title('Buy FASTag for Your Vehicle')
+                      .child(
+                        S.document()
+                          .schemaType('fastagPage')
+                          .documentId('fastag-individual')
+                      ),
+                    S.listItem()
+                      .title('Become a FASTag Business Partner')
+                      .child(
+                        S.document()
+                          .schemaType('fastagPage')
+                          .documentId('fastag-business')
+                      ),
+                  ])
+              ),
+            
             S.documentTypeListItem('siteSettings').title('Site Settings'),
           ])
       },
@@ -51,7 +75,7 @@ export default defineConfig({
     visionTool(),
     presentationTool({
       previewUrl: {
-        origin: process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000',
+        origin: 'http://localhost:3000',
         preview: '/',
         previewMode: {
           enable: '/api/preview',
@@ -94,6 +118,33 @@ export default defineConfig({
               }
             }
           },
+          'fastagPage': {
+            select: {
+              pageTitle: 'pageTitle',
+              cardType: 'cardType',
+            },
+            resolve: (doc: any) => {
+              if (!doc?.cardType) return null
+              
+              const hrefMap: Record<string, string> = {
+                individual: '/fastag/customer',
+                business: '/fastag/partner',
+              }
+              
+              const href = hrefMap[doc.cardType as 'individual' | 'business']
+                
+              if (!href) return null
+              
+              return {
+                locations: [
+                  {
+                    title: doc?.pageTitle || 'FASTag Page',
+                    href,
+                  },
+                ],
+              }
+            }
+          },
         },
       },
     }),
@@ -101,5 +152,20 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  document: {
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === 'global') {
+        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage')
+      }
+      return prev
+    },
+    actions: (prev, { schemaType }) => {
+      if (schemaType === 'fastagPage') {
+        return prev.filter(({ action }) => action === 'publish' || action === 'discardChanges' || action === 'restore')
+      }
+      return prev
+    },
   },
 })

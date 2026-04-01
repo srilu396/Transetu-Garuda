@@ -10,7 +10,8 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn: true,
+  perspective: 'published',
 })
 
 // Client used for live preview only

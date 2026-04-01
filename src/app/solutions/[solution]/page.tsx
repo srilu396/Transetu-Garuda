@@ -4,7 +4,7 @@ import { solutions } from "@/sections/gps/data/gpsData";
 import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 import { getClient } from "@/lib/sanity";
-import { draftMode } from "next/headers";
+import { draftMode, headers } from "next/headers";
 import { SOLUTION_BY_SLUG_QUERY, ALL_SOLUTIONS_QUERY } from "@/lib/queries";
 
 // ── Fetch one solution from Sanity by slug ─────────────────────────────────
@@ -129,7 +129,9 @@ export default async function SolutionPage({
   params: { solution: string };
 }) {
   const { solution: slug } = params;
-  const { isEnabled: isPreview } = draftMode();
+  const { isEnabled } = draftMode();
+  const isIframe = headers().get("sec-fetch-dest") === "iframe";
+  const isPreview = isEnabled && isIframe;
 
   // Try Sanity first
   const sanity = await fetchFromSanity(slug, isPreview);

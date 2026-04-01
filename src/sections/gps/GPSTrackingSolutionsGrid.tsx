@@ -392,7 +392,8 @@ export default function ProductsSection() {
   useEffect(() => {
     async function fetchCards() {
       try {
-        const sanityCards: SanityGPSCard[] = await fetchSanityQuery(GPS_CARDS_QUERY);
+        const isIframe = window.self !== window.top;
+        const sanityCards: SanityGPSCard[] = await fetchSanityQuery(GPS_CARDS_QUERY, {}, isIframe);
         if (sanityCards && sanityCards.length > 0) {
           setProducts(sanityCards.map(sanityCardToProduct));
         }

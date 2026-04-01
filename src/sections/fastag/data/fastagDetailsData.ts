@@ -11,6 +11,7 @@ export interface FASTagDetailsData {
   title: string;
   description: string;
   icon: LucideIcon;
+  media?: any;
   videoUrl?: string;
   documents: FASTagDocument[];
 }

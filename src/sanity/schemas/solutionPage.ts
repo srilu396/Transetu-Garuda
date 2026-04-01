@@ -102,6 +102,8 @@ export const solutionPage = defineType({
   name: 'solutionPage',
   title: 'GPS Solution Pages',
   type: 'document',
+  description:
+    'Published content appears on the live website. Drafts are visible only in Presentation preview until you publish.',
 
   fields: [
 

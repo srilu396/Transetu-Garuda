@@ -1,22 +1,36 @@
 'use server'
 
-import { draftMode } from 'next/headers'
+import { draftMode, headers } from 'next/headers'
 import { getClient } from '@/lib/sanity'
 
-// This server action fetches data directly from Sanity.
-// It detects draft mode and uses either the preview client or published client.
-export async function fetchSanityQuery(query: string, params: Record<string, unknown> = {}) {
-  // 1. Check if draft mode is ON securely on the server
+/**
+ * Fetches from Sanity with correct draft vs published isolation:
+ * - Preview (draft) content only when Draft Mode is on AND the request is from
+ *   Sanity Presentation (iframe) or the caller passes `presentationIframe: true`
+ *   (e.g. client-detected embed from GPSTrackingSolutionsGrid).
+ * - Otherwise uses the published perspective so draft edits never affect the
+ *   live site, even if a Draft Mode cookie is still set from an old session.
+ */
+export async function fetchSanityQuery(
+  query: string,
+  params: Record<string, unknown> = {},
+  presentationIframe?: boolean
+) {
   const isDraftMode = draftMode().isEnabled
 
-  // 2. Load the correct client (published or preview)
-  const client = getClient(isDraftMode)
+  let usePreviewPerspective = false
+  if (typeof presentationIframe === 'boolean') {
+    usePreviewPerspective = isDraftMode && presentationIframe
+  } else {
+    const secFetchDest = headers().get('sec-fetch-dest')
+    usePreviewPerspective = isDraftMode && secFetchDest === 'iframe'
+  }
 
-  // 3. Force non-cache behavior for draft mode
-  const fetchOptions = isDraftMode
+  const client = getClient(usePreviewPerspective)
+
+  const fetchOptions = usePreviewPerspective
     ? { cache: 'no-store' as RequestCache }
     : { next: { revalidate: 60 } }
 
-  // 4. Return data securely without leaking token to the client component
   return await client.fetch(query, params, fetchOptions)
 }

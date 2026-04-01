@@ -3,6 +3,9 @@ import { Metadata } from "next";
 import FASTagDetailsClient from "@/sections/fastag/FASTagDetailsClient";
 import { notFound } from "next/navigation";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
+import { fastagIndividualQuery, fastagBusinessQuery } from "@/lib/queries";
+import { fetchSanityQuery } from "@/actions/sanity";
+
 
 interface Props {
   params: {
@@ -27,25 +30,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         "Partner with Garuda OM (GarudaOM) for FASTag distribution and fleet solutions. Grow your business with GPS tracking and toll-tag programs across India.",
       path: "/fastag/partner",
-      keywords: ["FASTag partner", "Garuda OM partner", "GarudaOM", "FASTag agent"],
+      keywords: [
+        "FASTag partner",
+        "Garuda OM partner",
+        "GarudaOM",
+        "FASTag agent",
+      ],
     });
   }
   return { title: "FASTag" };
 }
 
-export default function FastagDetailsPage({ params }: Props) {
-  const type = params.id;
-  
+export default async function FastagDetailsPage({ params }: Props) {
+  const { id: type } = params;
+
   if (type !== "customer" && type !== "partner") {
     notFound();
   }
 
-  return <FASTagDetailsClient type={type as "customer" | "partner"} />;
+  // Pick query
+  const query =
+    type === "customer" ? fastagIndividualQuery : fastagBusinessQuery;
+
+  // Try Sanity fetch using the unified action which respects Draft Mode cookie strictly
+  const sanity = await fetchSanityQuery(query);
+
+  return <FASTagDetailsClient type={type} sanityData={sanity} />;
 }
 
 export function generateStaticParams() {
-  return [
-    { id: "customer" },
-    { id: "partner" },
-  ];
+  return [{ id: "customer" }, { id: "partner" }];
 }
