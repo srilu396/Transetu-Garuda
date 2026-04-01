@@ -1,19 +1,3 @@
-// ============================================================
-// SCHEMA: GPS Solution Pages
-// File:   sanity/schemas/solutionPage.ts
-//
-// Icon strategy (matches live UI exactly):
-//   • Page-level icon  → manual dropdown (Lucide)
-//   • Benefits (3 cards) → manual dropdown (Lucide, content-driven)
-//   • Key Features     → manual dropdown (Lucide, content-driven)
-//   • Use Cases        → NO icon field — frontend renders auto-numbers (01, 02…)
-//   • Why Choose       → Icon dropdown with CheckCircle2 as default
-//
-// UI Title Mapping:
-//   • Benefits field   → NO title displayed in UI (just the 3 cards)
-//   • Use Cases field  → Displays as "Benefits & Use Cases" in UI
-// ============================================================
-
 import { defineType, defineField } from 'sanity'
 
 // ──────────────────────────────────────────────────────────────────────────────

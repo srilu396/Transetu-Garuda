@@ -276,3 +276,21 @@ export const ABOUT_SECTION_QUERY = `
     }
   }
 `;
+
+// ── 10. WATCH PLATFORM DEMO SECTION (Singleton) ──
+export const WATCH_PLATFORM_DEMO_QUERY = `
+  *[_type == "watchPlatformDemoSection" && (_id == "watchPlatformDemoSection" || _id == "drafts.watchPlatformDemoSection")] | order(_updatedAt desc) [0] {
+    badgeLabel,
+    heading,
+    subheading,
+    cards[] {
+      icon,
+      iconColor,
+      "thumbnail": thumbnail.asset->url,
+      youtubeUrl,
+      title,
+      description,
+      watchVideoLabel
+    }
+  }
+`;

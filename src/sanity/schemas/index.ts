@@ -5,6 +5,7 @@ import { featureCard } from './featureCard'
 import { fastagPage } from './fastagPage'
 import { siteSettings } from './siteSettings'
 import { aboutSection } from './aboutSection'
+import { demoCard, watchPlatformDemoSection } from './watchPlatformDemo'
 
 export const schemaTypes = [
   gpsSolutionCard,
@@ -14,4 +15,6 @@ export const schemaTypes = [
   fastagPage,
   siteSettings,
   aboutSection,
+  demoCard,
+  watchPlatformDemoSection,
 ]

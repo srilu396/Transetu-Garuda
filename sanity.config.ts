@@ -77,6 +77,14 @@ export default defineConfig({
                   .schemaType('aboutSection')
                   .documentId('aboutSection')
               ),
+            
+            S.listItem()
+              .title('Watch Platform Demo')
+              .child(
+                S.document()
+                  .schemaType('watchPlatformDemoSection')
+                  .documentId('watchPlatformDemoSection')
+              ),
           ])
       },
     }),
@@ -168,6 +176,21 @@ export default defineConfig({
               }
             }
           },
+          'watchPlatformDemoSection': {
+            select: {
+              title: 'heading',
+            },
+            resolve: () => {
+              return {
+                locations: [
+                   {
+                     title: 'Watch Platform Demo (Home)',
+                     href: '/#videos',
+                   },
+                ],
+              }
+            }
+          },
         },
       },
     }),
@@ -180,7 +203,7 @@ export default defineConfig({
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection')
+        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection')
       }
       return prev
     },
