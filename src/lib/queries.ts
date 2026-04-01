@@ -245,3 +245,34 @@ export const SITE_SETTINGS_QUERY = `
     companyDocs
   }
 `;
+
+// ── 9. ABOUT US SECTION (Singleton) ──
+export const ABOUT_SECTION_QUERY = `
+  *[_type == "aboutSection" && (_id == "aboutSection" || _id == "drafts.aboutSection")] | order(_updatedAt desc) [0] {
+    stats[] {
+      statValue,
+      label
+    },
+    founder {
+      "founderImage": founderImage.asset->url,
+      founderName,
+      founderBadge,
+      founderEducation,
+      founderPreviousRoles,
+      founderBio
+    },
+    companyOverview {
+      overviewDescription
+    },
+    visionMission {
+      visionDescription,
+      missionDescription
+    },
+    keyAchievements,
+    clients[] {
+      clientName,
+      "clientLogo": clientLogo.asset->url,
+      clientWebsiteUrl
+    }
+  }
+`;

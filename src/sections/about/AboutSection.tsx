@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { ABOUT_SECTION_QUERY } from "@/lib/queries";
 import {
   Target,
   Eye,
@@ -29,6 +31,65 @@ import {
 
 export default function AboutSection() {
   const [showMore, setShowMore] = useState(false);
+  const [sanityData, setSanityData] = useState<any>(null);
+
+  useEffect(() => {
+    async function getAboutData() {
+      try {
+        const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+        const data = await fetchSanityQuery(ABOUT_SECTION_QUERY, {}, isIframe);
+        if (data) {
+          setSanityData(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch About Section from Sanity:", error);
+      }
+    }
+    getAboutData();
+  }, []);
+
+  // Use sanity data with hardcoded fallbacks
+  const stats = sanityData?.stats || [
+    { value: "2000+", label: "Active Clients", icon: Users },
+    { value: "6+", label: "Years Experience", icon: Clock },
+    { value: "15K+", label: "Vehicles Tracked", icon: Truck },
+    { value: "99.9%", label: "Client Retention", icon: Star },
+  ];
+
+  const founder = {
+    image: sanityData?.founder?.founderImage || "/images/founder.png",
+    name: sanityData?.founder?.founderName || "Polimetla Sudhakar",
+    badge: sanityData?.founder?.founderBadge || "Founder & Business Strategist",
+    education: sanityData?.founder?.founderEducation || "MBA in Logistics & Supply Chain Management",
+    roles: sanityData?.founder?.founderPreviousRoles || "Ex-BlackBuck (Territory Sales Manager) | Ex-Paytm (Senior Manager - Sales)",
+    bio: sanityData?.founder?.founderBio || "Experienced in logistics, freight forwarding, and import/export operations including LCL and FCL shipments. Specialized in handling both DG (Dangerous Goods) and Non-DG goods. Strong expertise in transport technology solutions.",
+  };
+
+  const overview = sanityData?.companyOverview?.overviewDescription || "Garuda OM provides comprehensive logistics technology solutions designed to empower modern transportation businesses through GPS tracking, video telematics, fuel monitoring, and FASTag management systems. We emphasize improving fleet visibility, operational transparency, and efficiency.";
+
+  const vision = sanityData?.visionMission?.visionDescription || "To build a reliable and technology-driven logistics and freight forwarding business that connects global markets efficiently while ensuring transparency, safety, and customer satisfaction.";
+  
+  const mission = sanityData?.visionMission?.missionDescription || "To provide innovative logistics and transportation solutions by integrating modern tracking technologies, efficient supply chain management, and strong customer support to deliver goods safely and on time across domestic and international markets.";
+
+  const achievements = sanityData?.keyAchievements || [
+    "Developed strong expertise in GPS, video telematics, fuel sensors, and FASTag integration",
+    "Successfully handled freight forwarding operations including LCL and FCL import/export shipments",
+    "Built high-performing sales teams and achieved strong market growth during tenure at Paytm and BlackBuck",
+  ];
+
+  const clientList = sanityData?.clients?.map((c: any) => ({
+    name: c.clientName,
+    logo: c.clientLogo,
+    website: c.clientWebsiteUrl
+  })) || [
+    { name: "ONGC", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/ongc.png", website: "https://www.ongcindia.com/" },
+    { name: "Maha Cement", icon: <Package className="w-5 h-5" />, logo: "/images/clients/maha-cement.png", website: "https://www.mahacement.com/" },
+    { name: "Maersk", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/maersk.png", website: "https://www.maersk.com/" },
+    { name: "TS Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/telangana-mining.png", website: "https://tgmdc.telangana.gov.in/" },
+    { name: "AP Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-govt.png", website: "https://www.mines.ap.gov.in/miningportal/" },
+    { name: "AP Transportation", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-transport.png", website: "https://www.aptransport.org/" },
+    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/singareni.png", website: "https://scclmines.com/" },
+  ];
 
   // Animation Variants
   const fadeInUp = {
@@ -205,13 +266,8 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
-          {[
-            { value: "2000+", label: "Active Clients", icon: Users },
-            { value: "6+", label: "Years Experience", icon: Clock },
-            { value: "15K+", label: "Vehicles Tracked", icon: Truck },
-            { value: "99.9%", label: "Client Retention", icon: Star },
-          ].map((stat, index) => {
-            const Icon = stat.icon;
+          {stats.map((stat: any, index: number) => {
+            const Icon = stat.icon || Users;
             return (
               <div
                 key={index}
@@ -225,7 +281,7 @@ export default function AboutSection() {
                 >
                   <Icon className="w-6 h-6 text-primary" />
                 </motion.div>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                <div className="text-2xl font-bold text-gray-900">{stat.value || stat.statValue}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
               </div>
             );
@@ -259,8 +315,8 @@ export default function AboutSection() {
                 {/* Founder Image */}
 <div className="w-32 h-36 rounded-2xl flex items-center justify-center shadow-lg shrink-0 overflow-hidden border-2 border-gray-100 bg-gray-50 p-1">
   <Image
-    src="/images/founder.png"
-    alt="Polimetla Sudhakar - Founder & Business Strategist"
+    src={founder.image}
+    alt={`${founder.name} - ${founder.badge}`}
     width={128}
     height={128}
     className="w-full h-full object-contain"
@@ -272,21 +328,21 @@ export default function AboutSection() {
                     variants={fadeInUp}
                     className="text-2xl font-black mb-1"
                   >
-                    Polimetla Sudhakar
+                    {founder.name}
                   </motion.h3>
                   <motion.p 
                     variants={fadeInUp}
                     className="text-primary font-medium mb-2 flex items-center gap-2"
                   >
                     <Rocket className="w-4 h-4" />
-                    Founder & Business Strategist
+                    {founder.badge}
                   </motion.p>
                   <motion.div 
                     variants={fadeInUp}
                     className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 w-fit"
                   >
                     <GraduationCap className="w-4 h-4" />
-                    MBA in Logistics & Supply Chain Management
+                    {founder.education}
                   </motion.div>
                 </div>
               </div>
@@ -301,13 +357,13 @@ export default function AboutSection() {
                   className="flex items-center gap-3 text-gray-600"
                 >
                   <Briefcase className="w-5 h-5 text-primary shrink-0" />
-                  <span>Ex-BlackBuck (Territory Sales Manager) | Ex-Paytm (Senior Manager - Sales)</span>
+                  <span>{founder.roles}</span>
                 </motion.div>
                 <motion.p 
                   variants={fadeInUp}
                   className="text-gray-600 leading-relaxed"
                 >
-                  Experienced in logistics, freight forwarding, and import/export operations including LCL and FCL shipments. Specialized in handling both DG (Dangerous Goods) and Non-DG goods. Strong expertise in transport technology solutions.
+                  {founder.bio}
                 </motion.p>
               </motion.div>
 
@@ -379,7 +435,7 @@ export default function AboutSection() {
               variants={fadeInUp}
               className="text-gray-600 leading-relaxed mb-6"
             >
-              Garuda OM provides comprehensive logistics technology solutions designed to empower modern transportation businesses through GPS tracking, video telematics, fuel monitoring, and FASTag management systems. We emphasize improving fleet visibility, operational transparency, and efficiency.
+              {overview}
             </motion.p>
 
             <motion.div 
@@ -453,7 +509,7 @@ export default function AboutSection() {
                     </motion.div>
                     <h5 className="font-bold mb-2">Our Vision</h5>
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      To build a reliable and technology-driven logistics and freight forwarding business that connects global markets efficiently while ensuring transparency, safety, and customer satisfaction.
+                      {vision}
                     </p>
                   </div>
                   <div 
@@ -469,7 +525,7 @@ export default function AboutSection() {
                     </motion.div>
                     <h5 className="font-bold mb-2">Our Mission</h5>
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      To provide innovative logistics and transportation solutions by integrating modern tracking technologies, efficient supply chain management, and strong customer support to deliver goods safely and on time across domestic and international markets.
+                      {mission}
                     </p>
                   </div>
                 </div>
@@ -481,11 +537,7 @@ export default function AboutSection() {
                     Key Achievements
                   </h5>
                   <div className="grid md:grid-cols-3 gap-4">
-                    {[
-                      "Developed strong expertise in GPS, video telematics, fuel sensors, and FASTag integration",
-                      "Successfully handled freight forwarding operations including LCL and FCL import/export shipments",
-                      "Built high-performing sales teams and achieved strong market growth during tenure at Paytm and BlackBuck",
-                    ].map((item, idx) => (
+                    {achievements.map((item: string, idx: number) => (
                       <div 
                         key={idx} 
                         className="flex items-start gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-primary/30 hover:bg-primary/5 transition-all"
@@ -541,7 +593,7 @@ export default function AboutSection() {
         >
           <h3 className="text-2xl font-bold mb-8 text-gray-900">Trusted By Industry Leaders</h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {clientLogos.map((client, idx) => {
+            {clientList.map((client: any, idx: number) => {
               const Wrapper = client.website ? motion.a : motion.div;
               const wrapperProps = client.website
                 ? { href: client.website, target: "_blank", rel: "noopener noreferrer" }
@@ -573,7 +625,7 @@ export default function AboutSection() {
                       variants={iconHover}
                       className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0 mb-1"
                     >
-                      {client.icon}
+                      {client.icon || <Globe className="w-5 h-5" />}
                     </motion.div>
                   )}
                   <span className="font-semibold text-gray-800 text-sm text-center mt-2 leading-tight">{client.name}</span>

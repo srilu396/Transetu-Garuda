@@ -69,6 +69,14 @@ export default defineConfig({
               ),
             
             S.documentTypeListItem('siteSettings').title('Site Settings'),
+            
+            S.listItem()
+              .title('About Us Section')
+              .child(
+                S.document()
+                  .schemaType('aboutSection')
+                  .documentId('aboutSection')
+              ),
           ])
       },
     }),
@@ -145,6 +153,21 @@ export default defineConfig({
               }
             }
           },
+          'aboutSection': {
+            select: {
+              title: 'title',
+            },
+            resolve: () => {
+              return {
+                locations: [
+                   {
+                     title: 'About Us (Home)',
+                     href: '/#about',
+                   },
+                ],
+              }
+            }
+          },
         },
       },
     }),
@@ -157,7 +180,7 @@ export default defineConfig({
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage')
+        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection')
       }
       return prev
     },
