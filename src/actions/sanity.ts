@@ -51,7 +51,11 @@ export async function fetchSanityQuery(
         next: { revalidate: 0 } 
       }
     : { 
-        next: { revalidate: 60 } // Default reval for live site
+        // Use tag-based revalidation for instant updates when webhook triggers
+        next: { 
+          revalidate: 0, // No cache for live data to ensure instant updates
+          tags: ['sanity'] 
+        } 
       }
 
   return await client.fetch(query, queryParams, fetchOptions)

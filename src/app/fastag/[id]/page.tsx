@@ -6,6 +6,7 @@ import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 import { fastagIndividualQuery, fastagBusinessQuery } from "@/lib/queries";
 import { fetchSanityQuery } from "@/actions/sanity";
 
+export const revalidate = 0; // Ensure instant updates on page reload
 
 interface Props {
   params: {

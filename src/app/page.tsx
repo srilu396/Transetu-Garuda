@@ -3,6 +3,8 @@ import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 
+export const revalidate = 0; // Ensure instant updates on page reload
+
 export const metadata = pageMetadata({
   title: `${SITE_BRAND} — GPS Tracking, Fleet Management & FASTag India`,
   description:

@@ -7,6 +7,8 @@ import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 import { fetchSanityQuery } from "@/actions/sanity";
 import { INDUSTRIAL_DETAIL_QUERY, INDUSTRIAL_CARDS_QUERY } from "@/lib/queries";
 
+export const revalidate = 0; // Ensure instant updates on page reload
+
 export async function generateStaticParams() {
   // Fetch only published slugs for static generation
   const industries = await fetchSanityQuery(INDUSTRIAL_CARDS_QUERY);
