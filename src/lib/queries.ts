@@ -106,8 +106,6 @@ export const SOLUTION_BY_SLUG_QUERY = `
   }
 `;
 
-
-
 // ── 6. WHY US FEATURE CARDS (Singleton) ──
 export const FEATURE_CARDS_QUERY = `
   *[_type == "featureCardsSection" && ($preview || !(_id in path("drafts.**")))] [0] {
@@ -122,9 +120,9 @@ export const FEATURE_CARDS_QUERY = `
   }
 `;
 
-// ── 7 FASTAG NEW SCHEMA QUERIES ──
+// ── 7. FASTAG NEW SCHEMA QUERIES ──
 export const fastagIndividualQuery = `
-  *[_type == "fastagPage" && _id == "fastag-individual"] | order(_updatedAt desc) [0] {
+  *[_type == "fastagPage" && (_id == "fastag-individual" || _id == "drafts.fastag-individual") && ($preview || !(_id in path("drafts.**")))] | order(_updatedAt desc) [0] {
     pageTitle,
     media {
       mediaType,
@@ -163,7 +161,7 @@ export const fastagIndividualQuery = `
 `;
 
 export const fastagBusinessQuery = `
-  *[_type == "fastagPage" && _id == "fastag-business"] | order(_updatedAt desc) [0] {
+  *[_type == "fastagPage" && (_id == "fastag-business" || _id == "drafts.fastag-business") && ($preview || !(_id in path("drafts.**")))] | order(_updatedAt desc) [0] {
     pageTitle,
     media {
       mediaType,

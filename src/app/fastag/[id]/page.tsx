@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import FASTagDetailsClient from "@/sections/fastag/FASTagDetailsClient";
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 import { fastagIndividualQuery, fastagBusinessQuery } from "@/lib/queries";
 import { fetchSanityQuery } from "@/actions/sanity";
@@ -54,7 +55,9 @@ export default async function FastagDetailsPage({ params }: Props) {
     type === "customer" ? fastagIndividualQuery : fastagBusinessQuery;
 
   // Try Sanity fetch using the unified action which respects Draft Mode cookie strictly
-  const sanity = await fetchSanityQuery(query);
+  // In Presentation iframe, we pass presentationIframe: true to use previewDrafts perspective
+  const isDraft = (await draftMode()).isEnabled;
+  const sanity = await fetchSanityQuery(query, {}, isDraft);
 
   return <FASTagDetailsClient type={type} sanityData={sanity} />;
 }
