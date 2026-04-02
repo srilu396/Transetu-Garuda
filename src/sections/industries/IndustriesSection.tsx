@@ -237,7 +237,7 @@ export default function IndustriesSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr"
         >
           {industries.map((industry, index) => (
-            <IndustryCard key={industry.slug} industry={industry} index={index} />
+            <IndustryCard key={industry.slug || industry._id || industry.title || index} industry={industry} index={index} />
           ))}
         </motion.div>
 
