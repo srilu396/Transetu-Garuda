@@ -108,14 +108,17 @@ export const SOLUTION_BY_SLUG_QUERY = `
 
 
 
-// ── 6. WHY US FEATURE CARDS ──
+// ── 6. WHY US FEATURE CARDS (Singleton) ──
 export const FEATURE_CARDS_QUERY = `
-  *[_type == "featureCard"] | order(order asc) {
+  *[_type == "featureCardsSection" && ($preview || !(_id in path("drafts.**")))] [0] {
     _id,
-    title,
-    description,
-    iconName,
-    order
+    "cards": cards[] {
+      _key,
+      icon,
+      iconColor,
+      title,
+      description
+    }
   }
 `;
 

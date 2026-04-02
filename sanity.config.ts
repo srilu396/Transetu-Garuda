@@ -64,8 +64,6 @@ export default defineConfig({
             S.divider(),
             
             // Other document types
-            S.documentTypeListItem('featureCard').title('Why Us Feature Cards'),
-            
             // FASTag Section Sidebar
             S.listItem()
               .title('FASTag Section')
@@ -112,6 +110,14 @@ export default defineConfig({
                 S.document()
                   .schemaType('watchPlatformDemoSection')
                   .documentId('watchPlatformDemoSection')
+              ),
+            
+            S.listItem()
+              .title('Feature Cards')
+              .child(
+                S.document()
+                  .schemaType('featureCardsSection')
+                  .documentId('featureCardsSection')
               ),
           ])
       },
@@ -245,7 +251,7 @@ export default defineConfig({
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection' && templateItem.templateId !== 'siteSettings')
+        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection' && templateItem.templateId !== 'siteSettings' && templateItem.templateId !== 'featureCardsSection')
       }
       return prev
     },
