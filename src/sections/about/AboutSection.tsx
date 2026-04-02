@@ -29,11 +29,32 @@ import {
   Star,
 } from "lucide-react";
 
+interface SanityAboutData {
+  stats?: { iconName?: string; value: string; label: string }[];
+  clients?: { clientName: string; clientLogo: unknown; clientWebsiteUrl: string }[];
+  founder?: {
+    founderImage?: string;
+    founderName?: string;
+    founderBadge?: string;
+    founderEducation?: string;
+    founderPreviousRoles?: string;
+    founderBio?: string;
+  };
+  companyOverview?: { overviewDescription?: string };
+  visionMission?: { visionDescription?: string; missionDescription?: string };
+  keyAchievements?: string[];
+}
+
 export default function AboutSection() {
   const [showMore, setShowMore] = useState(false);
-  const [sanityData, setSanityData] = useState<any>(null);
+  const [sanityData, setSanityData] = useState<SanityAboutData | null>(null);
 
-  const [siteSettings, setSiteSettings] = useState<any>(null);
+  const [siteSettings, setSiteSettings] = useState<{
+    linkedin?: string;
+    email?: string;
+    phone?: string;
+    whatsapp?: string;
+  } | null>(null);
 
   useEffect(() => {
     async function getAboutData() {
@@ -81,9 +102,9 @@ export default function AboutSection() {
     "Built high-performing sales teams and achieved strong market growth during tenure at Paytm and BlackBuck",
   ];
 
-  const clientList = sanityData?.clients?.map((c: any) => ({
+  const clientList = sanityData?.clients?.map((c: { clientName: string; clientLogo: unknown; clientWebsiteUrl: string }): { name: string; logo: string; website: string } => ({
     name: c.clientName,
-    logo: c.clientLogo,
+    logo: ((c.clientLogo as { asset?: { url?: string } })?.asset?.url || c.clientLogo) as string,
     website: c.clientWebsiteUrl
   })) || [
     { name: "ONGC", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/ongc.png", website: "https://www.ongcindia.com/" },
@@ -202,15 +223,7 @@ export default function AboutSection() {
     },
   ];
 
-  const clientLogos = [
-    { name: "ONGC", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/ongc.png", website: "https://www.ongcindia.com/" },
-    { name: "Maha Cement", icon: <Package className="w-5 h-5" />, logo: "/images/clients/maha-cement.png", website: "https://www.mahacement.com/" },
-    { name: "Maersk", icon: <Globe className="w-5 h-5" />, logo: "/images/clients/maersk.png", website: "https://www.maersk.com/" },
-    { name: "TS Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/telangana-mining.png", website: "https://tgmdc.telangana.gov.in/" },
-    { name: "AP Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-govt.png", website: "https://www.mines.ap.gov.in/miningportal/" },
-    { name: "AP Transportation", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/ap-transport.png", website: "https://www.aptransport.org/" },
-    { name: "Singareni Mining", icon: <Truck className="w-5 h-5" />, logo: "/images/clients/singareni.png", website: "https://scclmines.com/" },
-  ];
+  // clientLogos was assigned a value but never used
 
   return (
     <section id="about" className="py-24 relative overflow-hidden" style={{ backgroundColor: '#f8fafc' }}>
@@ -270,7 +283,7 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
-          {stats.map((stat: any, index: number) => {
+          {stats.map((stat: { icon?: React.ElementType; value: string; label: string; statValue?: string }, index: number) => {
             const Icon = stat.icon || Users;
             return (
               <div
@@ -597,8 +610,8 @@ export default function AboutSection() {
         >
           <h3 className="text-2xl font-bold mb-8 text-gray-900">Trusted By Industry Leaders</h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {clientList.map((client: any, idx: number) => {
-              const Wrapper = client.website ? motion.a : motion.div;
+            {clientList.map((client: { website?: string; logo?: string; name: string; icon?: React.ReactNode }, idx: number) => {
+              const Wrapper = (client.website ? motion.a : motion.div) as React.ElementType;
               const wrapperProps = client.website
                 ? { href: client.website, target: "_blank", rel: "noopener noreferrer" }
                 : {};
@@ -614,7 +627,7 @@ export default function AboutSection() {
                   {client.logo ? (
                     <div className="relative w-full min-h-[72px] flex items-center justify-center flex-1">
                       <Image
-                        src={client.logo}
+                        src={client.logo as string}
                         alt={client.name}
                         width={280}
                         height={80}

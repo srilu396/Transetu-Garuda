@@ -8,6 +8,7 @@ import { schemaTypes } from './src/sanity/schemas'
 export default defineConfig({
   name: 'garuda-om-cms',
   title: 'Garuda OM Admin Panel',
+  basePath: '/studio',
 
   projectId: 'tuxe1ipn',
   dataset: 'production',
@@ -37,11 +38,32 @@ export default defineConfig({
                   .title('GPS Solution Pages')
                   .defaultOrdering([{ field: 'order', direction: 'asc' }])
               ),
+
+            S.divider(),
+
+            // Industrial Cards
+            S.listItem()
+              .title('Industrial Cards')
+              .schemaType('industrialCard')
+              .child(
+                S.documentTypeList('industrialCard')
+                  .title('Industrial Cards')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+              ),
+            
+            // Industrial Detail Pages
+            S.listItem()
+              .title('Industrial Pages')
+              .schemaType('industrialDetail')
+              .child(
+                S.documentTypeList('industrialDetail')
+                  .title('Industrial Pages')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+              ),
             
             S.divider(),
             
             // Other document types
-            S.documentTypeListItem('industryPage').title('Industry Pages'),
             S.documentTypeListItem('featureCard').title('Why Us Feature Cards'),
             
             // FASTag Section Sidebar
@@ -106,13 +128,30 @@ export default defineConfig({
       },
       resolve: {
         locations: {
+          'industrialDetail': {
+            select: {
+              title: 'title',
+              slug: 'slug.current',
+            },
+            resolve: (doc: any) => {
+              if (!doc?.slug) return null
+              return {
+                locations: [
+                  {
+                    title: doc.title || 'Untitled',
+                    href: `/industrial/${doc.slug}`,
+                  },
+                ],
+              }
+            }
+          },
           'solutionPage': {
             select: {
               title: 'title',
               slug: 'slug.current',
             },
             resolve: (doc: any) => {
-              if (!doc.slug) return null
+              if (!doc?.slug) return null
               return {
                 locations: [
                   {
@@ -123,23 +162,7 @@ export default defineConfig({
               }
             }
           },
-          'industryPage': {
-            select: {
-              title: 'title',
-              slug: 'slug.current',
-            },
-            resolve: (doc: any) => {
-              if (!doc.slug) return null
-              return {
-                locations: [
-                  {
-                    title: doc.title || 'Untitled',
-                    href: `/industries/${doc.slug}`,
-                  },
-                ],
-              }
-            }
-          },
+
           'fastagPage': {
             select: {
               pageTitle: 'pageTitle',

@@ -18,7 +18,12 @@ function MediaRenderer({
   defaultVideo,
   title,
 }: {
-  media?: any;
+  media?: {
+    mediaType: "image" | "video" | "youtube";
+    image?: { asset: { url: string; metadata?: { dimensions: { width: number; height: number } } }; alt?: string };
+    youtubeUrl?: string;
+    videoUrl?: string;
+  };
   defaultVideo?: string;
   title: string;
 }) {

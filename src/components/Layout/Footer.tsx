@@ -6,8 +6,20 @@ import Image from "next/image";
 import { fetchSanityQuery } from "@/actions/sanity";
 import { SITE_SETTINGS_QUERY } from "@/lib/queries";
 
+interface CompanyDoc {
+  documentName: string;
+  fileUrl: string;
+}
+
+interface SiteSettings {
+  phone?: string;
+  email?: string;
+  companyDocs?: CompanyDoc[];
+  addresses?: string[];
+}
+
 export default function Footer() {
-  const [siteSettings, setSiteSettings] = useState<any>(null);
+  const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
 
   useEffect(() => {
     async function getSettings() {
@@ -25,8 +37,8 @@ export default function Footer() {
   const phone = siteSettings?.phone || "+91 7780274792";
   const email = siteSettings?.email || "info@garudaom.online";
 
-  const companyDocs = siteSettings?.companyDocs?.length > 0 
-    ? siteSettings.companyDocs.map((doc: any) => ({
+  const companyDocs = siteSettings?.companyDocs?.length && siteSettings.companyDocs.length > 0 
+    ? siteSettings.companyDocs.map((doc: CompanyDoc) => ({
         name: doc.documentName,
         path: doc.fileUrl
       }))
@@ -49,8 +61,8 @@ export default function Footer() {
     }
   ];
 
-  const officeAddresses = siteSettings?.addresses?.length > 0
-    ? siteSettings.addresses
+  const officeAddresses = ((siteSettings?.addresses?.length ?? 0) > 0)
+    ? siteSettings!.addresses!
     : [
         "Vijayawada: A Bhavani, 56-14-9 Kankadurga Residency, Patamata, Vijayawada - 520010",
         "Hyderabad: H.no 1-8-67/Ews - 152, Apiic Colony East Kamalanagar, ECIL X Roads - 500076",
@@ -229,7 +241,7 @@ export default function Footer() {
               Company Docs
             </h3>
             <ul className="space-y-2">
-              {companyDocs.map((doc: any, index: number) => (
+              {companyDocs.map((doc: { name: string; path: string }, index: number) => (
                 <li key={index}>
                   <a
                     href={doc.path}

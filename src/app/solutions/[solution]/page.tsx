@@ -129,9 +129,17 @@ export default async function SolutionPage({
   params: { solution: string };
 }) {
   const { solution: slug } = params;
-  const { isEnabled } = draftMode();
-  const isIframe = headers().get("sec-fetch-dest") === "iframe";
-  const isPreview = isEnabled && isIframe;
+
+  // Safty wrapper for draftMode() and headers() to avoid "outside request scope" error
+  let isPreview = false;
+  try {
+    const { isEnabled } = draftMode();
+    const isIframe = headers().get("sec-fetch-dest") === "iframe";
+    isPreview = isEnabled && isIframe;
+  } catch {
+    // Normal for generateStaticParams/build-time
+    isPreview = false;
+  }
 
   // Try Sanity first
   const sanity = await fetchFromSanity(slug, isPreview);

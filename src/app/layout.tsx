@@ -106,11 +106,13 @@ export default function RootLayout({
         {children}
         <FloatingSocialBar />
         
-        {draftMode().isEnabled && (
-          <>
-            <VisualEditing />
-          </>
-        )}
+        {(() => {
+          try {
+            return draftMode().isEnabled && <VisualEditing />;
+          } catch {
+            return null;
+          }
+        })()}
       </body>
     </html>
   );

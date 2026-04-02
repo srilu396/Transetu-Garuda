@@ -93,7 +93,11 @@ const officeBodyClass =
   "text-slate-800 text-xs sm:text-sm font-normal leading-snug break-words";
 
 export default function ContactSection() {
-  const [siteSettings, setSiteSettings] = useState<any>(null);
+  const [siteSettings, setSiteSettings] = useState<{
+    phone?: string;
+    email?: string;
+    addresses?: string[];
+  } | null>(null);
 
   React.useEffect(() => {
     async function getSettings() {

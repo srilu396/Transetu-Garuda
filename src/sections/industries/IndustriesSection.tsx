@@ -1,12 +1,26 @@
 "use client";
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { industries, IndustryData } from "@/sections/industries/data/industriesData";
+import { industries as staticIndustries } from "@/sections/industries/data/industriesData";
 import { IconRegistry } from "@/components/Icons/IconRegistry";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { INDUSTRIAL_CARDS_QUERY } from "@/lib/queries";
+
+interface UnifiedIndustry {
+  _id?: string;
+  iconName?: string;
+  icon?: string; // Icon name for registry
+  title: string;
+  description: string;
+  badge?: string;
+  category?: string;
+  order?: number;
+  slug: string;
+}
 
 // Memoized Industry Card for better performance
-const IndustryCard = memo(({ industry, index }: { industry: IndustryData, index: number }) => {
+const IndustryCard = memo(({ industry, index }: { industry: UnifiedIndustry, index: number }) => {
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -68,7 +82,12 @@ const IndustryCard = memo(({ industry, index }: { industry: IndustryData, index:
     },
   };
 
-  const IndustryIcon = IconRegistry[industry.icon] || IconRegistry.Building;
+  // Support both Sanity (iconName) and Static (icon)
+  const iconRaw = industry.iconName || industry.icon;
+  const IndustryIcon = (IconRegistry as Record<string, React.ElementType>)[(iconRaw || "Building") as string] || IconRegistry.Building;
+  
+  // Support both Sanity (badge) and Static (category)
+  const category = industry.badge || industry.category;
 
   return (
     <Link href={`/industries/${industry.slug}`} passHref prefetch={false}>
@@ -114,7 +133,7 @@ const IndustryCard = memo(({ industry, index }: { industry: IndustryData, index:
             className="mt-auto relative z-10 w-fit"
           >
             <span className="inline-block rounded-md border border-primary/25 bg-gradient-to-r from-primary/10 to-accent/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider group-hover:border-[#ec39b0]/25 group-hover:from-[#ec39b0]/10 group-hover:to-[#ec39b0]/10 transition-all duration-300">
-              {industry.category}
+              {category}
             </span>
           </motion.div>
         </div>
@@ -126,6 +145,29 @@ const IndustryCard = memo(({ industry, index }: { industry: IndustryData, index:
 IndustryCard.displayName = "IndustryCard";
 
 export default function IndustriesSection() {
+  const [industries, setIndustries] = useState<UnifiedIndustry[]>(staticIndustries);
+  const [, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadIndustries() {
+      try {
+        const isIframe = window.self !== window.top;
+        const data = await fetchSanityQuery(INDUSTRIAL_CARDS_QUERY, {}, isIframe);
+        if (data && data.length > 0) {
+          setIndustries(data);
+        } else {
+          setIndustries(staticIndustries);
+        }
+      } catch (error) {
+        console.error("Sanity industrial fetch failed, using fallback:", error);
+        setIndustries(staticIndustries);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadIndustries();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

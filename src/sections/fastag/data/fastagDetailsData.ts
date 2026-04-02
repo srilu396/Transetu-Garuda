@@ -11,7 +11,12 @@ export interface FASTagDetailsData {
   title: string;
   description: string;
   icon: LucideIcon;
-  media?: any;
+  media?: {
+    mediaType: "image" | "video" | "youtube";
+    image?: { asset: { url: string; metadata?: { dimensions: { width: number; height: number } } }; alt?: string };
+    youtubeUrl?: string;
+    videoUrl?: string;
+  };
   videoUrl?: string;
   documents: FASTagDocument[];
 }

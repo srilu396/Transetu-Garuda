@@ -18,7 +18,7 @@ import {
   Building2, Users, Globe, CreditCard, Tag, Layers, Cloud, Database, FileText, Link, Search, Camera, Play, Gauge
 } from "lucide-react";
 
-const IconMap: Record<string, any> = {
+const IconMap: Record<string, LucideIcon> = {
   MapPin, Navigation, Navigation2, Route, Map, Satellite, Signal, Wifi,
   Truck, Bus, Car, Package,
   Fuel, Battery, Zap, Cpu,
@@ -28,6 +28,21 @@ const IconMap: Record<string, any> = {
   Settings, Wrench, Bell, AlertCircle, CheckCircle2, Star, Award, Target, ThumbsUp, LifeBuoy, Phone, Smartphone,
   Building2, Users, Globe, CreditCard, Tag, Layers, Cloud, Database, FileText, Link, Search, Camera, Play, Gauge
 };
+
+interface SanityVideoData {
+  badgeLabel?: string;
+  heading: string;
+  subheading: string;
+  cards: {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+    thumbnail: string;
+    icon: string;
+    iconColor?: string;
+    watchVideoLabel?: string;
+  }[];
+}
 
 interface VideoItem {
   title: string;
@@ -157,7 +172,7 @@ VideoCard.displayName = "VideoCard";
 
 export default function VideosSection() {
   const router = useRouter();
-  const [sanityData, setSanityData] = useState<any>(null);
+  const [sanityData, setSanityData] = useState<SanityVideoData | null>(null);
 
   useEffect(() => {
     async function getDemoData() {
@@ -293,7 +308,15 @@ export default function VideosSection() {
   const heading = sanityData?.heading || "Watch Platform Demo";
   const subheading = sanityData?.subheading || "With our advanced fleet vehicle tracking systems you have complete control over your fleet and their activities.";
 
-  const videosToRender = sanityData?.cards ? sanityData.cards.map((card: any) => {
+  const videosToRender = sanityData?.cards ? sanityData.cards.map((card: {
+    iconColor?: string;
+    title: string;
+    description: string;
+    youtubeUrl: string;
+    thumbnail: string;
+    icon: string;
+    watchVideoLabel?: string;
+  }) => {
     // Parse color theme 'bg-orange-100  text-orange-500' -> split by space
     const colorClasses = card.iconColor?.split(/\s+/) || ["bg-orange-100", "text-orange-500"];
     const bgClass = colorClasses[0] || "bg-orange-100";

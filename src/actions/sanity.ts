@@ -16,21 +16,43 @@ export async function fetchSanityQuery(
   params: Record<string, unknown> = {},
   presentationIframe?: boolean
 ) {
-  const isDraftMode = draftMode().isEnabled
-
-  let usePreviewPerspective = false
-  if (typeof presentationIframe === 'boolean') {
-    usePreviewPerspective = isDraftMode && presentationIframe
-  } else {
-    const secFetchDest = headers().get('sec-fetch-dest')
-    usePreviewPerspective = isDraftMode && secFetchDest === 'iframe'
+  // Check if Draft Mode is enabled in Next.js
+  let isDraftMode = false
+  let isIframe = false
+  try {
+    isDraftMode = draftMode().isEnabled
+    // Also check for iframe header if available
+    isIframe = headers().get("sec-fetch-dest") === "iframe"
+  } catch {
+    // This happens during generateStaticParams or build time when no request exists.
+    // Defaulting to false ensures we only fetch published content for static generation.
+    isDraftMode = false
   }
+
+  /**
+   * Determine if we should use the PREVIEW client (perspective: previewDrafts).
+   * Strict Isolation: We only use preview perspective if Draft Mode is on
+   * AND we are within the Sanity Presentation iframe (detected via headers or passed flag).
+   */
+  const usePreviewPerspective = isDraftMode && (presentationIframe || isIframe)
 
   const client = getClient(usePreviewPerspective)
 
-  const fetchOptions = usePreviewPerspective
-    ? { cache: 'no-store' as RequestCache }
-    : { next: { revalidate: 60 } }
+  // Explicitly pass $preview to GROQ for the strict filtering logic
+  const queryParams = {
+    ...params,
+    preview: usePreviewPerspective,
+  }
 
-  return await client.fetch(query, params, fetchOptions)
+  const fetchOptions = usePreviewPerspective
+    ? { 
+        cache: 'no-store' as RequestCache,
+        // Ensure we don't use CDN for preview
+        next: { revalidate: 0 } 
+      }
+    : { 
+        next: { revalidate: 60 } // Default reval for live site
+      }
+
+  return await client.fetch(query, queryParams, fetchOptions)
 }

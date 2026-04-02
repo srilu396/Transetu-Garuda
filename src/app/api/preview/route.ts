@@ -1,6 +1,8 @@
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   // Sanity Studio automatically sends sanity-preview-pathname

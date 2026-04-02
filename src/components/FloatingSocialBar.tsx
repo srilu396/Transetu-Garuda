@@ -11,8 +11,6 @@ import {
 
 const PHONE = "+917780274792";
 const EMAIL = "info@garudaom.online";
-const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, "")}`;
-const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${EMAIL}`;
 
 function WhatsAppIcon({
   className,
@@ -34,8 +32,17 @@ function WhatsAppIcon({
 import { fetchSanityQuery } from "@/actions/sanity";
 import { SITE_SETTINGS_QUERY } from "@/lib/queries";
 
+interface SiteSettings {
+  phone?: string;
+  email?: string;
+  whatsapp?: string;
+  facebook?: string;
+  instagram?: string;
+  linkedin?: string;
+}
+
 export default function SocialContactBar() {
-  const [siteSettings, setSiteSettings] = React.useState<any>(null);
+  const [siteSettings, setSiteSettings] = React.useState<SiteSettings | null>(null);
 
   React.useEffect(() => {
     async function getSettings() {
