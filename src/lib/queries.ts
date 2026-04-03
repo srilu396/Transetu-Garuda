@@ -120,85 +120,6 @@ export const FEATURE_CARDS_QUERY = `
   }
 `;
 
-// ── 7. FASTAG NEW SCHEMA QUERIES ──
-export const fastagIndividualQuery = `
-  *[_type == "fastagPage" && (_id == "fastag-individual" || _id == "drafts.fastag-individual") && ($preview || !(_id in path("drafts.**")))] | order(_updatedAt desc) [0] {
-    pageTitle,
-    media {
-      mediaType,
-      image {
-        asset-> {
-          _id,
-          url,
-          metadata {
-            dimensions {
-              width,
-              height
-            }
-          }
-        },
-        alt,
-        hotspot,
-        crop
-      },
-      videoUrl,
-      youtubeUrl
-    },
-    overviewText,
-    documents[] {
-      documentName,
-      description,
-      file {
-        asset-> {
-          url,
-          originalFilename,
-          extension,
-          size
-        }
-      }
-    }
-  }
-`;
-
-export const fastagBusinessQuery = `
-  *[_type == "fastagPage" && (_id == "fastag-business" || _id == "drafts.fastag-business") && ($preview || !(_id in path("drafts.**")))] | order(_updatedAt desc) [0] {
-    pageTitle,
-    media {
-      mediaType,
-      image {
-        asset-> {
-          _id,
-          url,
-          metadata {
-            dimensions {
-              width,
-              height
-            }
-          }
-        },
-        alt,
-        hotspot,
-        crop
-      },
-      videoUrl,
-      youtubeUrl
-    },
-    overviewText,
-    documents[] {
-      documentName,
-      description,
-      file {
-        asset-> {
-          url,
-          originalFilename,
-          extension,
-          size
-        }
-      }
-    }
-  }
-`;
-
 // ── 8. SITE SETTINGS (phone, email, address, social) ──
 export const SITE_SETTINGS_QUERY = `
   *[_type == "siteSettings" && _id == "siteSettings"] | order(_updatedAt desc) [0] {
@@ -213,6 +134,27 @@ export const SITE_SETTINGS_QUERY = `
     "companyDocs": companyDocs[]{
       documentName,
       "fileUrl": file.asset->url
+    }
+  }
+`;
+
+// ── 8. FASTAG DETAILS (Managed via fastTagDetailsSection) ──
+// This query fetches the two fixed cards (Buy/Partner) and their detail contents.
+// Incorporates $preview logic to support draft updates in presentation mode.
+export const FASTAG_DETAILS_QUERY = `
+  *[_type == "fastTagDetailsSection" && ($preview || !(_id in path("drafts.**")))] [0] {
+    _id,
+    cards[] {
+      identifier,
+      title,
+      pageTitle,
+      youtubeUrl,
+      description,
+      documents[] {
+        documentName,
+        description,
+        "fileUrl": file.asset->url
+      }
     }
   }
 `;

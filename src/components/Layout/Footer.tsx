@@ -82,15 +82,15 @@ export default function Footer() {
             <div className="flex items-center mb-2">
               <Link href="/" className="flex items-center">
                 {/* Reduced logo size and removed extra margin */}
-                <div className="relative w-40 h-42 flex items-center justify-center flex-shrink-0 -mr-2">
-                  <Image
-                    src="/assets/logos/image.png"
-                    alt="Garuda OM logo"
-                    width={160}
-                    height={168}
-                    className="object-contain brightness-0 invert"
-                    loading="lazy"
-                  />
+                <div className="relative w-40 h-40 flex items-center justify-center flex-shrink-0 -mr-2">
+                      <Image
+                        src="/assets/logos/image.png"
+                        alt="Garuda OM logo"
+                        fill
+                        className="object-contain brightness-0 invert"
+                        loading="lazy"
+                        sizes="(max-width: 160px) 100vw, 160px"
+                      />
                 </div>
                 <div className="flex flex-col">
                   <div className="text-4xl font-black tracking-wider text-white leading-none">

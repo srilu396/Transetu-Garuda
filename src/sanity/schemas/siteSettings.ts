@@ -33,4 +33,12 @@ export const siteSettings = defineType({
       ]
     }),
   ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Site Settings',
+        subtitle: 'Global configuration (Phone, Email, Social)',
+      }
+    },
+  },
 })

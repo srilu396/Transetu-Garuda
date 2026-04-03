@@ -10,8 +10,12 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // Set to false for instant updates
+  useCdn: true, // Use CDN for production
   perspective: "published",
+  stega: {
+    enabled: false,
+    studioUrl: '/studio',
+  }
 });
 
 // Client used for live preview only
@@ -22,6 +26,10 @@ export const previewClient = createClient({
   useCdn: false, // Must be false for live preview
   token: process.env.SANITY_API_TOKEN, // Reuse existing token or SANITY_API_READ_TOKEN
   perspective: "previewDrafts",
+  stega: {
+    enabled: true,
+    studioUrl: '/studio',
+  }
 });
 
 // Helper function to choose the correct client

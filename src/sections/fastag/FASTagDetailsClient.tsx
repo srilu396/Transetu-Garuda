@@ -9,35 +9,41 @@ export default function FASTagDetailsClient({
   type, 
   sanityData 
 }: { 
-  type: "customer" | "partner", 
+  type: "buy" | "partner", 
   sanityData?: {
+    identifier?: string;
+    title?: string;
     pageTitle?: string;
-    overviewText?: string;
-    media?: {
-      mediaType: "image" | "video" | "youtube";
-      image?: { asset: { url: string } };
-      youtubeUrl?: string;
-      videoUrl?: string;
-    };
-    documents?: { documentName?: string; description?: string; file?: { asset?: { url?: string } } }[];
+    description?: string;
+    youtubeUrl?: string;
+    documents?: { documentName?: string; description?: string; fileUrl?: string }[];
   } 
 }) {
-  const localData = type === "customer" ? buyFASTagData : becomePartnerData;
+  // Map 'buy' to 'customer' for local data backward compatibility if needed
+  const localKey = type === "buy" ? "customer" : "partner";
+  const localData = localKey === "customer" ? buyFASTagData : becomePartnerData;
   
-  // Merge Sanity data if present
+  // Merge Sanity data if present with robust safety checks
   const finalData = {
     ...localData,
-    title: sanityData?.pageTitle ?? localData.title,
-    description: sanityData?.overviewText ?? localData.description,
-    media: sanityData?.media as { mediaType: "image" | "video" | "youtube"; image?: { asset: { url: string } }; youtubeUrl?: string; videoUrl?: string } | undefined,
-    videoUrl: (sanityData?.media as { youtubeUrl?: string; videoUrl?: string } | undefined)?.youtubeUrl ?? (sanityData?.media as { youtubeUrl?: string; videoUrl?: string } | undefined)?.videoUrl ?? localData.videoUrl,
-    documents: sanityData?.documents && sanityData.documents.length > 0
-      ? sanityData.documents.map((doc: { documentName?: string; description?: string; file?: { asset?: { url?: string } } }) => ({
-          name: doc.documentName ?? "",
-          description: doc.description ?? "",
-          path: doc.file?.asset?.url ?? "",
+    id: type,
+    title: sanityData?.pageTitle ?? localData?.title ?? "",
+    description: sanityData?.description ?? localData?.description ?? "",
+    videoUrl: sanityData?.youtubeUrl ?? localData?.videoUrl ?? "",
+    
+    // If youtubeUrl is provided by Sanity, set mediaType to youtube
+    media: sanityData?.youtubeUrl 
+      ? { mediaType: "youtube" as const, youtubeUrl: sanityData.youtubeUrl }
+      : (localData?.media ?? { mediaType: "image" as const }),
+      
+    // Safely map documents if sanityData exists and contains valid documents
+    documents: (sanityData?.documents && Array.isArray(sanityData.documents) && sanityData.documents.length > 0)
+      ? sanityData.documents.map((doc) => ({
+          name: doc?.documentName ?? "",
+          description: doc?.description ?? "",
+          path: doc?.fileUrl ?? "",
         }))
-      : localData.documents,
+      : (localData?.documents ?? []),
   };
 
   return <FASTagDetails data={finalData} showNavbarFooter={true} />;

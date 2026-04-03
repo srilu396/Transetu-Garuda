@@ -587,7 +587,7 @@ export default function ProductsSection() {
                   }}
                 >
                   {product.image ? (
-                    <div className="w-full h-full">
+                    <div className="relative w-full h-full">
                       <Image
                         src={product.image}
                         alt={product.title}

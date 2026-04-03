@@ -7,7 +7,7 @@ import { CreditCard, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
 
 const fastagOptions = [
   {
-    id: "customer",
+    id: "buy",
     title: "Buy FASTag for Your Vehicle",
     description:
       "Users can directly purchase FASTag through Garuda OM for personal or business vehicles. The FASTag enables automatic toll payments, reduces waiting time at toll plazas, and allows seamless integration with vehicle tracking systems.",
@@ -22,7 +22,7 @@ const fastagOptions = [
     ],
     buttonText: "Get FASTag",
     buttonLink: "/#contact",
-    learnMoreLink: "/fastag/customer",
+    learnMoreLink: "/fastag/buy",
     buttonVariant: "primary" as const,
     badge: "For Vehicle Owners",
     badgeIcon: ShieldCheck,
@@ -50,7 +50,33 @@ const fastagOptions = [
   },
 ];
 
-export default function FASTagManagement() {
+interface FastTagSanityData {
+  cards?: {
+    identifier: string;
+    title: string;
+    description: string;
+  }[];
+}
+
+export default function FASTagManagement({ sanityData }: { sanityData?: FastTagSanityData }) {
+  // Merge Sanity data into fastagOptions with robust safety checks
+  const displayedOptions = fastagOptions.map(option => {
+    // Return early if sanityData or cards is missing
+    if (!sanityData?.cards) return option;
+    
+    const sData = sanityData.cards.find(c => 
+      c.identifier === (option.id === 'buy' ? 'buyFastTag' : 'businessPartner')
+    );
+    
+    if (sData) {
+      return {
+        ...option,
+        title: sData.title || option.title,
+        description: sData.description || option.description,
+      };
+    }
+    return option;
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -206,7 +232,7 @@ export default function FASTagManagement() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
         >
-          {fastagOptions.map((option, index) => {
+          {displayedOptions.map((option, index) => {
             const Icon = option.icon;
 
             return (

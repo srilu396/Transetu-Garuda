@@ -64,29 +64,6 @@ export default defineConfig({
             S.divider(),
             
             // Other document types
-            // FASTag Section Sidebar
-            S.listItem()
-              .title('FASTag Section')
-              .child(
-                S.list()
-                  .title('FASTag Pages')
-                  .items([
-                    S.listItem()
-                      .title('Buy FASTag for Your Vehicle')
-                      .child(
-                        S.document()
-                          .schemaType('fastagPage')
-                          .documentId('fastag-individual')
-                      ),
-                    S.listItem()
-                      .title('Become a FASTag Business Partner')
-                      .child(
-                        S.document()
-                          .schemaType('fastagPage')
-                          .documentId('fastag-business')
-                      ),
-                  ])
-              ),
             
             S.listItem()
               .title('Site Settings')
@@ -118,6 +95,16 @@ export default defineConfig({
                 S.document()
                   .schemaType('featureCardsSection')
                   .documentId('featureCardsSection')
+              ),
+            
+            S.divider(),
+
+            S.listItem()
+              .title('Fast Tag Details Section')
+              .child(
+                S.document()
+                  .schemaType('fastTagDetailsSection')
+                  .documentId('fastTagDetailsSection')
               ),
           ])
       },
@@ -169,33 +156,6 @@ export default defineConfig({
             }
           },
 
-          'fastagPage': {
-            select: {
-              pageTitle: 'pageTitle',
-              cardType: 'cardType',
-            },
-            resolve: (doc: any) => {
-              if (!doc?.cardType) return null
-              
-              const hrefMap: Record<string, string> = {
-                individual: '/fastag/customer',
-                business: '/fastag/partner',
-              }
-              
-              const href = hrefMap[doc.cardType as 'individual' | 'business']
-                
-              if (!href) return null
-              
-              return {
-                locations: [
-                  {
-                    title: doc?.pageTitle || 'FASTag Page',
-                    href,
-                  },
-                ],
-              }
-            }
-          },
           'aboutSection': {
             select: {
               title: 'title',
@@ -239,6 +199,29 @@ export default defineConfig({
               }
             }
           },
+          'fastTagDetailsSection': {
+            select: {
+              cards: 'cards',
+            },
+            resolve: (doc: any) => {
+              return {
+                locations: [
+                   {
+                     title: 'Home Page',
+                     href: '/',
+                   },
+                   {
+                     title: 'Buy FASTag',
+                     href: '/fastag/buy',
+                   },
+                   {
+                     title: 'Become a Partner',
+                     href: '/fastag/partner',
+                   },
+                ],
+              }
+            }
+          },
         },
       },
     }),
@@ -251,12 +234,12 @@ export default defineConfig({
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'fastagPage' && templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection' && templateItem.templateId !== 'siteSettings' && templateItem.templateId !== 'featureCardsSection')
+        return prev.filter((templateItem) => templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection' && templateItem.templateId !== 'siteSettings' && templateItem.templateId !== 'featureCardsSection' && templateItem.templateId !== 'fastTagDetailsSection')
       }
       return prev
     },
     actions: (prev, { schemaType }) => {
-      if (schemaType === 'fastagPage' || schemaType === 'siteSettings') {
+      if (schemaType === 'siteSettings') {
         return prev.filter(({ action }) => action === 'publish' || action === 'discardChanges' || action === 'restore')
       }
       return prev

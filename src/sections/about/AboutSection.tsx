@@ -337,6 +337,7 @@ export default function AboutSection() {
     width={128}
     height={128}
     className="w-full h-full object-contain"
+    style={{ height: "auto" }}
     priority
   />
 </div>
@@ -633,6 +634,7 @@ export default function AboutSection() {
                         height={80}
                         loading="lazy"
                         className="object-contain object-center w-full max-w-[200px] h-14 sm:h-16"
+                        style={{ height: "auto" }}
                       />
                     </div>
                   ) : (

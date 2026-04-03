@@ -19,6 +19,8 @@ export const metadata = pageMetadata({
   ],
 });
 import HeroSection from "@/sections/hero/Hero";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { FASTAG_DETAILS_QUERY } from "@/lib/queries";
 
 const SectionPlaceholder = () => (
   <div className="py-24 animate-pulse bg-slate-50" />
@@ -64,7 +66,10 @@ const ContactSection = dynamic(
   { ssr: false, loading: () => <SectionPlaceholder /> }
 );
 
-export default function Home() {
+export default async function Home() {
+  const fastTagData = await fetchSanityQuery(FASTAG_DETAILS_QUERY);
+
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -72,7 +77,7 @@ export default function Home() {
         <HeroSection />
         <FastagSection />
         <ProductsSection />
-        <FASTagManagement />
+        <FASTagManagement sanityData={fastTagData} />
         <FeaturesSection />
         <IndustriesSection />
         <AboutSection />

@@ -46,14 +46,15 @@ export async function fetchSanityQuery(
 
   const fetchOptions = usePreviewPerspective
     ? { 
-        cache: 'no-store' as RequestCache,
-        // Ensure we don't use CDN for preview
+        perspective: "previewDrafts" as const,
+        useCdn: false,
         next: { revalidate: 0 } 
       }
     : { 
-        // Use tag-based revalidation for instant updates when webhook triggers
+        perspective: "published" as const,
+        useCdn: false,
         next: { 
-          revalidate: 0, // No cache for live data to ensure instant updates
+          revalidate: 0,
           tags: ['sanity'] 
         } 
       }

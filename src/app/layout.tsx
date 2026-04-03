@@ -98,21 +98,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${robotoMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <RootJsonLd />
         {children}
         <FloatingSocialBar />
         
-        {(() => {
-          try {
-            return draftMode().isEnabled && <VisualEditing />;
-          } catch {
-            return null;
-          }
-        })()}
+        {draftMode().isEnabled && <VisualEditing />}
       </body>
     </html>
   );
