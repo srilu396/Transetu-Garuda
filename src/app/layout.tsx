@@ -55,9 +55,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: "P8Zgd-We6M0PdoigMOj10DfQf7jLewSw0siCWolZoJ0",
-  },
   openGraph: {
     title: `${SITE_BRAND} — GPS fleet tracking & FASTag in India`,
     description: DEFAULT_DESCRIPTION,
