@@ -93,7 +93,7 @@ export default function AboutSection() {
   const overview = sanityData?.companyOverview?.overviewDescription || "Garuda OM provides comprehensive logistics technology solutions designed to empower modern transportation businesses through GPS tracking, video telematics, fuel monitoring, and FASTag management systems. We emphasize improving fleet visibility, operational transparency, and efficiency.";
 
   const vision = sanityData?.visionMission?.visionDescription || "To build a reliable and technology-driven logistics and freight forwarding business that connects global markets efficiently while ensuring transparency, safety, and customer satisfaction.";
-  
+
   const mission = sanityData?.visionMission?.missionDescription || "To provide innovative logistics and transportation solutions by integrating modern tracking technologies, efficient supply chain management, and strong customer support to deliver goods safely and on time across domestic and international markets.";
 
   const achievements = sanityData?.keyAchievements || [
@@ -326,7 +326,7 @@ export default function AboutSection() {
               }}
               className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl -mr-16 -mt-16"
             />
-            
+
             <div className="relative z-10">
               <div className="flex items-start gap-8 mb-6">
                 {/* Founder Image */}
@@ -337,7 +337,7 @@ export default function AboutSection() {
     width={128}
     height={128}
     className="w-full h-full object-contain"
-    style={{ height: "auto" }}
+
     priority
   />
 </div>
@@ -634,7 +634,7 @@ export default function AboutSection() {
                         height={80}
                         loading="lazy"
                         className="object-contain object-center w-full max-w-[200px] h-14 sm:h-16"
-                        style={{ height: "auto" }}
+
                       />
                     </div>
                   ) : (

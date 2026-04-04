@@ -31,10 +31,12 @@ export async function fetchSanityQuery(
 
   /**
    * Determine if we should use the PREVIEW client (perspective: previewDrafts).
-   * Strict Isolation: We only use preview perspective if Draft Mode is on
-   * AND we are within the Sanity Presentation iframe (detected via headers or passed flag).
+   * 
+   * RELIABILITY UPGRADE:
+   * 1. If Draft Mode is on (via /api/preview), we should show drafts.
+   * 2. This ensures "Documents on this page" works even if the iframe header is missing.
    */
-  const usePreviewPerspective = isDraftMode && (presentationIframe || isIframe)
+  const usePreviewPerspective = isDraftMode || presentationIframe || isIframe
 
   const client = getClient(usePreviewPerspective)
 

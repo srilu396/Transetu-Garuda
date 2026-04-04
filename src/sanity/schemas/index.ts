@@ -6,6 +6,7 @@ import { demoCard, watchPlatformDemoSection } from './watchPlatformDemo'
 import { industrialCard } from './industrialCard'
 import { industrialDetail } from './industrialDetail'
 import { featureCardsSection } from './featureCardsSection'
+import { fastagDetailPage } from './fastagDetailPage'
 
 
 export const schemaTypes = [
@@ -18,5 +19,6 @@ export const schemaTypes = [
   industrialCard,
   industrialDetail,
   featureCardsSection,
+  fastagDetailPage,
 
 ]
