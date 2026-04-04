@@ -2,7 +2,6 @@
 // GROQ QUERIES FOR GARUDA OM WEBSITE
 // ============================================
 
-
 // ── 1. GPS SOLUTION CARDS (Home page grid) ──
 // Slug is fetched FROM the referenced solutionPage document.
 // No slug stored on the card itself — single source of truth.
@@ -30,8 +29,7 @@ export const GPS_CARDS_QUERY = `
       whyChoose
     }
   }
-`
-
+`;
 
 // ── 2. ALL SOLUTION PAGES (with order) ──
 
@@ -70,10 +68,10 @@ export const ALL_SOLUTIONS_QUERY = `
       description
     }
   }
-`
+`;
 
 export const SOLUTION_BY_SLUG_QUERY = `
-  *[_type == "solutionPage" && slug.current == $slug][0] {
+  *[_type == "solutionPage" && slug.current == $slug] | order(_updatedAt desc) [0] {
     _id,
     iconName,
     title,
@@ -106,86 +104,25 @@ export const SOLUTION_BY_SLUG_QUERY = `
       description
     }
   }
-`
+`;
 
-
-// ── 4. ALL INDUSTRY PAGES ──
-export const ALL_INDUSTRIES_QUERY = `
-  *[_type == "industryPage"] | order(title asc) {
-    _id,
-    title,
-    "slug": slug.current,
-    badge,
-    tagline,
-    image,
-    overview,
-    stats,
-    keySolutions,
-    coreFeatures,
-    keyBenefits
-  }
-`
-
-
-// ── 5. SINGLE INDUSTRY PAGE (by slug) ──
-export const INDUSTRY_BY_SLUG_QUERY = `
-  *[_type == "industryPage" && slug.current == $slug][0] {
-    _id,
-    title,
-    "slug": slug.current,
-    badge,
-    tagline,
-    image,
-    overview,
-    stats,
-    keySolutions,
-    coreFeatures,
-    keyBenefits
-  }
-`
-
-
-// ── 6. WHY US FEATURE CARDS ──
+// ── 6. WHY US FEATURE CARDS (Singleton) ──
 export const FEATURE_CARDS_QUERY = `
-  *[_type == "featureCard"] | order(order asc) {
+  *[_type == "featureCardsSection" && ($preview || !(_id in path("drafts.**")))] [0] {
     _id,
-    title,
-    description,
-    iconName,
-    order
+    "cards": cards[] {
+      _key,
+      icon,
+      iconColor,
+      title,
+      description
+    }
   }
-`
+`;
 
-
-// ── 7. FASTAG CONTENT (customer page) ──
-export const FASTAG_CUSTOMER_QUERY = `
-  *[_type == "fastagContent" && pageType == "customer"][0] {
-    _id,
-    title,
-    tagline,
-    overview,
-    benefits,
-    features
-  }
-`
-
-
-// ── 8. FASTAG CONTENT (partner page) ──
-export const FASTAG_PARTNER_QUERY = `
-  *[_type == "fastagContent" && pageType == "partner"][0] {
-    _id,
-    title,
-    tagline,
-    overview,
-    benefits,
-    features
-  }
-`
-
-
-// ── 9. SITE SETTINGS (phone, email, address, social) ──
+// ── 8. SITE SETTINGS (phone, email, address, social) ──
 export const SITE_SETTINGS_QUERY = `
-  *[_type == "siteSettings"][0] {
+  *[_type == "siteSettings" && _id == "siteSettings"] | order(_updatedAt desc) [0] {
     _id,
     phone,
     email,
@@ -194,7 +131,130 @@ export const SITE_SETTINGS_QUERY = `
     facebook,
     instagram,
     linkedin,
-    youtubeDemo,
-    companyDocs
+    "companyDocs": companyDocs[]{
+      documentName,
+      "fileUrl": file.asset->url
+    }
   }
-`
+`;
+
+// ── 9. ABOUT US SECTION (Singleton) ──
+export const ABOUT_SECTION_QUERY = `
+  *[_type == "aboutSection" && _id == "aboutSection"] | order(_updatedAt desc) [0] {
+    stats[] {
+      statValue,
+      label
+    },
+    founder {
+      "founderImage": founderImage.asset->url,
+      founderName,
+      founderBadge,
+      founderEducation,
+      founderPreviousRoles,
+      founderBio
+    },
+    companyOverview {
+      overviewDescription
+    },
+    visionMission {
+      visionDescription,
+      missionDescription
+    },
+    keyAchievements,
+    clients[] {
+      clientName,
+      "clientLogo": clientLogo.asset->url,
+      clientWebsiteUrl
+    }
+  }
+`;
+
+// ── 10. WATCH PLATFORM DEMO SECTION (Singleton) ──
+export const WATCH_PLATFORM_DEMO_QUERY = `
+  *[_type == "watchPlatformDemoSection" && _id == "watchPlatformDemoSection"] | order(_updatedAt desc) [0] {
+    badgeLabel,
+    heading,
+    subheading,
+    cards[] {
+      icon,
+      iconColor,
+      "thumbnail": thumbnail.asset->url,
+      youtubeUrl,
+      title,
+      description,
+      watchVideoLabel
+    }
+  }
+`;
+// ── 11. INDUSTRIAL SECTION QUERIES ──
+// Fetch industrial cards with explicit draft vs published filtering
+export const INDUSTRIAL_CARDS_QUERY = `
+  *[_type == "industrialCard" && ($preview || !(_id in path("drafts.**")))] | order(order asc) {
+    _id,
+    iconName,
+    title,
+    description,
+    badge,
+    order,
+    "slug": detailedPage->slug.current
+  }
+`;
+
+// Fetch specific industrial detail page with explicit draft vs published filtering
+// ── FASTag detail pages: match `slug.current` OR fixed desk document IDs (see fastagCanonical.ts) ──
+export const FASTAG_DETAIL_RESOLVED_QUERY = `
+  *[_type == "fastagDetailPage" && (
+    slug.current == $slug ||
+    _id in $ids
+  )] | order(_updatedAt desc) [0]{
+    _id,
+    _type,
+    title,
+    badge,
+    iconName,
+    overview,
+    youtubeVideoUrl,
+    documents[]{
+      documentName,
+      documentDescription,
+      "documentFileUrl": documentFile.asset->url
+    }
+  }
+`;
+
+export const FASTAG_ALL_SLUGS_QUERY = `
+  *[_type == "fastagDetailPage" && defined(slug.current)]{
+    "slug": slug.current
+  }
+`;
+
+export const INDUSTRIAL_DETAIL_QUERY = `
+  *[_type == "industrialDetail" && slug.current == $slug && ($preview || !(_id in path("drafts.**")))] | order(_updatedAt desc) [0] {
+    _id,
+    iconName,
+    badge,
+    title,
+    "slug": slug.current,
+    description,
+    "imageUrl": image.asset->url,
+    order,
+    infoCards[] {
+      iconName,
+      label,
+      value
+    },
+    industryOverview {
+      smallParagraph,
+      largeParagraph
+    },
+    coreFeatures[] {
+      text
+    },
+    keyBenefits[] {
+      text
+    },
+    keySolutions[] {
+      solutionText
+    }
+  }
+`;

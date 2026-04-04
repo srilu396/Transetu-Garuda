@@ -4,6 +4,8 @@ import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingSocialBar from "@/components/FloatingSocialBar";
 import RootJsonLd from "@/components/seo/RootJsonLd";
+import { draftMode } from 'next/headers'
+import { VisualEditing } from 'next-sanity'
 import { DEFAULT_DESCRIPTION, OG_IMAGE_PATH, SITE_BRAND, keywordList } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/siteUrl";
 
@@ -55,6 +57,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+
   openGraph: {
     title: `${SITE_BRAND} — GPS fleet tracking & FASTag in India`,
     description: DEFAULT_DESCRIPTION,
@@ -93,13 +96,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${robotoMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <RootJsonLd />
         {children}
         <FloatingSocialBar />
+        
+        {draftMode().isEnabled && <VisualEditing />}
       </body>
     </html>
   );

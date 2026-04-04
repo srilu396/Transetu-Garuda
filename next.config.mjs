@@ -6,7 +6,7 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), payment=()",
   },
-  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
@@ -14,7 +14,15 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  transpilePackages: ["sanity", "@portabletext/editor", "next-sanity"],
+  transpilePackages: [
+    "sanity",
+    "next-sanity",
+    "@sanity/icons",
+    "@sanity/ui",
+    "@sanity/presentation",
+    "@sanity/visual-editing",
+    "@portabletext/editor",
+  ],
   images: {
     remotePatterns: [
       {
@@ -84,6 +92,21 @@ const nextConfig = {
       {
         source: "/gps-tracking-solutions",
         destination: "/solutions/gps-tracking-solutions",
+        permanent: true,
+      },
+      {
+        source: "/fastag/buy",
+        destination: "/fastag/buy-fastag",
+        permanent: true,
+      },
+      {
+        source: "/fastag/customer",
+        destination: "/fastag/buy-fastag",
+        permanent: true,
+      },
+      {
+        source: "/fastag/partner",
+        destination: "/fastag/become-a-partner",
         permanent: true,
       },
     ];

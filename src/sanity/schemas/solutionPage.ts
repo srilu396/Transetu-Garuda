@@ -1,99 +1,6 @@
-// ============================================================
-// SCHEMA: GPS Solution Pages
-// File:   sanity/schemas/solutionPage.ts
-//
-// Icon strategy (matches live UI exactly):
-//   • Page-level icon  → manual dropdown (Lucide)
-//   • Benefits (3 cards) → manual dropdown (Lucide, content-driven)
-//   • Key Features     → manual dropdown (Lucide, content-driven)
-//   • Use Cases        → NO icon field — frontend renders auto-numbers (01, 02…)
-//   • Why Choose       → Icon dropdown with CheckCircle2 as default
-//
-// UI Title Mapping:
-//   • Benefits field   → NO title displayed in UI (just the 3 cards)
-//   • Use Cases field  → Displays as "Benefits & Use Cases" in UI
-// ============================================================
-
 import { defineType, defineField } from 'sanity'
 
-// ──────────────────────────────────────────────────────────────────────────────
-// LUCIDE ICON LIST
-// These are the exact icons already used across your solution pages and
-// gpsData / featureCard schemas. Only meaningful, GPS/fleet-relevant icons
-// are included — no generic clutter.
-// ──────────────────────────────────────────────────────────────────────────────
-const LUCIDE_ICONS = [
-  // Tracking & Location
-  { title: 'MapPin — Location / Tracking',       value: 'MapPin' },
-  { title: 'Navigation — Route / Direction',     value: 'Navigation' },
-  { title: 'Navigation2 — GPS Arrow',            value: 'Navigation2' },
-  { title: 'Route — Path / Journey',             value: 'Route' },
-  { title: 'Map — Map View',                     value: 'Map' },
-  { title: 'Satellite — Satellite / Signal',     value: 'Satellite' },
-  { title: 'Signal — Network / Connectivity',    value: 'Signal' },
-  { title: 'Wifi — Wireless / Live Feed',        value: 'Wifi' },
-
-  // Fleet & Vehicles
-  { title: 'Truck — Fleet / Heavy Vehicle',      value: 'Truck' },
-  { title: 'Bus — Bus / School Transport',       value: 'Bus' },
-  { title: 'Car — Car / Personal Vehicle',       value: 'Car' },
-  { title: 'Package — Cargo / Delivery',         value: 'Package' },
-
-  // Fuel & Engine
-  { title: 'Fuel — Fuel Level / Consumption',    value: 'Fuel' },
-  { title: 'Battery — Power / Battery',          value: 'Battery' },
-  { title: 'Zap — Power / Efficiency',           value: 'Zap' },
-  { title: 'Cpu — Device / Hardware',            value: 'Cpu' },
-
-  // Camera & Vision
-  { title: 'Video — Dash Cam / Recording',       value: 'Video' },
-  { title: 'Monitor — Live View / Dashboard',    value: 'Monitor' },
-  { title: 'Radio — Wireless / IoT',             value: 'Radio' },
-
-  // Security & Compliance
-  { title: 'Shield — Security / Protection',     value: 'Shield' },
-  { title: 'ShieldCheck — Verified / Compliant', value: 'ShieldCheck' },
-  { title: 'Lock — Locked / Secure',             value: 'Lock' },
-  { title: 'Flag — Compliance / Milestone',      value: 'Flag' },
-
-  // Performance & Analytics
-  { title: 'BarChart2 — Reports / Analytics',    value: 'BarChart2' },
-  { title: 'PieChart — Data / Breakdown',        value: 'PieChart' },
-  { title: 'TrendingUp — Growth / Efficiency',   value: 'TrendingUp' },
-  { title: 'Activity — Live / Real-time',        value: 'Activity' },
-  { title: 'Timer — Time / Speed',               value: 'Timer' },
-  { title: 'Clock — Schedule / Uptime',          value: 'Clock' },
-
-  // Operations & Service
-  { title: 'Settings — Configuration',           value: 'Settings' },
-  { title: 'Wrench — Maintenance',               value: 'Wrench' },
-  { title: 'Bell — Alert / Notification',        value: 'Bell' },
-  { title: 'AlertCircle — Warning / Alert',      value: 'AlertCircle' },
-  { title: 'CheckCircle2 — Success / Done',      value: 'CheckCircle2' },
-  { title: 'Star — Quality / Premium',           value: 'Star' },
-  { title: 'Award — Achievement / Reliability',  value: 'Award' },
-  { title: 'Target — Goal / Precision',          value: 'Target' },
-  { title: 'ThumbsUp — Approval / Trust',        value: 'ThumbsUp' },
-  { title: 'LifeBuoy — Support / Help',          value: 'LifeBuoy' },
-  { title: 'Phone — Support / Contact',          value: 'Phone' },
-  { title: 'Smartphone — App / Mobile',          value: 'Smartphone' },
-
-  // Business & Logistics
-  { title: 'Building2 — Enterprise / Company',   value: 'Building2' },
-  { title: 'Users — Team / Fleet Operators',     value: 'Users' },
-  { title: 'Globe — Coverage / Nationwide',      value: 'Globe' },
-  { title: 'CreditCard — Payment / FASTag',      value: 'CreditCard' },
-  { title: 'Tag — Tagging / Label',              value: 'Tag' },
-  { title: 'Layers — Integration / Multi-layer', value: 'Layers' },
-  { title: 'Cloud — Cloud / Remote Access',      value: 'Cloud' },
-  { title: 'Database — Data / Storage',          value: 'Database' },
-  { title: 'FileText — Reports / Documents',     value: 'FileText' },
-  { title: 'Link — Integration / API',           value: 'Link' },
-
-  // Search & Find
-  { title: 'Search — Search / Find',             value: 'Search' },
-  { title: 'Camera — Camera / Video',             value: 'Camera' },
-]
+import { LUCIDE_ICONS } from './iconConstants'
 
 // ──────────────────────────────────────────────────────────────────────────────
 // SCHEMA DEFINITION
@@ -102,6 +9,8 @@ export const solutionPage = defineType({
   name: 'solutionPage',
   title: 'GPS Solution Pages',
   type: 'document',
+  description:
+    'Published content appears on the live website. Drafts are visible only in Presentation preview until you publish.',
 
   fields: [
 

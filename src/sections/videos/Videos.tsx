@@ -1,10 +1,48 @@
 "use client";
 
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
-import { Play, Fuel, Gauge, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { LucideIcon } from "lucide-react";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { WATCH_PLATFORM_DEMO_QUERY } from "@/lib/queries";
+
+import {
+  MapPin, Navigation, Navigation2, Route, Map, Satellite, Signal, Wifi,
+  Truck, Bus, Car, Package,
+  Fuel, Battery, Zap, Cpu,
+  Video, Monitor, Radio,
+  Shield, ShieldCheck, Lock, Flag,
+  BarChart2, PieChart, TrendingUp, Activity, Timer, Clock,
+  Settings, Wrench, Bell, AlertCircle, CheckCircle2, Star, Award, Target, ThumbsUp, LifeBuoy, Phone, Smartphone,
+  Building2, Users, Globe, CreditCard, Tag, Layers, Cloud, Database, FileText, Link, Search, Camera, Play, Gauge
+} from "lucide-react";
+
+const IconMap: Record<string, LucideIcon> = {
+  MapPin, Navigation, Navigation2, Route, Map, Satellite, Signal, Wifi,
+  Truck, Bus, Car, Package,
+  Fuel, Battery, Zap, Cpu,
+  Video, Monitor, Radio,
+  Shield, ShieldCheck, Lock, Flag,
+  BarChart2, PieChart, TrendingUp, Activity, Timer, Clock,
+  Settings, Wrench, Bell, AlertCircle, CheckCircle2, Star, Award, Target, ThumbsUp, LifeBuoy, Phone, Smartphone,
+  Building2, Users, Globe, CreditCard, Tag, Layers, Cloud, Database, FileText, Link, Search, Camera, Play, Gauge
+};
+
+interface SanityVideoData {
+  badgeLabel?: string;
+  heading: string;
+  subheading: string;
+  cards: {
+    title: string;
+    description: string;
+    youtubeUrl: string;
+    thumbnail: string;
+    icon: string;
+    iconColor?: string;
+    watchVideoLabel?: string;
+  }[];
+}
 
 interface VideoItem {
   title: string;
@@ -14,6 +52,7 @@ interface VideoItem {
   icon: LucideIcon;
   iconBg: string;
   iconColor: string;
+  watchVideoLabel?: string;
 }
 
 interface VideoVariants {
@@ -106,7 +145,7 @@ const VideoCard = memo(({ video, index, variants }: { video: VideoItem, index: n
             className="inline-flex items-center text-primary font-semibold text-sm group/link"
             whileHover={{ x: 3 }}
           >
-            Watch Video
+            {video.watchVideoLabel || "Watch Video"}
             <motion.svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -133,6 +172,22 @@ VideoCard.displayName = "VideoCard";
 
 export default function VideosSection() {
   const router = useRouter();
+  const [sanityData, setSanityData] = useState<SanityVideoData | null>(null);
+
+  useEffect(() => {
+    async function getDemoData() {
+      try {
+        const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+        const data = await fetchSanityQuery(WATCH_PLATFORM_DEMO_QUERY, {}, isIframe);
+        if (data) {
+          setSanityData(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch Demo Section from Sanity:", error);
+      }
+    }
+    getDemoData();
+  }, []);
 
   // Function to handle navigation to contact section
   const handleContactNavigation = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -249,6 +304,36 @@ export default function VideosSection() {
     },
   ];
 
+  const badgeLabel = sanityData?.badgeLabel || "Watch Demos";
+  const heading = sanityData?.heading || "Watch Platform Demo";
+  const subheading = sanityData?.subheading || "With our advanced fleet vehicle tracking systems you have complete control over your fleet and their activities.";
+
+  const videosToRender = sanityData?.cards ? sanityData.cards.map((card: {
+    iconColor?: string;
+    title: string;
+    description: string;
+    youtubeUrl: string;
+    thumbnail: string;
+    icon: string;
+    watchVideoLabel?: string;
+  }) => {
+    // Parse color theme 'bg-orange-100  text-orange-500' -> split by space
+    const colorClasses = card.iconColor?.split(/\s+/) || ["bg-orange-100", "text-orange-500"];
+    const bgClass = colorClasses[0] || "bg-orange-100";
+    const textClass = colorClasses.length > 1 ? colorClasses[colorClasses.length - 1] : "text-orange-500";
+    
+    return {
+      title: card.title,
+      description: card.description,
+      videoUrl: card.youtubeUrl,
+      thumbnail: card.thumbnail,
+      icon: IconMap[card.icon] || Play,
+      iconBg: bgClass,
+      iconColor: textClass,
+      watchVideoLabel: card.watchVideoLabel,
+    };
+  }) : videos;
+
   return (
     <section
       id="videos"
@@ -274,7 +359,7 @@ export default function VideosSection() {
             viewport={{ once: true }}
             className="inline-flex items-center px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6"
           >
-            Watch Demos
+            {badgeLabel}
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -283,7 +368,9 @@ export default function VideosSection() {
             transition={{ duration: 0.6 }}
             className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-slate-900"
           >
-            Watch <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Platform Demo</span>
+            {heading.split(/(Platform Demo)/i).map((part: string, i: number) => 
+               part.toLowerCase() === 'platform demo' ? <span key={i} className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{part}</span> : part
+            )}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -292,7 +379,7 @@ export default function VideosSection() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg text-slate-700 font-medium max-w-3xl mx-auto leading-relaxed"
           >
-            With our advanced fleet vehicle tracking systems you have complete control over your fleet and their activities.
+            {subheading}
           </motion.p>
         </div>
 
@@ -303,7 +390,7 @@ export default function VideosSection() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
-          {videos.map((video, index) => (
+          {videosToRender.map((video: VideoItem, index: number) => (
             <VideoCard key={index} video={video} index={index} variants={variants} />
           ))}
         </motion.div>

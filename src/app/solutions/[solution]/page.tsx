@@ -3,16 +3,22 @@ import { Metadata } from "next";
 import { solutions } from "@/sections/gps/data/gpsData";
 import GPSTrackingDetails from "@/sections/gps/GPSTrackingDetails";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
-import { client } from "@/lib/sanity";
+import { getClient } from "@/lib/sanity";
+import { draftMode, headers } from "next/headers";
 import { SOLUTION_BY_SLUG_QUERY, ALL_SOLUTIONS_QUERY } from "@/lib/queries";
 
+export const revalidate = 0; // Ensure instant updates on page reload
+
 // ── Fetch one solution from Sanity by slug ─────────────────────────────────
-async function fetchFromSanity(slug: string) {
+async function fetchFromSanity(slug: string, isPreview: boolean = false) {
   try {
-    return await client.fetch(
+    const activeClient = getClient(isPreview);
+    return await activeClient.fetch(
       SOLUTION_BY_SLUG_QUERY,
       { slug },
-      { next: { revalidate: 60 } }
+      isPreview
+        ? { next: { revalidate: 0 } }
+        : { next: { revalidate: 0, tags: ["sanity"] } },
     );
   } catch {
     return null;
@@ -38,7 +44,7 @@ interface SanityUseCase {
 }
 
 interface SanityMedia {
-  mediaType: 'image' | 'video' | 'youtube';
+  mediaType: "image" | "video" | "youtube";
   image?: string;
   youtubeUrl?: string;
   videoUrl?: string;
@@ -58,10 +64,10 @@ interface SanitySolution {
 // ── Convert Sanity shape → GPSTrackingDetails shape ────────────────────────
 function mapSanityData(solution: SanitySolution) {
   return {
-    title:    solution.title    ?? "",
-    tagline:  solution.tagline  ?? "",
-    icon:     solution.iconName ?? "Satellite",
-    bgColor:  "from-blue-500 to-purple-600",
+    title: solution.title ?? "",
+    tagline: solution.tagline ?? "",
+    icon: solution.iconName ?? "Satellite",
+    bgColor: "from-blue-500 to-purple-600",
     overview: solution.overview ?? "",
     benefits: (solution.benefits ?? []).map((b: SanityBenefit) => ({
       icon: b.iconName ?? "Shield",
@@ -78,12 +84,14 @@ function mapSanityData(solution: SanitySolution) {
       description: u.description ?? "",
     })),
     steps: [],
-    media: solution.media ? {
-      mediaType: solution.media.mediaType,
-      imageUrl:  solution.media.image,
-      youtubeUrl: solution.media.youtubeUrl,
-      videoUrl:  solution.media.videoUrl,
-    } : undefined,
+    media: solution.media
+      ? {
+          mediaType: solution.media.mediaType,
+          imageUrl: solution.media.image,
+          youtubeUrl: solution.media.youtubeUrl,
+          videoUrl: solution.media.videoUrl,
+        }
+      : undefined,
     seoMeta: {
       title: solution.title ?? "",
       description: solution.tagline ?? solution.overview ?? "",
@@ -128,8 +136,19 @@ export default async function SolutionPage({
 }) {
   const { solution: slug } = params;
 
+  // Safty wrapper for draftMode() and headers() to avoid "outside request scope" error
+  let isPreview = false;
+  try {
+    const { isEnabled } = draftMode();
+    const isIframe = headers().get("sec-fetch-dest") === "iframe";
+    isPreview = isEnabled && isIframe;
+  } catch {
+    // Normal for generateStaticParams/build-time
+    isPreview = false;
+  }
+
   // Try Sanity first
-  const sanity = await fetchFromSanity(slug);
+  const sanity = await fetchFromSanity(slug, isPreview);
   if (sanity) {
     return (
       <GPSTrackingDetails
@@ -143,12 +162,7 @@ export default async function SolutionPage({
   const local = solutions[slug];
   if (!local) notFound();
 
-  return (
-    <GPSTrackingDetails
-      data={local}
-      icon={local.icon as string}
-    />
-  );
+  return <GPSTrackingDetails data={local} icon={local.icon as string} />;
 }
 
 // ── Static Params ──────────────────────────────────────────────────────────
@@ -158,10 +172,10 @@ export async function generateStaticParams() {
   }));
 
   try {
-    const sanitySolutions = await client.fetch(
+    const sanitySolutions = await getClient(false).fetch(
       ALL_SOLUTIONS_QUERY,
       {},
-      { next: { revalidate: 60 } }
+      { next: { revalidate: 60 } },
     );
 
     const sanitySlugs = (sanitySolutions ?? [])

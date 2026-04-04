@@ -3,97 +3,166 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  MapPin,
-  Shield,
-  Fuel,
-  BarChart3,
-  Satellite,
-  Zap,
-  Route,
-  UserCheck,
-  Box,
-  ChevronLeft,
-  ChevronRight,
+  MapPin, Shield, Fuel, Satellite, Zap, Route, UserCheck, Box,
+  ChevronLeft, ChevronRight, LucideIcon, Camera, Truck, Thermometer,
+  Lock, Package, Navigation, Navigation2, Map, Signal, Wifi, Bus, Car,
+  Battery, Cpu, Video, Monitor, Radio, ShieldCheck, Flag, BarChart2,
+  PieChart, TrendingUp, Activity, Timer, Clock, Settings, Wrench, Bell,
+  AlertCircle, CheckCircle2, Star, Award, Target, ThumbsUp, LifeBuoy,
+  Phone, Smartphone, Building2, Users, Globe, CreditCard, Tag, Layers,
+  Cloud, Database, FileText, Link, Search,
 } from "lucide-react";
+import { fetchSanityQuery } from "@/actions/sanity";
+import { FEATURE_CARDS_QUERY } from "@/lib/queries";
+
+// ── Complete Icon Map ──────────────────────────────────────────────────────
+const IconMap: Record<string, LucideIcon> = {
+  MapPin, Shield, Fuel, Satellite, Zap, Route, UserCheck, Box,
+  Camera, Truck, Thermometer, Lock, Package, Navigation, Navigation2,
+  Map, Signal, Wifi, Bus, Car, Battery, Cpu, Video, Monitor, Radio,
+  ShieldCheck, Flag, BarChart2, PieChart, TrendingUp, Activity, Timer,
+  Clock, Settings, Wrench, Bell, AlertCircle, CheckCircle2, Star, Award,
+  Target, ThumbsUp, LifeBuoy, Phone, Smartphone, Building2, Users,
+  Globe, CreditCard, Tag, Layers, Cloud, Database, FileText, Link, Search,
+};
+
+// ── Color map: only text colors, NO backgrounds ────────────────────────────
+const colorMap: Record<string, string> = {
+  red:     "text-red-500",
+  rose:    "text-rose-600",
+  pink:    "text-pink-500",
+  orange:  "text-orange-500",
+  amber:   "text-amber-600",
+  yellow:  "text-yellow-500",
+  green:   "text-green-500",
+  emerald: "text-emerald-500",
+  teal:    "text-teal-500",
+  blue:    "text-blue-500",
+  sky:     "text-sky-500",
+  cyan:    "text-cyan-500",
+  indigo:  "text-indigo-500",
+  violet:  "text-violet-600",
+  purple:  "text-purple-500",
+  fuchsia: "text-fuchsia-500",
+  slate:   "text-slate-500",
+  gray:    "text-gray-500",
+  zinc:    "text-zinc-500",
+};
 
 /**
- * 10 High-Quality GPS Feature Cards with vibrant colors and polished descriptions.
+ * Default Feature Cards fallback — no backgrounds on icons
  */
-const features = [
+const defaultFeatures = [
   {
     title: "Real-Time GPS Tracking",
     description: "Monitor your fleet and assets with precise, real-time location data and comprehensive reporting.",
     icon: <MapPin className="w-10 h-10 text-blue-500" />,
-    color: "bg-blue-500/10",
   },
   {
     title: "Advanced Security",
     description: "Protect your valuable assets with geo-fencing, alerts, and anti-theft features.",
     icon: <Shield className="w-10 h-10 text-green-500" />,
-    color: "bg-transparent",
   },
   {
     title: "Fuel Monitoring",
     description: "Track fuel consumption, detect theft, and optimize fuel efficiency across your fleet.",
     icon: <Fuel className="w-10 h-10 text-orange-500" />,
-    color: "bg-orange-500/10",
   },
   {
     title: "Analytics & Reports",
     description: "Get detailed insights with customizable dashboards and comprehensive analytics.",
-    icon: <BarChart3 className="w-10 h-10 text-purple-500" />,
-    color: "bg-purple-500/10",
+    icon: <BarChart2 className="w-10 h-10 text-purple-500" />,
   },
   {
     title: "Satellite Coverage",
     description: "Global coverage with reliable satellite communication for remote locations.",
     icon: <Satellite className="w-10 h-10 text-cyan-500" />,
-    color: "bg-cyan-500/10",
   },
   {
     title: "Instant Alerts",
     description: "Receive immediate notifications for critical events and system updates.",
     icon: <Zap className="w-10 h-10 text-yellow-500" />,
-    color: "bg-yellow-500/10",
   },
   {
     title: "Efficiency-First Routing",
     description: "Intelligent path planning designed to reduce mileage, save time, and lower operating costs.",
     icon: <Route className="w-10 h-10 text-violet-600" />,
-    color: "bg-violet-600/10",
   },
   {
     title: "AI-Powered Safety",
     description: "Future-ready AI technology that analyzes driving patterns, predicts risks, and enhances fleet safety.",
     icon: <UserCheck className="w-10 h-10 text-amber-600" />,
-    color: "bg-amber-600/10",
   },
   {
     title: "Total Lifecycle Control",
     description: "Holistic tracking for all equipment with maintenance reminders and automated usage logs.",
     icon: <Box className="w-10 h-10 text-rose-600" />,
-    color: "bg-rose-600/10",
   },
 ];
 
 // How many cards visible at once (used to calculate dot count)
 const CARDS_PER_VIEW = 3;
-const TOTAL_DOTS = features.length - CARDS_PER_VIEW + 1; // 7 dot positions
-const AUTO_SCROLL_INTERVAL = 3000; // 3 seconds — enough time to read each card
+const AUTO_SCROLL_INTERVAL = 3000;
 
 export default function FeaturesSection() {
+  const [features, setFeatures] = useState(defaultFeatures);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const autoScrollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // ── Auto-scroll: starts on mount, pauses on hover, resumes on leave ──────
+  // ── 1. FETCH FROM SANITY ──────────────────────────────────────────────────
+  interface SanityFeatureCard {
+    _key: string;
+    icon: string;
+    iconColor: string;
+    title: string;
+    description: string;
+  }
+
+  interface SanityFeatureData {
+    _id: string;
+    cards: SanityFeatureCard[];
+  }
+
+  useEffect(() => {
+    async function getFeatures() {
+      try {
+        const isIframe = typeof window !== "undefined" && window.self !== window.top;
+        const data = await fetchSanityQuery(FEATURE_CARDS_QUERY, {}, isIframe) as SanityFeatureData | null;
+
+
+
+        if (data && data.cards && data.cards.length > 0) {
+          const mappedFeatures = data.cards.map((card: SanityFeatureCard) => {
+            const Icon = IconMap[card.icon] || Zap;
+
+            // Only apply text color — no background at all
+            const iconColor = colorMap[card.iconColor] || "text-primary";
+
+            return {
+              title: card.title,
+              description: card.description,
+              icon: <Icon className={`w-10 h-10 ${iconColor}`} />,
+            };
+          });
+          setFeatures(mappedFeatures);
+        }
+      } catch (error) {
+        console.error("Failed to fetch Features from Sanity:", error);
+      }
+    }
+    getFeatures();
+  }, []);
+
+  const TOTAL_DOTS = Math.max(1, features.length - CARDS_PER_VIEW + 1);
+
+  // ── Auto-scroll ───────────────────────────────────────────────────────────
   const startAutoScroll = useCallback(() => {
     if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
     autoScrollTimer.current = setInterval(() => {
       setActiveIndex((prev) => {
         const next = prev >= TOTAL_DOTS - 1 ? 0 : prev + 1;
-        // scrollToIndex needs the ref — call it via a small helper below
         if (scrollRef.current) {
           const SNAP = 340 + 24;
           const maxScroll = Math.max(0, scrollRef.current.scrollWidth - scrollRef.current.clientWidth);
@@ -105,7 +174,7 @@ export default function FeaturesSection() {
         return next;
       });
     }, AUTO_SCROLL_INTERVAL);
-  }, []);
+  }, [TOTAL_DOTS]);
 
   const stopAutoScroll = useCallback(() => {
     if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
@@ -132,14 +201,14 @@ export default function FeaturesSection() {
       container.scrollTo({ left: newScroll, behavior: animated ? "smooth" : "auto" });
       setActiveIndex(clampedIndex);
     },
-    [SCROLL_SNAP_ITEM]
+    [SCROLL_SNAP_ITEM, TOTAL_DOTS]
   );
 
   // ── Arrow navigation ──────────────────────────────────────────────────────
   const scroll = (direction: "left" | "right") => {
     if (isAnimating) return;
     setIsAnimating(true);
-    startAutoScroll(); // reset timer on manual interaction
+    startAutoScroll();
 
     const next =
       direction === "left"
@@ -158,7 +227,7 @@ export default function FeaturesSection() {
     setActiveIndex(Math.min(index, TOTAL_DOTS - 1));
   };
 
-  // ── Animation variants (unchanged from original) ──────────────────────────
+  // ── Animation variants ────────────────────────────────────────────────────
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -302,8 +371,7 @@ export default function FeaturesSection() {
                   height: 0 !important;
                   background: transparent !important;
                 }
-                
-                /* Mobile-specific styles - only apply below 640px */
+
                 @media (max-width: 640px) {
                   .features-scroll {
                     padding-top: 2rem;
@@ -316,7 +384,6 @@ export default function FeaturesSection() {
                     padding: 1rem !important;
                   }
                   .mobile-icon-container {
-                    padding: 0.75rem !important;
                     margin-bottom: 0.75rem !important;
                   }
                   .mobile-icon {
@@ -335,14 +402,6 @@ export default function FeaturesSection() {
                   }
                   .mobile-dot-gap {
                     gap: 0.375rem !important;
-                  }
-                  .mobile-dot-active {
-                    width: 24px !important;
-                    height: 8px !important;
-                  }
-                  .mobile-dot-inactive {
-                    width: 8px !important;
-                    height: 8px !important;
                   }
                 }
               `}</style>
@@ -385,10 +444,11 @@ export default function FeaturesSection() {
                         style={{ border: "2px solid transparent" }}
                       />
 
+                      {/* ── Plain icon — NO background box ── */}
                       <div className="mb-4 flex justify-center relative z-10 mobile-icon-container">
                         <motion.div
                           variants={iconVariants}
-                          className={`p-4 rounded-xl ${feature.color} group-hover:scale-110 transition-all duration-500 mobile-icon`}
+                          className="mobile-icon"
                         >
                           {feature.icon}
                         </motion.div>
@@ -414,11 +474,11 @@ export default function FeaturesSection() {
                 <button
                   key={i}
                   onClick={() => {
-                    startAutoScroll(); // reset timer on manual dot click
+                    startAutoScroll();
                     scrollToIndex(i);
                   }}
                   aria-label={`Go to slide ${i + 1}`}
-                  className="transition-all duration-300 rounded-full focus:outline-none mobile-dot"
+                  className="transition-all duration-300 rounded-full focus:outline-none"
                   style={{
                     width: activeIndex === i ? "28px" : "10px",
                     height: "10px",

@@ -6,10 +6,103 @@ import Footer from "../../components/Layout/Footer";
 import { FASTagDetailsData } from "./data/fastagDetailsData";
 import { FileText, Download, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface FASTagDetailsProps {
   data: FASTagDetailsData;
   showNavbarFooter?: boolean;
+}
+
+function MediaRenderer({
+  media,
+  defaultVideo,
+  title,
+}: {
+  media?: {
+    mediaType: "image" | "video" | "youtube";
+    image?: { asset: { url: string; metadata?: { dimensions: { width: number; height: number } } }; alt?: string };
+    youtubeUrl?: string;
+    videoUrl?: string;
+  };
+  defaultVideo?: string;
+  title: string;
+}) {
+  if (!media && !defaultVideo) return null;
+
+  // 1. YouTube Case
+  if (media?.mediaType === "youtube" && media.youtubeUrl) {
+    const getYouTubeId = (url: string) => {
+      const match = url.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/
+      );
+      return match ? match[1] : null;
+    };
+    const videoId = getYouTubeId(media.youtubeUrl);
+    if (videoId) {
+      return (
+        <div className="mb-8 w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-md">
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}`}
+            title={title}
+            className="w-full h-full"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      );
+    }
+  }
+
+  // 2. Direct Video Case
+  if (media?.mediaType === "video" && media.videoUrl) {
+    return (
+      <div className="mb-8 w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-md bg-black">
+        <video
+          controls
+          src={media.videoUrl}
+          className="w-full h-full object-contain"
+        >
+          Your browser does not support video.
+        </video>
+      </div>
+    );
+  }
+
+  // 3. Image Case (with dereferenced metadata)
+  if (media?.mediaType === "image" && media.image?.asset?.url) {
+    const { url, metadata } = media.image.asset;
+    return (
+      <div className="mb-8 w-full max-w-3xl rounded-2xl overflow-hidden shadow-md border border-slate-200">
+        <Image
+          src={url}
+          alt={media.image.alt || title}
+          width={metadata?.dimensions?.width || 1200}
+          height={metadata?.dimensions?.height || 675}
+          className="w-full h-auto object-cover"
+          priority
+        />
+      </div>
+    );
+  }
+
+  // Fallback to default local video url if no Sanity media matches
+  if (defaultVideo) {
+    return (
+      <div className="mb-8 w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-md">
+        <iframe
+          src={defaultVideo}
+          title={title}
+          className="w-full h-full"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+    );
+  }
+
+  return null;
 }
 
 export default function FASTagDetails({
@@ -53,18 +146,11 @@ export default function FASTagDetails({
                 </div>
               </div>
               
-              {data.videoUrl && (
-                <div className="mb-8 w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-md">
-                  <iframe
-                    src={data.videoUrl}
-                    title={data.title}
-                    className="w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              )}
+              <MediaRenderer 
+                media={data.media} 
+                defaultVideo={data.videoUrl} 
+                title={data.title} 
+              />
 
               <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mb-8">
                 {data.description}

@@ -7,7 +7,7 @@ import { CreditCard, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
 
 const fastagOptions = [
   {
-    id: "customer",
+    id: "buy",
     title: "Buy FASTag for Your Vehicle",
     description:
       "Users can directly purchase FASTag through Garuda OM for personal or business vehicles. The FASTag enables automatic toll payments, reduces waiting time at toll plazas, and allows seamless integration with vehicle tracking systems.",
@@ -22,7 +22,7 @@ const fastagOptions = [
     ],
     buttonText: "Get FASTag",
     buttonLink: "/#contact",
-    learnMoreLink: "/fastag/customer",
+    learnMoreLink: "/fastag/buy-fastag",
     buttonVariant: "primary" as const,
     badge: "For Vehicle Owners",
     badgeIcon: ShieldCheck,
@@ -43,14 +43,23 @@ const fastagOptions = [
     ],
     buttonText: "Become a Partner",
     buttonLink: "/#contact",
-    learnMoreLink: "/fastag/partner",
+    learnMoreLink: "/fastag/become-a-partner",
     buttonVariant: "outline" as const,
     badge: "Business Opportunity",
     badgeIcon: TrendingUp,
   },
 ];
 
+interface FastTagSanityData {
+  cards?: {
+    identifier: string;
+    title: string;
+    description: string;
+  }[];
+}
+
 export default function FASTagManagement() {
+  const displayedOptions = fastagOptions;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -206,7 +215,7 @@ export default function FASTagManagement() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
         >
-          {fastagOptions.map((option, index) => {
+          {displayedOptions.map((option, index) => {
             const Icon = option.icon;
 
             return (

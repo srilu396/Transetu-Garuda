@@ -11,8 +11,6 @@ import {
 
 const PHONE = "+917780274792";
 const EMAIL = "info@garudaom.online";
-const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, "")}`;
-const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${EMAIL}`;
 
 function WhatsAppIcon({
   className,
@@ -31,58 +29,93 @@ function WhatsAppIcon({
   );
 }
 
-const buttons = [
-  {
-    label: "WhatsApp",
-    href: WHATSAPP_URL,
-    icon: WhatsAppIcon,
-    bgColor: "#25D366",
-    isActionable: true,
-    external: true,
-  },
-  {
-    label: "Facebook",
-    href: "#",
-    icon: Facebook,
-    bgColor: "#1877F2",
-    isActionable: false,
-    external: false,
-  },
-  {
-    label: "Instagram",
-    href: "#",
-    icon: Instagram,
-    bgColor: "linear-gradient(135deg, #F58529, #DD2A7B, #8134AF)",
-    isActionable: false,
-    external: false,
-  },
-  {
-    label: "LinkedIn",
-    href: "#",
-    icon: Linkedin,
-    bgColor: "#0A66C2",
-    isActionable: false,
-    external: false,
-  },
-  {
-    label: "Email",
-    href: GMAIL_URL,
-    icon: Mail,
-    bgColor: "#E53935",
-    isActionable: true,
-    external: true,
-  },
-  {
-    label: "Phone",
-    href: `tel:${PHONE}`,
-    icon: Phone,
-    bgColor: "#43A047",
-    isActionable: true,
-    external: false,
-  },
-];
+import { fetchSanityQuery } from "@/actions/sanity";
+import { SITE_SETTINGS_QUERY } from "@/lib/queries";
+
+interface SiteSettings {
+  phone?: string;
+  email?: string;
+  whatsapp?: string;
+  facebook?: string;
+  instagram?: string;
+  linkedin?: string;
+}
 
 export default function SocialContactBar() {
+  const [siteSettings, setSiteSettings] = React.useState<SiteSettings | null>(null);
+
+  React.useEffect(() => {
+    async function getSettings() {
+      try {
+        const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+        const data = await fetchSanityQuery(SITE_SETTINGS_QUERY, {}, isIframe);
+        if (data) setSiteSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch Site Settings for Social Bar:", error);
+      }
+    }
+    getSettings();
+  }, []);
+
+  const phone = siteSettings?.phone || PHONE;
+  const email = siteSettings?.email || EMAIL;
+
+  const whatsappUrl = siteSettings?.whatsapp?.startsWith('http') 
+    ? siteSettings.whatsapp 
+    : `https://wa.me/${(siteSettings?.whatsapp || phone).replace(/\D/g, "")}`;
+    
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${email}`;
+
+  const buttons = [
+    {
+      label: "WhatsApp",
+      href: whatsappUrl,
+      icon: WhatsAppIcon,
+      bgColor: "#25D366",
+      isActionable: true,
+      external: true,
+    },
+    {
+      label: "Facebook",
+      href: siteSettings?.facebook || "#",
+      icon: Facebook,
+      bgColor: "#1877F2",
+      isActionable: !!siteSettings?.facebook,
+      external: true,
+    },
+    {
+      label: "Instagram",
+      href: siteSettings?.instagram || "#",
+      icon: Instagram,
+      bgColor: "linear-gradient(135deg, #F58529, #DD2A7B, #8134AF)",
+      isActionable: !!siteSettings?.instagram,
+      external: true,
+    },
+    {
+      label: "LinkedIn",
+      href: siteSettings?.linkedin || "#",
+      icon: Linkedin,
+      bgColor: "#0A66C2",
+      isActionable: !!siteSettings?.linkedin,
+      external: true,
+    },
+    {
+      label: "Email",
+      href: gmailUrl,
+      icon: Mail,
+      bgColor: "#E53935",
+      isActionable: true,
+      external: true,
+    },
+    {
+      label: "Phone",
+      href: `tel:${phone}`,
+      icon: Phone,
+      bgColor: "#43A047",
+      isActionable: true,
+      external: false,
+    },
+  ];
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof buttons[0]) => {
     if (!item.isActionable) {
       e.preventDefault();

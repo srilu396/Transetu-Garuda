@@ -1,56 +1,286 @@
 // sanity.config.ts
-import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure'
-import { visionTool } from '@sanity/vision'
-import { schemaTypes } from './src/sanity/schemas'
+import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
+import { visionTool } from "@sanity/vision";
+import { presentationTool } from "sanity/presentation";
+import { schemaTypes } from "./src/sanity/schemas";
 
 export default defineConfig({
-  name: 'garuda-om-cms',
-  title: 'Garuda OM Admin Panel',
+  name: "garuda-om-cms",
+  title: "Garuda OM Admin Panel",
+  basePath: "/studio",
 
-  projectId: 'tuxe1ipn',
-  dataset: 'production',
+  projectId: "tuxe1ipn",
+  dataset: "production",
 
   plugins: [
     structureTool({
       structure: (S) => {
         return S.list()
-          .title('Content')
+          .title("Content")
           .items([
             // GPS Solution Cards
             S.listItem()
-              .title('GPS Solution Cards')
-              .schemaType('gpsSolutionCard')
+              .title("GPS Solution Cards")
+              .schemaType("gpsSolutionCard")
               .child(
-                S.documentTypeList('gpsSolutionCard')
-                  .title('GPS Solution Cards')
-                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                S.documentTypeList("gpsSolutionCard")
+                  .title("GPS Solution Cards")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
               ),
-            
+
             // GPS Solution Pages - with custom title
             S.listItem()
-              .title('GPS Solution Pages')  // ← This controls the sidebar text
-              .schemaType('solutionPage')
+              .title("GPS Solution Pages") // ← This controls the sidebar text
+              .schemaType("solutionPage")
               .child(
-                S.documentTypeList('solutionPage')
-                  .title('GPS Solution Pages')
-                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                S.documentTypeList("solutionPage")
+                  .title("GPS Solution Pages")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
               ),
-            
+
             S.divider(),
-            
+
+            // FASTag detail pages — fixed documents only (no “Create new” list)
+            S.listItem()
+              .title("FASTag Detail Pages")
+              .child(
+                S.list()
+                  .title("FASTag Detail Pages")
+                  .items([
+                    S.listItem()
+                      .title("Buy FASTag for Your Vehicle")
+                      .child(
+                        S.document()
+                          .schemaType("fastagDetailPage")
+                          .documentId("fastagDetailPage-buy-fastag"),
+                      ),
+                    S.listItem()
+                      .title("Become a FASTag Business Partner")
+                      .child(
+                        S.document()
+                          .schemaType("fastagDetailPage")
+                          .documentId("fastagDetailPage-become-a-partner"),
+                      ),
+                  ]),
+              ),
+
+            S.divider(),
+
+            // Industrial Cards
+            S.listItem()
+              .title("Industrial Cards")
+              .schemaType("industrialCard")
+              .child(
+                S.documentTypeList("industrialCard")
+                  .title("Industrial Cards")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
+              ),
+
+            // Industrial Detail Pages
+            S.listItem()
+              .title("Industrial Pages")
+              .schemaType("industrialDetail")
+              .child(
+                S.documentTypeList("industrialDetail")
+                  .title("Industrial Pages")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
+              ),
+
+            S.divider(),
+
             // Other document types
-            S.documentTypeListItem('industryPage').title('Industry Pages'),
-            S.documentTypeListItem('featureCard').title('Why Us Feature Cards'),
-            S.documentTypeListItem('fastagContent').title('FASTag Content'),
-            S.documentTypeListItem('siteSettings').title('Site Settings'),
-          ])
+
+            S.listItem()
+              .title("Site Settings")
+              .child(
+                S.document()
+                  .schemaType("siteSettings")
+                  .documentId("siteSettings"),
+              ),
+
+            S.listItem()
+              .title("About Us Section")
+              .child(
+                S.document()
+                  .schemaType("aboutSection")
+                  .documentId("aboutSection"),
+              ),
+
+            S.listItem()
+              .title("Watch Platform Demo")
+              .child(
+                S.document()
+                  .schemaType("watchPlatformDemoSection")
+                  .documentId("watchPlatformDemoSection"),
+              ),
+
+            S.listItem()
+              .title("Feature Cards")
+              .child(
+                S.document()
+                  .schemaType("featureCardsSection")
+                  .documentId("featureCardsSection"),
+              ),
+          ]);
       },
     }),
     visionTool(),
+    presentationTool({
+      previewUrl: {
+        origin: "http://localhost:3000",
+        preview: "/",
+        previewMode: {
+          enable: "/api/preview",
+          disable: "/api/exit-preview",
+        },
+      },
+      resolve: {
+        locations: {
+          industrialDetail: {
+            select: {
+              title: "title",
+              slug: "slug.current",
+            },
+            resolve: (doc: any) => {
+              if (!doc?.slug) return null;
+              return {
+                locations: [
+                  {
+                    title: doc.title || "Untitled",
+                    href: `/industries/${doc.slug}`,
+                  },
+                ],
+              };
+            },
+          },
+          solutionPage: {
+            select: {
+              title: "title",
+              slug: "slug.current",
+            },
+            resolve: (doc: any) => {
+              if (!doc?.slug) return null;
+              return {
+                locations: [
+                  {
+                    title: doc.title || "Untitled",
+                    href: `/solutions/${doc.slug}`,
+                  },
+                ],
+              };
+            },
+          },
+
+          fastagDetailPage: {
+            select: {
+              title: "title",
+              slug: "slug.current",
+              _id: "_id",
+            },
+            resolve: (doc: { title?: string; slug?: string; _id?: string }) => {
+              const rawId = doc?._id?.replace(/^drafts\./, "");
+              let href: string | null = null;
+
+              if (rawId === "fastagDetailPage-buy-fastag") {
+                href = "/fastag/buy-fastag";
+              } else if (rawId === "fastagDetailPage-become-a-partner") {
+                href = "/fastag/become-a-partner";
+              } else if (doc?.slug) {
+                href = `/fastag/${doc.slug}`;
+              }
+
+              if (!href) return null;
+              return {
+                locations: [
+                  {
+                    title: doc.title || "Untitled",
+                    href,
+                  },
+                ],
+              };
+            },
+          },
+
+          aboutSection: {
+            select: {
+              title: "title",
+            },
+            resolve: () => {
+              return {
+                locations: [
+                  {
+                    title: "About Us (Home)",
+                    href: "/#about",
+                  },
+                ],
+              };
+            },
+          },
+          watchPlatformDemoSection: {
+            select: {
+              title: "heading",
+            },
+            resolve: () => {
+              return {
+                locations: [
+                  {
+                    title: "Watch Platform Demo (Home)",
+                    href: "/#videos",
+                  },
+                ],
+              };
+            },
+          },
+          siteSettings: {
+            select: {},
+            resolve: () => {
+              return {
+                locations: [
+                  {
+                    title: "Site Settings",
+                    href: "/",
+                  },
+                ],
+              };
+            },
+          },
+        },
+      },
+    }),
   ],
 
   schema: {
     types: schemaTypes,
   },
-})
+
+  document: {
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === "global") {
+        return prev.filter(
+          (templateItem) =>
+            templateItem.templateId !== "aboutSection" &&
+            templateItem.templateId !== "watchPlatformDemoSection" &&
+            templateItem.templateId !== "siteSettings" &&
+            templateItem.templateId !== "featureCardsSection" &&
+            templateItem.templateId !== "fastagDetailPage",
+        );
+      }
+      return prev;
+    },
+    actions: (prev, { schemaType }) => {
+      if (schemaType === "siteSettings") {
+        return prev.filter(
+          ({ action }) =>
+            action === "publish" ||
+            action === "discardChanges" ||
+            action === "restore",
+        );
+      }
+      if (schemaType === "fastagDetailPage") {
+        return prev.filter(({ action }) => action !== "delete");
+      }
+      return prev;
+    },
+  },
+});

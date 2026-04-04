@@ -3,6 +3,8 @@ import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
 
+export const revalidate = 0; // Ensure instant updates on page reload
+
 export const metadata = pageMetadata({
   title: `${SITE_BRAND} — GPS Tracking, Fleet Management & FASTag India`,
   description:
@@ -17,6 +19,7 @@ export const metadata = pageMetadata({
   ],
 });
 import HeroSection from "@/sections/hero/Hero";
+
 
 const SectionPlaceholder = () => (
   <div className="py-24 animate-pulse bg-slate-50" />
@@ -62,7 +65,10 @@ const ContactSection = dynamic(
   { ssr: false, loading: () => <SectionPlaceholder /> }
 );
 
-export default function Home() {
+export default async function Home() {
+
+
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

@@ -1,15 +1,24 @@
 import { gpsSolutionCard } from './gpsSolutionCard'
 import { solutionPage } from './solutionPage'
-import { industryPage } from './industryPage'
-import { featureCard } from './featureCard'
-import { fastagContent } from './fastagContent'
 import { siteSettings } from './siteSettings'
+import { aboutSection } from './aboutSection'
+import { demoCard, watchPlatformDemoSection } from './watchPlatformDemo'
+import { industrialCard } from './industrialCard'
+import { industrialDetail } from './industrialDetail'
+import { featureCardsSection } from './featureCardsSection'
+import { fastagDetailPage } from './fastagDetailPage'
+
 
 export const schemaTypes = [
   gpsSolutionCard,
   solutionPage,
-  industryPage,
-  featureCard,
-  fastagContent,
   siteSettings,
+  aboutSection,
+  demoCard,
+  watchPlatformDemoSection,
+  industrialCard,
+  industrialDetail,
+  featureCardsSection,
+  fastagDetailPage,
+
 ]

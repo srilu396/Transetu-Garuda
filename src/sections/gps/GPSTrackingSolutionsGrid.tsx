@@ -19,8 +19,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { client, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import { GPS_CARDS_QUERY } from "@/lib/queries";
+import { fetchSanityQuery } from "@/actions/sanity";
 import { solutions as localSolutionsData, SolutionData } from "@/sections/gps/data/gpsData";
 import { assetTracking } from "@/sections/gps/data/asset-tracking";
 
@@ -391,7 +392,8 @@ export default function ProductsSection() {
   useEffect(() => {
     async function fetchCards() {
       try {
-        const sanityCards: SanityGPSCard[] = await client.fetch(GPS_CARDS_QUERY);
+        const isIframe = window.self !== window.top;
+        const sanityCards: SanityGPSCard[] = await fetchSanityQuery(GPS_CARDS_QUERY, {}, isIframe);
         if (sanityCards && sanityCards.length > 0) {
           setProducts(sanityCards.map(sanityCardToProduct));
         }
@@ -585,7 +587,7 @@ export default function ProductsSection() {
                   }}
                 >
                   {product.image ? (
-                    <div className="w-full h-full">
+                    <div className="relative w-full h-full">
                       <Image
                         src={product.image}
                         alt={product.title}

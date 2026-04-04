@@ -2,24 +2,60 @@
 import React from "react";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
-import { IndustryData } from "./data/industriesData";
 import { CheckCircle, ArrowLeft } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { useRouter } from "next/navigation";
 
 
 interface IndustryDetailWrapperProps {
-  industry: IndustryData;
+  industry: {
+    title: string;
+    slug: { current: string } | string;
+    description: string;
+    badge?: string;
+    category?: string;
+    iconName?: string;
+    icon?: string;
+    imageUrl?: string;
+    industryOverview?: { smallParagraph?: string; largeParagraph?: string };
+    detailedDescription?: string;
+    infoCards?: unknown[];
+    stats?: { iconName?: string; icon?: string; value: string; label: string }[];
+    coreFeatures?: { text: string }[];
+    features?: string[];
+    keyBenefits?: { text: string }[];
+    benefits?: string[];
+    keySolutions?: { solutionText: string }[];
+    solutions?: string[];
+  };
   showNavbarFooter?: boolean;
   onBack?: () => void;
 }
 
 export default function IndustryDetails({
-  industry,
+  industry: rawIndustry,
   showNavbarFooter = true,
   onBack,
 }: IndustryDetailWrapperProps) {
   const router = useRouter();
+
+  // Normalize data between Static and Sanity
+  const industry = {
+    title: rawIndustry.title,
+    slug: typeof rawIndustry.slug === "string" ? rawIndustry.slug : rawIndustry.slug?.current,
+    description: rawIndustry.description,
+    badge: rawIndustry.badge || rawIndustry.category,
+    icon: rawIndustry.iconName || rawIndustry.icon,
+    imageUrl: rawIndustry.imageUrl,
+    // Overview
+    overviewSmall: rawIndustry.industryOverview?.smallParagraph || `Professional tracking and management solutions tailored for ${rawIndustry.title.toLowerCase()} sector.`,
+    overviewLarge: rawIndustry.industryOverview?.largeParagraph || rawIndustry.detailedDescription,
+    // Arrays
+    stats: rawIndustry.infoCards || rawIndustry.stats,
+    features: (rawIndustry.coreFeatures || []).map((f: { text: string }) => f.text) || rawIndustry.features,
+    benefits: (rawIndustry.keyBenefits || []).map((b: { text: string }) => b.text) || rawIndustry.benefits,
+    solutions: (rawIndustry.keySolutions || []).map((s: { solutionText: string }) => s.solutionText) || rawIndustry.solutions,
+  };
 
   const handleBack = () => {
     if (onBack) {
@@ -37,18 +73,20 @@ export default function IndustryDetails({
     }
 
     // First navigate to homepage
-    router.push('/');
-    
+    router.push("/");
+
     // Use setTimeout to ensure the page has loaded before scrolling
     setTimeout(() => {
-      const contactSection = document.getElementById('contact');
+      const contactSection = document.getElementById("contact");
       if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+        contactSection.scrollIntoView({ behavior: "smooth" });
       } else {
         // If contact section not found, try to find it by class or alternative selector
-        const contactElement = document.querySelector('[id="contact"], .contact-section, #contact-section');
+        const contactElement = document.querySelector(
+          '[id="contact"], .contact-section, #contact-section'
+        );
         if (contactElement) {
-          contactElement.scrollIntoView({ behavior: 'smooth' });
+          contactElement.scrollIntoView({ behavior: "smooth" });
         }
       }
     }, 500); // Increased delay to ensure page fully loads
@@ -65,8 +103,11 @@ export default function IndustryDetails({
             onClick={handleBack}
             className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
           >
-            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Back to {industry.category}</span>
+            <ArrowLeft
+              size={20}
+              className="group-hover:-translate-x-1 transition-transform"
+            />
+            <span>Back to {industry.badge}</span>
           </button>
 
           {/* Header with Industry Icon and Title */}
@@ -74,13 +115,16 @@ export default function IndustryDetails({
             <div className="flex flex-col md:flex-row md:items-center gap-6 mb-6">
               <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center shrink-0">
                 {(() => {
-                  const IndustryIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[industry.icon] || LucideIcons.Building;
+                  const IndustryIcon =
+                    (LucideIcons as unknown as Record<string, React.ElementType>)[
+                      (industry.icon as string) || "Building"
+                    ] || LucideIcons.Building;
                   return <IndustryIcon size={48} className="text-white" />;
                 })()}
               </div>
               <div>
                 <span className="text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
-                  {industry.category}
+                  {industry.badge}
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-bold">
                   {industry.title}
@@ -105,17 +149,27 @@ export default function IndustryDetails({
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {industry.stats?.map((stat, index) => {
-              const StatIcon = (LucideIcons as unknown as Record<string, React.ElementType>)[stat.icon] || LucideIcons.CheckCircle;
+            {(industry.stats as { iconName?: string; icon?: string; value: string; label: string }[])?.map((stat, index: number) => {
+              const StatIcon =
+                (LucideIcons as unknown as Record<string, React.ElementType>)[
+                  (stat.iconName || stat.icon || "CheckCircle") as unknown as string
+                ] || LucideIcons.CheckCircle;
               return (
-                <div key={index} className="card-glass p-8 text-center hover:border-primary/30 transition-all duration-300">
+                <div
+                  key={index}
+                  className="card-glass p-8 text-center hover:border-primary/30 transition-all duration-300"
+                >
                   <div className="flex justify-center mb-4">
                     <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center">
                       <StatIcon className="w-7 h-7 text-primary" />
                     </div>
                   </div>
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-3xl font-bold text-primary mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                    {stat.label}
+                  </div>
                 </div>
               );
             })}
@@ -132,10 +186,10 @@ export default function IndustryDetails({
                 </h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-muted-foreground leading-relaxed text-lg italic mb-8 border-l-4 border-primary/20 pl-6">
-                    Professional tracking and management solutions tailored for {industry.title.toLowerCase()} sector.
+                    {industry.overviewSmall}
                   </p>
                   <p className="text-muted-foreground leading-relaxed text-lg">
-                    {industry.detailedDescription}
+                    {industry.overviewLarge}
                   </p>
                 </div>
               </section>
@@ -146,8 +200,11 @@ export default function IndustryDetails({
                   Key Solutions
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {industry.solutions.map((solution, index) => (
-                    <div key={index} className="flex items-center gap-4 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group">
+                  {industry.solutions.map((solution: string, index: number) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-4 p-5 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors group"
+                    >
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                         <span className="font-bold">{index + 1}</span>
                       </div>
@@ -163,7 +220,7 @@ export default function IndustryDetails({
               <div className="card-glass p-8 bg-gradient-to-br from-primary/5 to-transparent">
                 <h3 className="text-2xl font-bold mb-6">Core Features</h3>
                 <ul className="space-y-4">
-                  {industry.features.map((feature, index) => (
+                  {industry.features.map((feature: string, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-1" />
                       <span className="text-muted-foreground">{feature}</span>
@@ -175,7 +232,7 @@ export default function IndustryDetails({
               <div className="card-glass p-8 border-primary/20">
                 <h3 className="text-2xl font-bold mb-6">Key Benefits</h3>
                 <ul className="space-y-4">
-                  {industry.benefits.map((benefit, index) => (
+                  {industry.benefits.map((benefit: string, index: number) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-primary rounded-full shrink-0 mt-2.5" />
                       <span className="text-muted-foreground">{benefit}</span>
@@ -195,7 +252,8 @@ export default function IndustryDetails({
               Ready to optimize your {industry.title.toLowerCase()} operations?
             </h2>
             <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto relative z-10">
-              Contact our experts today for a tailored demonstration of our GPS tracking and management platform.
+              Contact our experts today for a tailored demonstration of our GPS
+              tracking and management platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <button
