@@ -14,7 +14,15 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  transpilePackages: ["sanity", "@portabletext/editor", "next-sanity"],
+  transpilePackages: [
+    "sanity",
+    "next-sanity",
+    "@sanity/icons",
+    "@sanity/ui",
+    "@sanity/presentation",
+    "@sanity/visual-editing",
+    "@portabletext/editor",
+  ],
   images: {
     remotePatterns: [
       {

@@ -138,27 +138,6 @@ export const SITE_SETTINGS_QUERY = `
   }
 `;
 
-// ── 8. FASTAG DETAILS (Managed via fastTagDetailsSection) ──
-// This query fetches the two fixed cards (Buy/Partner) and their detail contents.
-// Incorporates $preview logic to support draft updates in presentation mode.
-export const FASTAG_DETAILS_QUERY = `
-  *[_type == "fastTagDetailsSection" && ($preview || !(_id in path("drafts.**")))] [0] {
-    _id,
-    cards[] {
-      identifier,
-      title,
-      pageTitle,
-      youtubeUrl,
-      description,
-      documents[] {
-        documentName,
-        description,
-        "fileUrl": file.asset->url
-      }
-    }
-  }
-`;
-
 // ── 9. ABOUT US SECTION (Singleton) ──
 export const ABOUT_SECTION_QUERY = `
   *[_type == "aboutSection" && _id == "aboutSection"] | order(_updatedAt desc) [0] {

@@ -1,226 +1,193 @@
 // sanity.config.ts
-import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure'
-import { visionTool } from '@sanity/vision'
-import { presentationTool } from 'sanity/presentation'
-import { schemaTypes } from './src/sanity/schemas'
+import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
+import { visionTool } from "@sanity/vision";
+import { presentationTool } from "sanity/presentation";
+import { schemaTypes } from "./src/sanity/schemas";
 
 export default defineConfig({
-  name: 'garuda-om-cms',
-  title: 'Garuda OM Admin Panel',
-  basePath: '/studio',
+  name: "garuda-om-cms",
+  title: "Garuda OM Admin Panel",
+  basePath: "/studio",
 
-  projectId: 'tuxe1ipn',
-  dataset: 'production',
+  projectId: "tuxe1ipn",
+  dataset: "production",
 
   plugins: [
     structureTool({
       structure: (S) => {
         return S.list()
-          .title('Content')
+          .title("Content")
           .items([
             // GPS Solution Cards
             S.listItem()
-              .title('GPS Solution Cards')
-              .schemaType('gpsSolutionCard')
+              .title("GPS Solution Cards")
+              .schemaType("gpsSolutionCard")
               .child(
-                S.documentTypeList('gpsSolutionCard')
-                  .title('GPS Solution Cards')
-                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                S.documentTypeList("gpsSolutionCard")
+                  .title("GPS Solution Cards")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
               ),
-            
+
             // GPS Solution Pages - with custom title
             S.listItem()
-              .title('GPS Solution Pages')  // ← This controls the sidebar text
-              .schemaType('solutionPage')
+              .title("GPS Solution Pages") // ← This controls the sidebar text
+              .schemaType("solutionPage")
               .child(
-                S.documentTypeList('solutionPage')
-                  .title('GPS Solution Pages')
-                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                S.documentTypeList("solutionPage")
+                  .title("GPS Solution Pages")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
               ),
 
             S.divider(),
 
             // Industrial Cards
             S.listItem()
-              .title('Industrial Cards')
-              .schemaType('industrialCard')
+              .title("Industrial Cards")
+              .schemaType("industrialCard")
               .child(
-                S.documentTypeList('industrialCard')
-                  .title('Industrial Cards')
-                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                S.documentTypeList("industrialCard")
+                  .title("Industrial Cards")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
               ),
-            
+
             // Industrial Detail Pages
             S.listItem()
-              .title('Industrial Pages')
-              .schemaType('industrialDetail')
+              .title("Industrial Pages")
+              .schemaType("industrialDetail")
               .child(
-                S.documentTypeList('industrialDetail')
-                  .title('Industrial Pages')
-                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                S.documentTypeList("industrialDetail")
+                  .title("Industrial Pages")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
               ),
-            
-            S.divider(),
-            
-            // Other document types
-            
-            S.listItem()
-              .title('Site Settings')
-              .child(
-                S.document()
-                  .schemaType('siteSettings')
-                  .documentId('siteSettings')
-              ),
-            
-            S.listItem()
-              .title('About Us Section')
-              .child(
-                S.document()
-                  .schemaType('aboutSection')
-                  .documentId('aboutSection')
-              ),
-            
-            S.listItem()
-              .title('Watch Platform Demo')
-              .child(
-                S.document()
-                  .schemaType('watchPlatformDemoSection')
-                  .documentId('watchPlatformDemoSection')
-              ),
-            
-            S.listItem()
-              .title('Feature Cards')
-              .child(
-                S.document()
-                  .schemaType('featureCardsSection')
-                  .documentId('featureCardsSection')
-              ),
-            
+
             S.divider(),
 
+            // Other document types
+
             S.listItem()
-              .title('Fast Tag Details Section')
+              .title("Site Settings")
               .child(
                 S.document()
-                  .schemaType('fastTagDetailsSection')
-                  .documentId('fastTagDetailsSection')
+                  .schemaType("siteSettings")
+                  .documentId("siteSettings"),
               ),
-          ])
+
+            S.listItem()
+              .title("About Us Section")
+              .child(
+                S.document()
+                  .schemaType("aboutSection")
+                  .documentId("aboutSection"),
+              ),
+
+            S.listItem()
+              .title("Watch Platform Demo")
+              .child(
+                S.document()
+                  .schemaType("watchPlatformDemoSection")
+                  .documentId("watchPlatformDemoSection"),
+              ),
+
+            S.listItem()
+              .title("Feature Cards")
+              .child(
+                S.document()
+                  .schemaType("featureCardsSection")
+                  .documentId("featureCardsSection"),
+              ),
+          ]);
       },
     }),
     visionTool(),
     presentationTool({
       previewUrl: {
-        origin: 'http://localhost:3000',
-        preview: '/',
+        origin: "http://localhost:3000",
+        preview: "/",
         previewMode: {
-          enable: '/api/preview',
-          disable: '/api/exit-preview',
+          enable: "/api/preview",
+          disable: "/api/exit-preview",
         },
       },
       resolve: {
         locations: {
-          'industrialDetail': {
+          industrialDetail: {
             select: {
-              title: 'title',
-              slug: 'slug.current',
+              title: "title",
+              slug: "slug.current",
             },
             resolve: (doc: any) => {
-              if (!doc?.slug) return null
+              if (!doc?.slug) return null;
               return {
                 locations: [
                   {
-                    title: doc.title || 'Untitled',
+                    title: doc.title || "Untitled",
                     href: `/industrial/${doc.slug}`,
                   },
                 ],
-              }
-            }
+              };
+            },
           },
-          'solutionPage': {
+          solutionPage: {
             select: {
-              title: 'title',
-              slug: 'slug.current',
+              title: "title",
+              slug: "slug.current",
             },
             resolve: (doc: any) => {
-              if (!doc?.slug) return null
+              if (!doc?.slug) return null;
               return {
                 locations: [
                   {
-                    title: doc.title || 'Untitled',
+                    title: doc.title || "Untitled",
                     href: `/solutions/${doc.slug}`,
                   },
                 ],
-              }
-            }
+              };
+            },
           },
 
-          'aboutSection': {
+          aboutSection: {
             select: {
-              title: 'title',
+              title: "title",
             },
             resolve: () => {
               return {
                 locations: [
-                   {
-                     title: 'About Us (Home)',
-                     href: '/#about',
-                   },
+                  {
+                    title: "About Us (Home)",
+                    href: "/#about",
+                  },
                 ],
-              }
-            }
+              };
+            },
           },
-          'watchPlatformDemoSection': {
+          watchPlatformDemoSection: {
             select: {
-              title: 'heading',
+              title: "heading",
             },
             resolve: () => {
               return {
                 locations: [
-                   {
-                     title: 'Watch Platform Demo (Home)',
-                     href: '/#videos',
-                   },
+                  {
+                    title: "Watch Platform Demo (Home)",
+                    href: "/#videos",
+                  },
                 ],
-              }
-            }
+              };
+            },
           },
-          'siteSettings': {
+          siteSettings: {
             select: {},
             resolve: () => {
               return {
                 locations: [
-                   {
-                     title: 'Site Settings',
-                     href: '/',
-                   },
+                  {
+                    title: "Site Settings",
+                    href: "/",
+                  },
                 ],
-              }
-            }
-          },
-          'fastTagDetailsSection': {
-            select: {
-              cards: 'cards',
+              };
             },
-            resolve: (doc: any) => {
-              return {
-                locations: [
-                   {
-                     title: 'Home Page',
-                     href: '/',
-                   },
-                   {
-                     title: 'Buy FASTag',
-                     href: '/fastag/buy',
-                   },
-                   {
-                     title: 'Become a Partner',
-                     href: '/fastag/partner',
-                   },
-                ],
-              }
-            }
           },
         },
       },
@@ -233,16 +200,27 @@ export default defineConfig({
 
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
-      if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'aboutSection' && templateItem.templateId !== 'watchPlatformDemoSection' && templateItem.templateId !== 'siteSettings' && templateItem.templateId !== 'featureCardsSection' && templateItem.templateId !== 'fastTagDetailsSection')
+      if (creationContext.type === "global") {
+        return prev.filter(
+          (templateItem) =>
+            templateItem.templateId !== "aboutSection" &&
+            templateItem.templateId !== "watchPlatformDemoSection" &&
+            templateItem.templateId !== "siteSettings" &&
+            templateItem.templateId !== "featureCardsSection",
+        );
       }
-      return prev
+      return prev;
     },
     actions: (prev, { schemaType }) => {
-      if (schemaType === 'siteSettings') {
-        return prev.filter(({ action }) => action === 'publish' || action === 'discardChanges' || action === 'restore')
+      if (schemaType === "siteSettings") {
+        return prev.filter(
+          ({ action }) =>
+            action === "publish" ||
+            action === "discardChanges" ||
+            action === "restore",
+        );
       }
-      return prev
+      return prev;
     },
   },
-})
+});

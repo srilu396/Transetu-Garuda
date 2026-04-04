@@ -58,25 +58,8 @@ interface FastTagSanityData {
   }[];
 }
 
-export default function FASTagManagement({ sanityData }: { sanityData?: FastTagSanityData }) {
-  // Merge Sanity data into fastagOptions with robust safety checks
-  const displayedOptions = fastagOptions.map(option => {
-    // Return early if sanityData or cards is missing
-    if (!sanityData?.cards) return option;
-    
-    const sData = sanityData.cards.find(c => 
-      c.identifier === (option.id === 'buy' ? 'buyFastTag' : 'businessPartner')
-    );
-    
-    if (sData) {
-      return {
-        ...option,
-        title: sData.title || option.title,
-        description: sData.description || option.description,
-      };
-    }
-    return option;
-  });
+export default function FASTagManagement() {
+  const displayedOptions = fastagOptions;
 
   const containerVariants = {
     hidden: { opacity: 0 },

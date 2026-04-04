@@ -3,8 +3,6 @@ import { Metadata } from "next";
 import FASTagDetailsClient from "@/sections/fastag/FASTagDetailsClient";
 import { notFound, redirect } from "next/navigation";
 import { pageMetadata, SITE_BRAND } from "@/lib/seo";
-import { fetchSanityQuery } from "@/actions/sanity";
-import { FASTAG_DETAILS_QUERY } from "@/lib/queries";
 
 export const revalidate = 0; // Ensure fresh data from Sanity
 
@@ -54,34 +52,11 @@ export default async function FastagDetailsPage({ params }: Props) {
     notFound();
   }
 
-  // Fetch Sanity data with error resilience
-  let fastTagSection = null;
-  try {
-    fastTagSection = await fetchSanityQuery(FASTAG_DETAILS_QUERY);
-    console.log(
-      "[FastagDetailsPage] Server-side Fast Tag Data:",
-      fastTagSection,
-    );
-  } catch (error) {
-    console.error("[FastagDetailsPage] Error fetching Sanity data:", error);
-  }
-
-  // Robustly find the correct card based on identifier with fallback to null
-  const identifierMap = {
-    buy: "buyFastTag",
-    partner: "businessPartner",
-  };
-
-  const cardData =
-    (Array.isArray(fastTagSection?.cards) ? fastTagSection.cards : []).find(
-      (card: { identifier: string }) =>
-        card?.identifier === identifierMap[type as keyof typeof identifierMap],
-    ) || null;
-
+  // Use local data only (Sanity schema removed per request)
   return (
     <FASTagDetailsClient
       type={type as "buy" | "partner"}
-      sanityData={cardData}
+      sanityData={undefined}
     />
   );
 }
