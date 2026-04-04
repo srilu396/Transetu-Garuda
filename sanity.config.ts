@@ -41,32 +41,6 @@ export default defineConfig({
 
             S.divider(),
 
-            // FASTag detail pages — fixed documents only (no “Create new” list)
-            S.listItem()
-              .title("FASTag Detail Pages")
-              .child(
-                S.list()
-                  .title("FASTag Detail Pages")
-                  .items([
-                    S.listItem()
-                      .title("Buy FASTag for Your Vehicle")
-                      .child(
-                        S.document()
-                          .schemaType("fastagDetailPage")
-                          .documentId("fastagDetailPage-buy-fastag"),
-                      ),
-                    S.listItem()
-                      .title("Become a FASTag Business Partner")
-                      .child(
-                        S.document()
-                          .schemaType("fastagDetailPage")
-                          .documentId("fastagDetailPage-become-a-partner"),
-                      ),
-                  ]),
-              ),
-
-            S.divider(),
-
             // Industrial Cards
             S.listItem()
               .title("Industrial Cards")
@@ -148,7 +122,7 @@ export default defineConfig({
                 locations: [
                   {
                     title: doc.title || "Untitled",
-                    href: `/industries/${doc.slug}`,
+                    href: `/industrial/${doc.slug}`,
                   },
                 ],
               };
@@ -166,36 +140,6 @@ export default defineConfig({
                   {
                     title: doc.title || "Untitled",
                     href: `/solutions/${doc.slug}`,
-                  },
-                ],
-              };
-            },
-          },
-
-          fastagDetailPage: {
-            select: {
-              title: "title",
-              slug: "slug.current",
-              _id: "_id",
-            },
-            resolve: (doc: { title?: string; slug?: string; _id?: string }) => {
-              const rawId = doc?._id?.replace(/^drafts\./, "");
-              let href: string | null = null;
-
-              if (rawId === "fastagDetailPage-buy-fastag") {
-                href = "/fastag/buy-fastag";
-              } else if (rawId === "fastagDetailPage-become-a-partner") {
-                href = "/fastag/become-a-partner";
-              } else if (doc?.slug) {
-                href = `/fastag/${doc.slug}`;
-              }
-
-              if (!href) return null;
-              return {
-                locations: [
-                  {
-                    title: doc.title || "Untitled",
-                    href,
                   },
                 ],
               };
@@ -262,8 +206,7 @@ export default defineConfig({
             templateItem.templateId !== "aboutSection" &&
             templateItem.templateId !== "watchPlatformDemoSection" &&
             templateItem.templateId !== "siteSettings" &&
-            templateItem.templateId !== "featureCardsSection" &&
-            templateItem.templateId !== "fastagDetailPage",
+            templateItem.templateId !== "featureCardsSection",
         );
       }
       return prev;
@@ -276,9 +219,6 @@ export default defineConfig({
             action === "discardChanges" ||
             action === "restore",
         );
-      }
-      if (schemaType === "fastagDetailPage") {
-        return prev.filter(({ action }) => action !== "delete");
       }
       return prev;
     },

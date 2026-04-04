@@ -128,10 +128,9 @@ export default function FeaturesSection() {
   useEffect(() => {
     async function getFeatures() {
       try {
-        const isIframe = typeof window !== "undefined" && window.self !== window.top;
-        const data = await fetchSanityQuery(FEATURE_CARDS_QUERY, {}, isIframe) as SanityFeatureData | null;
+        const data = await fetchSanityQuery(FEATURE_CARDS_QUERY) as SanityFeatureData | null;
 
-
+        console.log("Feature Cards Data Received:", data);
 
         if (data && data.cards && data.cards.length > 0) {
           const mappedFeatures = data.cards.map((card: SanityFeatureCard) => {

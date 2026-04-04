@@ -71,7 +71,7 @@ export const ALL_SOLUTIONS_QUERY = `
 `;
 
 export const SOLUTION_BY_SLUG_QUERY = `
-  *[_type == "solutionPage" && slug.current == $slug] | order(_updatedAt desc) [0] {
+  *[_type == "solutionPage" && slug.current == $slug][0] {
     _id,
     iconName,
     title,
@@ -201,35 +201,10 @@ export const INDUSTRIAL_CARDS_QUERY = `
 `;
 
 // Fetch specific industrial detail page with explicit draft vs published filtering
-// ── FASTag detail pages: match `slug.current` OR fixed desk document IDs (see fastagCanonical.ts) ──
-export const FASTAG_DETAIL_RESOLVED_QUERY = `
-  *[_type == "fastagDetailPage" && (
-    slug.current == $slug ||
-    _id in $ids
-  )] | order(_updatedAt desc) [0]{
-    _id,
-    _type,
-    title,
-    badge,
-    iconName,
-    overview,
-    youtubeVideoUrl,
-    documents[]{
-      documentName,
-      documentDescription,
-      "documentFileUrl": documentFile.asset->url
-    }
-  }
-`;
 
-export const FASTAG_ALL_SLUGS_QUERY = `
-  *[_type == "fastagDetailPage" && defined(slug.current)]{
-    "slug": slug.current
-  }
-`;
 
 export const INDUSTRIAL_DETAIL_QUERY = `
-  *[_type == "industrialDetail" && slug.current == $slug && ($preview || !(_id in path("drafts.**")))] | order(_updatedAt desc) [0] {
+  *[_type == "industrialDetail" && slug.current == $slug && ($preview || !(_id in path("drafts.**")))] [0] {
     _id,
     iconName,
     badge,

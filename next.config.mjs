@@ -32,8 +32,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
-        port: "",
-        pathname: "/images/**",
       },
     ],
   },
@@ -92,21 +90,6 @@ const nextConfig = {
       {
         source: "/gps-tracking-solutions",
         destination: "/solutions/gps-tracking-solutions",
-        permanent: true,
-      },
-      {
-        source: "/fastag/buy",
-        destination: "/fastag/buy-fastag",
-        permanent: true,
-      },
-      {
-        source: "/fastag/customer",
-        destination: "/fastag/buy-fastag",
-        permanent: true,
-      },
-      {
-        source: "/fastag/partner",
-        destination: "/fastag/become-a-partner",
         permanent: true,
       },
     ];

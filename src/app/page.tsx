@@ -21,6 +21,7 @@ export const metadata = pageMetadata({
 import HeroSection from "@/sections/hero/Hero";
 
 
+
 const SectionPlaceholder = () => (
   <div className="py-24 animate-pulse bg-slate-50" />
 );
@@ -66,8 +67,6 @@ const ContactSection = dynamic(
 );
 
 export default async function Home() {
-
-
 
   return (
     <div className="min-h-screen bg-background">

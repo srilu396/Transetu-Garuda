@@ -22,7 +22,7 @@ const fastagOptions = [
     ],
     buttonText: "Get FASTag",
     buttonLink: "/#contact",
-    learnMoreLink: "/fastag/buy-fastag",
+    learnMoreLink: "/fastag/buy",
     buttonVariant: "primary" as const,
     badge: "For Vehicle Owners",
     badgeIcon: ShieldCheck,
@@ -43,20 +43,14 @@ const fastagOptions = [
     ],
     buttonText: "Become a Partner",
     buttonLink: "/#contact",
-    learnMoreLink: "/fastag/become-a-partner",
+    learnMoreLink: "/fastag/partner",
     buttonVariant: "outline" as const,
     badge: "Business Opportunity",
     badgeIcon: TrendingUp,
   },
 ];
 
-interface FastTagSanityData {
-  cards?: {
-    identifier: string;
-    title: string;
-    description: string;
-  }[];
-}
+
 
 export default function FASTagManagement() {
   const displayedOptions = fastagOptions;

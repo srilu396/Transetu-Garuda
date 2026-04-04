@@ -9,8 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     { path: "/", changeFrequency: "weekly" as const, priority: 1 },
-    { path: "/fastag/buy-fastag", changeFrequency: "monthly" as const, priority: 0.8 },
-    { path: "/fastag/become-a-partner", changeFrequency: "monthly" as const, priority: 0.8 },
+    { path: "/fastag/customer", changeFrequency: "monthly" as const, priority: 0.8 },
+    { path: "/fastag/partner", changeFrequency: "monthly" as const, priority: 0.8 },
   ];
 
   const solutionRoutes = Object.keys(solutions).map((slug) => ({

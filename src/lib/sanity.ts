@@ -10,7 +10,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn: true, // Use CDN for production
   perspective: "published",
   stega: {
     enabled: false,
