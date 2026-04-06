@@ -11,6 +11,7 @@ import Image from "next/image";
 interface FASTagDetailsProps {
   data: FASTagDetailsData;
   showNavbarFooter?: boolean;
+  onBack?: () => void;
 }
 
 function MediaRenderer({
@@ -108,24 +109,38 @@ function MediaRenderer({
 export default function FASTagDetails({
   data,
   showNavbarFooter = true,
+  onBack,
 }: FASTagDetailsProps) {
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       {showNavbarFooter && <Navbar />}
 
-      <main className={`flex-grow ${showNavbarFooter ? "pt-24" : "pt-8"} pb-20`}>
+      <main className={`flex-grow ${showNavbarFooter ? "pt-32" : "pt-24"} pb-20`}>
         <div className="max-w-5xl mx-auto px-6">
           {/* Back Button */}
-          <Link
-            href="/#fastag-management"
-            className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-8 group font-medium w-fit"
-          >
-            <ArrowLeft
-              size={20}
-              className="group-hover:-translate-x-1 transition-transform"
-            />
-            <span>Back to FASTag</span>
-          </Link>
+          {onBack ? (
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-10 group font-medium w-fit cursor-pointer"
+            >
+              <ArrowLeft
+                size={20}
+                className="group-hover:-translate-x-1 transition-transform"
+              />
+              <span>Back to FASTag</span>
+            </button>
+          ) : (
+            <Link
+              href="/#fastag-management"
+              className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-10 group font-medium w-fit"
+            >
+              <ArrowLeft
+                size={20}
+                className="group-hover:-translate-x-1 transition-transform"
+              />
+              <span>Back to FASTag</span>
+            </Link>
+          )}
 
           {/* Header Section */}
           <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-slate-200/60 mb-12 relative overflow-hidden">

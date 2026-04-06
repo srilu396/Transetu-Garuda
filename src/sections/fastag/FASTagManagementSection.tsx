@@ -1,9 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { CreditCard, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
+import { CreditCard, Handshake, ShieldCheck, TrendingUp, Truck } from "lucide-react";
+import dynamic from "next/dynamic";
+
+// Dynamic imports for the detail view components
+const SlidePanel = dynamic(() => import("@/components/UI/SlidePanel"), {
+  ssr: false,
+});
+import FASTagDetails from "./FASTagDetails";
+import { buyFASTagData } from "./data/buyFASTagData";
+import { becomePartnerData } from "./data/becomePartnerData";
 
 const fastagOptions = [
   {
@@ -53,6 +62,7 @@ const fastagOptions = [
 
 
 export default function FASTagManagement() {
+  const [selectedOption, setSelectedOption] = useState<"buy" | "partner" | null>(null);
   const displayedOptions = fastagOptions;
 
   const containerVariants = {
@@ -313,12 +323,12 @@ export default function FASTagManagement() {
                     whileTap="tap"
                     className="w-full"
                   >
-                    <Link
-                      href={option.learnMoreLink}
+                    <button
+                      onClick={() => setSelectedOption(option.id as "buy" | "partner")}
                       className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full border-2 border-primary text-primary bg-transparent text-sm font-bold transition-all duration-300 hover:bg-primary/5 cursor-pointer"
                     >
                       Learn More
-                    </Link>
+                    </button>
                   </motion.div>
                 </div>
               </motion.div>
@@ -326,6 +336,27 @@ export default function FASTagManagement() {
           })}
         </motion.div>
       </div>
+
+      {/* Detail Slide Panel Integration */}
+      <SlidePanel
+        isOpen={!!selectedOption}
+        onClose={() => setSelectedOption(null)}
+        title={selectedOption === "buy" ? "Vehicle FASTag Solution" : "FASTag Partnership Program"}
+        description={selectedOption === "buy" ? buyFASTagData.description : becomePartnerData.description}
+        features={selectedOption === "buy" ? buyFASTagData.documents.map(d => d.name) : becomePartnerData.documents.map(d => d.name)}
+        icon={selectedOption === "buy" ? CreditCard : Handshake}
+        category="FASTag Solutions"
+      >
+        {selectedOption && (
+          <div className="flex flex-col bg-slate-50">
+            <FASTagDetails 
+              data={selectedOption === "buy" ? buyFASTagData : becomePartnerData} 
+              showNavbarFooter={false}
+              onBack={() => setSelectedOption(null)}
+            />
+          </div>
+        )}
+      </SlidePanel>
     </section>
   );
 }
