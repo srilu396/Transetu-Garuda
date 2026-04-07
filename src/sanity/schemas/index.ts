@@ -6,6 +6,7 @@ import { demoCard, watchPlatformDemoSection } from './watchPlatformDemo'
 import { industrialCard } from './industrialCard'
 import { industrialDetail } from './industrialDetail'
 import { featureCardsSection } from './featureCardsSection'
+import { fastTagDetail } from './fastTagDetail'
 
 export const schemaTypes = [
   gpsSolutionCard,
@@ -17,4 +18,5 @@ export const schemaTypes = [
   industrialCard,
   industrialDetail,
   featureCardsSection,
+  fastTagDetail,
 ]

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { CreditCard, Handshake, ShieldCheck, TrendingUp, Truck } from "lucide-react";
+import { CreditCard, Handshake, ShieldCheck, TrendingUp } from "lucide-react";
 import dynamic from "next/dynamic";
 
 // Dynamic imports for the detail view components
@@ -61,9 +61,40 @@ const fastagOptions = [
 
 
 
+import { client } from "@/lib/sanity";
+import { FAST_TAG_SLUGS_QUERY } from "@/lib/queries";
+
 export default function FASTagManagement() {
   const [selectedOption, setSelectedOption] = useState<"buy" | "partner" | null>(null);
+  const [slugs, setSlugs] = useState<{ [key: string]: string }>({});
+
+  React.useEffect(() => {
+    const fetchSlugs = async () => {
+      try {
+        const data = await client.fetch(FAST_TAG_SLUGS_QUERY, { preview: false });
+        const slugMap: { [key: string]: string } = {};
+        data.forEach((doc: any) => {
+          // Map by title keywords or known IDs to match local options
+          if (doc.title?.toLowerCase().includes("buy") || doc.title?.toLowerCase().includes("vehicle")) {
+            slugMap["buy"] = doc.slug;
+          } else if (doc.title?.toLowerCase().includes("partner") || doc.title?.toLowerCase().includes("business")) {
+            slugMap["partner"] = doc.slug;
+          }
+        });
+        setSlugs(slugMap);
+      } catch (error) {
+        console.error("Error fetching Fast Tag slugs:", error);
+      }
+    };
+    fetchSlugs();
+  }, []);
+
+  const handleOpenDetails = (optionId: "buy" | "partner") => {
+    setSelectedOption(optionId);
+  };
+
   const displayedOptions = fastagOptions;
+// ... (omitting unchanged variants for brevity in think, but I will include them in ReplacementContent)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -323,12 +354,12 @@ export default function FASTagManagement() {
                     whileTap="tap"
                     className="w-full"
                   >
-                    <button
-                      onClick={() => setSelectedOption(option.id as "buy" | "partner")}
+                    <Link
+                      href={`/fast-tag/${slugs[option.id] || option.learnMoreLink.replace("/fastag/", "")}`}
                       className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full border-2 border-primary text-primary bg-transparent text-sm font-bold transition-all duration-300 hover:bg-primary/5 cursor-pointer"
                     >
                       Learn More
-                    </button>
+                    </Link>
                   </motion.div>
                 </div>
               </motion.div>

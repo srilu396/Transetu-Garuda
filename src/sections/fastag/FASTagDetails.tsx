@@ -115,13 +115,13 @@ export default function FASTagDetails({
     <div className="flex flex-col min-h-screen bg-slate-50">
       {showNavbarFooter && <Navbar />}
 
-      <main className={`flex-grow ${showNavbarFooter ? "pt-32" : "pt-24"} pb-20`}>
+      <main className={`flex-grow ${showNavbarFooter ? "pt-28" : "pt-24"} pb-20`}>
         <div className="max-w-5xl mx-auto px-6">
           {/* Back Button */}
           {onBack ? (
             <button
               onClick={onBack}
-              className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-10 group font-medium w-fit cursor-pointer"
+              className="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors mb-6 group font-medium w-fit cursor-pointer text-base"
             >
               <ArrowLeft
                 size={20}
@@ -132,7 +132,7 @@ export default function FASTagDetails({
           ) : (
             <Link
               href="/#fastag-management"
-              className="flex items-center gap-2 text-slate-500 hover:text-[#7E60F4] transition-colors mb-10 group font-medium w-fit"
+              className="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors mb-6 group font-medium w-fit text-base"
             >
               <ArrowLeft
                 size={20}

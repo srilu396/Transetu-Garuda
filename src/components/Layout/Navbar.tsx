@@ -356,26 +356,6 @@ const Navbar = memo(function Navbar({ onNavLinkClick }: NavbarProps) {
         </div>
       </div>
 
-      {/* ── Breadcrumb bar ── */}
-      <nav
-        aria-label="Breadcrumb Navigation"
-        className="bg-background/80 backdrop-blur-sm border-b border-border/50 py-1.5 sticky top-16 z-40"
-      >
-        <div className="container mx-auto px-4">
-          <ol className="flex items-center space-x-2 text-sm">
-            <li className="flex items-center">
-              <Link
-                href="/"
-                className="flex items-center gap-1 px-2 py-1 rounded transition-colors text-primary font-medium bg-primary/10"
-                onClick={(e) => handleNavClick(e, "/")}
-              >
-                <House className="w-3 h-3" />
-                Home
-              </Link>
-            </li>
-          </ol>
-        </div>
-      </nav>
     </header>
   );
 });

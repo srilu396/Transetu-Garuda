@@ -233,3 +233,28 @@ export const INDUSTRIAL_DETAIL_QUERY = `
     }
   }
 `;
+
+// ── 12. FAST TAG DETAIL PAGE QUERY ──
+export const FAST_TAG_DETAIL_QUERY = `
+  *[_type == "fastTagDetail" && slug.current == $slug && ($preview || !(_id in path("drafts.**")))] [0] {
+    _id,
+    title,
+    "slug": slug.current,
+    overview,
+    youtubeUrl,
+    "documents": documents[] {
+      documentName,
+      shortDescription,
+      "fileUrl": file.asset->url
+    }
+  }
+`;
+
+// -- 13. FAST TAG SLUGS QUERY (For dynamic UI links) --
+export const FAST_TAG_SLUGS_QUERY = `
+  *[_type == "fastTagDetail" && ($preview || !(_id in path("drafts.**")))] {
+    _id,
+    "slug": slug.current,
+    title
+  }
+`;

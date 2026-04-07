@@ -1,9 +1,3 @@
-// ──────────────────────────────────────────────────────────────────────────────
-// LUCIDE ICON LIST
-// Covers: Industry Cards (homepage), Industry Detail Pages, Solutions & Features
-// Industries: Logistics & Transport | Mining Operations | School Fleet Safety
-//             Ready-Mix Concrete | Pharmaceutical / Healthcare Logistics
-// ──────────────────────────────────────────────────────────────────────────────
 export const LUCIDE_ICONS = [
 
   // ── Tracking & Location ───────────────────────────────────────────────────
@@ -47,6 +41,7 @@ export const LUCIDE_ICONS = [
   { title: 'ShieldCheck — Verified / Compliant',     value: 'ShieldCheck' },
   { title: 'Lock — Locked / Secure',                 value: 'Lock' },
   { title: 'Flag — Compliance / Milestone',          value: 'Flag' },
+  { title: 'CheckCircle — Success / Verified',       value: 'CheckCircle' },
   { title: 'CheckCircle2 — Success / Done',          value: 'CheckCircle2' },
   { title: 'ClipboardCheck — Audit / Checklist',     value: 'ClipboardCheck' },
   { title: 'BadgeCheck — Certification / AIS-140',   value: 'BadgeCheck' },
@@ -87,6 +82,7 @@ export const LUCIDE_ICONS = [
   { title: 'BarChart2 — Reports / Analytics',        value: 'BarChart2' },
   { title: 'PieChart — Data / Breakdown',            value: 'PieChart' },
   { title: 'TrendingUp — Growth / Efficiency',       value: 'TrendingUp' },
+  { title: 'TrendingDown — Decline / Fuel Drop',     value: 'TrendingDown' },
   { title: 'Activity — Live / Real-time Data',       value: 'Activity' },
   { title: 'Timer — Time / Speed',                   value: 'Timer' },
   { title: 'Clock — Schedule / Uptime',              value: 'Clock' },
@@ -110,4 +106,8 @@ export const LUCIDE_ICONS = [
   { title: 'ThumbsUp — Approval / Trust',            value: 'ThumbsUp' },
   { title: 'LifeBuoy — Support / Help',              value: 'LifeBuoy' },
   { title: 'Search — Search / Find',                 value: 'Search' },
+
+  // ── Financial & Customer Relations ────────────────────────────────────────
+  { title: 'DollarSign — Cost / Pricing / Savings',  value: 'DollarSign' },
+  { title: 'Heart — Customer Love / Satisfaction',   value: 'Heart' },
 ]
