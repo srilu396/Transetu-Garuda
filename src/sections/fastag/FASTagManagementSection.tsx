@@ -355,7 +355,7 @@ export default function FASTagManagement() {
                     className="w-full"
                   >
                     <Link
-                      href={`/fast-tag/${slugs[option.id] || option.learnMoreLink.replace("/fastag/", "")}`}
+                      href={`/fastag/${slugs[option.id] || option.learnMoreLink.replace("/fastag/", "")}`}
                       className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full border-2 border-primary text-primary bg-transparent text-sm font-bold transition-all duration-300 hover:bg-primary/5 cursor-pointer"
                     >
                       Learn More

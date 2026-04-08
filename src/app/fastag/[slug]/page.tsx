@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     title: `${data.title} — ${SITE_BRAND}`,
     description: data.overview || "FASTag services through Garuda OM.",
-    path: `/fast-tag/${data.slug}`,
+    path: `/fastag/${data.slug}`,
     keywords: ["FASTag", "Garuda OM", "GarudaOM"],
   });
 }
@@ -41,7 +41,7 @@ export default async function FastagDetailsPage({ params }: Props) {
 
   // Handle legacy redirects
   if (slug === "customer") {
-    redirect("/fast-tag/buy");
+    redirect("/fastag/buy");
   }
 
   // Fetch data from Sanity with perspective handling for draft mode
