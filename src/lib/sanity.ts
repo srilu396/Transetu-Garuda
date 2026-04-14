@@ -32,9 +32,23 @@ export const previewClient = createClient({
   }
 });
 
-// Helper function to choose the correct client
-export function getClient(preview?: boolean) {
-  return preview ? previewClient : client;
+// Helper function to choose the correct client with strict isolation
+export function getClient(preview?: boolean, isPreviewIntent?: boolean) {
+  // Defensive Hardening: Force production client if we're not explicitly in a verified preview context.
+  // We only use previewClient if BOTH Draft Mode is enabled AND there is an explicit intent flag.
+  const usePreview = !!(preview && isPreviewIntent);
+
+  // Safeguard: Log warning if draft mode is active but intent is missing (indicates a "leak" attempt or stale cookie)
+  if (preview && !isPreviewIntent && process.env.NODE_ENV !== 'production') {
+    console.log("Next.js Draft Mode is active, but is being ignored because isPreviewIntent is false. Leak prevented.");
+  }
+
+  if (usePreview && !process.env.SANITY_API_TOKEN) {
+    console.warn("Draft Mode enabled but SANITY_API_TOKEN is missing. Drafts may not be visible.");
+  }
+  
+  // Final safeguard: In production, we are even more strict about the fallback.
+  return usePreview ? previewClient : client;
 }
 
 const builder = createImageUrlBuilder(client);

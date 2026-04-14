@@ -7,7 +7,8 @@ export async function GET(request: Request) {
   const slug = searchParams.get('slug')
 
   // This secret should be set in your Environment Variables and match Sanity's configuration
-  if (secret !== process.env.SANITY_PREVIEW_SECRET && process.env.NODE_ENV === 'production') {
+  if (secret !== process.env.SANITY_PREVIEW_SECRET) {
+    console.error("Draft mode secret mismatch");
     return new Response('Invalid token', { status: 401 })
   }
 

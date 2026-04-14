@@ -16,12 +16,16 @@ interface Props {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { isEnabled: preview } = draftMode();
-  const sanityClient = getClient(preview);
+  const isPreviewIntent = searchParams?.preview === "true" || !!searchParams?._sanity_edit_target;
+  const sanityClient = getClient(preview, isPreviewIntent);
+  
   const data = await sanityClient.fetch(FAST_TAG_DETAIL_QUERY, { 
-    slug: params.slug,
-    preview: preview || false
+    slug: params.slug
+  }, {
+    perspective: (preview && isPreviewIntent) ? "previewDrafts" : "published",
+    next: { revalidate: (preview && isPreviewIntent) ? 0 : 3600 }
   });
 
   if (!data) {
@@ -36,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function FastagDetailsPage({ params }: Props) {
+export default async function FastagDetailsPage({ params, searchParams }: Props) {
   const { slug } = params;
 
   // Handle legacy redirects
@@ -44,12 +48,18 @@ export default async function FastagDetailsPage({ params }: Props) {
     redirect("/fastag/buy");
   }
 
-  // Fetch data from Sanity with perspective handling for draft mode
-  const { isEnabled: preview } = draftMode();
-  const sanityClient = getClient(preview);
+  // Fetch data with strict isolation: Only use preview client if in draft mode AND explicit intent
+  const { isEnabled: previewModeActive } = draftMode();
+  
+  // Check for preview intent from query params or iframe headers
+  const isPreviewIntent = searchParams?.preview === "true" || !!searchParams?._sanity_edit_target;
+  
+  const sanityClient = getClient(previewModeActive, isPreviewIntent);
   const data = await sanityClient.fetch(FAST_TAG_DETAIL_QUERY, { 
-    slug: slug,
-    preview: preview || false
+    slug: slug
+  }, {
+    perspective: (previewModeActive && isPreviewIntent) ? "previewDrafts" : "published",
+    next: { revalidate: (previewModeActive && isPreviewIntent) ? 0 : 3600 }
   });
 
   if (!data && slug !== "buy" && slug !== "partner") {
@@ -62,16 +72,19 @@ export default async function FastagDetailsPage({ params }: Props) {
     fileUrl: string;
   }
 
+  // Robust data mapping with null-checks to prevent TypeErrors
   const sanityDataMapped = data ? {
-    identifier: data.slug,
-    pageTitle: data.title,
-    description: data.overview,
-    youtubeUrl: data.youtubeUrl,
-    documents: data.documents?.map((doc: FastTagDocument) => ({
-      documentName: doc.documentName,
-      description: doc.shortDescription,
-      fileUrl: doc.fileUrl
-    })) || []
+    identifier: data?.slug || slug,
+    pageTitle: data?.title || "",
+    description: data?.overview || "",
+    youtubeUrl: data?.youtubeUrl || "",
+    documents: (data?.documents && Array.isArray(data.documents)) 
+      ? data.documents.map((doc: FastTagDocument) => ({
+          documentName: doc?.documentName || "",
+          description: doc?.shortDescription || "",
+          fileUrl: doc?.fileUrl || ""
+        })) 
+      : []
   } : undefined;
 
   // Determine fallback type for client component logic

@@ -108,7 +108,7 @@ export const SOLUTION_BY_SLUG_QUERY = `
 
 // ── 6. WHY US FEATURE CARDS (Singleton) ──
 export const FEATURE_CARDS_QUERY = `
-  *[_type == "featureCardsSection" && ($preview || !(_id in path("drafts.**")))] [0] {
+  *[_type == "featureCardsSection"][0] {
     _id,
     "cards": cards[] {
       _key,
@@ -189,7 +189,7 @@ export const WATCH_PLATFORM_DEMO_QUERY = `
 // ── 11. INDUSTRIAL SECTION QUERIES ──
 // Fetch industrial cards with explicit draft vs published filtering
 export const INDUSTRIAL_CARDS_QUERY = `
-  *[_type == "industrialCard" && ($preview || !(_id in path("drafts.**")))] | order(order asc) {
+  *[_type == "industrialCard"] | order(order asc) {
     _id,
     iconName,
     title,
@@ -204,7 +204,7 @@ export const INDUSTRIAL_CARDS_QUERY = `
 
 
 export const INDUSTRIAL_DETAIL_QUERY = `
-  *[_type == "industrialDetail" && slug.current == $slug && ($preview || !(_id in path("drafts.**")))] [0] {
+  *[_type == "industrialDetail" && slug.current == $slug][0] {
     _id,
     iconName,
     badge,
@@ -236,7 +236,7 @@ export const INDUSTRIAL_DETAIL_QUERY = `
 
 // ── 12. FAST TAG DETAIL PAGE QUERY ──
 export const FAST_TAG_DETAIL_QUERY = `
-  *[_type == "fastTagDetail" && slug.current == $slug && ($preview || !(_id in path("drafts.**")))] [0] {
+  *[_type == "fastTagDetail" && slug.current == $slug][0] {
     _id,
     title,
     "slug": slug.current,
@@ -252,7 +252,7 @@ export const FAST_TAG_DETAIL_QUERY = `
 
 // -- 13. FAST TAG SLUGS QUERY (For dynamic UI links) --
 export const FAST_TAG_SLUGS_QUERY = `
-  *[_type == "fastTagDetail" && ($preview || !(_id in path("drafts.**")))] {
+  *[_type == "fastTagDetail"] {
     _id,
     "slug": slug.current,
     title

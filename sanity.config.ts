@@ -129,7 +129,7 @@ export default defineConfig({
     presentationTool({
       previewUrl: {
         origin: "http://localhost:3000",
-        preview: "/",
+        preview: "/api/preview",
         previewMode: {
           enable: "/api/preview",
           disable: "/api/exit-preview",
@@ -213,7 +213,7 @@ export default defineConfig({
                 locations: [
                   {
                     title: doc.title || "Untitled",
-                    href: `/fastag/${doc.slug}`,
+                    href: `/fastag/${doc.slug}?preview=true`,
                   },
                 ],
               };
